@@ -41,7 +41,7 @@
         class="fixed inset-0 bg-background bg-opacity-90 z-40 md:hidden">
 
         <ul
-            class="flex flex-col items-center justify-center h-full space-y-4 uppercase text-black md:text-white text-2xl">
+            class="flex flex-col items-center justify-center h-full space-y-4 uppercase text-black md:text-white text-3xl">
             <x-nav.nav-link href="#">
                 @lang('Rezervēt')
             </x-nav.nav-link>
