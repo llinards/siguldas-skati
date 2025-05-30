@@ -1,5 +1,6 @@
-<x-layouts.app>
-    <div class="px-2 relative h-screen sm:h-220 w-full bg-center bg-cover z-0 flex justify-center before:absolute before:inset-0 before:bg-black/30"
+<x-app-layout>
+    <div
+        class="px-2 relative h-screen sm:h-220 w-full bg-center bg-cover z-0 flex justify-center before:absolute before:inset-0 before:bg-black/30"
         style="background-image: url('{{ asset('images/siguldas-skati-houses.jpg') }}')">
 
         <h1
@@ -14,4 +15,4 @@
             @lang('Uzzināt vairāk')
         </x-btn-primary>
     </div>
-</x-layouts.app>
+</x-app-layout>
