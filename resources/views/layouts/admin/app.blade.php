@@ -10,21 +10,21 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="antialiased bg-bg font-main">
-    <div class="min-h-screen">
-        @include('includes.nav')
+<div class="min-h-screen">
+    @include('includes.admin-nav')
 
-        <!-- Page Content -->
-        <main aria-labelledby="main-content">
-            {{ $slot }}
-        </main>
-    </div>
+    <!-- Page Content -->
+    <main aria-labelledby="main-content">
+        {{ $slot }}
+    </main>
+</div>
 </body>
 
 </html>

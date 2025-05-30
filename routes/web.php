@@ -5,14 +5,18 @@ use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
-Route::group([
-    'prefix' => LaravelLocalization::setLocale(), 'middleware' => [
-        'localeSessionRedirect', 'localizationRedirect', 'localeViewPath',
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [
+            'localeSessionRedirect',
+            'localizationRedirect',
+            'localeViewPath',
+        ],
     ],
-],
     function () {
         Route::get('/', function () {
-            return view('welcome');
+            return view('home');
         });
 
         Route::get('/dashboard', function () {
@@ -25,5 +29,6 @@ Route::group([
             Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
         });
 
-        require __DIR__.'/auth.php';
-    });
+        require __DIR__ . '/auth.php';
+    }
+);
