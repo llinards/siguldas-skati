@@ -16,7 +16,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="antialiased bg-background font-main">
+<body class="antialiased bg-bg font-main">
     <div class="min-h-screen">
         @include('includes.nav')
 

@@ -11,7 +11,7 @@ duration-150 ease-in-out';
 
 
 <li
-    class="mx-4 border-1 border-transparent hover:border-b-menu-hover hover:text-menu-hover md:hover:border-b-white md:hover:text-white transition-all ease-in-out duration-200">
+    class="mx-4 border-1 text-center border-transparent hover:border-b-menu-hover hover:text-menu-hover md:hover:border-b-white md:hover:text-white transition-all ease-in-out duration-200 text-btn-md sm:text-btn-sm lg:text-btn">
     <a {{ $attributes}}>
         {{ $slot }}
     </a>
