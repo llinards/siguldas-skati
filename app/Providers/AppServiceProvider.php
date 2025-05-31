@@ -3,11 +3,15 @@
 namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
+use Mcamara\LaravelLocalization\Traits\LoadsTranslatedCachedRoutes;
 
 class AppServiceProvider extends ServiceProvider
 {
+    use LoadsTranslatedCachedRoutes;
+
     /**
      * Register any application services.
      */
@@ -24,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
         Model::unguard();
         Model::automaticallyEagerLoadRelationships();
         DB::prohibitDestructiveCommands(app()->isProduction());
+        RouteServiceProvider::loadCachedRoutesUsing(fn() => $this->loadCachedRoutes());
     }
 }
