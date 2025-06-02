@@ -44,9 +44,9 @@
     <div x-show="open" x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 translate-x-full" x-transition:enter-end="opacity-100 translate-x-0"
         x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-x-0"
-        x-transition:leave-end="opacity-0 translate-x-full" class="fixed inset-0 bg-bg bg-opacity-90 z-40 md:hidden">
+        x-transition:leave-end="opacity-0 translate-x-full" class="fixed inset-0 bg-bg bg-opacity-90 z-40 lg:hidden">
 
-        <ul class="flex flex-col items-center justify-center h-full space-y-2 uppercase text-black md:text-white">
+        <ul class="flex flex-col items-center justify-center h-full space-y-2 uppercase text-black lg:text-white">
             <x-nav.nav-link href="#">
                 @lang('Rezervēt')
             </x-nav.nav-link>
