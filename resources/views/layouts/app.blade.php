@@ -16,14 +16,15 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="antialiased bg-bg font-main">
-    <div class="min-h-screen">
+<body class="antialiased font-main">
+    <div class="min-h-screen ">
         @include('includes.nav')
 
         <!-- Page Content -->
         <main aria-labelledby="main-content">
             {{ $slot }}
         </main>
+        @include('includes.footer')
     </div>
 </body>
 

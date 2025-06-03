@@ -10,9 +10,10 @@ duration-150 ease-in-out';
 @endphp --}}
 
 
-<li
-    class="mx-4 border-1 text-center border-transparent hover:border-b-menu-hover hover:text-menu-hover md:hover:border-b-white md:hover:text-white transition-all ease-in-out duration-200 text-btn-md md:text-btn-md lg:text-btn">
-    <a {{ $attributes}}>
+<li>
+    <a {{ $attributes->merge([ 'class' => 'mx-4 border-1 text-center border-transparent hover:border-b-menu-hover
+        hover:text-menu-hover lg:hover:border-b-white lg:hover:text-white transition-all ease-in-out duration-200
+        text-btn-md md:text-btn-md lg:text-btn'])}}>
         {{ $slot }}
     </a>
 </li>
