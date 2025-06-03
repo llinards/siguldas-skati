@@ -20,7 +20,8 @@
 
             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
             <x-nav.nav-link rel="alternate" hreflang="{{ $localeCode }}"
-                href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
+                :class="app()->getLocale() === $localeCode ? ' border-b-white' : ''">
                 {{ $properties['native'] }}
             </x-nav.nav-link>
             @endforeach
@@ -61,7 +62,8 @@
             </x-nav.nav-link>
             <ul class="flex"> @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                 <x-nav.nav-link rel="alternate" hreflang="{{ $localeCode }}"
-                    href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                    href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
+                    :class="app()->getLocale() === $localeCode ? ' border-b-black' : ''">
                     {{ $properties['native'] }}
                 </x-nav.nav-link>
                 @endforeach
