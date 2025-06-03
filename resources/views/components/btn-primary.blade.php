@@ -1,9 +1,7 @@
-@props(['class' => ''])
-
-<a {{ $attributes->merge(['class' => 'px-6 py-2 uppercase bg-white text-btn rounded-xl
-    border-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary hover:bg-bg-dark hover:text-white
-    hover:border-transparent
-    transition-all duration-200 ' .
-    $class]) }}>
+<a {{ $attributes->merge(['class' => 'px-6 py-4 uppercase bg-ss-dark rounded-xl
+    border-2 border-transparent
+    text-white
+    hover:bg-white hover:border-black hover:text-black
+    transition-all duration-200']) }}>
     {{ $slot }}
 </a>
