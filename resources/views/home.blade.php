@@ -17,7 +17,7 @@
 
 
     </div>
-    <div class="h-120 bg-bg">
+    <div class="h-120 bg-ss">
 
     </div>
 </x-app-layout>
