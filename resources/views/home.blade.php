@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="px-2 relative h-dvh bg-center bg-cover z-0 flex justify-center before:absolute before:inset-0 before:bg-black/30"
+    <div class="fixed px-2 relative h-dvh bg-center bg-cover z-0 flex justify-center before:absolute before:inset-0 before:bg-black/30"
         style="background-image: url('{{ asset('images/siguldas-skati-houses.jpg') }}')">
         <div class="container mx-auto flex flex-col items-center px-4">
             <h1
