@@ -38,3 +38,13 @@
     --text-h-med: 4rem;
     --text-h: 6.875rem;
 }
+
+:focus {
+    outline: 2px solid rgb(30, 38, 1);
+    outline-offset: 2px;
+}
+
+footer :focus {
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
