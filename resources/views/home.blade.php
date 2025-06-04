@@ -1,5 +1,6 @@
-<x-app-layout>
-    <div class="px-2 relative h-dvh bg-center bg-cover will-change-transform z-0 flex justify-center before:absolute before:inset-0 before:bg-black/30"
+<x-app-layout :title="__('Sākums')">
+    <div
+        class="px-2 relative h-dvh bg-center bg-cover will-change-transform z-0 flex justify-center before:absolute before:inset-0 before:bg-black/30"
         style="background-image: url('{{ asset('images/siguldas-skati-houses.jpg') }}')">
         <div class="container mx-auto flex flex-col items-center px-4">
             <h1

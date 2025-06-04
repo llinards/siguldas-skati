@@ -7,7 +7,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group(
     [
-        'prefix' => LaravelLocalization::setLocale(),
+        'prefix'     => LaravelLocalization::setLocale(),
         'middleware' => [
             'localeSessionRedirect',
             'localizationRedirect',
@@ -17,7 +17,11 @@ Route::group(
     function () {
         Route::get('/', function () {
             return view('home');
-        });
+        })->name('home');
+
+        Route::get('/privatuma-politika', function () {
+            return view('privacy-policy');
+        })->name('privacy-policy');
 
         Route::get('/dashboard', function () {
             return view('dashboard');
@@ -29,6 +33,6 @@ Route::group(
             Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
         });
 
-        require __DIR__ . '/auth.php';
+        require __DIR__.'/auth.php';
     }
 );
