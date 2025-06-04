@@ -95,7 +95,7 @@
         </div>
         <div class="text-sm px-4 container mx-auto text-white md:text-center my-6 lg:mt-12">
             @lang('Mājaslapu izstrādāja')
-            <a href="https://slmedia.lv" class="underline hover:text-menu-hover transition-colors duration-200"
+            <a href="https://slmedia.lv" class="underline hover:text-ss-gray transition-all duration-200"
                 target="_blank" rel="noopener">
                 S&amp;L Media SIA
             </a>
