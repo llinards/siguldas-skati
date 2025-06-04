@@ -1,6 +1,6 @@
 <form action="{!! $url !!}" {!! $attributes !!}>
     @csrf
-    <button type="submit" class="{!! $basename !!}__link">
-        <span class="{!! $basename !!}__label">{{ $label }}</span>
-    </button>
+    <x-btn-cookies type="submit" class="">
+        <span class="{!! $basename !!}__label ">{{ $label }}</span>
+    </x-btn-cookies>
 </form>
