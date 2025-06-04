@@ -30,13 +30,23 @@
     --breakpoint-xs: 30rem;
     --color-ss: #f2f3ed;
     --color-menu-hover: rgba(0, 0, 0, 0.5);
+    --color-ss-gray: #767E86;
     --color-ss-dark: rgb(30, 38, 1);
     --text-btn: 1.25rem;
     --text-btn-sm: 1rem;
     --text-btn-md: 1.125rem;
-    --text-h-mob: 2.875rem;
-    --text-h-med: 4rem;
+    --text-h-mob: 2.75rem;
+    --text-h-sm: 3.375rem;
+    --text-h-sm-mob: 2rem;
+    --text-h-md: 4rem;
     --text-h: 6.875rem;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Charpentier';
+    text-transform: uppercase;
 }
 
 :focus {
