@@ -13,10 +13,9 @@
                         <input type="email" id="email"
                             class="mb-4 sm:mb-0 py-4 px-4 xl:ml-0 block border-1 rounded-lg border-ss-dark w-full"
                             placeholder="@lang('Ievadiet savu e-pastu')">
-                        <button type="submit"
-                            class="w-full sm:w-auto border-1 border-ss-dark block sm:ml-4 py-4 px-8 bg-ss-dark text-white rounded-lg">
+                        <x-btn-primary type="submit" class="w-full sm:w-auto block sm:ml-4">
                             @lang('Abonēt')
-                        </button>
+                        </x-btn-primary>
                     </div>
                 </form>
             </div>
