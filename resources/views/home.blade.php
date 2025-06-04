@@ -10,9 +10,9 @@
                 mājas tavai
                 atpūtai!')</h1>
 
-            <x-btn-primary href="#" class="absolute bottom-48 sm:bottom-16 z-10">
+            <x-btn-header href="#" class="absolute bottom-48 sm:bottom-16 z-10">
                 @lang('Uzzināt vairāk')
-            </x-btn-primary>
+            </x-btn-header>
         </div>
 
 
