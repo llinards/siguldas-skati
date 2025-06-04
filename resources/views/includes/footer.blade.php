@@ -40,10 +40,10 @@
 
 
 <footer>
-    <div class="bg-ss-dark pb-6 pt-6 sm:pt-28 lg:pt-40 lg:pb-24">
+    <div class="bg-ss-dark pb-6 pt-6 sm:pt-28 lg:pt-40">
         <div
             class="px-4 container mx-auto flex flex-col sm:grid sm:grid-cols-2 sm:grid-rows-3 md:grid-cols-4 md:grid-rows-2 lg:flex lg:flex-row text-white justify-between">
-            <div class="flex flex-col sm:col-span-2 md:col-span-4 lg:col-span-1 md:items-center py-6 md:py-12 lg:py-0">
+            <div class="flex flex-col sm:col-span-2 md:col-span-4 lg:col-span-1 md:items-center py-6 md:pt-12 lg:py-0">
                 <a href="/{{ app()->getLocale() }}" class="flex items-center">
                     <img src="{{ asset('images/siguldas-skati-logo.png') }}" class="w-xs mb-4"
                         alt="Siguldas Skati Logo" />
@@ -93,5 +93,13 @@
 
             </div>
         </div>
+        <div class="text-sm px-4 container mx-auto text-white md:text-center my-6 lg:mt-12">
+            @lang('Mājaslapu izstrādāja')
+            <a href="https://slmedia.lv" class="underline hover:text-menu-hover transition-colors duration-200"
+                target="_blank" rel="noopener">
+                S&amp;L Media SIA
+            </a>
+        </div>
     </div>
+
 </footer>
