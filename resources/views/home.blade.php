@@ -29,7 +29,7 @@
                 </p>
             </div>
             <div class="lg:grid lg:grid-cols-2 gap-6">
-                <img class="h-full lg:h-240 object-cover rounded-3xl mb-6"
+                <img class="lg:h-240 object-cover rounded-3xl mb-6"
                     src="{{ asset('images/siguldas-skati-home-2.jpg') }}"
                     alt="@lang('Siguldas Skati - Moduļu māju parks')">
                 <div class="lg:flex lg:flex-col lg:justify-center">
