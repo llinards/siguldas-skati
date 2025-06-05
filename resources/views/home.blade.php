@@ -20,8 +20,8 @@
     <div class="bg-ss">
         <div class="container mx-auto px-4 py-6">
             <div>
-                <div class="relative inline-block mb-6">
-                    <h2 class="text-h-mob lg:text-h-md leading-18 md:leading-22">@lang('Par mums')</h2>
+                <div class="relative inline-block mb-3">
+                    <h2 class="text-h-mob lg:text-h-md leading-none">@lang('Par mums')</h2>
                     <span class="absolute left-0 bottom-0 w-2/3 h-0.5 bg-ss-dark"></span>
                 </div>
                 <p class="text-sm text-ss-gray mb-6">
@@ -33,7 +33,7 @@
                     src="{{ asset('images/siguldas-skati-home-2.jpg') }}"
                     alt="@lang('Siguldas Skati - Moduļu māju parks')">
                 <div class="lg:flex lg:flex-col lg:justify-center">
-                    <h3 class="mb-6 text-h-sm-mob md:text-h-sm">@lang('Siguldas skati')</h3>
+                    <h3 class="mb-3 leading-none text-h-sm-mob md:text-h-sm">@lang('Siguldas skati')</h3>
                     <div class="text-base leading-7.5 md:text-2xl space-y-6 md:space-y-10 md:leading-10 text-justify">
                         <p>@lang('Īpaša atpūtas vieta tiem, kuri meklē mieru, klātbūtnes un skaistuma sajūtu pašā
                             Siguldas
