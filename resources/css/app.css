@@ -40,6 +40,7 @@
     --text-h-sm-mob: 2rem;
     --text-h-md: 4rem;
     --text-h: 6.875rem;
+    --leading-0.5: 0.5;
 }
 
 .home-introduction {

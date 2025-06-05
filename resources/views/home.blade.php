@@ -20,8 +20,8 @@
     <div class="bg-ss">
         <div class="container mx-auto px-4 py-6">
             <div>
-                <div class="relative inline-block mb-6">
-                    <h2 class="text-h-mob lg:text-h-md leading-18 md:leading-22">@lang('Par mums')</h2>
+                <div class="relative inline-block mb-3">
+                    <h2 class="text-h-mob lg:text-h-md leading-none">@lang('Par mums')</h2>
                     <span class="absolute left-0 bottom-0 w-2/3 h-0.5 bg-ss-dark"></span>
                 </div>
                 <p class="text-sm text-ss-gray mb-6">
