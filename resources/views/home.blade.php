@@ -1,6 +1,6 @@
 <x-app-layout :title="__('Sākums')">
-    <div class="px-2 relative h-dvh bg-center bg-cover will-change-transform z-0 flex justify-center before:absolute before:inset-0 before:bg-black/30"
-        style="background-image: url('{{ asset('images/siguldas-skati-houses.jpg') }}')">
+    <div
+        class="px-2 relative bg-cover bg-center bg-no-repeat flex justify-center home-introduction before:inset-0 before:bg-black/30">
         <div class="container mx-auto flex flex-col items-center px-4">
             <h1
                 class="text-h-mob xs:text-6xl sm:text-7xl md:text-8xl xl:text-h max-w-7xl font-heading uppercase text-center text-white z-10 absolute top-48 sm:top-1/2 sm:-translate-y-1/2 leading-12 sm:leading-16 md:leading-24 xl:leading-28">
@@ -30,8 +30,8 @@
             </div>
             <div class="lg:grid lg:grid-cols-2 gap-6">
                 <img class="h-full lg:h-240 object-cover rounded-3xl mb-6"
-                    src="{{ asset('images/siguldas-skati-home-2.jpg') }}"
-                    alt="@lang('Siguldas Skati - Moduļu māju parks')">
+                     src="{{ asset('images/siguldas-skati-home-2.jpg') }}"
+                     alt="@lang('Siguldas Skati - Moduļu māju parks')">
                 <div class="lg:flex lg:flex-col lg:justify-center">
                     <h3 class="mb-6 text-h-sm-mob md:text-h-sm">@lang('Siguldas skati')</h3>
                     <div class="text-base leading-7.5 md:text-2xl space-y-6 md:space-y-10 md:leading-10 text-justify">
