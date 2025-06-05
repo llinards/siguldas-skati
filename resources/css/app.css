@@ -42,10 +42,17 @@
     --text-h: 6.875rem;
 }
 
+.home-introduction {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/public/images/siguldas-skati-houses.jpg');
+    min-height: calc(
+        100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0)
+    );
+}
+
 h1,
 h2,
 h3 {
-    font-family: 'Charpentier';
+    font-family: 'Charpentier', serif;
     text-transform: uppercase;
 }
 

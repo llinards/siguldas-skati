@@ -20,7 +20,7 @@
 </head>
 
 <body class="antialiased font-main">
-<div class="min-h-screen ">
+<div>
     @include('includes.nav')
 
     <!-- Page Content -->
