@@ -29,9 +29,9 @@
                 </p>
             </div>
             <div class="lg:grid lg:grid-cols-2 gap-6">
-                <img class="h-full lg:h-240 object-cover rounded-3xl mb-6"
-                     src="{{ asset('images/siguldas-skati-home-2.jpg') }}"
-                     alt="@lang('Siguldas Skati - Moduļu māju parks')">
+                <img class="lg:h-240 object-cover rounded-3xl mb-6"
+                    src="{{ asset('images/siguldas-skati-home-2.jpg') }}"
+                    alt="@lang('Siguldas Skati - Moduļu māju parks')">
                 <div class="lg:flex lg:flex-col lg:justify-center">
                     <h3 class="mb-6 text-h-sm-mob md:text-h-sm">@lang('Siguldas skati')</h3>
                     <div class="text-base leading-7.5 md:text-2xl space-y-6 md:space-y-10 md:leading-10 text-justify">
