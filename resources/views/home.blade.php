@@ -33,7 +33,7 @@
                     src="{{ asset('images/siguldas-skati-home-2.jpg') }}"
                     alt="@lang('Siguldas Skati - Moduļu māju parks')">
                 <div class="lg:flex lg:flex-col lg:justify-center">
-                    <h3 class="mb-6 text-h-sm-mob md:text-h-sm">@lang('Siguldas skati')</h3>
+                    <h3 class="mb-3 leading-none text-h-sm-mob md:text-h-sm">@lang('Siguldas skati')</h3>
                     <div class="text-base leading-7.5 md:text-2xl space-y-6 md:space-y-10 md:leading-10 text-justify">
                         <p>@lang('Īpaša atpūtas vieta tiem, kuri meklē mieru, klātbūtnes un skaistuma sajūtu pašā
                             Siguldas
