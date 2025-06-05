@@ -70,12 +70,14 @@
         <x-slot name="bannerImage">{{ asset('images/siguldas-skati-home-3.jpg') }}</x-slot>
         <x-slot name="bannerText">@lang('Miers nav kaut kur tālu!
         tas ir šeit - starp dizainu, dabu un Tevi!')</x-slot>
+        <x-slot name="bannerImageAlt">@lang('Drona skats uz māju parku')</x-slot>
     </x-banner>
     <x-banner>
         <x-slot name="bannerImage">{{ asset('images/siguldas-skati-home-4.jpg') }}</x-slot>
         <x-slot name="bannerText">@lang('Sigulda nav tikai galamērķis –
         tā ir sajūta.')</x-slot>
         <x-slot name="secondaryBannerText">@lang('Mēs esam tepat, lai palīdzētu Tev to iepazīt savā ritmā.')</x-slot>
+        <x-slot name="bannerImageAlt">@lang('Sigulda Skati Sauna')</x-slot>
     </x-banner>
 
 </x-app-layout>
