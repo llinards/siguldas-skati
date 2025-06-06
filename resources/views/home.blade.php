@@ -91,44 +91,63 @@
         <x-slot name="bannerImageAlt">@lang('Drona skats uz māju parku')</x-slot>
     </x-banner>
 
-    {{-- EXPERIENCES --}}
-    <div class="container mx-auto px-4 py-12 md:py-18 lg:py-24 xl:py-30">
-        <div class="relative inline-block mb-3">
-            <h2 class="text-h-mob lg:text-h-md leading-none">@lang('Ko sniedz pieredze Siguldas Skatos?')</h2>
-            <span class="absolute left-0 bottom-0 w-2/3 h-0.5 bg-ss-dark"></span>
+    {{-- GALLERY --}}
+    <div class="bg-ss">
+        <div class="container mx-auto px-4 pt-12 md:pt-18 lg:pt-24 xl:pt-30">
+            <div class="relative inline-block mb-3">
+                <h2 class="text-h-mob lg:text-h-md leading-none">@lang('Galerija')</h2>
+                <span class="absolute left-0 bottom-0 w-2/3 h-0.5 bg-ss-dark"></span>
+            </div>
+            <p class="text-sm text-ss-gray pb-6 xl:pb-12 leading-none">
+                @lang('Siguldas skatu galerija.')</p>
+            <x-carousels.gallery.wrapper></x-carousels.gallery.wrapper>
         </div>
-        <p class="text-sm text-ss-gray pb-6 sm:pb-12 leading-none">
-            @lang('Dizaina brīvdienu mājas ar skatu uz Siguldu!')</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-6 text-white">
-            <x-experience-card>
-                <x-slot name="experienceSvg">wave</x-slot>
-                <x-slot name="experienceTitle">@lang('Klusums
-                    un miers')</x-slot>
-                <x-slot name="experienceText">@lang('Mūsu brīvdienu dizaina mājās nav steigas – šī ir vieta, kur Tu vari
-                    elpot dziļāk, dzirdēt sevi un atpūsties bez stresa.')</x-slot>
-            </x-experience-card>
-            <x-experience-card>
-                <x-slot name="experienceSvg">check</x-slot>
-                <x-slot name="experienceTitle">@lang('Estētika un
-                    komforts')</x-slot>
-                <x-slot name="experienceText">@lang('Pārdomāts dizains, kvalitatīvas detaļas un mājīgums, kas ļauj
-                    justies
-                    kā mājās – tikai vēl labāk.')</x-slot>
-            </x-experience-card>
-            <x-experience-card>
-                <x-slot name="experienceSvg">happy_face</x-slot>
-                <x-slot name="experienceTitle">@lang('Atmiņas un
-                    sajūtas')</x-slot>
-                <x-slot name="experienceText">@lang('Šī nav tikai naktsmītne – tā ir iespēja apstāties, sajust vidi un
-                    ieraudzīt Siguldu citām acīm.')</x-slot>
-            </x-experience-card>
-            <x-experience-card>
-                <x-slot name="experienceSvg">location</x-slot>
-                <x-slot name="experienceTitle">@lang('Izcila
-                    lokācija')</x-slot>
-                <x-slot name="experienceText">@lang('Vietu pašā Siguldas sirdī, kur daba un pilsētas kultūras notikumi
-                    satiekas viena soļa attālumā.')</x-slot>
-            </x-experience-card>
+    </div>
+
+
+    {{-- EXPERIENCES --}}
+    <div class="bg-ss">
+        <div class="container mx-auto px-4 py-12 md:py-18 lg:py-24 xl:py-30">
+            <div class="relative inline-block mb-3">
+                <h2 class="text-h-mob lg:text-h-md leading-none">@lang('Ko sniedz pieredze Siguldas Skatos?')</h2>
+                <span class="absolute left-0 bottom-0 w-2/3 h-0.5 bg-ss-dark"></span>
+            </div>
+            <p class="text-sm text-ss-gray pb-6 sm:pb-12 leading-none">
+                @lang('Dizaina brīvdienu mājas ar skatu uz Siguldu!')</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-6 text-white">
+                <x-experience-card>
+                    <x-slot name="experienceSvg">wave</x-slot>
+                    <x-slot name="experienceTitle">@lang('Klusums
+                        un miers')</x-slot>
+                    <x-slot name="experienceText">@lang('Mūsu brīvdienu dizaina mājās nav steigas – šī ir vieta, kur Tu
+                        vari
+                        elpot dziļāk, dzirdēt sevi un atpūsties bez stresa.')</x-slot>
+                </x-experience-card>
+                <x-experience-card>
+                    <x-slot name="experienceSvg">check</x-slot>
+                    <x-slot name="experienceTitle">@lang('Estētika un
+                        komforts')</x-slot>
+                    <x-slot name="experienceText">@lang('Pārdomāts dizains, kvalitatīvas detaļas un mājīgums, kas ļauj
+                        justies
+                        kā mājās – tikai vēl labāk.')</x-slot>
+                </x-experience-card>
+                <x-experience-card>
+                    <x-slot name="experienceSvg">happy_face</x-slot>
+                    <x-slot name="experienceTitle">@lang('Atmiņas un
+                        sajūtas')</x-slot>
+                    <x-slot name="experienceText">@lang('Šī nav tikai naktsmītne – tā ir iespēja apstāties, sajust vidi
+                        un
+                        ieraudzīt Siguldu citām acīm.')</x-slot>
+                </x-experience-card>
+                <x-experience-card>
+                    <x-slot name="experienceSvg">location</x-slot>
+                    <x-slot name="experienceTitle">@lang('Izcila
+                        lokācija')</x-slot>
+                    <x-slot name="experienceText">@lang('Vietu pašā Siguldas sirdī, kur daba un pilsētas kultūras
+                        notikumi
+                        satiekas viena soļa attālumā.')</x-slot>
+                </x-experience-card>
+            </div>
         </div>
     </div>
 
