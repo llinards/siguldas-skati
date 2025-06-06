@@ -92,7 +92,7 @@ footer :focus {
 
 @media screen and (min-width: 768px) {
     #productCarousel {
-        --f-carousel-slide-width: calc((100% - 64px) / 2);
+        --f-carousel-slide-width: calc((100% - 32px) / 2);
     }
 }
 
