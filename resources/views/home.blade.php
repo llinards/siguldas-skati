@@ -25,7 +25,7 @@
                     <h2 class="text-h-mob lg:text-h-md leading-none">@lang('Par mums')</h2>
                     <span class="absolute left-0 bottom-0 w-2/3 h-0.5 bg-ss-dark"></span>
                 </div>
-                <p class="text-sm text-ss-gray mb-6 leading-none">
+                <p class="text-sm text-ss-gray pb-6 leading-none">
                     @lang('Klusuma greznība Siguldas sirdī!')
                 </p>
             </div>
@@ -77,7 +77,7 @@
                 <h2 class="text-h-mob lg:text-h-md leading-none">@lang('Dizaina mājas un sauna')</h2>
                 <span class="absolute left-0 bottom-0 w-2/3 h-0.5 bg-ss-dark"></span>
             </div>
-            <p class="text-sm text-ss-gray mb-6 leading-none">
+            <p class="text-sm text-ss-gray pb-6 leading-none">
                 @lang('Izsmalcināta atpūta starp pilsētu un dabu!')</p>
             <x-carousels.products.wrapper></x-carousels.products.wrapper>
         </div>
@@ -97,7 +97,7 @@
             <h2 class="text-h-mob lg:text-h-md leading-none">@lang('Ko sniedz pieredze Siguldas Skatos?')</h2>
             <span class="absolute left-0 bottom-0 w-2/3 h-0.5 bg-ss-dark"></span>
         </div>
-        <p class="text-sm text-ss-gray mb-6 leading-none">
+        <p class="text-sm text-ss-gray pb-6 sm:pb-12 leading-none">
             @lang('Dizaina brīvdienu mājas ar skatu uz Siguldu!')</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-6 text-white">
             <x-experience-card>
@@ -142,5 +142,21 @@
         <x-slot name="bannerImageAlt">@lang('Sigulda Skati Sauna')</x-slot>
     </x-banner>
 
+    {{-- WHAT TO DO IN SIGULDA --}}
+    <div class="bg-ss">
+        <div class="container mx-auto px-4 pt-12 md:pt-18 lg:pt-24 xl:pt-30">
+            <div class="relative inline-block mb-3">
+                <h2 class="text-h-mob lg:text-h-md leading-none">@lang('Ko vēl darīt Siguldā?')</h2>
+                <span class="absolute left-0 bottom-0 w-2/3 h-0.5 bg-ss-dark"></span>
+            </div>
+            <p class="text-sm text-ss-gray pb-6 xl:pb-12 leading-none md:max-w-2/3 lg:max-w-2/5">
+                @lang('Sigulda ir vieta, kur daba, kultūra un piedzīvojumi saplūst vienā ainavā. Neatkarīgi no
+                gadalaika, šeit katrs var atrast
+                sev piemērotu ritmu – vai tā būtu nesteidzīga pastaiga dabas takās, kultūras baudījums vai mazs
+                piedzīvojums virs koku
+                galotnēm.')</p>
+            <x-carousels.todo.wrapper></x-carousels.todo.wrapper>
+        </div>
+    </div>
 
 </x-app-layout>

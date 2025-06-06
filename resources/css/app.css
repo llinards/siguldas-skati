@@ -68,7 +68,8 @@ footer :focus {
 }
 
 
-#productCarousel {
+#productCarousel,
+#todoCarousel {
     --f-carousel-spacing: 32px;
 
     --f-button-prev-pos: 5rem;
@@ -90,15 +91,25 @@ footer :focus {
         rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
-@media screen and (min-width: 768px) {
-    #productCarousel {
+@media screen and (min-width: 640px) {
+
+    #productCarousel,
+    #todoCarousel {
         --f-carousel-slide-width: calc((100% - 32px) / 2);
     }
 }
 
 @media screen and (min-width: 1024px) {
-    #productCarousel {
+
+    #productCarousel,
+    #todoCarousel {
         --f-carousel-slide-width: calc((100% - 64px) / 3);
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    #todoCarousel {
+        --f-carousel-slide-width: calc((100% - 96px) / 4);
     }
 }
 

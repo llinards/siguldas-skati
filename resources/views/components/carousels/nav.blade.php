@@ -1,4 +1,6 @@
-<div class="carousel-nav flex justify-center md:justify-end mt-6 sm:mb-6 md:mt-0  gap-x-4 order-2 md:order-none">
+<div {{ $attributes->class([
+    'carousel-nav flex justify-center md:justify-end mt-6 sm:mb-6 md:mt-0 gap-x-4 order-2 md:order-none'
+    ]) }}>
     <x-carousels.btn id="{{ $prev }}" aria-label="Previous">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-7">
             <path fill-rule="evenodd"
