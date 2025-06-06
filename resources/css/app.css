@@ -58,14 +58,13 @@ h4 {
 }
 
 :focus {
-    outline: 2px solid rgb(30, 38, 1);
-    outline-offset: 2px;
+    outline: 3px solid rgb(30, 38, 1);
 }
 
-footer :focus {
-    outline: 2px solid white;
-    outline-offset: 2px;
+footer :focus, nav :focus {
+    outline: 3px solid white;
 }
+
 
 
 #productCarousel,

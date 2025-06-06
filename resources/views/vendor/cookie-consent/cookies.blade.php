@@ -4,7 +4,7 @@
     <div class="cookies__alert">
         <div class="cookies__container">
             <div class="cookies__wrapper">
-                <h2 class="cookies__title">@lang('cookieConsent::cookies.title')</h2>
+                <p class="cookies__title">@lang('cookieConsent::cookies.title')</p>
                 <div class="cookies__intro">
                     <p>@lang('cookieConsent::cookies.intro')</p>
                     @if($policy)
