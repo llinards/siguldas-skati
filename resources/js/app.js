@@ -5,9 +5,13 @@ import 'preline'
 import { Fancybox } from "@fancyapps/ui";
 
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import "@fancyapps/ui/dist/carousel/carousel.css";
+import { Carousel } from "@fancyapps/ui/dist/carousel/carousel.esm.js";
 
+window.Carousel = Carousel;
 window.Alpine = Alpine;
 window.Fancybox = Fancybox;
+
 
 
 function handleMobileMenu() {
