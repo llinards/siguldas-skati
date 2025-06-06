@@ -69,7 +69,8 @@ footer :focus {
 
 
 #productCarousel,
-#todoCarousel {
+#todoCarousel,
+#galleryCarousel {
     --f-carousel-spacing: 32px;
 
     --f-button-prev-pos: 5rem;
@@ -94,7 +95,8 @@ footer :focus {
 @media screen and (min-width: 640px) {
 
     #productCarousel,
-    #todoCarousel {
+    #todoCarousel,
+    #galleryCarousel {
         --f-carousel-slide-width: calc((100% - 32px) / 2);
     }
 }
@@ -102,13 +104,16 @@ footer :focus {
 @media screen and (min-width: 1024px) {
 
     #productCarousel,
-    #todoCarousel {
+    #todoCarousel,
+    #galleryCarousel {
         --f-carousel-slide-width: calc((100% - 64px) / 3);
     }
 }
 
 @media screen and (min-width: 1280px) {
-    #todoCarousel {
+
+    #todoCarousel,
+    #galleryCarousel {
         --f-carousel-slide-width: calc((100% - 96px) / 4);
     }
 }
