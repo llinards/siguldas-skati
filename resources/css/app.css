@@ -46,18 +46,13 @@
 
 .home-introduction {
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/public/images/siguldas-skati-houses.jpg');
-    min-height: calc(
-        100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0)
-    );
-}
-
-.home-banner{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+    min-height: calc(100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0));
 }
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
     font-family: 'Charpentier', serif;
     text-transform: uppercase;
 }
@@ -70,4 +65,46 @@ h3 {
 footer :focus {
     outline: 2px solid white;
     outline-offset: 2px;
+}
+
+
+#productCarousel {
+    --f-carousel-spacing: 32px;
+
+    --f-button-prev-pos: 5rem;
+    --f-button-next-pos: 5rem;
+
+    --f-button-bg: rgb(30, 38, 1);
+    --f-button-color: white;
+
+    --f-button-width: 48px;
+    --f-button-height: 48px;
+    --f-button-border-radius: 50%;
+
+    --f-button-svg-width: 27px;
+    --f-button-svg-height: 27px;
+    --f-button-svg-stroke-width: 1.5;
+
+    --f-button-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+        rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+@media screen and (min-width: 768px) {
+    #productCarousel {
+        --f-carousel-slide-width: calc((100% - 64px) / 2);
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    #productCarousel {
+        --f-carousel-slide-width: calc((100% - 64px) / 3);
+    }
+}
+
+/* Add this to your CSS */
+button[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
 }
