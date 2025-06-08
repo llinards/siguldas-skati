@@ -1,6 +1,6 @@
 <div class="bg-ss" x-data="{ agreed: false }">
     <div class="px-4 container mx-auto flex justify-center">
-        <div class="my-12 md:mt-18 lg:mt-24 xl:mtt-30 sm:-mb-28 max-w-6xl bg-white rounded-3xl">
+        <div class="my-12 md:mt-18 lg:mt-24 xl:mt-30 sm:-mb-28 max-w-6xl bg-white rounded-3xl">
             <div class="xl:flex p-8 md:p-12 items-center">
                 <h3
                     class="xl:max-w-1/2 xl:px-8 text-5xl xl:text-6xl 2xl:text-h-med font-heading leading-none text-center mb-4 xl:mb-0">
