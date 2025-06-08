@@ -19,6 +19,10 @@ Route::group(
             return view('home');
         })->name('home');
 
+        Route::get('/product', function () {
+            return view('product');
+        })->name('product');
+
         Route::get('/privatuma-politika', function () {
             return view('privacy-policy');
         })->name('privacy-policy');
@@ -33,6 +37,6 @@ Route::group(
             Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
         });
 
-        require __DIR__.'/auth.php';
+        require __DIR__ . '/auth.php';
     }
 );

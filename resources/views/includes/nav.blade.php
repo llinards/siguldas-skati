@@ -1,5 +1,5 @@
 <nav class="absolute w-full z-50" x-data="handleMobileMenu()" x-init="init()">
-    <div class="lg:container lg:mx-auto flex justify-between items-center px-4 py-8 relative z-50">
+    <div class="container mx-auto flex justify-between items-center px-4 py-8 relative z-50">
         <a href="/{{ app()->getLocale() }}" class="flex items-center">
             <img src="{{ asset('images/siguldas-skati-logo.png') }}" class="w-44 lg:w-56 xl:w-82 transition-all duration-300
                     {{ Route::is('home') ? '' : 'invert' }}" :class="open ? 'invert' : ''" alt="Siguldas Skati Logo" />
