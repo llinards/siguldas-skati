@@ -1,11 +1,8 @@
 <nav class="absolute w-full z-50" x-data="handleMobileMenu()" x-init="init()">
     <div class="lg:container lg:mx-auto flex justify-between items-center px-4 py-8 relative z-50">
         <a href="/{{ app()->getLocale() }}" class="flex items-center">
-            <img src="{{ asset('images/siguldas-skati-logo.png') }}"
-                class="w-44 lg:w-48 transition-all duration-300
-                    {{ Route::is('home') ? '' : 'invert' }}"
-                :class="open ? 'invert' : ''"
-                alt="Siguldas Skati Logo" />
+            <img src="{{ asset('images/siguldas-skati-logo.png') }}" class="w-44 lg:w-56 xl:w-82 transition-all duration-300
+                    {{ Route::is('home') ? '' : 'invert' }}" :class="open ? 'invert' : ''" alt="Siguldas Skati Logo" />
         </a>
         <ul class="hidden lg:flex uppercase {{ Route::is('home') ? 'text-white' : 'text-black' }}">
             <x-nav.nav-link href="#">
@@ -32,7 +29,8 @@
 
 
         <button x-on:click="open = !open" class="lg:hidden relative z-50">
-            <svg x-show="!open" class="size-12 cursor-pointer {{ Route::is('home') ? 'fill-white' : 'fill-black' }}" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20">
+            <svg x-show="!open" class="size-12 cursor-pointer {{ Route::is('home') ? 'fill-white' : 'fill-black' }}"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
                     d="M2 4.75A.75.75 0 0 1 2.75 4h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75ZM2 10a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 10Zm0 5.25a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"
                     clip-rule="evenodd" />
