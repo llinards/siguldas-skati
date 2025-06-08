@@ -18,24 +18,24 @@
     <meta name="author" content="{{ config('app.name') }}">
     <meta name="locale" content="{{ app()->getLocale() }}">
     <meta name="description"
-          content="Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai.">
-    <meta name="keywords" content="Siguldas Skati, brīvdienu mājas, atpūta, daba, dizains, Sigulda">
+          content="@lang('Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai.')">
+    <meta name="keywords" content="@lang('Siguldas Skati, brīvdienu mājas, atpūta, daba, dizains, Sigulda')">
 
     <meta property="og:url" content="{{Request::url()}}">
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ isset($title) ? $title . ' | ' . config('app.name') : config('app.name') }}">
     <meta property="og:description"
-          content="Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai.">
+          content="@lang('Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai.')">
     <meta property="og:image" content="{{ asset('images/ss-meta-logo.svg') }}">
     <meta property="og:site_name" content="{{ config('app.name') }}">
     <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta property="twitter:domain" content="siguldasskati.slmedia.lv">
+    <meta property="twitter:domain" content="siguldasskati.lv">
     <meta property="twitter:url" content="{{Request::url()}}">
     <meta name="twitter:title" content="{{ isset($title) ? $title . ' | ' . config('app.name') : config('app.name') }}">
     <meta name="twitter:description"
-          content="Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai.">
+          content="@lang('Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai.')">
     <meta name="twitter:image" content="{{ asset('images/ss-meta-logo.svg') }}">
     <meta name="robots" content="index, follow">
 
