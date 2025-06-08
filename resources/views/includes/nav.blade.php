@@ -21,7 +21,7 @@
             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
             <x-nav.nav-link rel="alternate" hreflang="{{ $localeCode }}"
                 href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
-                :class="app()->getLocale() === $localeCode ? ' border-b-white' : ''">
+                class="{{ app()->getLocale() === $localeCode ? (Route::is('home') ? 'border-b-white' : 'border-b-black') : '' }}">
                 {{ $properties['native'] }}
             </x-nav.nav-link>
             @endforeach
