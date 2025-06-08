@@ -10,13 +10,48 @@
         {{ isset($title) ? $title . ' | ' . config('app.name') : config('app.name') }}
     </title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
+    <meta name="author" content="{{ config('app.name') }}">
+    <meta name="locale" content="{{ app()->getLocale() }}">
+    <meta name="description"
+          content="Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai.">
+    <meta name="keywords" content="Siguldas Skati, brīvdienu mājas, atpūta, daba, dizains, Sigulda">
+
+    <meta property="og:url" content="{{Request::url()}}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ isset($title) ? $title . ' | ' . config('app.name') : config('app.name') }}">
+    <meta property="og:description"
+          content="Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai.">
+    <meta property="og:image" content="{{ asset('images/ss-meta-logo.svg') }}">
+    <meta property="og:site_name" content="{{ config('app.name') }}">
+    <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="siguldasskati.slmedia.lv">
+    <meta property="twitter:url" content="{{Request::url()}}">
+    <meta name="twitter:title" content="{{ isset($title) ? $title . ' | ' . config('app.name') : config('app.name') }}">
+    <meta name="twitter:description"
+          content="Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai.">
+    <meta name="twitter:image" content="{{ asset('images/ss-meta-logo.svg') }}">
+    <meta name="robots" content="index, follow">
+
+    <meta name="geo.region" content="LV">
+    <meta name="geo.placename" content="Sigulda, Latvia">
+
+    <link rel="canonical" href="{{ Request::url() }}">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @cookieconsentscripts
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "{{ config('app.name') }}",
+          "url": "{{ config('app.url') }}",
+          "logo": "{{ asset('images/ss-meta-logo.svg') }}",
+          "description": "Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai."
+        }
+    </script>
 </head>
 
 <body class="antialiased font-main">
