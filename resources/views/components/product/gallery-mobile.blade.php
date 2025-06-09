@@ -41,53 +41,68 @@
 
 <script type="module">
     const carousel = new Carousel(document.getElementById('productCarousel'), {
-    Navigation: false,
-    infinite: false,
-    center: true,
-    transition: 'fade',
-    Dots: false,
+        Navigation: false,
+        infinite: false,
+        center: true,
+        transition: 'fade',
+        Dots: false,
     });
-    
+
     document.getElementById('productPrev').addEventListener('click', () => carousel.slidePrev());
     document.getElementById('productNext').addEventListener('click', () => carousel.slideNext());
-    
+
     const prevBtn = document.getElementById('productPrev');
     const nextBtn = document.getElementById('productNext');
-    
-    function updateProductCarouselNav() {
-    prevBtn.disabled = carousel.page === 0;
-    nextBtn.disabled = carousel.page === carousel.pages.length - 1;
-    }
-    
-    updateProductCarouselNav();
-    
-    carousel.on('change', updateProductCarouselNav);
 
+    function updateProductCarouselNav() {
+        prevBtn.disabled = carousel.page === 0;
+        nextBtn.disabled = carousel.page === carousel.pages.length - 1;
+    }
+        
+    function slideCounter() {
+        const counter = document.getElementById('carousel-counter');
+        const current = carousel.page + 1;
+        const total = carousel.pages.length;
+        counter.innerText = `${current} / ${total}`;
+    }
+
+    function handleResize() {
+        updateProductCarouselNav();
+        slideCounter();
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    carousel.on('ready', () => {
+        updateProductCarouselNav();
+        slideCounter();
+    });
+
+    carousel.on('change', () => {
+        updateProductCarouselNav();
+        slideCounter();
+    });
+
+    carousel.off('resize');
+    
     Fancybox.bind('[data-fancybox="galleryMob"]', {
         compact: false,
         idle: false,
-
         animated: false,
         showClass: false,
         hideClass: false,
-
         dragToClose: false,
         contentClick: false,
-
-        Images: {
-            
-        },
-
+        Images: {},
         Toolbar: {
             display: {
-            left: [],
-            middle: ['infobar'],
-            right: ['close'],
+                left: [],
+                middle: ['infobar'],
+                right: ['close'],
             },
         },
-
         Thumbs: {
-        type: 'classic',
+            type: 'classic',
         },
     });
 </script>
