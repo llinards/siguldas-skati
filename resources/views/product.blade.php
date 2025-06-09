@@ -7,7 +7,7 @@
             </x-product.title>
 
             <div>
-                <div class="block lg:hidden grid grid-cols-1">
+                <div class="block lg:hidden grid grid-cols-1 relative">
                     <x-carousels.nav class="lg:hidden">
                         <x-slot name="prev">productPrev</x-slot>
                         <x-slot name="next">productNext</x-slot>
@@ -15,6 +15,11 @@
                     <div id="productCarousel" class="f-carousel">
                         <div class="f-carousel__viewport">
                             <x-product.gallery-mobile />
+                        </div>
+                        <!-- Slide counter -->
+                        <div id="carousel-counter"
+                            class="absolute right-4 bottom-4 bg-black/60 text-white text-xs px-2 py-1 rounded z-10">
+                            1 / 5
                         </div>
                     </div>
                 </div>

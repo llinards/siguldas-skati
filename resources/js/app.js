@@ -37,14 +37,13 @@ window.Alpine = Alpine;
 window.handleMobileMenu = handleMobileMenu;
 
 document.querySelectorAll('[id^="gallery-main-"]').forEach(el => {
-    el.addEventListener('click', function(e) {
+    el.addEventListener('click', function (e) {
         e.preventDefault();
 
         const images = [
             { src: el.getAttribute('href') }
         ];
 
-        // Get extra images from data-gallery-extra (if present)
         const extra = el.getAttribute('data-gallery-extra');
         if (extra) {
             try {
@@ -60,5 +59,7 @@ document.querySelectorAll('[id^="gallery-main-"]').forEach(el => {
         });
     });
 });
+
+
 
 Alpine.start();
