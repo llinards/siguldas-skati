@@ -16,7 +16,6 @@
                         <div class="f-carousel__viewport">
                             <x-product.gallery-mobile />
                         </div>
-                        <!-- Slide counter -->
                         <div id="carousel-counter"
                             class="absolute right-4 bottom-4 bg-black/60 text-white text-xs px-2 py-1 rounded z-10">
                             1 / 5
