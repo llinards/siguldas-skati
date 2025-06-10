@@ -1,5 +1,5 @@
 <div class="bg-ss">
-    <div class="container mx-auto carousel-section grid grid-cols-1">
+    <div class="container mx-auto grid grid-cols-1">
         <x-carousels.nav>
             <x-slot name="prev">productPrev</x-slot>
             <x-slot name="next">productNext</x-slot>
