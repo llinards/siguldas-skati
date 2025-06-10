@@ -1,4 +1,4 @@
-<div class="hidden lg:grid grid-cols-2 2xl:grid-cols-5 gap-4">
+<div class="hidden lg:grid grid-cols-2 2xl:grid-cols-5 gap-4 mb-6">
     <div class="2xl:col-span-3 overflow-hidden rounded-3xl h-full">
         <a data-fancybox="galleryDesktop" href="{{ asset('images/siguldas-skati-product-3.jpg') }}"
             class="block h-full">

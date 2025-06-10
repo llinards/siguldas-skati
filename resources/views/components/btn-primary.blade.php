@@ -2,7 +2,7 @@
 
 @php
 $styling = 'px-6 py-4 uppercase bg-ss-dark rounded-xl text-white transition-all duration-200
-text-center';
+text-center w-full sm:w-auto';
 $hover = 'hover:bg-white hover:text-black'
 @endphp
 
