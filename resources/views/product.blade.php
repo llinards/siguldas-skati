@@ -6,22 +6,28 @@
                 <x-slot name="productCapacityLong">@lang('Paredzēts 2 personām')</x-slot>
             </x-product.title>
 
-            <div>
-                <div class="block lg:hidden grid grid-cols-1">
-                    <x-carousels.nav class="lg:hidden">
-                        <x-slot name="prev">productPrev</x-slot>
-                        <x-slot name="next">productNext</x-slot>
-                    </x-carousels.nav>
-                    <div id="productCarousel" class="f-carousel">
-                        <div class="f-carousel__viewport">
-                            <x-product.gallery-mobile />
-                        </div>
-                    </div>
-                </div>
-
-                <x-product.gallery-desktop />
+            <x-product.gallery.mobile />
+            <div class="flex sm:hidden mt-6 mb-6">
+                <x-btn-primary class="w-full">@lang('Rezervēt')</x-btn-primary>
             </div>
 
+            <x-product.gallery.desktop />
+
+            <x-product.wrapper />
+
+        </div>
+    </div>
+
+    {{-- PRODUCT CAROUSEL --}}
+    <div class="bg-ss">
+        <div class="container mx-auto px-4">
+            <div class="relative inline-block mb-3">
+                <h2 class="text-h-mob lg:text-h-md leading-none">@lang('Apskati citas dizaina mājas!')</h2>
+                <span class="absolute left-0 bottom-0 w-2/3 h-0.5 bg-ss-dark"></span>
+            </div>
+            <p class="text-sm text-ss-gray pb-6 leading-none">
+                @lang('Izsmalcināta atpūta starp pilsētu un dabu!')</p>
+            <x-carousels.products.wrapper></x-carousels.products.wrapper>
         </div>
     </div>
 </x-app-layout>

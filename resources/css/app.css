@@ -58,18 +58,20 @@ h4 {
 }
 
 :focus {
-    outline: 3px solid rgb(30, 38, 1);
+    outline: 2px solid rgb(30, 38, 1);
 }
 
-footer :focus, nav :focus {
-    outline: 3px solid white;
+footer :focus,
+nav :focus {
+    outline: 2px solid white;
 }
 
 
 
 #productCarousel,
 #todoCarousel,
-#galleryCarousel {
+#galleryCarousel,
+#productGallery {
     --f-carousel-spacing: 32px;
 
     --f-button-prev-pos: 5rem;
@@ -95,7 +97,8 @@ footer :focus, nav :focus {
 
     #productCarousel,
     #todoCarousel,
-    #galleryCarousel {
+    #galleryCarousel,
+    #productGallery {
         --f-carousel-slide-width: calc((100% - 32px) / 2);
     }
 }
@@ -104,7 +107,8 @@ footer :focus, nav :focus {
 
     #productCarousel,
     #todoCarousel,
-    #galleryCarousel {
+    #galleryCarousel,
+    #productGallery {
         --f-carousel-slide-width: calc((100% - 64px) / 3);
     }
 }
@@ -117,7 +121,6 @@ footer :focus, nav :focus {
     }
 }
 
-/* Add this to your CSS */
 button[disabled] {
     opacity: 0.5;
     pointer-events: none;
