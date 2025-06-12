@@ -33,8 +33,8 @@ Route::group(
             Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
         });
 
-        Route::get('/{product}', [ProductController::class, 'show'])->name('product');
-
         require __DIR__.'/auth.php';
+        
+        Route::get('/{product}', [ProductController::class, 'show'])->name('product');
     }
 );
