@@ -57,6 +57,13 @@ h4 {
     text-transform: uppercase;
 }
 
+li h3 {
+    font-family: 'Rubik', serif;
+    font-weight: bold;
+    text-transform: none;
+    margin-bottom: 0.75rem;
+}
+
 :focus {
     outline: 2px solid rgb(30, 38, 1);
 }
