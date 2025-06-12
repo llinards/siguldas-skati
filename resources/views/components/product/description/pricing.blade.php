@@ -1,11 +1,15 @@
 <ul class="mb-6">
-    <li class="font-bold">@lang('Cena par nakti')</li>
+    <li>
+        <h3 class="font-main">@lang('Cena par nakti')</h3>
+    </li>
     <li>159 EUR – 2 @lang('viesiem')</li>
     <li>209 EUR – 2 @lang('viesiem nedēļas nogalēs')</li>
     <li>+20 EUR @lang('katru papildu viesi (par nakti)')</li>
 </ul>
 <ul class="mb-6">
-    <li class="font-bold">@lang('Papildu maksa')</li>
+    <li>
+        <h3>@lang('Papildu maksa')</h3>
+    </li>
     <li>10 EUR – @lang('uzkopšana uzturēšanās reizēs no 1 līdz 2 naktīm')</li>
     <li>30 EUR – @lang('uzkopšana uzturēšanās reizēs no 3 līdz 4 naktīm')</li>
     <li>20 EUR – @lang('mājdzīvnieku uzņemšana')</li>

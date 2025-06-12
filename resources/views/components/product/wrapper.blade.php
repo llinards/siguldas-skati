@@ -10,14 +10,22 @@
     </div>
     <div class="2xl:col-span-2">
         <div class="relative inline-block mb-3">
-            <h2 class="mt-6 lg:mt-0 mb-3 leading-none text-h-sm-mob lg:text-h-mob">@lang('Cenas un papildu
+            <h2 class="mt-6 xl:mt-0 mb-3 leading-none text-h-sm-mob lg:text-h-mob">@lang('Cenas un papildu
                 informācija')</h2>
             <span class="absolute left-0 bottom-0 w-2/3 h-0.5 bg-ss-dark"></span>
         </div>
         <x-product.description.pricing />
-        <div class="flex xl:justify-end">
+        <div class="sm:mb-6 flex xl:justify-end">
             <x-btn-primary>@lang('Rezervēt')</x-btn-primary>
         </div>
+    </div>
+
+    <div class="hidden sm:block col-span-5 xl:border-b-2">
+        <div class="relative inline-block mb-3">
+            <h2 class="mt-6 xl:mt-0 mb-3 leading-none text-h-sm-mob lg:text-h-mob">@lang('Lietas, ko ņemt vērā')</h2>
+            <span class="absolute left-0 bottom-0 w-2/3 h-0.5 bg-ss-dark"></span>
+        </div>
+        <x-product.description.good-to-know />
     </div>
 </div>
 
@@ -63,11 +71,7 @@
         <div id="hs-basic-with-arrow-collapse-three"
             class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region"
             aria-labelledby="hs-basic-with-arrow-heading-three">
-            <p class="">
-                <em>This is the second item's accordion body.</em> It is hidden by default, until the collapse plugin
-                adds the appropriate classes that we use to style each element. These classes control the overall
-                appearance, as well as the showing and hiding via CSS transitions.
-            </p>
+            <x-product.description.good-to-know />
         </div>
     </div>
 </div>
