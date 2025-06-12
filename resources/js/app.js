@@ -2,6 +2,7 @@ import './bootstrap';
 
 import Alpine from 'alpinejs';
 import 'preline'
+import { HSOverlay } from 'preline';
 import { Fancybox } from "@fancyapps/ui";
 
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
@@ -61,5 +62,5 @@ document.querySelectorAll('[id^="gallery-main-"]').forEach(el => {
 });
 
 
-
 Alpine.start();
+
