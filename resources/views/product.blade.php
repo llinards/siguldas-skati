@@ -6,14 +6,14 @@
                 <x-slot name="productCapacityLong">@lang('Paredzēts 2 personām')</x-slot>
             </x-product.title>
 
-            <x-product.gallery.mobile />
+            <x-product.gallery.mobile/>
             <div class="flex sm:hidden mt-6 mb-6">
                 <x-btn-primary class="w-full">@lang('Rezervēt')</x-btn-primary>
             </div>
 
-            <x-product.gallery.desktop />
+            <x-product.gallery.desktop/>
 
-            <x-product.wrapper />
+            <x-product.wrapper/>
 
         </div>
     </div>
@@ -27,7 +27,7 @@
             </div>
             <p class="text-sm text-ss-gray pb-6 leading-none">
                 @lang('Izsmalcināta atpūta starp pilsētu un dabu!')</p>
-            <x-carousels.products.wrapper></x-carousels.products.wrapper>
+            <x-carousels.products.wrapper :products="$products"></x-carousels.products.wrapper>
         </div>
     </div>
 </x-app-layout>
