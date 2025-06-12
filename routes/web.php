@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -15,13 +17,7 @@ Route::group(
         ],
     ],
     function () {
-        Route::get('/', function () {
-            return view('home');
-        })->name('home');
-
-        Route::get('/product', function () {
-            return view('product');
-        })->name('product');
+        Route::get('/', HomeController::class)->name('home');
 
         Route::get('/privatuma-politika', function () {
             return view('privacy-policy');
@@ -37,6 +33,8 @@ Route::group(
             Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
         });
 
-        require __DIR__ . '/auth.php';
+        Route::get('/{product}', [ProductController::class, 'show'])->name('product');
+
+        require __DIR__.'/auth.php';
     }
 );
