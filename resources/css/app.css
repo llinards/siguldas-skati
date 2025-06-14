@@ -58,6 +58,7 @@ h4 {
     text-transform: uppercase;
 }
 
+li h2,
 li h3 {
     font-family: 'Rubik', serif;
     font-weight: bold;
