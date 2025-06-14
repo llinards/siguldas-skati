@@ -67,6 +67,44 @@ for (let item of accordions) {
         item.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 }
+const productModalBtnOpen = document.querySelectorAll('.modalBtnOpen');
+const productModalBtnClose = document.getElementById('modalBtnClose');
+const productModal = document.getElementById('modal');
+const productModalContainer = document.getElementById('modalContainer');
+
+function closeModal() {
+    productModalContainer.classList.remove('opacity-100');
+    productModalContainer.classList.add('opacity-0');
+    productModalContainer.addEventListener('transitionend', function handler() {
+        productModal.close();
+        productModalContainer.removeEventListener('transitionend', handler);
+    });
+}
+
+if (productModal) {
+    productModalBtnOpen.forEach(btn => {
+        btn.addEventListener('click', () => {
+            productModal.showModal();
+            productModalContainer.classList.add('opacity-100');
+            productModalContainer.classList.remove('opacity-0');
+        });
+    });
+
+    productModalBtnClose.addEventListener('click', () => {
+        closeModal();
+    });
+
+    // Optional: close when clicking outside
+    productModalContainer.addEventListener('click', function (e) {
+        if (e.target === productModalContainer) {
+            closeModal();
+        }
+    })
+}
+
+
+
+
 
 
 

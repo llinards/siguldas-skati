@@ -41,9 +41,8 @@
             <x-accordion-arrows />
 
         </button>
-        <div id="hs-basic-with-arrow-collapse-one"
-            class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300" role="region"
-            aria-labelledby="hs-basic-with-arrow-heading-one">
+        <div id="hs-basic-with-arrow-collapse-one" class="hs-accordion-content w-full transition-[height] duration-300"
+            role="region" aria-labelledby="hs-basic-with-arrow-heading-one">
             <x-product.description.facilities />
         </div>
     </div>

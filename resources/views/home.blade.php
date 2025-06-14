@@ -31,7 +31,7 @@
             </div>
             <div class="lg:grid lg:grid-cols-2 gap-6">
                 <img class="lg:h-240 object-cover rounded-3xl" src="{{ asset('images/siguldas-skati-home-2.jpg') }}"
-                     alt="@lang('Siguldas Skati - Moduļu māju parks')">
+                    alt="@lang('Siguldas Skati - Moduļu māju parks')">
                 <div class="lg:flex lg:flex-col lg:justify-center">
                     <h3 class="mt-6 lg:mt-0 mb-3 leading-none text-h-sm-mob lg:text-h-sm">@lang('Siguldas skati')</h3>
                     <div
