@@ -19,6 +19,8 @@ Route::group(
     function () {
         Route::get('/', HomeController::class)->name('home');
 
+        Route::get('/dizaina-majas-un-sauna', [ProductController::class, 'index'])->name('products');
+
         Route::get('/privatuma-politika', function () {
             return view('privacy-policy');
         })->name('privacy-policy');
@@ -33,8 +35,8 @@ Route::group(
             Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
         });
 
-        require __DIR__.'/auth.php';
-        
+        require __DIR__ . '/auth.php';
+
         Route::get('/{product}', [ProductController::class, 'show'])->name('product');
     }
 );
