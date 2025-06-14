@@ -31,7 +31,7 @@
 
 
 {{-- MOBILE --}}
-<div class="sm:hidden hs-accordion-group space-y-6 pb-12">
+<div class="sm:hidden hs-accordion-group space-y-6 pb-12" data-hs-accordion-always-open="">
     <div class="hs-accordion active" id="hs-basic-with-arrow-heading-one">
         <button class="hs-accordion-toggle border-b-2 mb-3 relative flex items-center w-full justify-between"
             aria-expanded="true" aria-controls="hs-basic-with-arrow-collapse-one">
