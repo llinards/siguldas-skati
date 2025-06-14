@@ -2,20 +2,20 @@
 
 @php
 $styling = 'px-6 py-4 uppercase bg-ss-dark rounded-xl text-white transition-all duration-200
-text-center w-full sm:w-auto';
-$hover = 'hover:bg-white hover:text-black'
+text-center w-full border-1 border-transparent hover:bg-white hover:text-black hover:border-ss-dark
+cursor-pointer'
 @endphp
 
 @if ($type === 'button')
-<button {{ $attributes->merge(['class' => "$styling $hover cursor-pointer"]) }}>
+<button {{ $attributes->merge(['class' => "$styling sm:w-auto"]) }}>
     {{ $slot }}
 </button>
 @elseif($type === 'submit')
-<button {{ $attributes->merge(['class' => $styling]) }}>
+<button {{ $attributes->merge(['class' => "$styling"]) }}>
     {{ $slot }}
 </button>
 @else
-<a {{ $attributes->merge(['class' => "$styling $hover cursor-pointer"]) }}>
+<a {{ $attributes->merge(['class' => "$styling sm:w-auto"]) }}>
     {{ $slot }}
 </a>
 @endif

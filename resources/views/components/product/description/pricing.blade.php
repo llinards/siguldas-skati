@@ -17,7 +17,7 @@
 </ul>
 <p class="mb-6">@lang('* Cenas svētku dienās, kā arī dienu pirms un pēc tām, var būt augstākas.')
 </p>
-<p class="mb-6">@lang('Pārbaudi pieejamos datumus un') <x-link class="uppercase font-bold" href="#">
+<p class="mb-6">@lang('Pārbaudi pieejamos datumus un') <x-link class="uppercase underline font-bold" href="#">
         @lang('rezervē') Airbnb</x-link>@lang('platformā vai rezervē
-    rakstot uz') <x-link href="mailto:info@siguldasskati.lv">info@siguldasskati.lv</x-link>
+    rakstot uz') <x-link class="underline" href="mailto:info@siguldasskati.lv">info@siguldasskati.lv</x-link>
 </p>

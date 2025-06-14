@@ -14,7 +14,7 @@
             <x-nav.nav-link href="#">
                 @lang('BUJ')
             </x-nav.nav-link>
-            <x-nav.nav-link href="#">
+            <x-nav.nav-link href="{{ route('contacts') }}">
                 @lang('Kontakti')
             </x-nav.nav-link>
 
