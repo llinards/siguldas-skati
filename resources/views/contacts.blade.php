@@ -11,8 +11,8 @@
                 mājām')!</p>
 
             <div class="md:grid grid-cols-2 lg:grid-cols-3 items-center">
-                <div class="mb-6 lg:mb-0 space-y-6 lg:space-y-12">
-                    <ul>
+                <div class="mb-6 md:mb-12 lg:mb-0 space-y-6 lg:space-y-12">
+                    <ul class="text-center md:text-left">
                         <li>
                             <h2>@lang('Telefons')</h2>
                         </li>
@@ -20,7 +20,7 @@
                             <x-link href="tel:+37125666622" class="">+371 25666622</x-link>
                         </li>
                     </ul>
-                    <ul>
+                    <ul class="text-center md:text-left">
                         <li>
                             <h2>@lang('E-pasts')</h2>
                         </li>
@@ -29,8 +29,8 @@
                         </li>
                     </ul>
                 </div>
-                <div class="mb-6 lg:mb-0 space-y-6 lg:space-y-12">
-                    <ul>
+                <div class="mb-6 md:mb-18 lg:mb-0 space-y-6 lg:space-y-12">
+                    <ul class="text-center md:text-left">
                         <li>
                             <h2>@lang('Adrese')</h2>
                         </li>
@@ -39,12 +39,12 @@
                                 Sigulda, Latvija</x-link>
                         </li>
                     </ul>
-                    <ul>
+                    <ul class="text-center md:text-left">
                         <li>
                             <h2>@lang('Pieseko')</h2>
                         </li>
                         <li>
-                            <ul class="flex space-x-3">
+                            <ul class="flex justify-center md:justify-start space-x-3">
                                 <x-social.icon href="https://www.facebook.com/ModernHouseLV">
                                     <x-social.facebook class="hover:text-gray-500 transition-colors duration-200" />
                                 </x-social.icon>
@@ -60,7 +60,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-span-3 lg:col-span-1">
+                <div class="col-span-3 justify-center lg:col-span-1">
                     <form action="/" method="POST">
                         <div
                             class="flex flex-col p-6 space-y-6 mb-6 border-1 border-ss-gray text-ss-gray rounded-3xl shadow-md">
