@@ -1,26 +1,27 @@
 <div class="bg-ss">
     <div class="container mx-auto grid grid-cols-1">
         @if($products->isEmpty())
-            <p class="text-base leading-7.5 md:text-xl xl:text-2xl">@lang('Šobrīd nav aktīvu māju!')</p>
+        <p class="text-base leading-7.5 md:text-xl xl:text-2xl">@lang('Šobrīd nav aktīvu māju!')</p>
         @else
-            <x-carousels.nav>
-                <x-slot name="prev">productPrev</x-slot>
-                <x-slot name="next">productNext</x-slot>
-            </x-carousels.nav>
-            <div id="productCarousel" class="f-carousel">
-                <div class="f-carousel__viewport">
-                    @foreach ($products as $product)
-                        <x-carousels.products.card>
-                            <x-slot name="productTitle">{{$product->title}}</x-slot>
-                            <x-slot name="productImage">{{ asset($product->cover) }}</x-slot>
-                            <x-slot name="productCapacity">
-                                {{ $product->person_count === 1 ? __('1 personai') : __(':count personām', ['count' => $product->person_count]) }}
-                            </x-slot>
-                            <x-slot name="productLink">{{route('product', $product->slug)}}</x-slot>
-                        </x-carousels.products.card>
-                    @endforeach
-                </div>
+        <x-carousels.nav>
+            <x-slot name="prev">productPrev</x-slot>
+            <x-slot name="next">productNext</x-slot>
+        </x-carousels.nav>
+        <div id="productCarousel" class="f-carousel">
+            <div class="f-carousel__viewport">
+                @foreach ($products as $product)
+                <x-carousels.products.card>
+                    <x-slot name="productTitle">{{$product->title}}</x-slot>
+                    <x-slot name="productImage">{{ asset($product->cover) }}</x-slot>
+                    <x-slot name="productCapacity">
+                        {{ $product->person_count === 1 ? __('1 personai') : __(':count personām', ['count' =>
+                        $product->person_count]) }}
+                    </x-slot>
+                    <x-slot name="productLink">{{route('product', $product->slug)}}</x-slot>
+                </x-carousels.products.card>
+                @endforeach
             </div>
+        </div>
         @endif
     </div>
 </div>

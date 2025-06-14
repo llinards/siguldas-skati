@@ -15,6 +15,12 @@ class ProductController extends Controller
         $this->productServices = $productServices;
     }
 
+    public function index()
+    {
+        $products = Product::all();
+        return view('products', compact('products'));
+    }
+
     public function show(Product $product): View
     {
         $products = $this->productServices->getAllOtherProducts($product);
