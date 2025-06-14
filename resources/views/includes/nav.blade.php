@@ -51,16 +51,18 @@
         x-transition:leave-end="opacity-0 translate-x-full" class="fixed inset-0 bg-ss bg-opacity-90 z-40 lg:hidden">
 
         <ul class="flex flex-col items-center justify-center h-full space-y-2 uppercase text-black lg:text-white">
-            <x-nav.nav-link href="#">
+            <x-nav.nav-link href="#" class="{{ Route::is('book') ? 'border-b-ss-gray text-ss-gray' : '' }}">
                 @lang('Rezervēt')
             </x-nav.nav-link>
-            <x-nav.nav-link href="#">
+            <x-nav.nav-link href="{{ route('products') }}"
+                class="{{ Route::is('products') ? 'border-b-ss-gray text-ss-gray' : '' }}">
                 @lang('Dizaina mājas un sauna')
             </x-nav.nav-link>
-            <x-nav.nav-link href="#">
+            <x-nav.nav-link href="#" class="{{ Route::is('faq') ? 'border-b-ss-gray text-ss-gray' : '' }}">
                 @lang('BUJ')
             </x-nav.nav-link>
-            <x-nav.nav-link href="#">
+            <x-nav.nav-link href="{{ route('contacts') }}"
+                class="{{ Route::is('contacts') ? 'border-b-ss-gray text-ss-gray' : '' }}">
                 @lang('Kontakti')
             </x-nav.nav-link>
             <ul class="flex"> @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
