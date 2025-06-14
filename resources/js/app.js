@@ -61,6 +61,14 @@ document.querySelectorAll('[id^="gallery-main-"]').forEach(el => {
     });
 });
 
+const accordions = document.getElementsByClassName('hs-accordion');
+for (let item of accordions) {
+    item.addEventListener('click', function () {
+        item.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+}
+
+
 
 Alpine.start();
 
