@@ -8,23 +8,24 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    protected ProductServices $productServices;
+  protected ProductServices $productServices;
 
-    public function __construct(ProductServices $productServices)
-    {
-        $this->productServices = $productServices;
-    }
+  public function __construct(ProductServices $productServices)
+  {
+    $this->productServices = $productServices;
+  }
 
-    public function index()
-    {
-        $products = Product::all();
-        return view('products', compact('products'));
-    }
+  public function index(): View
+  {
+    $products = $this->productServices->getAllActiveProducts();
 
-    public function show(Product $product): View
-    {
-        $products = $this->productServices->getAllOtherProducts($product);
+    return view('products', compact('products'));
+  }
 
-        return view('product', compact('products'));
-    }
+  public function show(Product $product): View
+  {
+    $products = $this->productServices->getAllOtherProducts($product);
+
+    return view('product', compact('products'));
+  }
 }
