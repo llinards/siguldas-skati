@@ -34,22 +34,21 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $randomWord = $this->faker->word();
+        $randomWord = $this->faker->word;
 
-        $uniqueTitles = [
+        $title = [
             'lv' => $this->productTitles['lv'].' '.ucfirst($randomWord),
             'en' => $this->productTitles['en'].' '.ucfirst($randomWord),
         ];
 
-        // Create unique slugs by appending random elements
-        $uniqueSlugs = [
+        $slug = [
             'lv' => $this->productSlugs['lv'].'-'.Str::slug($randomWord),
             'en' => $this->productSlugs['en'].'-'.Str::slug($randomWord),
         ];
 
         return [
-            'title'        => $uniqueTitles,
-            'slug'         => $uniqueSlugs,
+            'title'        => $title,
+            'slug'         => $slug,
             'is_active'    => true,
             'cover'        => $this->faker->randomElement($this->productCovers),
             'person_count' => $this->faker->numberBetween(1, 4),
