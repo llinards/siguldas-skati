@@ -1,4 +1,4 @@
-<div class="bg-ss" x-data="{ agreed: false }">
+<div class="bg-ss footer-form" x-data="{ agreed: false }">
     <div class="px-4 container mx-auto flex justify-center">
         <div class="my-12 md:mt-18 lg:mt-24 xl:mt-30 sm:-mb-28 max-w-6xl bg-white rounded-3xl">
             <div class="xl:flex p-8 md:p-12 items-center">
