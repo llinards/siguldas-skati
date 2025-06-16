@@ -1,6 +1,7 @@
 <nav class="absolute w-full z-50" x-data="handleMobileMenu()" x-init="init()">
     <div class="container mx-auto flex justify-between items-center px-4 py-8 relative z-50">
-        <a href="/{{ app()->getLocale() }}" class="flex items-center">
+        <a href="/{{ app()->getLocale() }}"
+            class="flex items-center focus-visible:outline-1! focus-visible:outline-offset-6! {{ Route::is('home') ? 'focus-visible:outline-white' : 'focus-visible:outline-ss-dark' }}">
             <img src="{{ asset('images/logo.png') }}" class="w-44 lg:w-56 xl:w-82 transition-all duration-300
                     {{ Route::is('home') ? '' : 'invert' }}" :class="open ? 'invert' : ''" alt="Siguldas Skati Logo" />
         </a>
@@ -29,8 +30,7 @@
             @endforeach
         </ul>
 
-
-        <button x-on:click="open = !open" class="lg:hidden relative z-50">
+        <button x-on:click="open = !open" class="lg:hidden relative z-50 focus-visible:outline-1! {{ Route::is('home') ? 'focus-visible:outline-white' : 'focus-visible:outline-ss-dark' }}" :class="open ? 'focus-visible:outline-ss-dark' : 'focus-visible:outline-ss-dark'">
             <svg x-show="!open" class="size-12 cursor-pointer {{ Route::is('home') ? 'fill-white' : 'fill-black' }}"
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
