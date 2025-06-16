@@ -85,6 +85,13 @@ if (productModal) {
     productModalBtnOpen.forEach(btn => {
         btn.addEventListener('click', () => {
             productModal.showModal();
+
+            productModalContainer.classList.add('opacity-0');
+            productModalContainer.classList.remove('opacity-100');
+
+            // Ensures transition.
+            void productModalContainer.offsetWidth;
+
             productModalContainer.classList.add('opacity-100');
             productModalContainer.classList.remove('opacity-0');
         });
@@ -94,7 +101,6 @@ if (productModal) {
         closeModal();
     });
 
-    // Optional: close when clicking outside
     productModalContainer.addEventListener('click', function (e) {
         if (e.target === productModalContainer) {
             closeModal();

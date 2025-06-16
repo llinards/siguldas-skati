@@ -35,7 +35,7 @@
     {{-- PRODUCT MODAL --}}
     <dialog id="modal">
         <div id="modalContainer"
-             class="fixed z-130 flex items-center justify-center h-full w-full bg-black/50 opacity-0 transition-all duration-300">
+             class="fixed z-130 flex items-center justify-center h-full w-full bg-black/50 opacity-0 transition-opacity duration-300">
             <div class="flex flex-col border bg-ss shadow-2xs rounded-xl">
                 <div class=" flex justify-between items-center py-3 px-4 border-b border-ss-dark">
                     <h3 id="modal-label" class="font-bold ">
