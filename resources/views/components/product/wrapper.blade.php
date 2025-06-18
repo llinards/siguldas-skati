@@ -31,9 +31,9 @@
 
 
 {{-- MOBILE --}}
-<div class="sm:hidden hs-accordion-group space-y-6 pb-12" data-hs-accordion-always-open="">
+<div class="sm:hidden hs-accordion-group space-y-6 pb-6" data-hs-accordion-always-open="">
     <div class="hs-accordion active" id="hs-basic-with-arrow-heading-one">
-        <button class="hs-accordion-toggle border-b-2 mb-3 relative flex items-center w-full justify-between"
+        <button class="hs-accordion-toggle border-b-2 mb-3 pt-3 relative flex items-center w-full justify-between"
             aria-expanded="true" aria-controls="hs-basic-with-arrow-collapse-one">
 
             <h2 class="text-left leading-none text-h-sm-mob lg:text-h-mob">@lang('Ērtības un
@@ -48,7 +48,7 @@
     </div>
 
     <div class="hs-accordion" id="hs-basic-with-arrow-heading-two">
-        <button class="hs-accordion-toggle border-b-2 mb-3 relative flex items-center w-full justify-between"
+        <button class="hs-accordion-toggle border-b-2 mb-3 pt-3 relative flex items-center w-full justify-between"
             aria-expanded="false" aria-controls="hs-basic-with-arrow-collapse-two">
             <h2 class="text-left leading-none text-h-sm-mob lg:text-h-mob">@lang('Cenas un papildu
                 informācija')</h2>
@@ -62,7 +62,7 @@
     </div>
 
     <div class="hs-accordion" id="hs-basic-with-arrow-heading-three">
-        <button class="hs-accordion-toggle border-b-2 mb-3 relative flex items-center w-full justify-between"
+        <button class="hs-accordion-toggle border-b-2 mb-3 pt-3 relative flex items-center w-full justify-between"
             aria-expanded="false" aria-controls="hs-basic-with-arrow-collapse-three">
             <h2 class="text-left leading-none text-h-sm-mob lg:text-h-mob">@lang('Lietas, ko ņemt vērā')</h2>
             <x-accordion-arrows />
