@@ -1,6 +1,6 @@
 <figure class="f-carousel__slide relative">
     <a href="{{ $productLink ?? '' }}">
-        <div class="group relative rounded-3xl overflow-hidden">
+        <div class="group relative rounded-3xl overflow-hidden border-2 border-transparent hover:border-ss-dark transition-all duration-300 ease-in-out">
             <img class="rounded-3xl object-cover w-full transition-transform duration-300 ease-in-out group-hover:scale-105"
                 alt="{{ $productTitle ?? '' }}" src="{{ $productImage ?? '' }}" />
             <div
