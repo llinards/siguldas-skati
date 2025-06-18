@@ -13,7 +13,7 @@
                 class="{{ Route::is('products') ? 'border-b-ss-gray text-ss-gray' : '' }}">
                 @lang('Dizaina mājas un sauna')
             </x-nav.nav-link>
-            <x-nav.nav-link href="#" class="{{ Route::is('faq') ? 'border-b-ss-gray text-ss-gray' : '' }}">
+            <x-nav.nav-link href="{{ route('faq') }}" class="{{ Route::is('faq') ? 'border-b-ss-gray text-ss-gray' : '' }}">
                 @lang('BUJ')
             </x-nav.nav-link>
             <x-nav.nav-link href="{{ route('contacts') }}"
@@ -58,7 +58,7 @@
                 class="{{ Route::is('products') ? 'border-b-ss-gray text-ss-gray' : '' }}">
                 @lang('Dizaina mājas un sauna')
             </x-nav.nav-link>
-            <x-nav.nav-link href="#" class="{{ Route::is('faq') ? 'border-b-ss-gray text-ss-gray' : '' }}">
+            <x-nav.nav-link href="/buj" class="{{ Route::is('faq') ? 'border-b-ss-gray text-ss-gray' : '' }}">
                 @lang('BUJ')
             </x-nav.nav-link>
             <x-nav.nav-link href="{{ route('contacts') }}"
