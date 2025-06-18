@@ -21,6 +21,10 @@ Route::group(
 
         Route::get('/dizaina-majas-un-sauna', [ProductController::class, 'index'])->name('products');
 
+        Route::get('/buj', function () {
+            return view('faq');
+        })->name('faq');
+
         Route::get('/kontakti', function () {
             return view('contacts');
         })->name('contacts');
