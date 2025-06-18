@@ -24,7 +24,7 @@
 
 <body class="antialiased bg-ss font-main">
 <div class="min-h-screen">
-    @include('includes.admin-nav')
+    @include('includes.admin.admin-nav')
 
     <!-- Page Content -->
     <main aria-labelledby="main-content">
