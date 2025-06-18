@@ -2,7 +2,7 @@
     transition-all
     duration-200 border-1
     border-transparent
-    hover:bg-white hover:text-black hover:border-red-500
+    hover:bg-white hover:text-red-500 hover:border-red-500
     cursor-pointer']) }}>
     {{ $slot }}
 </button>
