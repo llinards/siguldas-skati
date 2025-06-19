@@ -1,7 +1,7 @@
 <div>
     <!-- Header -->
     <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-end">
-        <x-btn-primary>Add Product</x-btn-primary>
+        <x-btn-primary>{{ __('Pievienot produktu') }}</x-btn-primary>
     </div>
 
     <!-- Flash Messages -->
@@ -40,7 +40,7 @@
                     <div class="absolute top-2 right-2">
                         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium
                             {{ $product->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                            {{ $product->is_active ? 'Active' : 'Inactive' }}
+                            {{ $product->is_active ? __('Aktīvs') : __('Neaktīvs') }}
                         </span>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                                 {{ $product->is_active
                                     ? 'bg-red-100 text-red-800 hover:bg-red-200'
                                     : 'bg-green-100 text-green-800 hover:bg-green-200' }}">
-                            {{ $product->is_active ? 'Deactivate' : 'Activate' }}
+                            {{ $product->is_active ? __('Deaktivizēt') : __('Aktivizēt') }}
                         </button>
 
                         <div class="flex gap-2">
@@ -76,7 +76,7 @@
                             <!-- Delete Button -->
                             <button
                                 wire:click="deleteProduct({{ $product->id }})"
-                                onclick="return confirm('Are you sure you want to delete this product?')"
+                                onclick="return confirm('{{ __('Vai esat pārliecināts, ka vēlaties dzēst šo produktu?') }}')"
                                 class="inline-flex items-center p-2 text-red-600 hover:text-red-900 hover:bg-red-50 rounded-md transition-colors duration-200">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -93,12 +93,12 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2 2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-2.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 009.586 13H7"></path>
                 </svg>
-                <h3 class="mt-2 text-sm font-medium text-gray-900">No products</h3>
-                <p class="mt-1 text-sm text-gray-500">Get started by creating a new product.</p>
+                <h3 class="mt-2 text-sm font-medium text-gray-900">{{ __('Nav produktu') }}</h3>
+                <p class="mt-1 text-sm text-gray-500">{{ __('Sāciet, izveidojot jaunu produktu.') }}</p>
                 <div class="mt-6">
                     <a href="#"
                        class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                        Add Your First Product
+                        {{ __('Pievienot pirmo produktu') }}
                     </a>
                 </div>
             </div>

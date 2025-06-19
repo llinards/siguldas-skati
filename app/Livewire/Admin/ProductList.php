@@ -23,16 +23,16 @@ class ProductList extends Component
     {
         try {
             if ($this->productServices->deleteProduct($productId)) {
-                session()->flash('message', 'Product deleted successfully.');
+                session()->flash('message', __('Produkts veiksmīgi dzēsts.'));
             } else {
-                session()->flash('error', 'Product not found or could not be deleted.');
+                session()->flash('error', __('Produkts nav atrasts vai nevarēja tikt dzēsts.'));
             }
         } catch (\Exception $e) {
             Log::error('Failed to delete product', [
                 'product_id' => $productId,
                 'error'      => $e->getMessage(),
             ]);
-            session()->flash('error', 'An error occurred while deleting the product. Please try again.');
+            session()->flash('error', __('Dzēšot produktu, radās kļūda. Lūdzu, mēģiniet vēlreiz.'));
         }
     }
 
@@ -40,16 +40,16 @@ class ProductList extends Component
     {
         try {
             if ($this->productServices->toggleProductStatus($productId)) {
-                session()->flash('message', 'Product status updated successfully.');
+                session()->flash('message', __('Produkta statuss veiksmīgi atjaunināts.'));
             } else {
-                session()->flash('error', 'Product not found or could not be updated.');
+                session()->flash('error', __('Produkts nav atrasts vai nevarēja tikt atjaunināts.'));
             }
         } catch (\Exception $e) {
             Log::error('Failed to toggle product status', [
                 'product_id' => $productId,
                 'error'      => $e->getMessage(),
             ]);
-            session()->flash('error', 'An error occurred while updating the product status. Please try again.');
+            session()->flash('error', __('Atjauninot produkta statusu, radās kļūda. Lūdzu, mēģiniet vēlreiz.'));
         }
     }
 
@@ -66,7 +66,7 @@ class ProductList extends Component
 
             // Return empty collection to prevent breaking the page
             $products = collect()->paginate(12);
-            session()->flash('error', 'An error occurred while loading products. Please refresh the page.');
+            session()->flash('error', __('Ielādējot produktus, radās kļūda. Lūdzu, atsvaidziniet lapu.'));
 
             return view('livewire.admin.product-list', compact('products'));
         }
