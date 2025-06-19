@@ -85,3 +85,111 @@ test('getAllActiveProducts returns products with proper structure', function () 
                         ->and($product->slug)->toBeString();  // Should return localized slug
     });
 });
+
+// NEW TESTS FOR MISSING FUNCTIONS
+
+test('getAllProducts returns all products regardless of status', function () {
+    // Create active products
+    Product::factory()->count(3)->create(['is_active' => true]);
+
+    // Create inactive products
+    Product::factory()->count(2)->create(['is_active' => false]);
+
+    $productServices = new ProductServices();
+    $allProducts     = $productServices->getAllProducts();
+
+    expect($allProducts)->toHaveCount(5);
+});
+
+test('getAllProducts returns empty collection when no products exist', function () {
+    $productServices = new ProductServices();
+    $allProducts     = $productServices->getAllProducts();
+
+    expect($allProducts)->toBeEmpty();
+});
+
+test('deleteProduct successfully deletes existing product', function () {
+    $product   = Product::factory()->create();
+    $productId = $product->id;
+
+    $productServices = new ProductServices();
+    $result          = $productServices->deleteProduct($productId);
+
+    expect($result)->toBeTrue()
+                   ->and(Product::find($productId))->toBeNull();
+});
+
+test('deleteProduct returns false for non-existent product', function () {
+    $productServices = new ProductServices();
+    $result          = $productServices->deleteProduct(999);
+
+    expect($result)->toBeFalse();
+});
+
+test('toggleProductStatus activates inactive product', function () {
+    $product = Product::factory()->create(['is_active' => false]);
+
+    $productServices = new ProductServices();
+    $result          = $productServices->toggleProductStatus($product->id);
+
+    expect($result)->toBeTrue()
+                   ->and($product->fresh()->is_active)->toBeTrue();
+});
+
+test('toggleProductStatus deactivates active product', function () {
+    $product = Product::factory()->create(['is_active' => true]);
+
+    $productServices = new ProductServices();
+    $result          = $productServices->toggleProductStatus($product->id);
+
+    expect($result)->toBeTrue()
+                   ->and($product->fresh()->is_active)->toBeFalse();
+});
+
+test('toggleProductStatus returns false for non-existent product', function () {
+    $productServices = new ProductServices();
+    $result          = $productServices->toggleProductStatus(999);
+
+    expect($result)->toBeFalse();
+});
+
+test('getProduct returns existing product', function () {
+    $product = Product::factory()->create([
+        'title' => [
+            'en' => 'Test Product',
+            'lv' => 'Testa Produkts',
+        ],
+    ]);
+
+    $productServices = new ProductServices();
+    $foundProduct    = $productServices->getProduct($product->id);
+
+    expect($foundProduct)->toBeInstanceOf(Product::class)
+                         ->and($foundProduct->id)->toBe($product->id)
+                         ->and($foundProduct->title)->toBeString();
+});
+
+test('getProduct returns null for non-existent product', function () {
+    $productServices = new ProductServices();
+    $foundProduct    = $productServices->getProduct(999);
+
+    expect($foundProduct)->toBeNull();
+});
+
+test('getProduct returns product regardless of active status', function () {
+    // Create inactive product
+    $inactiveProduct = Product::factory()->create(['is_active' => false]);
+
+    // Create active product
+    $activeProduct = Product::factory()->create(['is_active' => true]);
+
+    $productServices = new ProductServices();
+
+    $foundInactive = $productServices->getProduct($inactiveProduct->id);
+    $foundActive   = $productServices->getProduct($activeProduct->id);
+
+    expect($foundInactive)->toBeInstanceOf(Product::class)
+                          ->and($foundInactive->is_active)->toBeFalse()
+                          ->and($foundActive)->toBeInstanceOf(Product::class)
+                          ->and($foundActive->is_active)->toBeTrue();
+});

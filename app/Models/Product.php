@@ -18,6 +18,12 @@ class Product extends Model
         return 'slug';
     }
 
+    protected $casts = [
+        'title'     => 'array',
+        'slug'      => 'array',
+        'is_active' => 'boolean',
+    ];
+
     public function resolveRouteBinding($value, $field = null)
     {
         $locale = app()->getLocale();
