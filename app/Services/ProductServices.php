@@ -19,4 +19,35 @@ class ProductServices
                       ->get();
     }
 
+    public function getAllProducts(): Collection
+    {
+        return Product::all();
+    }
+
+    public function deleteProduct(int $productId): bool
+    {
+        $product = Product::find($productId);
+
+        if ( ! $product) {
+            return false;
+        }
+
+        return $product->delete();
+    }
+
+    public function toggleProductStatus(int $productId): bool
+    {
+        $product = Product::find($productId);
+
+        if ( ! $product) {
+            return false;
+        }
+
+        return $product->update(['is_active' => ! $product->is_active]);
+    }
+
+    public function getProduct(int $productId): ?Product
+    {
+        return Product::find($productId);
+    }
 }

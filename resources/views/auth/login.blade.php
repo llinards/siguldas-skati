@@ -30,7 +30,7 @@
             <label class="mt-4 self-start flex text-sm text-gray-600 space-x-2 cursor-pointer">
                         <span class="relative">
                             <input id="remember_me" type="checkbox" name="remember"
-                                   class="peer appearance-none h-5 w-5 border-1 border-ss-dark rounded bg-white checked:bg-ss-dark checked:border-ss-dark transition duration-200">
+                                   class="peer appearance-none h-5 w-5 border-1 border-ss-dark rounded bg-ss checked:bg-ss-dark checked:border-ss-dark transition duration-200">
                             <svg
                                 class="pointer-events-none absolute left-0 top-0 h-5 w-5 text-white opacity-0 peer-checked:opacity-100 transition-opacity duration-150"
                                 fill="none" viewBox="0 0 20 20" stroke="currentColor" stroke-width="3">
@@ -49,9 +49,9 @@
                 </a>
             @endif
 
-            <x-primary-button class="ms-3">
+            <x-btn-primary :type="'submit'" class="ms-3">
                 {{ __('Log in') }}
-            </x-primary-button>
+            </x-btn-primary>
         </div>
     </form>
 </x-guest-layout>
