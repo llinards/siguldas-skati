@@ -42,3 +42,18 @@ jobs:
           DB_CONNECTION: sqlite
           DB_DATABASE: database/database.sqlite
         run: php artisan test
+
+
+  deploy-staging:
+    needs: php-8-3-tests
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/staging'
+    environment: staging
+
+    steps:
+      - name: Deploy to Staging
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://forge.laravel.com/api/v1/servers/${{ secrets.FORGE_STAGING_SERVER_ID }}/sites/${{ secrets.FORGE_STAGING_SITE_ID }}/deployment/deploy'
+          method: 'POST'
+          customHeaders: '{"Authorization": "Bearer ${{ secrets.FORGE_API_TOKEN }}", "Accept": "application/json", "Content-Type": "application/json"}'
