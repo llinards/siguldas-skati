@@ -66,10 +66,14 @@ test('getAllOtherProducts returns empty collection when no other active products
 test('getAllActiveProducts returns products with proper structure', function () {
     // Create active products with specific data
     Product::factory()->count(2)->create([
-        'is_active' => true,
-        'title'     => [
+        'is_active'   => true,
+        'title'       => [
             'en' => 'Test Product',
             'lv' => 'Testa Produkts',
+        ],
+        'description' => [
+            'en' => 'Test product description',
+            'lv' => 'Testa produkta apraksts',
         ],
     ]);
 
@@ -82,7 +86,8 @@ test('getAllActiveProducts returns products with proper structure', function () 
         expect($product)->toBeInstanceOf(Product::class)
                         ->and($product->is_active)->toBeTruthy()
                         ->and($product->title)->toBeString()  // Should return localized title
-                        ->and($product->slug)->toBeString();  // Should return localized slug
+                        ->and($product->slug)->toBeString()   // Should return localized slug
+                        ->and($product->description)->toBeString(); // Should return localized description
     });
 });
 
@@ -106,6 +111,25 @@ test('getAllProducts returns empty collection when no products exist', function 
     $allProducts     = $productServices->getAllProducts();
 
     expect($allProducts)->toBeEmpty();
+});
+
+test('getAllProducts returns products with description field', function () {
+    Product::factory()->count(2)->create([
+        'description' => [
+            'en' => 'English description',
+            'lv' => 'Latviešu apraksts',
+        ],
+    ]);
+
+    $productServices = new ProductServices();
+    $allProducts     = $productServices->getAllProducts();
+
+    expect($allProducts)->toHaveCount(2);
+
+    $allProducts->each(function ($product) {
+        expect($product)->toBeInstanceOf(Product::class)
+                        ->and($product->description)->toBeString();
+    });
 });
 
 test('deleteProduct successfully deletes existing product', function () {
@@ -153,11 +177,15 @@ test('toggleProductStatus returns false for non-existent product', function () {
     expect($result)->toBeFalse();
 });
 
-test('getProduct returns existing product', function () {
+test('getProduct returns existing product with description', function () {
     $product = Product::factory()->create([
-        'title' => [
+        'title'       => [
             'en' => 'Test Product',
             'lv' => 'Testa Produkts',
+        ],
+        'description' => [
+            'en' => 'Test product description',
+            'lv' => 'Testa produkta apraksts',
         ],
     ]);
 
@@ -166,7 +194,8 @@ test('getProduct returns existing product', function () {
 
     expect($foundProduct)->toBeInstanceOf(Product::class)
                          ->and($foundProduct->id)->toBe($product->id)
-                         ->and($foundProduct->title)->toBeString();
+                         ->and($foundProduct->title)->toBeString()
+                         ->and($foundProduct->description)->toBeString();
 });
 
 test('getProduct returns null for non-existent product', function () {
@@ -190,6 +219,8 @@ test('getProduct returns product regardless of active status', function () {
 
     expect($foundInactive)->toBeInstanceOf(Product::class)
                           ->and($foundInactive->is_active)->toBeFalse()
+                          ->and($foundInactive->description)->toBeString()
                           ->and($foundActive)->toBeInstanceOf(Product::class)
-                          ->and($foundActive->is_active)->toBeTrue();
+                          ->and($foundActive->is_active)->toBeTrue()
+                          ->and($foundActive->description)->toBeString();
 });

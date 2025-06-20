@@ -58,10 +58,14 @@ test('inactive products cannot be accessed directly', function () {
 test('products page shows correct product information', function () {
     // Create active products with specific data
     Product::factory()->count(2)->create([
-        'is_active' => true,
-        'title'     => [
+        'is_active'   => true,
+        'title'       => [
             'en' => 'Test Product',
             'lv' => 'Testa Produkts',
+        ],
+        'description' => [
+            'en' => 'Test product description',
+            'lv' => 'Testa produkta apraksts',
         ],
     ]);
 
@@ -74,7 +78,8 @@ test('products page shows correct product information', function () {
                         $products->every(function ($product) {
                             return (bool) $product->is_active &&
                                    ! empty($product->title) &&
-                                   ! empty($product->slug);
+                                   ! empty($product->slug) &&
+                                   ! empty($product->description);
                         });
              });
 });
@@ -91,5 +96,62 @@ test('product show page excludes current product from other products', function 
              ->assertViewHas('products', function ($otherProducts) use ($currentProduct) {
                  return $otherProducts->count() === 2 &&
                         ! $otherProducts->contains('id', $currentProduct->id);
+             });
+});
+
+test('product page displays description correctly', function () {
+    $product = Product::factory()->create([
+        'is_active'   => true,
+        'description' => [
+            'en' => 'This is a test description in English',
+            'lv' => 'Šis ir testa apraksts latviešu valodā',
+        ],
+    ]);
+
+    // Test English locale
+    app()->setLocale('en');
+    $response = $this->get(route('product', $product));
+
+    $response->assertStatus(200)
+             ->assertSee('This is a test description in English');
+
+    // Test Latvian locale
+    app()->setLocale('lv');
+    $response = $this->get(route('product', $product));
+
+    $response->assertStatus(200)
+             ->assertSee('Šis ir testa apraksts latviešu valodā');
+});
+
+test('product page handles empty description', function () {
+    $product = Product::factory()->create([
+        'is_active'   => true,
+        'description' => [
+            'en' => '',
+            'lv' => '',
+        ],
+    ]);
+
+    $response = $this->get(route('product', $product));
+
+    $response->assertStatus(200)
+             ->assertViewIs('product');
+});
+
+test('product page passes description to view', function () {
+    $product = Product::factory()->create([
+        'is_active'   => true,
+        'description' => [
+            'en' => 'Test description',
+            'lv' => 'Testa apraksts',
+        ],
+    ]);
+
+    $response = $this->get(route('product', $product));
+
+    $response->assertStatus(200)
+             ->assertViewIs('product')
+             ->assertViewHas('product', function ($viewProduct) {
+                 return ! empty($viewProduct->description);
              });
 });
