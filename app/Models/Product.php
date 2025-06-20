@@ -11,7 +11,7 @@ class Product extends Model
     use HasFactory;
     use HasTranslations;
 
-    public array $translatable = ['title', 'slug'];
+    public array $translatable = ['title', 'slug', 'description'];
 
     public function getRouteKeyName(): string
     {
@@ -19,9 +19,10 @@ class Product extends Model
     }
 
     protected $casts = [
-        'title'     => 'array',
-        'slug'      => 'array',
-        'is_active' => 'boolean',
+        'title'       => 'array',
+        'slug'        => 'array',
+        'description' => 'array',
+        'is_active'   => 'boolean',
     ];
 
     public function resolveRouteBinding($value, $field = null)

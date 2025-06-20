@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->json('title');
             $table->json('slug');
+            $table->json('description');
             $table->integer('person_count')->default(2);
             $table->boolean('is_active')->default(false);
             $table->string('cover');

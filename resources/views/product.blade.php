@@ -14,7 +14,7 @@
 
             <x-product.gallery.desktop/>
 
-            <x-product.wrapper/>
+            <x-product.wrapper :product="$product"/>
 
         </div>
     </div>

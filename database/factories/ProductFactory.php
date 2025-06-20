@@ -20,6 +20,11 @@ class ProductFactory extends Factory
         'en' => 'weekended-house',
     ];
 
+    private array $productDescriptions = [
+        'lv' => 'Pārvietojama koka karkasa moduļu māja. Šāda veida māju būvniecība ir salīdzinoši ātra un neaizņem ilgu projekta saskaņošanas laiku. Šim projektam nav nepieciešama būvatļauja (līdz apbūves platībai 60m²) un ir iespējams dzīvot uzreiz. Projektos ir iespējami dažādi iekšējās un ārējās apdares risinājumi, kā arī ir iespējams veikt izmaiņas telpu plānojumos.',
+        'en' => 'Portable wooden frame modular house. This type of house construction is relatively fast and does not require a long project approval time. This project does not require a building permit (up to a building area of 60m²) and it is possible to live in it immediately. The projects allow for various interior and exterior finishing solutions, and it is also possible to make changes to room layouts.',
+    ];
+
     private array $productCovers = [
         'images/assets/seeder-house-images/siguldas-skati-product-1.jpg',
         'images/assets/seeder-house-images/siguldas-skati-product-2.jpg',
@@ -49,6 +54,7 @@ class ProductFactory extends Factory
         return [
             'title'        => $title,
             'slug'         => $slug,
+            'description'  => $this->productDescriptions,
             'is_active'    => true,
             'cover'        => $this->faker->randomElement($this->productCovers),
             'person_count' => $this->faker->numberBetween(1, 4),
