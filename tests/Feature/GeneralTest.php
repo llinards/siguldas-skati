@@ -1,7 +1,7 @@
 <?php
 
 it('returns a successful response opening page in LAT', function () {
-    $response = $this->get('/lv');
+    $response = $this->get('/lvs');
 
     $response->assertStatus(200);
 });
