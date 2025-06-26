@@ -4,18 +4,8 @@
         <x-btn-primary>{{ __('Pievienot produktu') }}</x-btn-primary>
     </div>
 
-    <!-- Flash Messages -->
-    @if (session()->has('message'))
-        <div class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
-            {{ session('message') }}
-        </div>
-    @endif
-
-    @if (session()->has('error'))
-        <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-            {{ session('error') }}
-        </div>
-    @endif
+    
+    <x-admin.flash-message :dismissible="true"/>
 
     <!-- Products Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -76,7 +66,7 @@
                             <!-- Delete Button -->
                             <button
                                 wire:click="deleteProduct({{ $product->id }})"
-                                onclick="return confirm('{{ __('Vai esat pārliecināts, ka vēlaties dzēst šo produktu?') }}')"
+                                wire:confirm="{{ __('Vai esat pārliecināts, ka vēlaties dzēst šo produktu?') }}"
                                 class="inline-flex items-center p-2 text-red-600 hover:text-red-900 hover:bg-red-50 rounded-md transition-colors duration-200">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
