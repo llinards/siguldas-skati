@@ -3,19 +3,19 @@
 namespace App\Services;
 
 use App\Models\Product;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 
 class ProductServices
 {
     public function getAllActiveProducts(): Collection
     {
-        return Product::all()->where('is_active', 1);
+        return Product::where('is_active', true)->get();
     }
 
-    public function getAllOtherProducts(Product $product): Collection
+    public function getAllOtherProducts(Product $excludeProduct): Collection
     {
-        return Product::where('is_active', 1)
-                      ->where('id', '!=', $product->id)
+        return Product::where('is_active', true)
+                      ->where('id', '!=', $excludeProduct->id)
                       ->get();
     }
 
@@ -43,11 +43,8 @@ class ProductServices
             return false;
         }
 
-        return $product->update(['is_active' => ! $product->is_active]);
-    }
+        $product->is_active = ! $product->is_active;
 
-    public function getProduct(int $productId): ?Product
-    {
-        return Product::find($productId);
+        return $product->save();
     }
 }
