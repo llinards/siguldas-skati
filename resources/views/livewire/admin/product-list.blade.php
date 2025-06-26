@@ -1,9 +1,4 @@
 <div>
-    <!-- Header -->
-    <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-end">
-        <x-btn-primary>{{ __('Pievienot produktu') }}</x-btn-primary>
-    </div>
-    
     <x-admin.flash-message/>
 
     <!-- Products Grid -->
@@ -82,4 +77,10 @@
             </div>
         @endforelse
     </div>
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-end">
+        <x-btn-primary>{{ __('Pievienot produktu') }}</x-btn-primary>
+    </div>
+
 </div>
