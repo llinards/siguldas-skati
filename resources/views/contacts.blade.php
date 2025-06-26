@@ -10,58 +10,75 @@
                 @lang('Sazinies ar mums, ja rodas neskaidrības vai vēlies uzzināt vairāk par mūsu brīvdienu dizaina
                 mājām')!</p>
 
-            <div class="md:grid grid-cols-2 lg:grid-cols-3 items-center">
-                <div class="mb-6 md:mb-12 lg:mb-0 space-y-6 lg:space-y-12">
-                    <ul class="text-center md:text-left">
-                        <li>
-                            <h2>@lang('Telefons')</h2>
-                        </li>
-                        <li>
-                            <x-link href="tel:+37125666622" class="">+371 25666622</x-link>
-                        </li>
-                    </ul>
-                    <ul class="text-center md:text-left">
-                        <li>
-                            <h2>@lang('E-pasts')</h2>
-                        </li>
-                        <li>
-                            <x-link href="mailto:info@siguldasskati.lv" class="">info@siguldasskati.lv</x-link>
-                        </li>
-                    </ul>
-                </div>
-                <div class="mb-6 md:mb-18 lg:mb-0 space-y-6 lg:space-y-12">
-                    <ul class="text-center md:text-left">
-                        <li>
-                            <h2>@lang('Adrese')</h2>
-                        </li>
-                        <li>
-                            <x-link href="https://maps.app.goo.gl/gEtDt5FS3qpzUtWE9" target="_blank">Cēsu iela 17,
-                                Sigulda, Latvija</x-link>
-                        </li>
-                    </ul>
-                    <ul class="text-center md:text-left">
-                        <li>
-                            <h2>@lang('Pieseko')</h2>
-                        </li>
-                        <li>
-                            <ul class="flex justify-center md:justify-start space-x-3">
-                                <x-social.icon href="https://www.facebook.com/ModernHouseLV">
-                                    <x-social.facebook class="hover:text-gray-500 transition-colors duration-200" />
-                                </x-social.icon>
-
-                                <x-social.icon href="https://www.instagram.com/siguldasskati">
-                                    <x-social.instagram class="hover:text-gray-500 transition-colors duration-200" />
-                                </x-social.icon>
-
-                                <x-social.icon href="https://www.tiktok.com/@modernhouse_lv">
-                                    <x-social.tiktok class="hover:text-gray-500 transition-colors duration-200" />
-                                </x-social.icon>
+            <div class="lg:grid grid-cols-2 xl:grid-cols-3 gap-x-6 lg:gap-x-12 items-center">
+                <div class="col-span-1 xl:col-span-2 h-full space-y-6 lg:space-y-8">
+                    <div class="h-96 lg:h-2/3">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2163.568745360419!2d24.84604!3d57.161528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46e94fcd4be121c3%3A0x978c8c05100f4580!2sC%C4%93su%20iela%2017%2C%20Sigulda%2C%20Siguldas%20pils%C4%93ta%2C%20Siguldas%20novads%2C%20LV-2150!5e0!3m2!1sen!2slv!4v1750959826216!5m2!1sen!2slv"
+                            class="h-full w-full" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="text-center sm:text-left sm:grid grid-cols-2">
+                        <div class="mb-6 lg:mb-0 space-y-6 lg:space-y-8">
+                            <ul>
+                                <li>
+                                    <h2>@lang('Telefons')</h2>
+                                </li>
+                                <li>
+                                    <x-link href="tel:+37125666622" class="">+371 25666622</x-link>
+                                </li>
                             </ul>
-                        </li>
-                    </ul>
+                            <ul>
+                                <li>
+                                    <h2>@lang('E-pasts')</h2>
+                                </li>
+                                <li>
+                                    <x-link href="mailto:info@siguldasskati.lv" class="">info@siguldasskati.lv</x-link>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mb-6 lg:mb-0 space-y-6 lg:space-y-8">
+                            <ul>
+                                <li>
+                                    <h2>@lang('Adrese')</h2>
+                                </li>
+                                <li>
+                                    <x-link href="https://maps.app.goo.gl/gEtDt5FS3qpzUtWE9" target="_blank">Cēsu iela
+                                        17,
+                                        Sigulda, Latvija</x-link>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <h2>@lang('Pieseko')</h2>
+                                </li>
+                                <li>
+                                    <ul class="flex justify-center sm:justify-start space-x-3">
+                                        <x-social.icon href="https://www.facebook.com/ModernHouseLV">
+                                            <x-social.facebook
+                                                class="hover:text-gray-500 transition-colors duration-200" />
+                                        </x-social.icon>
+
+                                        <x-social.icon href="https://www.instagram.com/siguldasskati">
+                                            <x-social.instagram
+                                                class="hover:text-gray-500 transition-colors duration-200" />
+                                        </x-social.icon>
+
+                                        <x-social.icon href="https://www.tiktok.com/@modernhouse_lv">
+                                            <x-social.tiktok
+                                                class="hover:text-gray-500 transition-colors duration-200" />
+                                        </x-social.icon>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="col-span-3 justify-center lg:col-span-1">
-                    <form action="/" method="POST">
+
+                <div class="md:flex lg:flex-none items-center col-span-1 justify-center">
+                    <form action="/" method="POST" class="md:w-4/5 lg:w-full">
                         <div
                             class="flex flex-col p-6 space-y-6 mb-6 border-1 border-ss-gray text-ss-gray rounded-3xl shadow-md">
                             <label for="firstName">@lang('Vārds') *</label>
