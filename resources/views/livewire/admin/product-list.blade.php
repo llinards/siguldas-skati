@@ -3,9 +3,8 @@
     <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-end">
         <x-btn-primary>{{ __('Pievienot produktu') }}</x-btn-primary>
     </div>
-
     
-    <x-admin.flash-message :dismissible="true"/>
+    <x-admin.flash-message/>
 
     <!-- Products Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

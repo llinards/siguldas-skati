@@ -11,11 +11,11 @@
                 </div>
 
                 <!-- Navigation Links -->
-                {{--                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">--}}
-                {{--                    <x-nav.admin-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">--}}
-                {{--                        {{ __('Dashboard') }}--}}
-                {{--                    </x-nav.admin-nav-link>--}}
-                {{--                </div>--}}
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <a href="{{route('dashboard')}}" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
+                    </a>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -87,7 +87,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('Mans profils') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -97,7 +97,7 @@
                             <x-dropdown-link :href="route('logout')"
                                              onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Iziet') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
