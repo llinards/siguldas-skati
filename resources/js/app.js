@@ -2,19 +2,15 @@ import './bootstrap';
 
 import Alpine from 'alpinejs';
 import 'preline'
-import { HSOverlay } from 'preline';
 import { Fancybox } from "@fancyapps/ui";
 
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import "@fancyapps/ui/dist/carousel/carousel.css";
 import { Carousel } from "@fancyapps/ui/dist/carousel/carousel.esm.js";
 
-
 window.Carousel = Carousel;
 window.Alpine = Alpine;
 window.Fancybox = Fancybox;
-
-
 
 function handleMobileMenu() {
     return {
@@ -67,52 +63,6 @@ for (let item of accordions) {
         item.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 }
-const productModalBtnOpen = document.querySelectorAll('.modalBtnOpen');
-const productModalBtnClose = document.getElementById('modalBtnClose');
-const productModal = document.getElementById('modal');
-const productModalContainer = document.getElementById('modalContainer');
-
-function closeModal() {
-    productModalContainer.classList.remove('opacity-100');
-    productModalContainer.classList.add('opacity-0');
-    productModalContainer.addEventListener('transitionend', function handler() {
-        productModal.close();
-        productModalContainer.removeEventListener('transitionend', handler);
-    });
-}
-
-if (productModal) {
-    productModalBtnOpen.forEach(btn => {
-        btn.addEventListener('click', () => {
-            productModal.showModal();
-
-            productModalContainer.classList.add('opacity-0');
-            productModalContainer.classList.remove('opacity-100');
-
-            // Ensures transition.
-            void productModalContainer.offsetWidth;
-
-            productModalContainer.classList.add('opacity-100');
-            productModalContainer.classList.remove('opacity-0');
-        });
-    });
-
-    productModalBtnClose.addEventListener('click', () => {
-        closeModal();
-    });
-
-    productModalContainer.addEventListener('click', function (e) {
-        if (e.target === productModalContainer) {
-            closeModal();
-        }
-    })
-}
-
-
-
-
-
-
 
 Alpine.start();
 
