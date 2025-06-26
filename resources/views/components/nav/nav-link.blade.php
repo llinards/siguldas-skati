@@ -1,4 +1,4 @@
-<li>
+<li class="lg:mt-2 xl:mt-0">
     @props(['active' => false])
     <a {{ $attributes->class([
         'mx-4 border-b-1 text-center border-transparent hover:border-b-menu-hover hover:text-menu-hover transition-all

@@ -1,4 +1,4 @@
-<figure class="f-carousel__slide relative group border-2 border-transparent hover:border-ss-dark transition-all duration-300 ease-in-out rounded-3xl">
+<figure class="f-carousel__slide relative group transition-all duration-300 ease-in-out rounded-3xl">
     <a id="gallery-main-{{ $imageGallery }}" href="{{ $imageLink ?? '' }}" @if(!empty($extraImages))
         data-gallery-extra='{{ $extraImages }}' @endif>
         <div class="relative rounded-3xl overflow-hidden">
