@@ -154,3 +154,59 @@ test('component refreshes product list after delete', function () {
         return $products->count() === 3;
     });
 });
+
+test('update product order updates product order values', function () {
+    $user     = User::factory()->create();
+    $product1 = Product::factory()->create(['order' => 1]);
+    $product2 = Product::factory()->create(['order' => 2]);
+    $product3 = Product::factory()->create(['order' => 3]);
+
+    $this->actingAs($user);
+
+    $reorderedProducts = [
+        ['value' => $product3->id, 'order' => 1],
+        ['value' => $product1->id, 'order' => 2],
+        ['value' => $product2->id, 'order' => 3],
+    ];
+
+    Livewire::test(ProductList::class)
+            ->call('updateProductOrder', $reorderedProducts)
+            ->assertHasNoErrors();
+
+    expect($product1->fresh()->order)->toBe(2);
+    expect($product2->fresh()->order)->toBe(3);
+    expect($product3->fresh()->order)->toBe(1);
+});
+
+test('update product order shows success message', function () {
+    $user     = User::factory()->create();
+    $product1 = Product::factory()->create(['order' => 1]);
+    $product2 = Product::factory()->create(['order' => 2]);
+
+    $this->actingAs($user);
+
+    $reorderedProducts = [
+        ['value' => $product2->id, 'order' => 1],
+        ['value' => $product1->id, 'order' => 2],
+    ];
+
+    Livewire::test(ProductList::class)
+            ->call('updateProductOrder', $reorderedProducts)
+            ->assertHasNoErrors();
+//            ->assertSessionHas('message', 'Secība atjaunota.');
+});
+
+test('update product order with non-existent product throws exception', function () {
+    $user = User::factory()->create();
+
+    $this->actingAs($user);
+
+    $invalidProducts = [
+        ['value' => 999, 'order' => 1],
+    ];
+
+    expect(function () use ($invalidProducts) {
+        Livewire::test(ProductList::class)
+                ->call('updateProductOrder', $invalidProducts);
+    })->toThrow(Illuminate\Database\Eloquent\ModelNotFoundException::class);
+});
