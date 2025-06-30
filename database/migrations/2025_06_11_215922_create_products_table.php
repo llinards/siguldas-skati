@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->integer('order')->default(0);
             $table->json('title');
             $table->json('slug');
             $table->json('description');

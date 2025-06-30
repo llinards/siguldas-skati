@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\Product;
 use App\Services\ProductServices;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
@@ -53,19 +54,26 @@ class ProductList extends Component
         }
     }
 
+
+    public function updateProductOrder(array $products): void
+    {
+        foreach ($products as $product) {
+            Product::findOrFail($product['value'])->update(['order' => $product['order']]);
+        }
+
+        session()->flash('message', 'Secība atjaunota.');
+    }
+
     public function render(): View
     {
         try {
-            $products = $this->productServices->getAllProducts(12);
+            $products = $this->productServices->getAllProducts();
 
             return view('livewire.admin.product-list', compact('products'));
         } catch (\Exception $e) {
             Log::error('Failed to load products list', [
                 'error' => $e->getMessage(),
             ]);
-
-            // Return empty collection to prevent breaking the page
-            $products = collect()->paginate(12);
             session()->flash('error', __('Ielādējot produktus, radās kļūda. Lūdzu, atsvaidziniet lapu.'));
 
             return view('livewire.admin.product-list', compact('products'));

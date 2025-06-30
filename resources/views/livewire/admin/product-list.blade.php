@@ -2,9 +2,11 @@
     <x-admin.flash-message/>
 
     <!-- Products Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <div wire:sortable="updateProductOrder" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         @forelse($products as $product)
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+                 wire:key="product-{{ $product->id }}"
+                 wire:sortable.item="{{ $product->id }}">
                 <!-- Product Image -->
                 <div class="aspect-square bg-gray-200 relative">
                     @if($product->cover)
