@@ -224,3 +224,27 @@ test('getProduct returns product regardless of active status', function () {
                           ->and($foundActive->is_active)->toBeTrue()
                           ->and($foundActive->description)->toBeString();
 });
+
+test('generateSlug creates proper slug from title', function () {
+    $productServices = new ProductServices();
+
+    $slug = $productServices->generateSlug('Test Product Title');
+
+    expect($slug)->toBe('test-product-title');
+});
+
+test('generateSlug handles special characters', function () {
+    $productServices = new ProductServices();
+
+    $slug = $productServices->generateSlug('Test Product! With @Special# Characters$');
+
+    expect($slug)->toBe('test-product-with-at-special-characters');
+});
+
+test('generateSlug handles latvian characters', function () {
+    $productServices = new ProductServices();
+
+    $slug = $productServices->generateSlug('Produkts ar latviešu simboliem āēīōū');
+
+    expect($slug)->toBe('produkts-ar-latviesu-simboliem-aeiou');
+});
