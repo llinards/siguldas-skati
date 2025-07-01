@@ -87,19 +87,20 @@
                             <input class="border-b" id="lastName" type="text" required>
                             <label for="email">@lang('E-pasts') *</label>
                             <input class="border-b" id="email" type="email" required>
-                            <label for="question">
-                                <textarea class="border-b w-full resize-none" rows="5" cols="30" id="question"
-                                    required>@lang('Jautājums') *</textarea>
-                                <label class="mt-4 self-start flex text-sm text-gray-600 space-x-2 cursor-pointer">
-                                    <span class="relative">
-                                        <input type="checkbox" x-model="agreed"
-                                            class="peer appearance-none h-5 w-5 border-1 border-ss-dark rounded bg-ss checked:bg-ss-dark checked:border-ss-dark transition duration-200">
-                                        <svg class="pointer-events-none absolute left-0 top-0 h-5 w-5 text-white opacity-0 peer-checked:opacity-100 transition-opacity duration-150"
-                                            fill="none" viewBox="0 0 20 20" stroke="currentColor" stroke-width="3">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6" />
-                                        </svg>
-                                    </span>
-                                    <span>@lang('Es piekrītu datu uzglabāšanai un apstrādei')</span> </label>
+                            <label for="question">@lang('Jautājums') *</label>
+                            <textarea class="border-b w-full resize-none" rows="5" cols="30" id="question"
+                                required></textarea>
+                            <label class="mt-4 self-start flex text-sm text-gray-600 space-x-2 cursor-pointer">
+                                <span class="relative">
+                                    <input type="checkbox" x-model="agreed"
+                                        class="peer appearance-none h-5 w-5 border-1 border-ss-dark rounded bg-ss checked:bg-ss-dark checked:border-ss-dark transition duration-200">
+                                    <svg class="pointer-events-none absolute left-0 top-0 h-5 w-5 text-white opacity-0 peer-checked:opacity-100 transition-opacity duration-150"
+                                        fill="none" viewBox="0 0 20 20" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6" />
+                                    </svg>
+                                </span>
+                                <span>@lang('Es piekrītu datu uzglabāšanai un apstrādei')</span>
+                            </label>
                         </div>
 
                         <div class="flex w-full">
