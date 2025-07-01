@@ -51,7 +51,7 @@
 
                         <div class="flex gap-2">
                             <!-- Edit Button -->
-                            <a href="#"
+                            <a href="{{route('product.edit', $product->id)}}" wire:navigate
                                class="inline-flex items-center p-2 text-indigo-600 hover:text-indigo-900 hover:bg-indigo-50 rounded-md transition-colors duration-200">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

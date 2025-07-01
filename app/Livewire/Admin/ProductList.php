@@ -15,7 +15,7 @@ class ProductList extends Component
 
     protected ProductServices $productServices;
 
-    public function boot(ProductServices $productServices)
+    public function boot(ProductServices $productServices): void
     {
         $this->productServices = $productServices;
     }
