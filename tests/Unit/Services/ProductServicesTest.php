@@ -190,7 +190,7 @@ test('getProduct returns existing product with description', function () {
     ]);
 
     $productServices = new ProductServices();
-    $foundProduct    = $productServices->getProduct($product->id);
+    $foundProduct    = $productServices->getProductById($product->id);
 
     expect($foundProduct)->toBeInstanceOf(Product::class)
                          ->and($foundProduct->id)->toBe($product->id)
@@ -200,7 +200,7 @@ test('getProduct returns existing product with description', function () {
 
 test('getProduct returns null for non-existent product', function () {
     $productServices = new ProductServices();
-    $foundProduct    = $productServices->getProduct(999);
+    $foundProduct    = $productServices->getProductById(999);
 
     expect($foundProduct)->toBeNull();
 });
@@ -214,8 +214,8 @@ test('getProduct returns product regardless of active status', function () {
 
     $productServices = new ProductServices();
 
-    $foundInactive = $productServices->getProduct($inactiveProduct->id);
-    $foundActive   = $productServices->getProduct($activeProduct->id);
+    $foundInactive = $productServices->getProductById($inactiveProduct->id);
+    $foundActive   = $productServices->getProductById($activeProduct->id);
 
     expect($foundInactive)->toBeInstanceOf(Product::class)
                           ->and($foundInactive->is_active)->toBeFalse()

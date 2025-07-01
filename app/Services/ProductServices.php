@@ -24,6 +24,11 @@ class ProductServices
         return Product::all();
     }
 
+    public function getProductById(int $id): ?Product
+    {
+        return Product::find($id);
+    }
+
     public function deleteProduct(int $productId): bool
     {
         $product = Product::find($productId);
@@ -44,10 +49,5 @@ class ProductServices
         }
 
         return $product->update(['is_active' => ! $product->is_active]);
-    }
-
-    public function getProduct(int $productId): ?Product
-    {
-        return Product::find($productId);
     }
 }
