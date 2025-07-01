@@ -37,6 +37,14 @@
                 <a class="border-b-1 text-center border-transparent hover:border-b-menu-hover hover:text-menu-hover transition-all
         ease-in-out duration-200 text-btn-md {{ Route::is('profile.edit') ? 'border-b-menu-hover text-menu-hover' : '' }}"
                    href="{{route('profile.edit')}}" wire:navigate> {{ __('Mans profils') }}</a>
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                    <a hreflang="{{ $localeCode }}"
+                       href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
+                       class="border-b-1 text-center border-transparent hover:border-b-menu-hover hover:text-menu-hover transition-all
+        ease-in-out duration-200 text-btn-md {{ app()->getLocale() === $localeCode ? (Route::is('home') ? 'border-b-white' : 'border-b-black') : '' }}">
+                        {{ $properties['native'] }}
+                    </a>
+                @endforeach
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <a href="{{route('logout')}}" class="border-b-1 text-center border-transparent hover:border-b-menu-hover hover:text-menu-hover transition-all
