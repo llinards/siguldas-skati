@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Admin\EditProduct;
 use App\Livewire\Admin\ProductEdit;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
@@ -44,6 +45,7 @@ Route::group(
                 Route::get('/', function () {
                     return view('dashboard');
                 })->name('dashboard');
+                Route::get('/product/{product:id}/edit', EditProduct::class)->name('product.edit');
             });
         });
 

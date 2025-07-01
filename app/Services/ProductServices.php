@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Product;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class ProductServices
 {
@@ -49,5 +50,10 @@ class ProductServices
         }
 
         return $product->update(['is_active' => ! $product->is_active]);
+    }
+
+    public function generateSlug(string $title): string
+    {
+        return Str::slug($title);
     }
 }
