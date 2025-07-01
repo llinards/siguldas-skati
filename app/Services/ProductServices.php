@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Product;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class ProductServices
 {
@@ -22,6 +23,11 @@ class ProductServices
     public function getAllProducts(): Collection
     {
         return Product::all();
+    }
+
+    public function getProductById(int $id): ?Product
+    {
+        return Product::find($id);
     }
 
     public function deleteProduct(int $productId): bool
@@ -46,8 +52,8 @@ class ProductServices
         return $product->update(['is_active' => ! $product->is_active]);
     }
 
-    public function getProduct(int $productId): ?Product
+    public function generateSlug(string $title): string
     {
-        return Product::find($productId);
+        return Str::slug($title);
     }
 }

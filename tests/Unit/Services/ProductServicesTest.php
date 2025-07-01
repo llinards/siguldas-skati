@@ -190,7 +190,7 @@ test('getProduct returns existing product with description', function () {
     ]);
 
     $productServices = new ProductServices();
-    $foundProduct    = $productServices->getProduct($product->id);
+    $foundProduct    = $productServices->getProductById($product->id);
 
     expect($foundProduct)->toBeInstanceOf(Product::class)
                          ->and($foundProduct->id)->toBe($product->id)
@@ -200,7 +200,7 @@ test('getProduct returns existing product with description', function () {
 
 test('getProduct returns null for non-existent product', function () {
     $productServices = new ProductServices();
-    $foundProduct    = $productServices->getProduct(999);
+    $foundProduct    = $productServices->getProductById(999);
 
     expect($foundProduct)->toBeNull();
 });
@@ -214,8 +214,8 @@ test('getProduct returns product regardless of active status', function () {
 
     $productServices = new ProductServices();
 
-    $foundInactive = $productServices->getProduct($inactiveProduct->id);
-    $foundActive   = $productServices->getProduct($activeProduct->id);
+    $foundInactive = $productServices->getProductById($inactiveProduct->id);
+    $foundActive   = $productServices->getProductById($activeProduct->id);
 
     expect($foundInactive)->toBeInstanceOf(Product::class)
                           ->and($foundInactive->is_active)->toBeFalse()
@@ -223,4 +223,28 @@ test('getProduct returns product regardless of active status', function () {
                           ->and($foundActive)->toBeInstanceOf(Product::class)
                           ->and($foundActive->is_active)->toBeTrue()
                           ->and($foundActive->description)->toBeString();
+});
+
+test('generateSlug creates proper slug from title', function () {
+    $productServices = new ProductServices();
+
+    $slug = $productServices->generateSlug('Test Product Title');
+
+    expect($slug)->toBe('test-product-title');
+});
+
+test('generateSlug handles special characters', function () {
+    $productServices = new ProductServices();
+
+    $slug = $productServices->generateSlug('Test Product! With @Special# Characters$');
+
+    expect($slug)->toBe('test-product-with-at-special-characters');
+});
+
+test('generateSlug handles latvian characters', function () {
+    $productServices = new ProductServices();
+
+    $slug = $productServices->generateSlug('Produkts ar latviešu simboliem āēīōū');
+
+    expect($slug)->toBe('produkts-ar-latviesu-simboliem-aeiou');
 });

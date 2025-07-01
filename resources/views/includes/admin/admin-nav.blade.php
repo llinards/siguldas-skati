@@ -36,7 +36,7 @@
                    href="{{route('dashboard')}}">Sākums</a>
                 <a class="border-b-1 text-center border-transparent hover:border-b-menu-hover hover:text-menu-hover transition-all
         ease-in-out duration-200 text-btn-md {{ Route::is('profile.edit') ? 'border-b-menu-hover text-menu-hover' : '' }}"
-                   href="{{route('profile.edit')}}"> {{ __('Mans Profils') }}</a>
+                   href="{{route('profile.edit')}}" wire:navigate> {{ __('Mans profils') }}</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <a href="{{route('logout')}}" class="border-b-1 text-center border-transparent hover:border-b-menu-hover hover:text-menu-hover transition-all
