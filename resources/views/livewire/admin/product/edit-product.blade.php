@@ -25,8 +25,8 @@
                                    type="checkbox"
                                    class="peer appearance-none h-5 w-5 border-1 border-ss-dark rounded bg-white checked:bg-ss-dark checked:border-ss-dark transition duration-200">
                             <svg
-                                class="pointer-events-none absolute left-0 top-0 h-5 w-5 text-white opacity-0 peer-checked:opacity-100 transition-opacity duration-150"
-                                fill="none" viewBox="0 0 20 20" stroke="currentColor" stroke-width="3">
+                                    class="pointer-events-none absolute left-0 top-0 h-5 w-5 text-white opacity-0 peer-checked:opacity-100 transition-opacity duration-150"
+                                    fill="none" viewBox="0 0 20 20" stroke="currentColor" stroke-width="3">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6"/>
                             </svg>
                         </span>
@@ -37,14 +37,12 @@
 
                     <div class="mt-5">
                         <label class="block text-sm/6 font-medium text-gray-900">Adrese</label>
-                        <div class="mt-2">
-                            <div
-                                class="flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-                                <div
-                                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-500  outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-                                    {{ url('/') }}/{{app()->getLocale()}}/{{$product->slug}}
-                                </div>
-                            </div>
+                        <div
+                                class="flex items-center rounded-md bg-white">
+                            <a href="{{ url('/') }}/{{app()->getLocale()}}/{{$product->slug}}" target="_blank"
+                               class="block w-full rounded-md bg-white py-1.5 text-base underline text-gray-500 sm:text-sm/6">
+                                {{ url('/') }}/{{app()->getLocale()}}/{{$product->slug}}
+                            </a>
                         </div>
                     </div>
 
