@@ -59,8 +59,8 @@ test('toggle active shows success message', function () {
 
     Livewire::test(ProductList::class)
             ->call('toggleActive', $product->id)
-            ->assertHasNoErrors();
-//            ->assertSessionHas('message');
+            ->assertHasNoErrors()
+            ->assertSessionHas('_flash.new.0', 'message');
 });
 
 test('toggle active with non-existent product shows error', function () {
@@ -70,8 +70,8 @@ test('toggle active with non-existent product shows error', function () {
 
     Livewire::test(ProductList::class)
             ->call('toggleActive', 999)
-            ->assertHasNoErrors();
-//            ->assertSessionHas('error');
+            ->assertHasNoErrors()
+            ->assertSessionHas('_flash.new.0', 'error');
 });
 
 test('delete product removes product from database', function () {
@@ -95,8 +95,8 @@ test('delete product shows success message', function () {
 
     Livewire::test(ProductList::class)
             ->call('deleteProduct', $product->id)
-            ->assertHasNoErrors();
-//            ->assertSessionHas('message');
+            ->assertHasNoErrors()
+            ->assertSessionHas('_flash.new.0', 'message');
 });
 
 test('delete non-existent product shows error', function () {
@@ -106,8 +106,8 @@ test('delete non-existent product shows error', function () {
 
     Livewire::test(ProductList::class)
             ->call('deleteProduct', 999)
-            ->assertHasNoErrors();
-//            ->assertSessionHas('error');
+            ->assertHasNoErrors()
+            ->assertSessionHas('_flash.new.0', 'error');
 });
 
 test('component refreshes product list after toggle', function () {
@@ -192,8 +192,8 @@ test('update product order shows success message', function () {
 
     Livewire::test(ProductList::class)
             ->call('updateProductOrder', $reorderedProducts)
-            ->assertHasNoErrors();
-//            ->assertSessionHas('message', 'Secība atjaunota.');
+            ->assertHasNoErrors()
+            ->assertSessionHas('_flash.new.0', 'message');
 });
 
 test('update product order with non-existent product throws exception', function () {

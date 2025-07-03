@@ -32,8 +32,8 @@ test('add product component successfully creates product', function () {
             ->set('description', 'Produkta Apraksts')
             ->set('is_active', true)
             ->set('cover', $file)
-            ->call('store');
-//            ->assertSessionHas('message', 'Produkts pievienots.');
+            ->call('store')
+            ->assertSessionHas('_flash.new.0', 'message');
 
     // Check that product was created with localized data
     $this->assertDatabaseHas('products', [
@@ -172,8 +172,8 @@ test('add product component successfully uploads and stores image', function () 
             ->set('description', 'Test Description')
             ->set('cover', $file)
             ->set('is_active', true)
-            ->call('store');
-//            ->assertSessionHas('message', 'Produkts pievienots.');
+            ->call('store')
+            ->assertSessionHas('_flash.new.0', 'message');
 
     // Verify file was stored in correct directory
     Storage::disk('public')->assertExists('product-images/'.$file->hashName());
