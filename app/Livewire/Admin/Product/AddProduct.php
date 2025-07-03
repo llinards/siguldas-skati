@@ -39,7 +39,7 @@ class AddProduct extends Component
 
             Product::create(array_merge(
                 $this->only(['title', 'description', 'is_active']),
-                ['cover' => 'storage/'.$path],
+                ['cover' => $path],
                 ['slug' => $this->slug]
             ));
             session()->flash('message', __('Produkts pievienots.'));

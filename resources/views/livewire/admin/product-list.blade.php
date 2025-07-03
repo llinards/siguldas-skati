@@ -10,7 +10,7 @@
                 <!-- Product Image -->
                 <div class="aspect-square bg-gray-200 relative">
                     @if($product->cover)
-                        <img src="{{ asset($product->cover) }}"
+                        <img src="{{ Storage::url($product->cover) }}"
                              alt="{{ $product->title }}"
                              class="w-full h-full object-cover">
                         {{--                        <img src="{{ asset('storage/product-images/siguldas-skati-product-1.jpg') }}"--}}

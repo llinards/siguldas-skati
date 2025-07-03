@@ -20,7 +20,7 @@
                     @foreach ($products as $product)
                         <x-carousels.products.card>
                             <x-slot name="productTitle">{{$product->title}}</x-slot>
-                            <x-slot name="productImage">{{ asset($product->cover) }}</x-slot>
+                            <x-slot name="productImage">{{ Storage::url($product->cover) }}</x-slot>
                             <x-slot name="productCapacity">
                                 {{ $product->person_count === 1 ? __('1 personai') : __(':count personām', ['count' =>
                                 $product->person_count]) }}
