@@ -7,14 +7,22 @@ use App\Services\ProductServices;
 use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class AddProduct extends Component
 {
+    use WithFileUploads;
+
     #[Validate('required', message: 'validation.required')]
     public string $title;
 
     #[Validate('required', message: 'validation.required')]
     public string $description;
+
+    #[Validate('required', message: 'validation.required')]
+    #[Validate('max:512', message: 'Bildes izmērs nedrīkst pārsniegt 512 kb.')]
+    #[Validate('image', message: 'Drīkst pievienot tikai vienu bildi.')]
+    public $cover;
 
     public bool $is_active;
 
@@ -27,13 +35,15 @@ class AddProduct extends Component
         $this->validate();
         try {
             $this->slug = $this->productServices->generateSlug($this->title);
+            $path       = $this->cover->storePublicly('product-images', 'public');
 
             Product::create(array_merge(
                 $this->only(['title', 'description', 'is_active']),
-                ['cover' => 'storage/product-images/siguldas-skati-product-1.jpg'],
+                ['cover' => $path],
                 ['slug' => $this->slug]
             ));
             session()->flash('message', __('Produkts pievienots.'));
+            $this->reset(['title', 'description', 'is_active', 'cover']);
         } catch (\Exception $e) {
             Log::error('Failed to store product.', [
                 'error' => $e->getMessage(),

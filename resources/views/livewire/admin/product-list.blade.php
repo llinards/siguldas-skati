@@ -84,7 +84,7 @@
     </div>
 
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-end">
+    <div class="mt-5 flex flex-col sm:flex-row sm:items-center sm:justify-end">
         <x-btn-primary :href="route('product.add')">{{ __('Pievienot māju') }}</x-btn-primary>
     </div>
 
