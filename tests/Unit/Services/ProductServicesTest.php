@@ -133,21 +133,13 @@ test('getAllProducts returns products with description field', function () {
 });
 
 test('deleteProduct successfully deletes existing product', function () {
-    $product   = Product::factory()->create();
-    $productId = $product->id;
+    $product = Product::factory()->create();
 
     $productServices = new ProductServices();
-    $result          = $productServices->deleteProduct($productId);
+    $result          = $productServices->deleteProduct($product);
 
     expect($result)->toBeTrue()
-                   ->and(Product::find($productId))->toBeNull();
-});
-
-test('deleteProduct returns false for non-existent product', function () {
-    $productServices = new ProductServices();
-    $result          = $productServices->deleteProduct(999);
-
-    expect($result)->toBeFalse();
+                   ->and(Product::find($product->id))->toBeNull();
 });
 
 test('toggleProductStatus activates inactive product', function () {

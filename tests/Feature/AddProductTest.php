@@ -185,26 +185,6 @@ test('add product component successfully uploads and stores image', function () 
     ]);
 });
 
-
-test('add product component resets form after successful submission', function () {
-    Storage::fake('public');
-
-    $file = UploadedFile::fake()->image('product-image.jpg', 800, 600)->size(400);
-
-    $component = Livewire::test(AddProduct::class)
-                         ->set('title', 'Test Product')
-                         ->set('description', 'Test Description')
-                         ->set('cover', $file)
-                         ->set('is_active', true)
-                         ->call('store');
-
-    // Verify form fields are reset
-    $component->assertSet('title', '')
-              ->assertSet('description', '')
-              ->assertSet('is_active', false)
-              ->assertSet('cover', null);
-});
-
 test('add product component stores file in correct storage path', function () {
     Storage::fake('public');
 

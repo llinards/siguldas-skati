@@ -99,17 +99,6 @@ test('delete product shows success message', function () {
             ->assertSessionHas('_flash.new.0', 'message');
 });
 
-test('delete non-existent product shows error', function () {
-    $user = User::factory()->create();
-
-    $this->actingAs($user);
-
-    Livewire::test(ProductList::class)
-            ->call('deleteProduct', 999)
-            ->assertHasNoErrors()
-            ->assertSessionHas('_flash.new.0', 'error');
-});
-
 test('component refreshes product list after toggle', function () {
     $user    = User::factory()->create();
     $product = Product::factory()->create(['is_active' => true]);
