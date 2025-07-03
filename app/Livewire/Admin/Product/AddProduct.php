@@ -43,7 +43,7 @@ class AddProduct extends Component
                 ['slug' => $this->slug]
             ));
             session()->flash('message', __('Produkts pievienots.'));
-            $this->reset(['title', 'description', 'is_active', 'cover']);
+            $this->redirect(route('dashboard'));
         } catch (\Exception $e) {
             Log::error('Failed to store product.', [
                 'error' => $e->getMessage(),
