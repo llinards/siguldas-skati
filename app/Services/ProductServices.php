@@ -30,14 +30,8 @@ class ProductServices
         return Product::find($id);
     }
 
-    public function deleteProduct(int $productId): bool
+    public function deleteProduct(Product $product): bool
     {
-        $product = Product::find($productId);
-
-        if ( ! $product) {
-            return false;
-        }
-
         return $product->delete();
     }
 
