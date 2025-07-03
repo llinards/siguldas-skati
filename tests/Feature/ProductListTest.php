@@ -9,149 +9,89 @@ use Livewire\Livewire;
 
 uses(RefreshDatabase::class);
 
-test('product list component renders correctly', function () {
-    $user = User::factory()->create();
+beforeEach(function () {
+    $this->user = User::factory()->create();
+    $this->actingAs($this->user);
+    Storage::fake('public');
+});
 
-    // Create some products
+test('component renders successfully and displays all products regardless of status', function () {
     Product::factory()->count(3)->create(['is_active' => true]);
     Product::factory()->count(2)->create(['is_active' => false]);
 
-    $this->actingAs($user);
-
     Livewire::test(ProductList::class)
             ->assertStatus(200)
-            ->assertViewHas('products', function ($products) {
-                return $products->count() === 5; // All products should be loaded
-            });
-});
-
-test('product list shows all products regardless of status', function () {
-    $user = User::factory()->create();
-
-    Product::factory()->count(2)->create(['is_active' => true]);
-    Product::factory()->count(3)->create(['is_active' => false]);
-
-    $this->actingAs($user);
-
-    Livewire::test(ProductList::class)
             ->assertViewHas('products', function ($products) {
                 return $products->count() === 5;
             });
 });
 
-test('toggle active changes product status', function () {
-    $user    = User::factory()->create();
-    $product = Product::factory()->create(['is_active' => true]);
+test('toggles product status between active and inactive with success message', function () {
+    $activeProduct   = Product::factory()->create(['is_active' => true]);
+    $inactiveProduct = Product::factory()->create(['is_active' => false]);
 
-    $this->actingAs($user);
-
+    // Test toggling from active to inactive
     Livewire::test(ProductList::class)
-            ->call('toggleActive', $product->id)
-            ->assertHasNoErrors();
-
-    expect($product->fresh()->is_active)->toBeFalse();
-});
-
-test('toggle active shows success message', function () {
-    $user    = User::factory()->create();
-    $product = Product::factory()->create(['is_active' => true]);
-
-    $this->actingAs($user);
-
-    Livewire::test(ProductList::class)
-            ->call('toggleActive', $product->id)
+            ->call('toggleActive', $activeProduct->id)
             ->assertHasNoErrors()
             ->assertSessionHas('_flash.new.0', 'message');
+
+    expect($activeProduct->fresh()->is_active)->toBeFalse();
+
+    // Test toggling from inactive to active
+    Livewire::test(ProductList::class)
+            ->call('toggleActive', $inactiveProduct->id)
+            ->assertHasNoErrors()
+            ->assertSessionHas('_flash.new.0', 'message');
+
+    expect($inactiveProduct->fresh()->is_active)->toBeTrue();
 });
 
-test('toggle active with non-existent product shows error', function () {
-    $user = User::factory()->create();
-
-    $this->actingAs($user);
-
+test('handles toggle status for non-existent product with error message', function () {
     Livewire::test(ProductList::class)
             ->call('toggleActive', 999)
             ->assertHasNoErrors()
             ->assertSessionHas('_flash.new.0', 'error');
 });
 
-test('delete product removes product from database', function () {
-    $user    = User::factory()->create();
-    $product = Product::factory()->create();
+test('deletes product from database and removes cover image from storage', function () {
+    $product = Product::factory()->create([
+        'cover' => 'products/test-image.jpg',
+    ]);
 
-    $this->actingAs($user);
-
-    Livewire::test(ProductList::class)
-            ->call('deleteProduct', $product->id)
-            ->assertHasNoErrors();
-
-    expect(Product::find($product->id))->toBeNull();
-});
-
-test('delete product shows success message', function () {
-    $user    = User::factory()->create();
-    $product = Product::factory()->create();
-
-    $this->actingAs($user);
+    // Create fake file in storage
+    Storage::disk('public')->put('products/test-image.jpg', 'fake image content');
+    expect(Storage::disk('public')->exists('products/test-image.jpg'))->toBeTrue();
 
     Livewire::test(ProductList::class)
             ->call('deleteProduct', $product->id)
             ->assertHasNoErrors()
             ->assertSessionHas('_flash.new.0', 'message');
+
+    expect(Product::find($product->id))->toBeNull()
+                                       ->and(Storage::disk('public')->exists('products/test-image.jpg'))->toBeFalse();
 });
 
-test('component refreshes product list after toggle', function () {
-    $user    = User::factory()->create();
-    $product = Product::factory()->create(['is_active' => true]);
+test('deletes product gracefully when cover image does not exist in storage', function () {
+    $product = Product::factory()->create([
+        'cover' => 'products/non-existent-image.jpg',
+    ]);
 
-    $this->actingAs($user);
+    // Verify the file doesn't exist
+    expect(Storage::disk('public')->exists('products/non-existent-image.jpg'))->toBeFalse();
 
-    $component = Livewire::test(ProductList::class);
+    Livewire::test(ProductList::class)
+            ->call('deleteProduct', $product->id)
+            ->assertHasNoErrors()
+            ->assertSessionHas('_flash.new.0', 'message');
 
-    // Get initial products
-    $initialProducts    = $component->viewData('products');
-    $initialActiveCount = $initialProducts->where('is_active', true)->count();
-
-    // Toggle product status
-    $component->call('toggleActive', $product->id);
-
-    // Get updated products
-    $updatedProducts    = $component->viewData('products');
-    $updatedActiveCount = $updatedProducts->where('is_active', true)->count();
-
-    expect($updatedActiveCount)->toBe($initialActiveCount - 1);
+    expect(Product::find($product->id))->toBeNull();
 });
 
-test('component refreshes product list after delete', function () {
-    $user = User::factory()->create();
-    Product::factory()->count(3)->create();
-    $productToDelete = Product::factory()->create();
-
-    $this->actingAs($user);
-
-    $component = Livewire::test(ProductList::class);
-
-    // Verify initial count
-    $component->assertViewHas('products', function ($products) {
-        return $products->count() === 4;
-    });
-
-    // Delete product
-    $component->call('deleteProduct', $productToDelete->id);
-
-    // Verify updated count
-    $component->assertViewHas('products', function ($products) {
-        return $products->count() === 3;
-    });
-});
-
-test('update product order updates product order values', function () {
-    $user     = User::factory()->create();
+test('updates product order correctly and shows success message', function () {
     $product1 = Product::factory()->create(['order' => 1]);
     $product2 = Product::factory()->create(['order' => 2]);
     $product3 = Product::factory()->create(['order' => 3]);
-
-    $this->actingAs($user);
 
     $reorderedProducts = [
         ['value' => $product3->id, 'order' => 1],
@@ -161,36 +101,15 @@ test('update product order updates product order values', function () {
 
     Livewire::test(ProductList::class)
             ->call('updateProductOrder', $reorderedProducts)
-            ->assertHasNoErrors();
-
-    expect($product1->fresh()->order)->toBe(2);
-    expect($product2->fresh()->order)->toBe(3);
-    expect($product3->fresh()->order)->toBe(1);
-});
-
-test('update product order shows success message', function () {
-    $user     = User::factory()->create();
-    $product1 = Product::factory()->create(['order' => 1]);
-    $product2 = Product::factory()->create(['order' => 2]);
-
-    $this->actingAs($user);
-
-    $reorderedProducts = [
-        ['value' => $product2->id, 'order' => 1],
-        ['value' => $product1->id, 'order' => 2],
-    ];
-
-    Livewire::test(ProductList::class)
-            ->call('updateProductOrder', $reorderedProducts)
             ->assertHasNoErrors()
             ->assertSessionHas('_flash.new.0', 'message');
+
+    expect($product1->fresh()->order)->toBe(2)
+                                     ->and($product2->fresh()->order)->toBe(3)
+                                     ->and($product3->fresh()->order)->toBe(1);
 });
 
-test('update product order with non-existent product throws exception', function () {
-    $user = User::factory()->create();
-
-    $this->actingAs($user);
-
+test('throws exception when updating order with non-existent product', function () {
     $invalidProducts = [
         ['value' => 999, 'order' => 1],
     ];
@@ -201,54 +120,31 @@ test('update product order with non-existent product throws exception', function
     })->toThrow(Illuminate\Database\Eloquent\ModelNotFoundException::class);
 });
 
-test('delete product removes cover image from storage', function () {
-    $user = User::factory()->create();
+test('refreshes product list after performing actions', function () {
+    Product::factory()->count(3)->create(['is_active' => true]);
+    $productToDelete = Product::factory()->create(['is_active' => false]);
 
-    // Create a product with a cover image
-    $product = Product::factory()->create([
-        'cover' => 'products/test-image.jpg',
-    ]);
+    $component = Livewire::test(ProductList::class);
 
-    // Create a fake file in storage
-    Storage::fake('public');
-    Storage::disk('public')->put('products/test-image.jpg', 'fake image content');
+    // Verify initial count and active status
+    $component->assertViewHas('products', function ($products) {
+        return $products->count() === 4 && $products->where('is_active', true)->count() === 3;
+    });
 
-    // Verify the file exists before deletion
-    expect(Storage::disk('public')->exists('products/test-image.jpg'))->toBeTrue();
+    // Toggle one product status
+    $productToToggle = Product::first();
+    $component->call('toggleActive', $productToToggle->id);
 
-    $this->actingAs($user);
+    // Verify updated active count
+    $component->assertViewHas('products', function ($products) {
+        return $products->where('is_active', true)->count() === 2;
+    });
 
-    Livewire::test(ProductList::class)
-            ->call('deleteProduct', $product->id)
-            ->assertHasNoErrors();
+    // Delete product
+    $component->call('deleteProduct', $productToDelete->id);
 
-    // Verify the file has been deleted
-    expect(Storage::disk('public')->exists('products/test-image.jpg'))->toBeFalse();
-
-    // Verify the product is also deleted from database
-    expect(Product::find($product->id))->toBeNull();
-});
-
-test('delete product handles missing cover image gracefully', function () {
-    $user = User::factory()->create();
-
-    // Create a product with a cover path that doesn't exist in storage
-    $product = Product::factory()->create([
-        'cover' => 'products/non-existent-image.jpg',
-    ]);
-
-    Storage::fake('public');
-
-    // Verify the file doesn't exist
-    expect(Storage::disk('public')->exists('products/non-existent-image.jpg'))->toBeFalse();
-
-    $this->actingAs($user);
-
-    Livewire::test(ProductList::class)
-            ->call('deleteProduct', $product->id)
-            ->assertHasNoErrors()
-            ->assertSessionHas('_flash.new.0', 'message');
-
-    // Verify the product is still deleted despite missing image
-    expect(Product::find($product->id))->toBeNull();
+    // Verify updated total count
+    $component->assertViewHas('products', function ($products) {
+        return $products->count() === 3;
+    });
 });

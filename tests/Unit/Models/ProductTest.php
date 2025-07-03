@@ -6,200 +6,132 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 uses(Tests\TestCase::class);
 uses(RefreshDatabase::class);
 
-test('product factory creates valid product', function () {
+test('factory creates valid model instance with all required attributes', function () {
     $product = Product::factory()->create();
 
     expect($product)->toBeInstanceOf(Product::class)
-                    ->and($product->getTranslations('title'))->toBeArray()  // Get the full translations array
-                    ->and($product->getTranslations('slug'))->toBeArray()   // Get the full translations array
-                    ->and($product->getTranslations('description'))->toBeArray()   // Get the full translations array
+                    ->and($product->getTranslations('title'))->toBeArray()
+                    ->and($product->getTranslations('slug'))->toBeArray()
+                    ->and($product->getTranslations('description'))->toBeArray()
                     ->and($product->is_active)->toBeTrue()
                     ->and($product->person_count)->toBeInt()
                     ->and($product->cover)->toBeString();
 });
 
-test('product has translatable title, slug and description', function () {
+test('uses slug as route key name for URL generation', function () {
+    $product = new Product();
+    expect($product->getRouteKeyName())->toBe('slug');
+});
+
+test('translatable attributes work correctly across different locales', function () {
     $product = Product::factory()->create([
-        'title'       => [
-            'en' => 'Test Product',
-            'lv' => 'Testa Produkts',
-        ],
-        'slug'        => [
-            'en' => 'test-product',
-            'lv' => 'testa-produkts',
-        ],
-        'description' => [
-            'en' => 'Test product description in English',
-            'lv' => 'Testa produkta apraksts latviešu valodā',
-        ],
+        'title'       => ['en' => 'English Product', 'lv' => 'Latviešu Produkts'],
+        'slug'        => ['en' => 'english-product', 'lv' => 'latviesu-produkts'],
+        'description' => ['en' => 'English description', 'lv' => 'Latviešu apraksts'],
     ]);
 
     // Test English locale
     app()->setLocale('en');
-    expect($product->title)->toBe('Test Product')
-                           ->and($product->slug)->toBe('test-product')
-                           ->and($product->description)->toBe('Test product description in English');
+    expect($product->title)->toBe('English Product')
+                           ->and($product->slug)->toBe('english-product')
+                           ->and($product->description)->toBe('English description');
 
     // Test Latvian locale
     app()->setLocale('lv');
-    expect($product->title)->toBe('Testa Produkts')
-                           ->and($product->slug)->toBe('testa-produkts')
-                           ->and($product->description)->toBe('Testa produkta apraksts latviešu valodā');
+    expect($product->title)->toBe('Latviešu Produkts')
+                           ->and($product->slug)->toBe('latviesu-produkts')
+                           ->and($product->description)->toBe('Latviešu apraksts');
 });
 
-test('product route key name is slug', function () {
-    $product = new Product();
+test('falls back to Latvian when English translation is missing, null, or empty', function () {
+    $productMissing = Product::factory()->create([
+        'title'       => ['lv' => 'Latviešu Nosaukums'],
+        'slug'        => ['lv' => 'latviesu-nosaukums'],
+        'description' => ['lv' => 'Latviešu Apraksts'],
+    ]);
 
-    expect($product->getRouteKeyName())->toBe('slug');
+    $productNullEmpty = Product::factory()->create([
+        'title'       => ['lv' => 'Cits Nosaukums', 'en' => null],
+        'slug'        => ['lv' => 'cits-nosaukums', 'en' => ''],
+        'description' => ['lv' => 'Cits Apraksts', 'en' => null],
+    ]);
+
+    app()->setLocale('en');
+
+    // Test missing translations
+    expect($productMissing->title)->toBe('Latviešu Nosaukums')
+                                  ->and($productMissing->slug)->toBe('latviesu-nosaukums')
+                                  ->and($productMissing->description)->toBe('Latviešu Apraksts');
+
+    // Test null/empty translations
+    expect($productNullEmpty->title)->toBe('Cits Nosaukums')
+                                    ->and($productNullEmpty->slug)->toBe('cits-nosaukums')
+                                    ->and($productNullEmpty->description)->toBe('Cits Apraksts');
 });
 
-test('product resolves route binding by slug in current locale', function () {
-    // Create an active product
+test('resolves route binding by slug in current locale for active products only', function () {
     $activeProduct = Product::factory()->create([
-        'slug'      => [
-            'en' => 'active-product',
-            'lv' => 'aktivs-produkts',
-        ],
+        'slug'      => ['en' => 'active-product', 'lv' => 'aktivs-produkts'],
         'is_active' => true,
     ]);
 
-    // Create an inactive product
     $inactiveProduct = Product::factory()->create([
-        'slug'      => [
-            'en' => 'inactive-product',
-            'lv' => 'neaktivs-produkts',
-        ],
+        'slug'      => ['en' => 'inactive-product', 'lv' => 'neaktivs-produkts'],
         'is_active' => false,
     ]);
 
     // Test English locale
     app()->setLocale('en');
-    $resolvedActive   = (new Product())->resolveRouteBinding('active-product');
-    $resolvedInactive = (new Product())->resolveRouteBinding('inactive-product');
-
-    expect($resolvedActive->id)->toBe($activeProduct->id)
-                               ->and($resolvedInactive)->toBeNull();
+    expect((new Product())->resolveRouteBinding('active-product'))
+        ->toBeInstanceOf(Product::class)
+        ->and((new Product())->resolveRouteBinding('active-product')->id)
+        ->toBe($activeProduct->id)
+        ->and((new Product())->resolveRouteBinding('inactive-product'))
+        ->toBeNull();
 
     // Test Latvian locale
     app()->setLocale('lv');
-    $resolvedActive   = (new Product())->resolveRouteBinding('aktivs-produkts');
-    $resolvedInactive = (new Product())->resolveRouteBinding('neaktivs-produkts');
-
-    expect($resolvedActive->id)->toBe($activeProduct->id)
-                               ->and($resolvedInactive)->toBeNull();
+    expect((new Product())->resolveRouteBinding('aktivs-produkts'))
+        ->toBeInstanceOf(Product::class)
+        ->and((new Product())->resolveRouteBinding('aktivs-produkts')->id)
+        ->toBe($activeProduct->id)
+        ->and((new Product())->resolveRouteBinding('neaktivs-produkts'))
+        ->toBeNull();
 });
 
-test('product falls back to LV when EN translation is missing', function () {
-    $product = Product::factory()->create([
-        'title'       => [
-            'lv' => 'Latviešu nosaukums',
-            // No 'en' translation provided
-        ],
-        'slug'        => [
-            'lv' => 'latviesu-nosaukums',
-            // No 'en' translation provided
-        ],
-        'description' => [
-            'lv' => 'Latviešu apraksts',
-            // No 'en' translation provided
-        ],
+test('description attribute handles various content types correctly', function () {
+    $productWithContent = Product::factory()->create([
+        'description' => ['en' => 'Rich description', 'lv' => 'Bagāts apraksts'],
     ]);
 
-    // Set locale to English (which has missing translations)
-    app()->setLocale('en');
-
-    // Should fallback to LV
-    expect($product->title)->toBe('Latviešu nosaukums')
-                           ->and($product->slug)->toBe('latviesu-nosaukums')
-                           ->and($product->description)->toBe('Latviešu apraksts');
-});
-
-test('product falls back to LV when EN translation is null or empty', function () {
-    $product = Product::factory()->create([
-        'title'       => [
-            'lv' => 'Latviešu nosaukums',
-            'en' => null, // Explicitly null
-        ],
-        'slug'        => [
-            'lv' => 'latviesu-nosaukums',
-            'en' => '', // Empty string
-        ],
-        'description' => [
-            'lv' => 'Latviešu apraksts',
-            'en' => null, // Explicitly null
-        ],
+    $productEmpty = Product::factory()->create([
+        'description' => ['en' => '', 'lv' => ''],
     ]);
 
-    // Set locale to English
+    // Test with content
     app()->setLocale('en');
-
-    // Should fallback to LV
-    expect($product->title)->toBe('Latviešu nosaukums')
-                           ->and($product->slug)->toBe('latviesu-nosaukums')
-                           ->and($product->description)->toBe('Latviešu apraksts');
-});
-
-test('product uses EN translation when available', function () {
-    $product = Product::factory()->create([
-        'title'       => [
-            'lv' => 'Latviešu nosaukums',
-            'en' => 'English Title',
-        ],
-        'slug'        => [
-            'lv' => 'latviesu-nosaukums',
-            'en' => 'english-title',
-        ],
-        'description' => [
-            'lv' => 'Latviešu apraksts',
-            'en' => 'English description',
-        ],
-    ]);
-
-    // Set locale to English
-    app()->setLocale('en');
-
-    // Should use EN translation
-    expect($product->title)->toBe('English Title')
-                           ->and($product->slug)->toBe('english-title')
-                           ->and($product->description)->toBe('English description');
-
-    // Set locale to Latvian
-    app()->setLocale('lv');
-
-    // Should use LV translation
-    expect($product->title)->toBe('Latviešu nosaukums')
-                           ->and($product->slug)->toBe('latviesu-nosaukums')
-                           ->and($product->description)->toBe('Latviešu apraksts');
-});
-
-test('product description is accessible as string', function () {
-    $product = Product::factory()->create([
-        'description' => [
-            'en' => 'English description',
-            'lv' => 'Latviešu apraksts',
-        ],
-    ]);
-
-    app()->setLocale('en');
-    expect($product->description)->toBeString()
-                                 ->and($product->description)->toBe('English description');
+    expect($productWithContent->description)->toBeString()
+                                            ->and($productWithContent->description)->toBe('Rich description');
 
     app()->setLocale('lv');
-    expect($product->description)->toBeString()
-                                 ->and($product->description)->toBe('Latviešu apraksts');
-});
+    expect($productWithContent->description)->toBeString()
+                                            ->and($productWithContent->description)->toBe('Bagāts apraksts');
 
-test('product description can be empty', function () {
-    $product = Product::factory()->create([
-        'description' => [
-            'en' => '',
-            'lv' => '',
-        ],
-    ]);
-
+    // Test empty descriptions
     app()->setLocale('en');
-    expect($product->description)->toBe('');
+    expect($productEmpty->description)->toBe('');
 
     app()->setLocale('lv');
-    expect($product->description)->toBe('');
+    expect($productEmpty->description)->toBe('');
+});
+
+test('global scope orders products by order column automatically', function () {
+    $product1 = Product::factory()->create(['order' => 3]);
+    $product2 = Product::factory()->create(['order' => 1]);
+    $product3 = Product::factory()->create(['order' => 2]);
+
+    $products = Product::all();
+
+    expect($products->pluck('id')->toArray())
+        ->toBe([$product2->id, $product3->id, $product1->id]);
 });
