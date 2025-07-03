@@ -8,7 +8,7 @@
             <figure class="f-carousel__slide">
                 <div class="overflow-hidden rounded-3xl w-full">
                     <a data-fancybox="galleryMob" href="{{ asset('images/siguldas-skati-product-3.jpg') }}" class="">
-                        <img class="rounded-3xl object-cover duration-300 transition-all ease-in-out h-107 w-full"
+                        <img class="rounded-3xl object-cover duration-300 transition-all ease-in-out h-108 w-full"
                             alt="" src="{{ asset('images/siguldas-skati-product-3.jpg') }}">
                     </a>
                 </div>
@@ -17,7 +17,7 @@
                 <div class="overflow-hidden rounded-3xl w-full">
                     <a data-fancybox="galleryMob" href="{{ asset('images/siguldas-skati-product-viz-1.jpg') }}"
                         class="">
-                        <img class="rounded-3xl object-cover transition-all ease-in-out h-107 w-full" alt=""
+                        <img class="rounded-3xl object-cover transition-all ease-in-out h-108 w-full" alt=""
                             src="{{ asset('images/siguldas-skati-product-viz-1.jpg') }}">
                     </a>
                 </div>
@@ -26,7 +26,7 @@
                 <div class="overflow-hidden rounded-3xl w-full">
                     <a data-fancybox="galleryMob" href="{{ asset('images/gallery/siguldas-skati-house-1-2.jpg') }}"
                         class="">
-                        <img class="rounded-3xl object-cover transition-all ease-in-out h-107 w-full" alt=""
+                        <img class="rounded-3xl object-cover transition-all ease-in-out h-108 w-full" alt=""
                             src="{{ asset('images/gallery/siguldas-skati-house-1-2.jpg') }}">
                     </a>
                 </div>
@@ -35,7 +35,7 @@
                 <div class="overflow-hidden rounded-3xl w-full">
                     <a data-fancybox="galleryMob" href="{{ asset('images/gallery/siguldas-skati-house-1-1.jpg') }}"
                         class="">
-                        <img class="rounded-3xl object-cover transition-all ease-in-out h-107 w-full" alt=""
+                        <img class="rounded-3xl object-cover transition-all ease-in-out h-108 w-full" alt=""
                             src="{{ asset('images/gallery/siguldas-skati-house-1-1.jpg') }}">
                     </a>
                 </div>
@@ -43,7 +43,7 @@
             <figure class="f-carousel__slide">
                 <div class="overflow-hidden rounded-3xl w-full">
                     <a data-fancybox="galleryMob" href="{{ asset('images/siguldas-skati-product-1.jpg') }}" class="">
-                        <img class="rounded-3xl object-cover transition-all ease-in-out h-107 w-full" alt=""
+                        <img class="rounded-3xl object-cover transition-all ease-in-out h-108 w-full" alt=""
                             src="{{ asset('images/siguldas-skati-product-1.jpg') }}">
                     </a>
                 </div>

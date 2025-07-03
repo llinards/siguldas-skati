@@ -1,7 +1,7 @@
 <figure class="f-carousel__slide relative group transition-all duration-300 ease-in-out rounded-3xl">
     <a href="{{ $productLink ?? '' }}">
         <div class="relative rounded-3xl overflow-hidden">
-            <img class="rounded-3xl object-cover w-full transition-transform duration-300 ease-in-out group-hover:scale-105"
+            <img class="rounded-3xl h-108 md:h-116 xl:h-132 object-cover w-full transition-transform duration-300 ease-in-out group-hover:scale-105"
                 alt="{{ $productTitle ?? '' }}" src="{{ $productImage ?? '' }}" />
             <div
                 class="absolute inset-0 rounded-3xl pointer-events-none bg-gradient-to-t from-black/30 via-black/20 to-transparent transition-transform duration-300 ease-in-out group-hover:scale-105">
