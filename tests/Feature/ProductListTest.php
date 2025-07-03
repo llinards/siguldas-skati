@@ -4,6 +4,7 @@ use App\Livewire\Admin\ProductList;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 
 uses(RefreshDatabase::class);
@@ -198,4 +199,56 @@ test('update product order with non-existent product throws exception', function
         Livewire::test(ProductList::class)
                 ->call('updateProductOrder', $invalidProducts);
     })->toThrow(Illuminate\Database\Eloquent\ModelNotFoundException::class);
+});
+
+test('delete product removes cover image from storage', function () {
+    $user = User::factory()->create();
+
+    // Create a product with a cover image
+    $product = Product::factory()->create([
+        'cover' => 'products/test-image.jpg',
+    ]);
+
+    // Create a fake file in storage
+    Storage::fake('public');
+    Storage::disk('public')->put('products/test-image.jpg', 'fake image content');
+
+    // Verify the file exists before deletion
+    expect(Storage::disk('public')->exists('products/test-image.jpg'))->toBeTrue();
+
+    $this->actingAs($user);
+
+    Livewire::test(ProductList::class)
+            ->call('deleteProduct', $product->id)
+            ->assertHasNoErrors();
+
+    // Verify the file has been deleted
+    expect(Storage::disk('public')->exists('products/test-image.jpg'))->toBeFalse();
+
+    // Verify the product is also deleted from database
+    expect(Product::find($product->id))->toBeNull();
+});
+
+test('delete product handles missing cover image gracefully', function () {
+    $user = User::factory()->create();
+
+    // Create a product with a cover path that doesn't exist in storage
+    $product = Product::factory()->create([
+        'cover' => 'products/non-existent-image.jpg',
+    ]);
+
+    Storage::fake('public');
+
+    // Verify the file doesn't exist
+    expect(Storage::disk('public')->exists('products/non-existent-image.jpg'))->toBeFalse();
+
+    $this->actingAs($user);
+
+    Livewire::test(ProductList::class)
+            ->call('deleteProduct', $product->id)
+            ->assertHasNoErrors()
+            ->assertSessionHas('_flash.new.0', 'message');
+
+    // Verify the product is still deleted despite missing image
+    expect(Product::find($product->id))->toBeNull();
 });
