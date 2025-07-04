@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Spatie\Translatable\HasTranslations;
 
 class Product extends Model
@@ -28,11 +29,16 @@ class Product extends Model
 
     public function resolveRouteBinding($value, $field = null)
     {
-        $locale = app()->getLocale();
+        $product = $this->where(function ($query) use ($value) {
+            $locales = array_keys(LaravelLocalization::getSupportedLocales());
+            foreach ($locales as $locale) {
+                $query->orWhere("slug->{$locale}", $value);
+            }
+        })
+                        ->where('is_active', 1)
+                        ->first();
 
-        return $this->where("slug->{$locale}", $value)
-                    ->where('is_active', 1)
-                    ->first();
+        return $product;
     }
 
     protected static function boot(): void

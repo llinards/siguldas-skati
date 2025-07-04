@@ -135,3 +135,13 @@ test('global scope orders products by order column automatically', function () {
     expect($products->pluck('id')->toArray())
         ->toBe([$product2->id, $product3->id, $product1->id]);
 });
+
+test('resolveRouteBinding finds product by any locale slug', function () {
+    $product = Product::factory()->create([
+        'slug'      => ['lv' => 'test-lv', 'en' => 'test-en'],
+        'is_active' => true,
+    ]);
+
+    expect($product->resolveRouteBinding('test-lv'))->not->toBeNull();
+    expect($product->resolveRouteBinding('test-en'))->not->toBeNull();
+});
