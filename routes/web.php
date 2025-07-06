@@ -5,7 +5,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Admin\Product\AddProduct;
 use App\Livewire\Admin\Product\EditProduct;
-use App\Livewire\Admin\ProductEdit;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
