@@ -1,26 +1,29 @@
-<div class="block lg:hidden grid grid-cols-1 relative md:mb-6">
-    @if(!$product->images->isEmpty())
+<div class="relative block grid grid-cols-1 md:mb-6 lg:hidden">
+    @if (! $product->images->isEmpty())
         <x-carousels.nav class="lg:hidden">
             <x-slot name="prev">productGalleryPrev</x-slot>
             <x-slot name="next">productGalleryNext</x-slot>
         </x-carousels.nav>
         <div id="productGallery" class="f-carousel">
             <div class="f-carousel__viewport">
-                @foreach($product->images as $image)
+                @foreach ($product->images as $image)
                     <figure class="f-carousel__slide">
-                        <div class="overflow-hidden rounded-3xl w-full">
-                            <a data-fancybox="galleryMob" href="{{ Storage::url($image->filename) }}"
-                               class="">
+                        <div class="w-full overflow-hidden rounded-3xl">
+                            <a data-fancybox="galleryMob" href="{{ Storage::url($image->filename) }}" class="">
                                 <img
-                                    class="rounded-3xl object-cover duration-300 transition-all ease-in-out h-108 w-full"
-                                    alt="" src="{{ Storage::url($image->filename) }}">
+                                    class="h-108 w-full rounded-3xl object-cover transition-all duration-300 ease-in-out"
+                                    alt=""
+                                    src="{{ Storage::url($image->filename) }}"
+                                />
                             </a>
                         </div>
                     </figure>
                 @endforeach
             </div>
-            <div id="carousel-counter"
-                 class="absolute right-4 bottom-4 bg-black/60 text-white text-xs px-2 py-1 rounded z-10">
+            <div
+                id="carousel-counter"
+                class="absolute right-4 bottom-4 z-10 rounded bg-black/60 px-2 py-1 text-xs text-white"
+            >
                 1 / 5
             </div>
         </div>

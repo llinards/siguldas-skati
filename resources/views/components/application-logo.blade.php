@@ -1,2 +1,1 @@
-<img src="{{ asset('images/logo.png') }}" class="w-44 lg:w-70 invert"
-     alt="Siguldas Skati Logo"/>
+<img src="{{ asset('images/logo.png') }}" class="w-44 invert lg:w-70" alt="Siguldas Skati Logo" />

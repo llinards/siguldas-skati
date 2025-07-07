@@ -1,11 +1,10 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @source "../../node_modules/preline/dist/*.js";
-@import "../../node_modules/preline/variants.css";
+@import '../../node_modules/preline/variants.css';
 
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-
 
 @font-face {
     font-family: 'Rubik';
@@ -15,7 +14,6 @@
     font-display: swap;
 }
 
-
 @font-face {
     font-family: 'Charpentier';
     src: url('fonts/Charpentier-Sans-Pro-Maigre.ttf') format('truetype');
@@ -24,15 +22,16 @@
     font-display: swap;
 }
 
-
 @theme {
-    --font-sans: 'Arial', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans:
+        'Arial', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
     --font-heading: 'Charpentier';
     --font-main: 'Rubik';
     --breakpoint-xs: 30rem;
     --color-ss: #f2f3ed;
     --color-menu-hover: rgba(0, 0, 0, 0.5);
-    --color-ss-gray: #767E86;
+    --color-ss-gray: #767e86;
     --color-ss-dark: rgb(30, 38, 1);
     --text-btn: 1.25rem;
     --text-btn-sm: 1rem;
@@ -50,7 +49,6 @@
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/public/images/header.jpg');
     min-height: calc(100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0));
 }
-
 
 h1,
 h2,
@@ -84,7 +82,6 @@ nav li :focus-visible {
     outline-offset: 3px;
 }
 
-
 #productCarousel,
 #todoCarousel,
 #galleryCarousel,
@@ -105,13 +102,12 @@ nav li :focus-visible {
     --f-button-svg-height: 27px;
     --f-button-svg-stroke-width: 1.5;
 
-    --f-button-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
-    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    --f-button-shadow:
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+        rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
 @media screen and (min-width: 640px) {
-
     #productCarousel,
     #todoCarousel,
     #galleryCarousel,
@@ -121,7 +117,6 @@ nav li :focus-visible {
 }
 
 @media screen and (min-width: 1024px) {
-
     #productCarousel,
     #todoCarousel,
     #galleryCarousel,
@@ -130,9 +125,7 @@ nav li :focus-visible {
     }
 }
 
-
 @media screen and (min-width: 1280px) {
-
     #todoCarousel,
     #galleryCarousel {
         --f-carousel-slide-width: calc((100% - 96px) / 4);

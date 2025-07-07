@@ -4,6 +4,8 @@
         @lang('Ups... ir notikusi kļūda. :(')
     </h1>
     <div class="text-center">
-        <x-btn-primary :type="'button'" onclick="window.history.back()">@lang('Atpakaļ')</x-btn-primary>
+        <x-btn-primary :type="'button'" onclick="window.history.back()">
+            @lang('Atpakaļ')
+        </x-btn-primary>
     </div>
 </x-error-layout>
