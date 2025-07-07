@@ -73,21 +73,27 @@ class ProductFactory extends Factory
      */
     private function copyImageToStorage(string $filename): string
     {
-        $sourcePath      = public_path('images/assets/seeder-house-images/'.$filename);
-        $destinationDir  = public_path('storage/product-images');
-        $destinationPath = $destinationDir.'/'.$filename;
+        $sourcePath     = public_path('images/assets/seeder-house-images/'.$filename);
+        $destinationDir = public_path('storage/product-images');
+
+        // Get file extension
+        $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+        // Generate random filename
+        $randomFilename  = $this->faker->uuid.'.'.$extension;
+        $destinationPath = $destinationDir.'/'.$randomFilename;
 
         // Create the destination directory if it doesn't exist
         if ( ! File::exists($destinationDir)) {
             File::makeDirectory($destinationDir, 0755, true);
         }
 
-        // Copy the file if source exists and destination doesn't exist
-        if (File::exists($sourcePath) && ! File::exists($destinationPath)) {
+        // Copy the file if source exists
+        if (File::exists($sourcePath)) {
             File::copy($sourcePath, $destinationPath);
         }
 
         // Return the path relative to storage
-        return 'product-images/'.$filename;
+        return 'product-images/'.$randomFilename;
     }
 }

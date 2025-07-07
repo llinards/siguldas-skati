@@ -1,4 +1,5 @@
 @import "tailwindcss";
+
 @source "../../node_modules/preline/dist/*.js";
 @import "../../node_modules/preline/variants.css";
 
@@ -42,14 +43,13 @@
     --text-h-md: 4rem;
     --text-h: 6.875rem;
     --text-h-banner: 5.25rem;
-    --leading-0.5: 0.5;
+    --leading-0-5: 0.5;
 }
 
 .home-introduction {
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/public/images/header.jpg');
     min-height: calc(100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0));
 }
-
 
 
 h1,
@@ -85,7 +85,6 @@ nav li :focus-visible {
 }
 
 
-
 #productCarousel,
 #todoCarousel,
 #galleryCarousel,
@@ -107,8 +106,8 @@ nav li :focus-visible {
     --f-button-svg-stroke-width: 1.5;
 
     --f-button-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-        rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
-        rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
 @media screen and (min-width: 640px) {
@@ -130,7 +129,6 @@ nav li :focus-visible {
         --f-carousel-slide-width: calc((100% - 64px) / 3);
     }
 }
-
 
 
 @media screen and (min-width: 1280px) {

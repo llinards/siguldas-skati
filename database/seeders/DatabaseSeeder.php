@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -22,6 +23,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'info@siguldasskati.lv',
         ]);
 
-        Product::factory(5)->create();
+        Product::factory()
+               ->count(5)
+               ->has(ProductImage::factory()->count(3), 'images')
+               ->create();
     }
 }
