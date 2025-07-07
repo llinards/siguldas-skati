@@ -39,6 +39,17 @@ class ProductGallery extends Component
         $this->product = $this->productServices->getProductById($product);
     }
 
+    public function updateImageOrder(array $images): void
+    {
+        try {
+            $this->productServices->updateImageOrder($images);
+            $this->flashMessageService->success(__('Secība atjaunota.'));
+        } catch (\Exception $e) {
+            $this->errorLogService->logError('Failed to update product order', $e, []);
+            $this->flashMessageService->error(__('Atjauninot secību, radās kļūda. Lūdzu, mēģiniet vēlreiz.'));
+        }
+    }
+
     public function isImageOversized(int $index): bool
     {
         if ( ! isset($this->images[$index])) {

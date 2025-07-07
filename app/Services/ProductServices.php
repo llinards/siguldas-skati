@@ -125,4 +125,12 @@ class ProductServices
                    ->update(['order' => $productData['order']]);
         }
     }
+
+    public function updateImageOrder(array $images): void
+    {
+        foreach ($images as $image) {
+            ProductImage::findOrFail($image['value'])
+                        ->update(['order' => $image['order']]);
+        }
+    }
 }

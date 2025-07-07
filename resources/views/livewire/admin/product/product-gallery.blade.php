@@ -10,9 +10,11 @@
                 @if($product->images->count() > 0)
                     <div class="mb-8">
                         <h3 class="text-lg font-medium text-gray-900 mb-4">{{ __('Esošie attēli') }}</h3>
-                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+                             wire:sortable="updateImageOrder">
                             @foreach($product->images as $image)
-                                <div class="relative group" wire:key="existing-image-{{ $image->id }}">
+                                <div class="relative group" wire:key="existing-image-{{ $image->id }}"
+                                     wire:sortable.item="{{ $image->id }}">
                                     <img src="{{ Storage::url($image->filename) }}"
                                          alt="{{ __('Galerijas attēls') }}"
                                          class="h-32 w-full rounded-md border border-gray-300 object-cover">

@@ -307,3 +307,43 @@ test('updateProductOrder successfully updates product order values', function ()
                                      ->and($product2->fresh()->order)->toBe(1)
                                      ->and($product3->fresh()->order)->toBe(2);
 });
+
+test('updateImageOrder successfully updates order of product images', function () {
+    $product = Product::factory()->create();
+
+    $image1 = ProductImage::factory()->create([
+        'product_id' => $product->id,
+        'order'      => 1,
+    ]);
+
+    $image2 = ProductImage::factory()->create([
+        'product_id' => $product->id,
+        'order'      => 2,
+    ]);
+
+    $image3 = ProductImage::factory()->create([
+        'product_id' => $product->id,
+        'order'      => 3,
+    ]);
+
+    $orderData = [
+        ['value' => $image1->id, 'order' => 3],
+        ['value' => $image2->id, 'order' => 1],
+        ['value' => $image3->id, 'order' => 2],
+    ];
+
+    $this->productServices->updateImageOrder($orderData);
+
+    expect($image1->fresh()->order)->toBe(3)
+                                   ->and($image2->fresh()->order)->toBe(1)
+                                   ->and($image3->fresh()->order)->toBe(2);
+});
+
+test('updateImageOrder throws exception for non-existent image', function () {
+    $orderData = [
+        ['value' => 999, 'order' => 1],
+    ];
+
+    expect(fn() => $this->productServices->updateImageOrder($orderData))
+        ->toThrow(\Illuminate\Database\Eloquent\ModelNotFoundException::class);
+});
