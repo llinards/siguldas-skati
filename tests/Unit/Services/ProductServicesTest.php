@@ -102,10 +102,35 @@ test('deleteProduct successfully removes existing product and its cover from dat
         'cover' => 'product-images/test.jpg',
     ]);
 
+    // Create some product images
+    $productImage1 = ProductImage::factory()->create([
+        'product_id' => $product->id,
+        'filename'   => 'product-images/gallery/image1.jpg',
+    ]);
+
+    $productImage2 = ProductImage::factory()->create([
+        'product_id' => $product->id,
+        'filename'   => 'product-images/gallery/image2.jpg',
+    ]);
+
+    // Mock file storage service to expect deletion of cover image
     $this->fileStorageService
         ->shouldReceive('deleteFile')
         ->once()
         ->with($product->cover)
+        ->andReturn(true);
+
+    // Mock file storage service to expect deletion of product images
+    $this->fileStorageService
+        ->shouldReceive('deleteFile')
+        ->once()
+        ->with($productImage1->filename)
+        ->andReturn(true);
+
+    $this->fileStorageService
+        ->shouldReceive('deleteFile')
+        ->once()
+        ->with($productImage2->filename)
         ->andReturn(true);
 
     $result = $this->productServices->deleteProduct($product);

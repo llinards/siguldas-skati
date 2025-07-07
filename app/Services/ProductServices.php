@@ -45,6 +45,12 @@ class ProductServices
             $this->fileStorageService->deleteFile($product->cover);
         }
 
+        foreach ($product->images as $image) {
+            if ($image->filename) {
+                $this->fileStorageService->deleteFile($image->filename);
+            }
+        }
+
         return $product->delete();
     }
 
@@ -52,11 +58,11 @@ class ProductServices
     {
         $product = Product::find($productId);
 
-        if (!$product) {
+        if ( ! $product) {
             return false;
         }
 
-        return $product->update(['is_active' => !$product->is_active]);
+        return $product->update(['is_active' => ! $product->is_active]);
     }
 
     public function generateSlug(string $title): string
@@ -77,7 +83,7 @@ class ProductServices
     public function storeProductCover(UploadedFile $file): string
     {
         return $this->fileStorageService->storeFile(
-            $file, 
+            $file,
             FileStorageService::PRODUCT_IMAGE_PATH
         );
     }
@@ -94,13 +100,13 @@ class ProductServices
     public function storeProductGalleryImage(int $productId, UploadedFile $file): ProductImage
     {
         $path = $this->fileStorageService->storeFile(
-            $file, 
+            $file,
             FileStorageService::PRODUCT_GALLERY_PATH
         );
 
         return ProductImage::create([
             'product_id' => $productId,
-            'filename' => $path,
+            'filename'   => $path,
         ]);
     }
 
