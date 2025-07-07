@@ -12,19 +12,19 @@ test('factory creates valid model instance with all required attributes', functi
     $productImage = ProductImage::factory()->create();
 
     expect($productImage)->toBeInstanceOf(ProductImage::class)
-                         ->and($productImage->product_id)->toBeInt()
-                         ->and($productImage->order)->toBeInt()
-                         ->and($productImage->created_at)->not->toBeNull()
-                                                              ->and($productImage->updated_at)->not->toBeNull();
+        ->and($productImage->product_id)->toBeInt()
+        ->and($productImage->order)->toBeInt()
+        ->and($productImage->created_at)->not->toBeNull()
+        ->and($productImage->updated_at)->not->toBeNull();
 });
 
 test('belongs to product relationship returns correct product instance', function () {
-    $product      = Product::factory()->create();
+    $product = Product::factory()->create();
     $productImage = ProductImage::factory()->create(['product_id' => $product->id]);
 
     expect($productImage->product())->toBeInstanceOf(BelongsTo::class)
-                                    ->and($productImage->product)->toBeInstanceOf(Product::class)
-                                    ->and($productImage->product->id)->toBe($product->id);
+        ->and($productImage->product)->toBeInstanceOf(Product::class)
+        ->and($productImage->product->id)->toBe($product->id);
 });
 
 test('global scope orders product images by order column automatically', function () {
@@ -62,9 +62,9 @@ test('product relationship maintains proper foreign key constraint', function ()
     $image2 = ProductImage::factory()->create(['product_id' => $product2->id]);
 
     expect($image1->product->title)->toBe('First Product')
-                                   ->and($image2->product->title)->toBe('Second Product')
-                                   ->and($image1->product_id)->toBe($product1->id)
-                                   ->and($image2->product_id)->toBe($product2->id);
+        ->and($image2->product->title)->toBe('Second Product')
+        ->and($image1->product_id)->toBe($product1->id)
+        ->and($image2->product_id)->toBe($product2->id);
 });
 
 test('boot method applies global scope correctly to all queries', function () {
@@ -79,25 +79,25 @@ test('boot method applies global scope correctly to all queries', function () {
     ]);
 
     // Test different query methods all respect the global scope
-    $allImages   = ProductImage::all();
-    $getImages   = ProductImage::get();
+    $allImages = ProductImage::all();
+    $getImages = ProductImage::get();
     $whereImages = ProductImage::where('product_id', $product->id)->get();
 
     expect($allImages->pluck('order')->toArray())->toBe([1, 5, 50, 100])
-                                                 ->and($getImages->pluck('order')->toArray())->toBe([1, 5, 50, 100])
-                                                 ->and($whereImages->pluck('order')->toArray())->toBe([1, 5, 50, 100]);
+        ->and($getImages->pluck('order')->toArray())->toBe([1, 5, 50, 100])
+        ->and($whereImages->pluck('order')->toArray())->toBe([1, 5, 50, 100]);
 });
 
 test('database persists product image with correct attributes', function () {
-    $product      = Product::factory()->create();
+    $product = Product::factory()->create();
     $productImage = ProductImage::factory()->create([
         'product_id' => $product->id,
-        'order'      => 42,
+        'order' => 42,
     ]);
 
     $this->assertDatabaseHas('product_images', [
-        'id'         => $productImage->id,
+        'id' => $productImage->id,
         'product_id' => $product->id,
-        'order'      => 42,
+        'order' => 42,
     ]);
 });

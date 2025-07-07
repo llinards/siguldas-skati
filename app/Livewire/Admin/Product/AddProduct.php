@@ -28,8 +28,11 @@ class AddProduct extends Component
     public bool $is_active = false;
 
     private ProductServices $productServices;
+
     private FlashMessageService $flashMessageService;
+
     private ErrorLogService $errorLogService;
+
     private const SUCCESS_ROUTE = 'dashboard';
 
     public function boot(
@@ -37,9 +40,9 @@ class AddProduct extends Component
         FlashMessageService $flashMessageService,
         ErrorLogService $errorLogService
     ): void {
-        $this->productServices     = $productServices;
+        $this->productServices = $productServices;
         $this->flashMessageService = $flashMessageService;
-        $this->errorLogService     = $errorLogService;
+        $this->errorLogService = $errorLogService;
     }
 
     public function store(): void
@@ -71,11 +74,11 @@ class AddProduct extends Component
     private function prepareProductData(): array
     {
         return [
-            'title'       => $this->title,
+            'title' => $this->title,
             'description' => $this->description,
-            'is_active'   => $this->is_active,
-            'cover'       => $this->productServices->storeProductCover($this->cover),
-            'slug'        => $this->productServices->generateSlug($this->title),
+            'is_active' => $this->is_active,
+            'cover' => $this->productServices->storeProductCover($this->cover),
+            'slug' => $this->productServices->generateSlug($this->title),
         ];
     }
 

@@ -15,11 +15,15 @@ class ProductImages extends Component
     use WithFileUploads;
 
     public $product;
+
     public array $images = [];
 
     private ProductServices $productServices;
+
     private FlashMessageService $flashMessageService;
+
     private ErrorLogService $errorLogService;
+
     private FileStorageService $fileStorageService;
 
     public function boot(
@@ -28,10 +32,10 @@ class ProductImages extends Component
         ErrorLogService $errorLogService,
         FileStorageService $fileStorageService
     ): void {
-        $this->productServices     = $productServices;
+        $this->productServices = $productServices;
         $this->flashMessageService = $flashMessageService;
-        $this->errorLogService     = $errorLogService;
-        $this->fileStorageService  = $fileStorageService;
+        $this->errorLogService = $errorLogService;
+        $this->fileStorageService = $fileStorageService;
     }
 
     public function mount($product): void
@@ -52,7 +56,7 @@ class ProductImages extends Component
 
     public function isImageOversized(int $index): bool
     {
-        if ( ! isset($this->images[$index])) {
+        if (! isset($this->images[$index])) {
             return false;
         }
 
@@ -61,7 +65,7 @@ class ProductImages extends Component
 
     public function getImageSizeInKB(int $index): int
     {
-        if ( ! isset($this->images[$index])) {
+        if (! isset($this->images[$index])) {
             return 0;
         }
 
@@ -71,7 +75,7 @@ class ProductImages extends Component
     public function updatedImages(): void
     {
         $oversizedCount = collect($this->images)
-            ->filter(fn($image, $index) => $this->isImageOversized($index))
+            ->filter(fn ($image, $index) => $this->isImageOversized($index))
             ->count();
 
         if ($oversizedCount > 0) {
@@ -107,7 +111,7 @@ class ProductImages extends Component
             $this->flashMessageService->success(__('Attēls dzēsts!'));
         } catch (\Exception $e) {
             $this->errorLogService->logError('Failed to delete image', $e, [
-                'image_id'   => $imageId,
+                'image_id' => $imageId,
                 'product_id' => $this->product->id,
             ]);
             $this->flashMessageService->error(__('Radās kļūda dzēšot attēlu. Lūdzu, mēģiniet vēlreiz.'));
@@ -130,12 +134,12 @@ class ProductImages extends Component
     private function validateImages(): void
     {
         $this->validate([
-            'images'   => 'required|array',
+            'images' => 'required|array',
             'images.*' => 'image|max:'.FileStorageService::MAX_FILE_SIZE_KB,
         ], [
             'images.required' => 'Lūdzu, izvēlies vismaz vienu attēlu.',
-            'images.*.image'  => 'Katram failam jābūt attēlam.',
-            'images.*.max'    => 'Attēls nedrīkst pārsniegt :max KB.',
+            'images.*.image' => 'Katram failam jābūt attēlam.',
+            'images.*.max' => 'Attēls nedrīkst pārsniegt :max KB.',
         ]);
     }
 

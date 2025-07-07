@@ -15,9 +15,9 @@ return [
     */
 
     'url' => [
-        'domain'     => null,
+        'domain' => null,
         'middleware' => [],
-        'prefix'     => 'cookie-consent',
+        'prefix' => 'cookie-consent',
     ],
 
     /*
@@ -37,9 +37,9 @@ return [
     */
 
     'cookie' => [
-        'name'     => Str::slug(env('APP_NAME', 'laravel'), '_').'_cookie_consent',
+        'name' => Str::slug(env('APP_NAME', 'laravel'), '_').'_cookie_consent',
         'duration' => (60 * 24 * 365),
-        'domain'   => null,
+        'domain' => null,
     ],
 
     /*
@@ -53,7 +53,7 @@ return [
     |
     */
 
-    'policy'           => 'privacy-policy',
+    'policy' => 'privacy-policy',
 
     /* Google Analytics configuration
     |--------------------------------------------------------------------------
@@ -68,7 +68,7 @@ return [
     |
     */
     'google_analytics' => [
-        'id'           => env('GOOGLE_ANALYTICS_ID', ""),
+        'id' => env('GOOGLE_ANALYTICS_ID', ''),
         'anonymize_ip' => env('GOOGLE_ANALYTICS_ANONYMIZE_IP', true),
     ],
 ];

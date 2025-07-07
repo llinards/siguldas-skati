@@ -14,7 +14,9 @@ class ProductList extends Component
     use WithPagination;
 
     private ProductServices $productServices;
+
     private FlashMessageService $flashMessageService;
+
     private ErrorLogService $errorLogService;
 
     public function boot(
@@ -22,9 +24,9 @@ class ProductList extends Component
         FlashMessageService $flashMessageService,
         ErrorLogService $errorLogService
     ): void {
-        $this->productServices     = $productServices;
+        $this->productServices = $productServices;
         $this->flashMessageService = $flashMessageService;
-        $this->errorLogService     = $errorLogService;
+        $this->errorLogService = $errorLogService;
     }
 
     public function deleteProduct(int $productId): void
@@ -32,7 +34,7 @@ class ProductList extends Component
         try {
             $product = $this->productServices->getProductById($productId);
 
-            if ( ! $product) {
+            if (! $product) {
                 $this->flashMessageService->error(__('Produkts nav atrasts vai nevarēja tikt dzēsts.'));
 
                 return;

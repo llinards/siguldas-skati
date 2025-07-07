@@ -8,12 +8,11 @@ test('login screen can be rendered', function () {
     $response->assertStatus(200);
 });
 
-
 test('users can authenticate using the login screen', function () {
     $user = User::factory()->create();
 
     $response = $this->post('/lv/login', [
-        'email'    => $user->email,
+        'email' => $user->email,
         'password' => 'password',
     ]);
 
@@ -25,7 +24,7 @@ test('users can not authenticate with invalid password', function () {
     $user = User::factory()->create();
 
     $this->post('/lv/login', [
-        'email'    => $user->email,
+        'email' => $user->email,
         'password' => 'wrong-password',
     ]);
 

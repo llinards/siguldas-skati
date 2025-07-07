@@ -25,8 +25,8 @@ class ProductServices
     public function getAllOtherProducts(Product $product): Collection
     {
         return Product::where('is_active', 1)
-                      ->where('id', '!=', $product->id)
-                      ->get();
+            ->where('id', '!=', $product->id)
+            ->get();
     }
 
     public function getAllProducts(): Collection
@@ -58,7 +58,7 @@ class ProductServices
     {
         $product = Product::find($productId);
 
-        if ( ! $product) {
+        if (! $product) {
             return false;
         }
 
@@ -106,7 +106,7 @@ class ProductServices
 
         return ProductImage::create([
             'product_id' => $productId,
-            'filename'   => $path,
+            'filename' => $path,
         ]);
     }
 
@@ -122,7 +122,7 @@ class ProductServices
     {
         foreach ($products as $productData) {
             Product::findOrFail($productData['value'])
-                   ->update(['order' => $productData['order']]);
+                ->update(['order' => $productData['order']]);
         }
     }
 
@@ -130,7 +130,7 @@ class ProductServices
     {
         foreach ($images as $image) {
             ProductImage::findOrFail($image['value'])
-                        ->update(['order' => $image['order']]);
+                ->update(['order' => $image['order']]);
         }
     }
 }

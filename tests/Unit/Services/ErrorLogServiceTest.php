@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Log;
 uses(Tests\TestCase::class);
 
 beforeEach(function () {
-    $this->errorLogService = new ErrorLogService();
+    $this->errorLogService = new ErrorLogService;
 });
 
 test('logError records error with context', function () {

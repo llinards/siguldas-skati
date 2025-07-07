@@ -12,11 +12,11 @@
 */
 
 pest()->extend(Tests\TestCase::class)
-      ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-      ->beforeEach(function () {
-          $this->refreshApplicationWithLocale('lv');
-      })
-      ->in('Feature');
+    ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+    ->beforeEach(function () {
+        $this->refreshApplicationWithLocale('lv');
+    })
+    ->in('Feature');
 
 /*
 |--------------------------------------------------------------------------

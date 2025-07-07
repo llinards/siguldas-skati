@@ -27,10 +27,10 @@ class Product extends Model
     }
 
     protected $casts = [
-        'title'       => 'array',
-        'slug'        => 'array',
+        'title' => 'array',
+        'slug' => 'array',
         'description' => 'array',
-        'is_active'   => 'boolean',
+        'is_active' => 'boolean',
     ];
 
     public function resolveRouteBinding($value, $field = null)
@@ -41,8 +41,8 @@ class Product extends Model
                 $query->orWhere("slug->{$locale}", $value);
             }
         })
-                        ->where('is_active', 1)
-                        ->first();
+            ->where('is_active', 1)
+            ->first();
 
         return $product;
     }

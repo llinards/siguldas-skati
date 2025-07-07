@@ -19,13 +19,13 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name'  => 'Siguldas Skati',
+            'name' => 'Siguldas Skati',
             'email' => 'info@siguldasskati.lv',
         ]);
 
         Product::factory()
-               ->count(5)
-               ->has(ProductImage::factory()->count(10), 'images')
-               ->create();
+            ->count(5)
+            ->has(ProductImage::factory()->count(10), 'images')
+            ->create();
     }
 }

@@ -37,8 +37,8 @@ class ProductImageFactory extends Factory
 
         return [
             'product_id' => Product::factory(),
-            'order'      => 0,
-            'filename'   => $imagePath,
+            'order' => 0,
+            'filename' => $imagePath,
         ];
     }
 
@@ -47,18 +47,18 @@ class ProductImageFactory extends Factory
      */
     private function copyImageToStorage(string $filename): string
     {
-        $sourcePath     = public_path('images/gallery/'.$filename);
+        $sourcePath = public_path('images/gallery/'.$filename);
         $destinationDir = public_path('storage/product-images/gallery');
 
         // Get file extension
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
         // Generate random filename
-        $randomFilename  = $this->faker->uuid.'.'.$extension;
+        $randomFilename = $this->faker->uuid.'.'.$extension;
         $destinationPath = $destinationDir.'/'.$randomFilename;
 
         // Create the destination directory if it doesn't exist
-        if ( ! File::exists($destinationDir)) {
+        if (! File::exists($destinationDir)) {
             File::makeDirectory($destinationDir, 0755, true);
         }
 

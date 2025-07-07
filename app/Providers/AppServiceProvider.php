@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         Model::unguard();
         Model::automaticallyEagerLoadRelationships();
         DB::prohibitDestructiveCommands(app()->isProduction());
-        RouteServiceProvider::loadCachedRoutesUsing(fn() => $this->loadCachedRoutes());
+        RouteServiceProvider::loadCachedRoutesUsing(fn () => $this->loadCachedRoutes());
         Translatable::fallback(config('app.fallback_locale'));
     }
 }

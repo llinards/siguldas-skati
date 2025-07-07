@@ -59,11 +59,11 @@ class ProductFactory extends Factory
         $copiedImagePath = $this->copyImageToStorage($selectedCover);
 
         return [
-            'title'        => $title,
-            'slug'         => $slug,
-            'description'  => $this->productDescriptions,
-            'is_active'    => true,
-            'cover'        => $copiedImagePath,
+            'title' => $title,
+            'slug' => $slug,
+            'description' => $this->productDescriptions,
+            'is_active' => true,
+            'cover' => $copiedImagePath,
             'person_count' => $this->faker->numberBetween(1, 4),
         ];
     }
@@ -73,18 +73,18 @@ class ProductFactory extends Factory
      */
     private function copyImageToStorage(string $filename): string
     {
-        $sourcePath     = public_path('images/assets/seeder-house-images/'.$filename);
+        $sourcePath = public_path('images/assets/seeder-house-images/'.$filename);
         $destinationDir = public_path('storage/product-images');
 
         // Get file extension
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
         // Generate random filename
-        $randomFilename  = $this->faker->uuid.'.'.$extension;
+        $randomFilename = $this->faker->uuid.'.'.$extension;
         $destinationPath = $destinationDir.'/'.$randomFilename;
 
         // Create the destination directory if it doesn't exist
-        if ( ! File::exists($destinationDir)) {
+        if (! File::exists($destinationDir)) {
             File::makeDirectory($destinationDir, 0755, true);
         }
 

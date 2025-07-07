@@ -30,7 +30,9 @@ class EditProduct extends Component
     public bool $is_active = false;
 
     private ProductServices $productServices;
+
     private FlashMessageService $flashMessageService;
+
     private ErrorLogService $errorLogService;
 
     public function boot(
@@ -38,9 +40,9 @@ class EditProduct extends Component
         FlashMessageService $flashMessageService,
         ErrorLogService $errorLogService
     ): void {
-        $this->productServices     = $productServices;
+        $this->productServices = $productServices;
         $this->flashMessageService = $flashMessageService;
-        $this->errorLogService     = $errorLogService;
+        $this->errorLogService = $errorLogService;
     }
 
     public function mount($product): void
@@ -59,7 +61,7 @@ class EditProduct extends Component
         } catch (\Exception $e) {
             $this->errorLogService->logError('Failed to update product.', $e, [
                 'product_id' => $this->product->id,
-                'title'      => $this->title,
+                'title' => $this->title,
             ]);
             $this->flashMessageService->error(__('Radās kļūda. Lūdzu, mēģiniet vēlreiz.'));
         }
@@ -78,9 +80,9 @@ class EditProduct extends Component
 
     private function initializeFormData(): void
     {
-        $this->title       = $this->product->title;
+        $this->title = $this->product->title;
         $this->description = $this->product->description;
-        $this->is_active   = (bool) $this->product->is_active;
+        $this->is_active = (bool) $this->product->is_active;
     }
 
     private function updateProduct(): void
@@ -92,10 +94,10 @@ class EditProduct extends Component
     private function prepareUpdateData(): array
     {
         $updateData = [
-            'title'       => $this->title,
+            'title' => $this->title,
             'description' => $this->description,
-            'is_active'   => $this->is_active,
-            'slug'        => $this->productServices->generateSlug($this->title),
+            'is_active' => $this->is_active,
+            'slug' => $this->productServices->generateSlug($this->title),
         ];
 
         if ($this->hasNewCover()) {

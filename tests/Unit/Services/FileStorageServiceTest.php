@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 uses(Tests\TestCase::class);
 
 beforeEach(function () {
-    $this->fileStorageService = new FileStorageService();
+    $this->fileStorageService = new FileStorageService;
     Storage::fake('public');
 });
 
@@ -18,7 +18,7 @@ test('storeFile correctly stores file and returns path', function () {
     $filePath = $this->fileStorageService->storeFile($file, $path);
 
     expect($filePath)->toContain($path)
-                     ->and(Storage::disk('public')->exists($filePath))->toBeTrue();
+        ->and(Storage::disk('public')->exists($filePath))->toBeTrue();
 });
 
 test('deleteFile removes existing file and returns true', function () {
@@ -30,7 +30,7 @@ test('deleteFile removes existing file and returns true', function () {
     $result = $this->fileStorageService->deleteFile($filePath);
 
     expect($result)->toBeTrue()
-                   ->and(Storage::disk('public')->exists($filePath))->toBeFalse();
+        ->and(Storage::disk('public')->exists($filePath))->toBeFalse();
 });
 
 test('deleteFile returns false for non-existent file', function () {
@@ -44,7 +44,7 @@ test('fileExists returns correct boolean status', function () {
     $filePath = Storage::disk('public')->putFile('test-dir', $file);
 
     expect($this->fileStorageService->fileExists($filePath))->toBeTrue()
-                                                            ->and($this->fileStorageService->fileExists('non-existent.jpg'))->toBeFalse();
+        ->and($this->fileStorageService->fileExists('non-existent.jpg'))->toBeFalse();
 });
 
 test('getFileSizeInKB returns correct file size', function () {
@@ -60,5 +60,5 @@ test('isFileSizeExceeded returns correct boolean for file size limit', function 
     $largeFile = UploadedFile::fake()->image('large.jpg')->size(600); // 600 KB
 
     expect($this->fileStorageService->isFileSizeExceeded($smallFile, 512))->toBeFalse()
-                                                                          ->and($this->fileStorageService->isFileSizeExceeded($largeFile, 512))->toBeTrue();
+        ->and($this->fileStorageService->isFileSizeExceeded($largeFile, 512))->toBeTrue();
 });

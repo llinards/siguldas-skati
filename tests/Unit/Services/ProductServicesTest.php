@@ -13,7 +13,7 @@ uses(RefreshDatabase::class);
 
 beforeEach(function () {
     $this->fileStorageService = $this->mock(FileStorageService::class);
-    $this->productServices    = new ProductServices($this->fileStorageService);
+    $this->productServices = new ProductServices($this->fileStorageService);
     Storage::fake('public');
 });
 
@@ -24,14 +24,14 @@ test('getAllActiveProducts returns only active products with proper structure', 
     $activeProducts = $this->productServices->getAllActiveProducts();
 
     expect($activeProducts)->toHaveCount(3)
-                           ->and($activeProducts->every(fn($product) => (bool) $product->is_active))->toBeTrue();
+        ->and($activeProducts->every(fn ($product) => (bool) $product->is_active))->toBeTrue();
 
     // Verify product structure
     $activeProducts->each(function ($product) {
         expect($product)->toBeInstanceOf(Product::class)
-                        ->and($product->title)->toBeString()
-                        ->and($product->slug)->toBeString()
-                        ->and($product->description)->toBeString();
+            ->and($product->title)->toBeString()
+            ->and($product->slug)->toBeString()
+            ->and($product->description)->toBeString();
     });
 });
 
@@ -40,11 +40,11 @@ test('getAllOtherProducts excludes specified product and returns only active pro
     Product::factory()->count(2)->create(['is_active' => false]);
 
     $excludedProduct = $products->first();
-    $otherProducts   = $this->productServices->getAllOtherProducts($excludedProduct);
+    $otherProducts = $this->productServices->getAllOtherProducts($excludedProduct);
 
     expect($otherProducts)->toHaveCount(4)
-                          ->and($otherProducts->contains('id', $excludedProduct->id))->toBeFalse()
-                          ->and($otherProducts->every(fn($product) => (bool) $product->is_active))->toBeTrue();
+        ->and($otherProducts->contains('id', $excludedProduct->id))->toBeFalse()
+        ->and($otherProducts->every(fn ($product) => (bool) $product->is_active))->toBeTrue();
 });
 
 test('getAllProducts returns all products regardless of status', function () {
@@ -58,14 +58,14 @@ test('getAllProducts returns all products regardless of status', function () {
     // Verify each product has proper structure
     $allProducts->each(function ($product) {
         expect($product)->toBeInstanceOf(Product::class)
-                        ->and($product->description)->toBeString();
+            ->and($product->description)->toBeString();
     });
 });
 
 test('returns empty collections when no products match criteria', function () {
     // Test with no products at all
     expect($this->productServices->getAllActiveProducts())->toBeEmpty()
-                                                          ->and($this->productServices->getAllProducts())->toBeEmpty();
+        ->and($this->productServices->getAllProducts())->toBeEmpty();
 
     // Test with only inactive products
     Product::factory()->count(3)->create(['is_active' => false]);
@@ -77,20 +77,20 @@ test('returns empty collections when no products match criteria', function () {
 });
 
 test('getProductById returns existing product with proper structure regardless of status', function () {
-    $activeProduct   = Product::factory()->create(['is_active' => true]);
+    $activeProduct = Product::factory()->create(['is_active' => true]);
     $inactiveProduct = Product::factory()->create(['is_active' => false]);
 
-    $foundActive   = $this->productServices->getProductById($activeProduct->id);
+    $foundActive = $this->productServices->getProductById($activeProduct->id);
     $foundInactive = $this->productServices->getProductById($inactiveProduct->id);
 
     expect($foundActive)->toBeInstanceOf(Product::class)
-                        ->and($foundActive->id)->toBe($activeProduct->id)
-                        ->and($foundActive->is_active)->toBeTrue()
-                        ->and($foundActive->description)->toBeString()
-                        ->and($foundInactive)->toBeInstanceOf(Product::class)
-                        ->and($foundInactive->id)->toBe($inactiveProduct->id)
-                        ->and($foundInactive->is_active)->toBeFalse()
-                        ->and($foundInactive->description)->toBeString();
+        ->and($foundActive->id)->toBe($activeProduct->id)
+        ->and($foundActive->is_active)->toBeTrue()
+        ->and($foundActive->description)->toBeString()
+        ->and($foundInactive)->toBeInstanceOf(Product::class)
+        ->and($foundInactive->id)->toBe($inactiveProduct->id)
+        ->and($foundInactive->is_active)->toBeFalse()
+        ->and($foundInactive->description)->toBeString();
 });
 
 test('getProductById returns null for non-existent product', function () {
@@ -105,12 +105,12 @@ test('deleteProduct successfully removes existing product and its cover from dat
     // Create some product images
     $productImage1 = ProductImage::factory()->create([
         'product_id' => $product->id,
-        'filename'   => 'product-images/gallery/image1.jpg',
+        'filename' => 'product-images/gallery/image1.jpg',
     ]);
 
     $productImage2 = ProductImage::factory()->create([
         'product_id' => $product->id,
-        'filename'   => 'product-images/gallery/image2.jpg',
+        'filename' => 'product-images/gallery/image2.jpg',
     ]);
 
     // Mock file storage service to expect deletion of cover image
@@ -136,22 +136,22 @@ test('deleteProduct successfully removes existing product and its cover from dat
     $result = $this->productServices->deleteProduct($product);
 
     expect($result)->toBeTrue()
-                   ->and(Product::find($product->id))->toBeNull();
+        ->and(Product::find($product->id))->toBeNull();
 });
 
 test('toggleProductStatus switches between active and inactive states', function () {
-    $activeProduct   = Product::factory()->create(['is_active' => true]);
+    $activeProduct = Product::factory()->create(['is_active' => true]);
     $inactiveProduct = Product::factory()->create(['is_active' => false]);
 
     // Test deactivating active product
     $result1 = $this->productServices->toggleProductStatus($activeProduct->id);
     expect($result1)->toBeTrue()
-                    ->and($activeProduct->fresh()->is_active)->toBeFalse();
+        ->and($activeProduct->fresh()->is_active)->toBeFalse();
 
     // Test activating inactive product
     $result2 = $this->productServices->toggleProductStatus($inactiveProduct->id);
     expect($result2)->toBeTrue()
-                    ->and($inactiveProduct->fresh()->is_active)->toBeTrue();
+        ->and($inactiveProduct->fresh()->is_active)->toBeTrue();
 });
 
 test('toggleProductStatus returns false for non-existent product', function () {
@@ -160,12 +160,12 @@ test('toggleProductStatus returns false for non-existent product', function () {
 
 test('generateSlug creates proper URL-friendly slugs from various title formats', function () {
     $testCases = [
-        'Test Product Title'                       => 'test-product-title',
+        'Test Product Title' => 'test-product-title',
         'Test Product! With @Special# Characters$' => 'test-product-with-at-special-characters',
-        'Produkts ar latviešu simboliem āēīōū'     => 'produkts-ar-latviesu-simboliem-aeiou',
-        'Multiple   Spaces    Between Words'       => 'multiple-spaces-between-words',
-        'UPPERCASE TITLE'                          => 'uppercase-title',
-        'Mixed CaSe TiTlE'                         => 'mixed-case-title',
+        'Produkts ar latviešu simboliem āēīōū' => 'produkts-ar-latviesu-simboliem-aeiou',
+        'Multiple   Spaces    Between Words' => 'multiple-spaces-between-words',
+        'UPPERCASE TITLE' => 'uppercase-title',
+        'Mixed CaSe TiTlE' => 'mixed-case-title',
     ];
 
     foreach ($testCases as $input => $expected) {
@@ -175,46 +175,46 @@ test('generateSlug creates proper URL-friendly slugs from various title formats'
 
 test('createProduct successfully creates a product with provided data', function () {
     $productData = [
-        'title'       => 'Test Product',
+        'title' => 'Test Product',
         'description' => 'Test Description',
-        'is_active'   => true,
-        'slug'        => 'test-product',
-        'cover'       => 'product-images/test.jpg',
+        'is_active' => true,
+        'slug' => 'test-product',
+        'cover' => 'product-images/test.jpg',
     ];
 
     $product = $this->productServices->createProduct($productData);
 
     expect($product)->toBeInstanceOf(Product::class)
-                    ->and($product->title)->toBe('Test Product')
-                    ->and($product->description)->toBe('Test Description')
-                    ->and($product->is_active)->toBeTrue()
-                    ->and($product->slug)->toBe('test-product')
-                    ->and($product->cover)->toBe('product-images/test.jpg');
+        ->and($product->title)->toBe('Test Product')
+        ->and($product->description)->toBe('Test Description')
+        ->and($product->is_active)->toBeTrue()
+        ->and($product->slug)->toBe('test-product')
+        ->and($product->cover)->toBe('product-images/test.jpg');
 });
 
 test('updateProduct successfully updates an existing product', function () {
     $product = Product::factory()->create([
-        'title'       => 'Original Title',
+        'title' => 'Original Title',
         'description' => 'Original Description',
-        'is_active'   => false,
+        'is_active' => false,
     ]);
 
     $updateData = [
-        'title'       => 'Updated Title',
+        'title' => 'Updated Title',
         'description' => 'Updated Description',
-        'is_active'   => true,
+        'is_active' => true,
     ];
 
     $result = $this->productServices->updateProduct($product, $updateData);
 
     expect($result)->toBeTrue()
-                   ->and($product->fresh()->title)->toBe('Updated Title')
-                   ->and($product->fresh()->description)->toBe('Updated Description')
-                   ->and($product->fresh()->is_active)->toBeTrue();
+        ->and($product->fresh()->title)->toBe('Updated Title')
+        ->and($product->fresh()->description)->toBe('Updated Description')
+        ->and($product->fresh()->is_active)->toBeTrue();
 });
 
 test('storeProductCover stores a product cover image', function () {
-    $file         = UploadedFile::fake()->image('product.jpg');
+    $file = UploadedFile::fake()->image('product.jpg');
     $expectedPath = 'product-images/stored-image.jpg';
 
     $this->fileStorageService
@@ -233,7 +233,7 @@ test('updateProductCover deletes old cover and stores new one', function () {
         'cover' => 'product-images/old-image.jpg',
     ]);
 
-    $file         = UploadedFile::fake()->image('new-product.jpg');
+    $file = UploadedFile::fake()->image('new-product.jpg');
     $expectedPath = 'product-images/new-image.jpg';
 
     $this->fileStorageService
@@ -254,8 +254,8 @@ test('updateProductCover deletes old cover and stores new one', function () {
 });
 
 test('storeProductGalleryImage stores image and creates database record', function () {
-    $product      = Product::factory()->create();
-    $file         = UploadedFile::fake()->image('gallery.jpg');
+    $product = Product::factory()->create();
+    $file = UploadedFile::fake()->image('gallery.jpg');
     $expectedPath = 'product-images/gallery/stored-image.jpg';
 
     $this->fileStorageService
@@ -267,15 +267,15 @@ test('storeProductGalleryImage stores image and creates database record', functi
     $productImage = $this->productServices->storeProductGalleryImage($product->id, $file);
 
     expect($productImage)->toBeInstanceOf(ProductImage::class)
-                         ->and($productImage->product_id)->toBe($product->id)
-                         ->and($productImage->filename)->toBe($expectedPath);
+        ->and($productImage->product_id)->toBe($product->id)
+        ->and($productImage->filename)->toBe($expectedPath);
 });
 
 test('deleteProductImage deletes image file and database record', function () {
-    $product      = Product::factory()->create();
+    $product = Product::factory()->create();
     $productImage = ProductImage::create([
         'product_id' => $product->id,
-        'filename'   => 'product-images/gallery/image-to-delete.jpg',
+        'filename' => 'product-images/gallery/image-to-delete.jpg',
     ]);
 
     $this->fileStorageService
@@ -287,7 +287,7 @@ test('deleteProductImage deletes image file and database record', function () {
     $result = $this->productServices->deleteProductImage($productImage->id);
 
     expect($result)->toBeTrue()
-                   ->and(ProductImage::find($productImage->id))->toBeNull();
+        ->and(ProductImage::find($productImage->id))->toBeNull();
 });
 
 test('updateProductOrder successfully updates product order values', function () {
@@ -304,8 +304,8 @@ test('updateProductOrder successfully updates product order values', function ()
     $this->productServices->updateProductOrder($orderData);
 
     expect($product1->fresh()->order)->toBe(3)
-                                     ->and($product2->fresh()->order)->toBe(1)
-                                     ->and($product3->fresh()->order)->toBe(2);
+        ->and($product2->fresh()->order)->toBe(1)
+        ->and($product3->fresh()->order)->toBe(2);
 });
 
 test('updateImageOrder successfully updates order of product images', function () {
@@ -313,17 +313,17 @@ test('updateImageOrder successfully updates order of product images', function (
 
     $image1 = ProductImage::factory()->create([
         'product_id' => $product->id,
-        'order'      => 1,
+        'order' => 1,
     ]);
 
     $image2 = ProductImage::factory()->create([
         'product_id' => $product->id,
-        'order'      => 2,
+        'order' => 2,
     ]);
 
     $image3 = ProductImage::factory()->create([
         'product_id' => $product->id,
-        'order'      => 3,
+        'order' => 3,
     ]);
 
     $orderData = [
@@ -335,8 +335,8 @@ test('updateImageOrder successfully updates order of product images', function (
     $this->productServices->updateImageOrder($orderData);
 
     expect($image1->fresh()->order)->toBe(3)
-                                   ->and($image2->fresh()->order)->toBe(1)
-                                   ->and($image3->fresh()->order)->toBe(2);
+        ->and($image2->fresh()->order)->toBe(1)
+        ->and($image3->fresh()->order)->toBe(2);
 });
 
 test('updateImageOrder throws exception for non-existent image', function () {
@@ -344,6 +344,6 @@ test('updateImageOrder throws exception for non-existent image', function () {
         ['value' => 999, 'order' => 1],
     ];
 
-    expect(fn() => $this->productServices->updateImageOrder($orderData))
+    expect(fn () => $this->productServices->updateImageOrder($orderData))
         ->toThrow(\Illuminate\Database\Eloquent\ModelNotFoundException::class);
 });

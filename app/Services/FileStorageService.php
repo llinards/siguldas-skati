@@ -8,8 +8,11 @@ use Illuminate\Support\Facades\Storage;
 class FileStorageService
 {
     private const DEFAULT_DISK = 'public';
+
     public const PRODUCT_IMAGE_PATH = 'product-images';
+
     public const PRODUCT_GALLERY_PATH = 'product-images/gallery';
+
     public const MAX_FILE_SIZE_KB = 512;
 
     public function storeFile(UploadedFile $file, string $path, string $disk = self::DEFAULT_DISK): string

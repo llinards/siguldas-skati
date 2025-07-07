@@ -7,20 +7,20 @@ use Illuminate\View\View;
 
 class HomeController extends Controller
 {
-  protected ProductServices $productServices;
+    protected ProductServices $productServices;
 
-  public function __construct(ProductServices $productServices)
-  {
-    $this->productServices = $productServices;
-  }
+    public function __construct(ProductServices $productServices)
+    {
+        $this->productServices = $productServices;
+    }
 
-  /**
-   * Handle the incoming request.
-   */
-  public function __invoke(): View
-  {
-    $products = $this->productServices->getAllActiveProducts();
+    /**
+     * Handle the incoming request.
+     */
+    public function __invoke(): View
+    {
+        $products = $this->productServices->getAllActiveProducts();
 
-    return view('home', compact('products'));
-  }
+        return view('home', compact('products'));
+    }
 }
