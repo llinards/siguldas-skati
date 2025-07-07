@@ -10,7 +10,7 @@ use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class ProductGallery extends Component
+class ProductImages extends Component
 {
     use WithFileUploads;
 
@@ -123,7 +123,7 @@ class ProductGallery extends Component
 
     public function render(): View
     {
-        return view('livewire.admin.product.product-gallery')
+        return view('livewire.admin.product.product-images')
             ->layout('layouts.admin.app');
     }
 

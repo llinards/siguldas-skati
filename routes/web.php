@@ -5,7 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Admin\Product\AddProduct;
 use App\Livewire\Admin\Product\EditProduct;
-use App\Livewire\Admin\Product\ProductGallery;
+use App\Livewire\Admin\Product\ProductImages;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -48,7 +48,7 @@ Route::group(
                 })->name('dashboard');
                 Route::get('/product/add', AddProduct::class)->name('product.add');
                 Route::get('/product/{product:id}/edit', EditProduct::class)->name('product.edit');
-                Route::get('/product/{product:id}/gallery/add', ProductGallery::class)->name('product.gallery.add');
+                Route::get('/product/{product:id}/images', ProductImages::class)->name('product.images');
             });
         });
 

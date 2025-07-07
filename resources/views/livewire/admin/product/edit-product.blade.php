@@ -6,7 +6,7 @@
                 <h2 class="mb-3 leading-none text-h-sm-mob lg:text-h-mob">{{ __('Rediģēt') }}
                     - {{$product->title}}</h2>
                 <div>
-                    <a href="{{route('product.gallery.add', $product)}}"
+                    <a href="{{route('product.images', $product)}}"
                        class="rounded-md bg-white py-1.5 hover:underline text-gray-500 sm:text-sm/6">
                         <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
