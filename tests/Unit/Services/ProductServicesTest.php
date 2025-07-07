@@ -1,14 +1,20 @@
 <?php
 
 use App\Models\Product;
+use App\Models\ProductImage;
+use App\Services\FileStorageService;
 use App\Services\ProductServices;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 uses(Tests\TestCase::class);
 uses(RefreshDatabase::class);
 
 beforeEach(function () {
-    $this->productServices = new ProductServices();
+    $this->fileStorageService = $this->mock(FileStorageService::class);
+    $this->productServices    = new ProductServices($this->fileStorageService);
+    Storage::fake('public');
 });
 
 test('getAllActiveProducts returns only active products with proper structure', function () {
@@ -91,8 +97,16 @@ test('getProductById returns null for non-existent product', function () {
     expect($this->productServices->getProductById(999))->toBeNull();
 });
 
-test('deleteProduct successfully removes existing product from database', function () {
-    $product = Product::factory()->create();
+test('deleteProduct successfully removes existing product and its cover from database', function () {
+    $product = Product::factory()->create([
+        'cover' => 'product-images/test.jpg',
+    ]);
+
+    $this->fileStorageService
+        ->shouldReceive('deleteFile')
+        ->once()
+        ->with($product->cover)
+        ->andReturn(true);
 
     $result = $this->productServices->deleteProduct($product);
 
@@ -132,4 +146,139 @@ test('generateSlug creates proper URL-friendly slugs from various title formats'
     foreach ($testCases as $input => $expected) {
         expect($this->productServices->generateSlug($input))->toBe($expected);
     }
+});
+
+test('createProduct successfully creates a product with provided data', function () {
+    $productData = [
+        'title'       => 'Test Product',
+        'description' => 'Test Description',
+        'is_active'   => true,
+        'slug'        => 'test-product',
+        'cover'       => 'product-images/test.jpg',
+    ];
+
+    $product = $this->productServices->createProduct($productData);
+
+    expect($product)->toBeInstanceOf(Product::class)
+                    ->and($product->title)->toBe('Test Product')
+                    ->and($product->description)->toBe('Test Description')
+                    ->and($product->is_active)->toBeTrue()
+                    ->and($product->slug)->toBe('test-product')
+                    ->and($product->cover)->toBe('product-images/test.jpg');
+});
+
+test('updateProduct successfully updates an existing product', function () {
+    $product = Product::factory()->create([
+        'title'       => 'Original Title',
+        'description' => 'Original Description',
+        'is_active'   => false,
+    ]);
+
+    $updateData = [
+        'title'       => 'Updated Title',
+        'description' => 'Updated Description',
+        'is_active'   => true,
+    ];
+
+    $result = $this->productServices->updateProduct($product, $updateData);
+
+    expect($result)->toBeTrue()
+                   ->and($product->fresh()->title)->toBe('Updated Title')
+                   ->and($product->fresh()->description)->toBe('Updated Description')
+                   ->and($product->fresh()->is_active)->toBeTrue();
+});
+
+test('storeProductCover stores a product cover image', function () {
+    $file         = UploadedFile::fake()->image('product.jpg');
+    $expectedPath = 'product-images/stored-image.jpg';
+
+    $this->fileStorageService
+        ->shouldReceive('storeFile')
+        ->once()
+        ->with($file, FileStorageService::PRODUCT_IMAGE_PATH)
+        ->andReturn($expectedPath);
+
+    $result = $this->productServices->storeProductCover($file);
+
+    expect($result)->toBe($expectedPath);
+});
+
+test('updateProductCover deletes old cover and stores new one', function () {
+    $product = Product::factory()->create([
+        'cover' => 'product-images/old-image.jpg',
+    ]);
+
+    $file         = UploadedFile::fake()->image('new-product.jpg');
+    $expectedPath = 'product-images/new-image.jpg';
+
+    $this->fileStorageService
+        ->shouldReceive('deleteFile')
+        ->once()
+        ->with($product->cover)
+        ->andReturn(true);
+
+    $this->fileStorageService
+        ->shouldReceive('storeFile')
+        ->once()
+        ->with($file, FileStorageService::PRODUCT_IMAGE_PATH)
+        ->andReturn($expectedPath);
+
+    $result = $this->productServices->updateProductCover($product, $file);
+
+    expect($result)->toBe($expectedPath);
+});
+
+test('storeProductGalleryImage stores image and creates database record', function () {
+    $product      = Product::factory()->create();
+    $file         = UploadedFile::fake()->image('gallery.jpg');
+    $expectedPath = 'product-images/gallery/stored-image.jpg';
+
+    $this->fileStorageService
+        ->shouldReceive('storeFile')
+        ->once()
+        ->with($file, FileStorageService::PRODUCT_GALLERY_PATH)
+        ->andReturn($expectedPath);
+
+    $productImage = $this->productServices->storeProductGalleryImage($product->id, $file);
+
+    expect($productImage)->toBeInstanceOf(ProductImage::class)
+                         ->and($productImage->product_id)->toBe($product->id)
+                         ->and($productImage->filename)->toBe($expectedPath);
+});
+
+test('deleteProductImage deletes image file and database record', function () {
+    $product      = Product::factory()->create();
+    $productImage = ProductImage::create([
+        'product_id' => $product->id,
+        'filename'   => 'product-images/gallery/image-to-delete.jpg',
+    ]);
+
+    $this->fileStorageService
+        ->shouldReceive('deleteFile')
+        ->once()
+        ->with($productImage->filename)
+        ->andReturn(true);
+
+    $result = $this->productServices->deleteProductImage($productImage->id);
+
+    expect($result)->toBeTrue()
+                   ->and(ProductImage::find($productImage->id))->toBeNull();
+});
+
+test('updateProductOrder successfully updates product order values', function () {
+    $product1 = Product::factory()->create(['order' => 1]);
+    $product2 = Product::factory()->create(['order' => 2]);
+    $product3 = Product::factory()->create(['order' => 3]);
+
+    $orderData = [
+        ['value' => $product1->id, 'order' => 3],
+        ['value' => $product2->id, 'order' => 1],
+        ['value' => $product3->id, 'order' => 2],
+    ];
+
+    $this->productServices->updateProductOrder($orderData);
+
+    expect($product1->fresh()->order)->toBe(3)
+                                     ->and($product2->fresh()->order)->toBe(1)
+                                     ->and($product3->fresh()->order)->toBe(2);
 });

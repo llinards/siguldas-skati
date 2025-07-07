@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Admin\Product;
 
-use App\Models\Product;
+use App\Services\ErrorLogService;
+use App\Services\FlashMessageService;
 use App\Services\ProductServices;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -28,12 +28,18 @@ class AddProduct extends Component
     public bool $is_active = false;
 
     private ProductServices $productServices;
-    private const STORAGE_PATH = 'product-images';
+    private FlashMessageService $flashMessageService;
+    private ErrorLogService $errorLogService;
     private const SUCCESS_ROUTE = 'dashboard';
 
-    public function boot(ProductServices $productServices): void
-    {
-        $this->productServices = $productServices;
+    public function boot(
+        ProductServices $productServices,
+        FlashMessageService $flashMessageService,
+        ErrorLogService $errorLogService
+    ): void {
+        $this->productServices     = $productServices;
+        $this->flashMessageService = $flashMessageService;
+        $this->errorLogService     = $errorLogService;
     }
 
     public function store(): void
@@ -42,11 +48,11 @@ class AddProduct extends Component
 
         try {
             $this->createProduct();
-            $this->flashSuccess(__('Produkts pievienots.'));
+            $this->flashMessageService->success(__('Produkts pievienots.'));
             $this->redirectToSuccess();
         } catch (\Exception $e) {
-            $this->logError('Failed to store product.', $e);
-            $this->flashError(__('Radās kļūda. Lūdzu, mēģiniet vēlreiz.'));
+            $this->errorLogService->logError('Failed to store product.', $e, ['title' => $this->title]);
+            $this->flashMessageService->error(__('Radās kļūda. Lūdzu, mēģiniet vēlreiz.'));
         }
     }
 
@@ -59,7 +65,7 @@ class AddProduct extends Component
     private function createProduct(): void
     {
         $productData = $this->prepareProductData();
-        Product::create($productData);
+        $this->productServices->createProduct($productData);
     }
 
     private function prepareProductData(): array
@@ -68,37 +74,9 @@ class AddProduct extends Component
             'title'       => $this->title,
             'description' => $this->description,
             'is_active'   => $this->is_active,
-            'cover'       => $this->storeCoverImage(),
-            'slug'        => $this->generateSlug(),
+            'cover'       => $this->productServices->storeProductCover($this->cover),
+            'slug'        => $this->productServices->generateSlug($this->title),
         ];
-    }
-
-    private function storeCoverImage(): string
-    {
-        return $this->cover->storePublicly(self::STORAGE_PATH, 'public');
-    }
-
-    private function generateSlug(): string
-    {
-        return $this->productServices->generateSlug($this->title);
-    }
-
-    private function flashSuccess(string $message): void
-    {
-        session()->flash('message', $message);
-    }
-
-    private function flashError(string $message): void
-    {
-        session()->flash('error', $message);
-    }
-
-    private function logError(string $message, \Exception $e): void
-    {
-        Log::error($message, [
-            'error' => $e->getMessage(),
-            'title' => $this->title,
-        ]);
     }
 
     private function redirectToSuccess(): void

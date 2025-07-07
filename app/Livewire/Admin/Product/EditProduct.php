@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Admin\Product;
 
+use App\Services\ErrorLogService;
+use App\Services\FlashMessageService;
 use App\Services\ProductServices;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -30,11 +30,17 @@ class EditProduct extends Component
     public bool $is_active = false;
 
     private ProductServices $productServices;
-    private const STORAGE_PATH = 'product-images';
+    private FlashMessageService $flashMessageService;
+    private ErrorLogService $errorLogService;
 
-    public function boot(ProductServices $productServices): void
-    {
-        $this->productServices = $productServices;
+    public function boot(
+        ProductServices $productServices,
+        FlashMessageService $flashMessageService,
+        ErrorLogService $errorLogService
+    ): void {
+        $this->productServices     = $productServices;
+        $this->flashMessageService = $flashMessageService;
+        $this->errorLogService     = $errorLogService;
     }
 
     public function mount($product): void
@@ -49,10 +55,13 @@ class EditProduct extends Component
 
         try {
             $this->updateProduct();
-            $this->flashSuccess(__('Produkts atjaunots.'));
+            $this->flashMessageService->success(__('Produkts atjaunots.'));
         } catch (\Exception $e) {
-            $this->logError('Failed to update product.', $e);
-            $this->flashError(__('Radās kļūda. Lūdzu, mēģiniet vēlreiz.'));
+            $this->errorLogService->logError('Failed to update product.', $e, [
+                'product_id' => $this->product->id,
+                'title'      => $this->title,
+            ]);
+            $this->flashMessageService->error(__('Radās kļūda. Lūdzu, mēģiniet vēlreiz.'));
         }
     }
 
@@ -77,7 +86,7 @@ class EditProduct extends Component
     private function updateProduct(): void
     {
         $updateData = $this->prepareUpdateData();
-        $this->product->update($updateData);
+        $this->productServices->updateProduct($this->product, $updateData);
     }
 
     private function prepareUpdateData(): array
@@ -86,12 +95,11 @@ class EditProduct extends Component
             'title'       => $this->title,
             'description' => $this->description,
             'is_active'   => $this->is_active,
-            'slug'        => $this->generateSlug(),
+            'slug'        => $this->productServices->generateSlug($this->title),
         ];
 
         if ($this->hasNewCover()) {
-            $this->removeOldCover();
-            $updateData['cover'] = $this->storeNewCover();
+            $updateData['cover'] = $this->productServices->updateProductCover($this->product, $this->cover);
         }
 
         return $updateData;
@@ -100,46 +108,5 @@ class EditProduct extends Component
     private function hasNewCover(): bool
     {
         return $this->cover !== null;
-    }
-
-    private function removeOldCover(): void
-    {
-        if ($this->product->cover && $this->coverExistsInStorage()) {
-            Storage::disk('public')->delete($this->product->cover);
-        }
-    }
-
-    private function coverExistsInStorage(): bool
-    {
-        return Storage::disk('public')->exists($this->product->cover);
-    }
-
-    private function storeNewCover(): string
-    {
-        return $this->cover->storePublicly(self::STORAGE_PATH, 'public');
-    }
-
-    private function generateSlug(): string
-    {
-        return $this->productServices->generateSlug($this->title);
-    }
-
-    private function flashSuccess(string $message): void
-    {
-        session()->flash('message', $message);
-    }
-
-    private function flashError(string $message): void
-    {
-        session()->flash('error', $message);
-    }
-
-    private function logError(string $message, \Exception $e): void
-    {
-        Log::error($message, [
-            'error'      => $e->getMessage(),
-            'product_id' => $this->product->id,
-            'title'      => $this->title,
-        ]);
     }
 }

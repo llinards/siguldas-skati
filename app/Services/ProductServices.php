@@ -3,11 +3,20 @@
 namespace App\Services;
 
 use App\Models\Product;
+use App\Models\ProductImage;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class ProductServices
 {
+    private FileStorageService $fileStorageService;
+
+    public function __construct(FileStorageService $fileStorageService)
+    {
+        $this->fileStorageService = $fileStorageService;
+    }
+
     public function getAllActiveProducts(): Collection
     {
         return Product::all()->where('is_active', 1);
@@ -32,6 +41,10 @@ class ProductServices
 
     public function deleteProduct(Product $product): bool
     {
+        if ($product->cover) {
+            $this->fileStorageService->deleteFile($product->cover);
+        }
+
         return $product->delete();
     }
 
@@ -39,15 +52,71 @@ class ProductServices
     {
         $product = Product::find($productId);
 
-        if ( ! $product) {
+        if (!$product) {
             return false;
         }
 
-        return $product->update(['is_active' => ! $product->is_active]);
+        return $product->update(['is_active' => !$product->is_active]);
     }
 
     public function generateSlug(string $title): string
     {
         return Str::slug($title);
+    }
+
+    public function createProduct(array $productData): Product
+    {
+        return Product::create($productData);
+    }
+
+    public function updateProduct(Product $product, array $productData): bool
+    {
+        return $product->update($productData);
+    }
+
+    public function storeProductCover(UploadedFile $file): string
+    {
+        return $this->fileStorageService->storeFile(
+            $file, 
+            FileStorageService::PRODUCT_IMAGE_PATH
+        );
+    }
+
+    public function updateProductCover(Product $product, UploadedFile $file): string
+    {
+        if ($product->cover) {
+            $this->fileStorageService->deleteFile($product->cover);
+        }
+
+        return $this->storeProductCover($file);
+    }
+
+    public function storeProductGalleryImage(int $productId, UploadedFile $file): ProductImage
+    {
+        $path = $this->fileStorageService->storeFile(
+            $file, 
+            FileStorageService::PRODUCT_GALLERY_PATH
+        );
+
+        return ProductImage::create([
+            'product_id' => $productId,
+            'filename' => $path,
+        ]);
+    }
+
+    public function deleteProductImage(int $imageId): bool
+    {
+        $image = ProductImage::findOrFail($imageId);
+        $this->fileStorageService->deleteFile($image->filename);
+
+        return $image->delete();
+    }
+
+    public function updateProductOrder(array $products): void
+    {
+        foreach ($products as $productData) {
+            Product::findOrFail($productData['value'])
+                   ->update(['order' => $productData['order']]);
+        }
     }
 }
