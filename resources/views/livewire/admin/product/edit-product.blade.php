@@ -5,8 +5,17 @@
             <div class="border-b border-gray-900/10 pb-12">
                 <h2 class="mb-3 leading-none text-h-sm-mob lg:text-h-mob">{{ __('Rediģēt') }}
                     - {{$product->title}}</h2>
-
-                <div class="mt-10">
+                <div>
+                    <a href="{{route('product.gallery.add', $product)}}"
+                       class="rounded-md bg-white py-1.5 hover:underline text-gray-500 sm:text-sm/6">
+                        <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                        </svg>
+                        Galerija
+                    </a>
+                </div>
+                <div class="mt-5">
                     <div>
                         <label for="title" class="block text-sm/6 font-medium text-gray-900">Nosaukums</label>
                         <div class="mt-2">
