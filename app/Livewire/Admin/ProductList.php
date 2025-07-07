@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Models\Product;
 use App\Services\ProductServices;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -14,76 +15,139 @@ class ProductList extends Component
 {
     use WithPagination;
 
-    protected ProductServices $productServices;
-
-    protected Product $product;
+    private ProductServices $productServices;
 
     public function boot(ProductServices $productServices): void
     {
         $this->productServices = $productServices;
     }
 
-    public function deleteProduct($productId): void
+    public function deleteProduct(int $productId): void
     {
         try {
-            $this->product = $this->productServices->getProductById($productId);
-            if (Storage::disk('public')->exists($this->product->cover)) {
-                Storage::disk('public')->delete($this->product->cover);
+            $product = $this->findProduct($productId);
+
+            if ( ! $product) {
+                $this->flashError(__('Produkts nav atrasts vai nevarēja tikt dzēsts.'));
+
+                return;
             }
-            if ($this->productServices->deleteProduct($this->product)) {
-                session()->flash('message', __('Produkts veiksmīgi dzēsts.'));
-            } else {
-                session()->flash('error', __('Produkts nav atrasts vai nevarēja tikt dzēsts.'));
-            }
+
+            $this->deleteProductWithCover($product);
+            $this->flashSuccess(__('Produkts veiksmīgi dzēsts.'));
         } catch (\Exception $e) {
-            Log::error('Failed to delete product', [
-                'product_id' => $this->product->id,
-                'error'      => $e->getMessage(),
-            ]);
-            session()->flash('error', __('Dzēšot produktu, radās kļūda. Lūdzu, mēģiniet vēlreiz.'));
+            $this->logError('Failed to delete product', $e, $productId);
+            $this->flashError(__('Dzēšot produktu, radās kļūda. Lūdzu, mēģiniet vēlreiz.'));
         }
     }
 
-    public function toggleActive($productId): void
+    public function toggleActive(int $productId): void
     {
         try {
             if ($this->productServices->toggleProductStatus($productId)) {
-                session()->flash('message', __('Produkta statuss veiksmīgi atjaunināts.'));
+                $this->flashSuccess(__('Produkta statuss veiksmīgi atjaunināts.'));
             } else {
-                session()->flash('error', __('Produkts nav atrasts vai nevarēja tikt atjaunināts.'));
+                $this->flashError(__('Produkts nav atrasts vai nevarēja tikt atjaunināts.'));
             }
         } catch (\Exception $e) {
-            Log::error('Failed to toggle product status', [
-                'product_id' => $productId,
-                'error'      => $e->getMessage(),
-            ]);
-            session()->flash('error', __('Atjauninot produkta statusu, radās kļūda. Lūdzu, mēģiniet vēlreiz.'));
+            $this->logError('Failed to toggle product status', $e, $productId);
+            $this->flashError(__('Atjauninot produkta statusu, radās kļūda. Lūdzu, mēģiniet vēlreiz.'));
         }
     }
 
-
     public function updateProductOrder(array $products): void
     {
-        foreach ($products as $product) {
-            Product::findOrFail($product['value'])->update(['order' => $product['order']]);
+        try {
+            $this->processOrderUpdate($products);
+            $this->flashSuccess(__('Secība atjaunota.'));
+        } catch (\Exception $e) {
+            $this->logError('Failed to update product order', $e);
+            $this->flashError(__('Atjauninot secību, radās kļūda. Lūdzu, mēģiniet vēlreiz.'));
         }
-
-        session()->flash('message', 'Secība atjaunota.');
     }
 
     public function render(): View
     {
         try {
-            $products = $this->productServices->getAllProducts();
+            $products = $this->loadProducts();
 
             return view('livewire.admin.product-list', compact('products'));
         } catch (\Exception $e) {
-            Log::error('Failed to load products list', [
-                'error' => $e->getMessage(),
-            ]);
-            session()->flash('error', __('Ielādējot produktus, radās kļūda. Lūdzu, atsvaidziniet lapu.'));
+            $this->logError('Failed to load products list', $e);
+            $this->flashError(__('Ielādējot produktus, radās kļūda. Lūdzu, atsvaidziniet lapu.'));
 
-            return view('livewire.admin.product-list', compact('products'));
+            return view('livewire.admin.product-list', [
+                'products' => collect([]),
+            ]);
         }
+    }
+
+    private function findProduct(int $productId): ?Product
+    {
+        return $this->productServices->getProductById($productId);
+    }
+
+    private function deleteProductWithCover(Product $product): void
+    {
+        $this->deleteCoverImage($product);
+        $this->deleteProductRecord($product);
+    }
+
+    private function deleteCoverImage(Product $product): void
+    {
+        if ($product->cover && $this->coverExists($product->cover)) {
+            Storage::disk('public')->delete($product->cover);
+        }
+    }
+
+    private function coverExists(string $coverPath): bool
+    {
+        return Storage::disk('public')->exists($coverPath);
+    }
+
+    private function deleteProductRecord(Product $product): bool
+    {
+        return $this->productServices->deleteProduct($product);
+    }
+
+    private function processOrderUpdate(array $products): void
+    {
+        foreach ($products as $productData) {
+            $this->updateSingleProductOrder($productData);
+        }
+    }
+
+    private function updateSingleProductOrder(array $productData): void
+    {
+        Product::findOrFail($productData['value'])
+               ->update(['order' => $productData['order']]);
+    }
+
+    private function loadProducts(): Collection
+    {
+        return $this->productServices->getAllProducts();
+    }
+
+    private function flashSuccess(string $message): void
+    {
+        session()->flash('message', $message);
+    }
+
+    private function flashError(string $message): void
+    {
+        session()->flash('error', $message);
+    }
+
+    private function logError(string $message, \Exception $e, ?int $productId = null): void
+    {
+        $context = [
+            'error' => $e->getMessage(),
+        ];
+
+        if ($productId) {
+            $context['product_id'] = $productId;
+        }
+
+        Log::error($message, $context);
     }
 }

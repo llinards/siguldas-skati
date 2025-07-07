@@ -109,17 +109,6 @@ test('updates product order correctly and shows success message', function () {
                                      ->and($product3->fresh()->order)->toBe(1);
 });
 
-test('throws exception when updating order with non-existent product', function () {
-    $invalidProducts = [
-        ['value' => 999, 'order' => 1],
-    ];
-
-    expect(function () use ($invalidProducts) {
-        Livewire::test(ProductList::class)
-                ->call('updateProductOrder', $invalidProducts);
-    })->toThrow(Illuminate\Database\Eloquent\ModelNotFoundException::class);
-});
-
 test('refreshes product list after performing actions', function () {
     Product::factory()->count(3)->create(['is_active' => true]);
     $productToDelete = Product::factory()->create(['is_active' => false]);

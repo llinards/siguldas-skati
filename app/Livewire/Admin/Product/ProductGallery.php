@@ -17,6 +17,11 @@ class ProductGallery extends Component
     public $product;
     public array $images = [];
 
+    private ProductServices $productServices;
+    private const MAX_FILE_SIZE_KB = 512;
+    private const MAX_FILE_SIZE_BYTES = self::MAX_FILE_SIZE_KB * 1024;
+    private const STORAGE_PATH = 'product-images/gallery';
+
     public function boot(ProductServices $productServices): void
     {
         $this->productServices = $productServices;
@@ -27,19 +32,16 @@ class ProductGallery extends Component
         $this->product = $this->productServices->getProductById($product);
     }
 
-    public function isImageOversized($index): bool
+    public function isImageOversized(int $index): bool
     {
         if ( ! isset($this->images[$index])) {
             return false;
         }
 
-        $image          = $this->images[$index];
-        $maxSizeInBytes = 512 * 1024;
-
-        return $image->getSize() > $maxSizeInBytes;
+        return $this->images[$index]->getSize() > self::MAX_FILE_SIZE_BYTES;
     }
 
-    public function getImageSizeInKB($index): int
+    public function getImageSizeInKB(int $index): int
     {
         if ( ! isset($this->images[$index])) {
             return 0;
@@ -50,16 +52,14 @@ class ProductGallery extends Component
 
     public function updatedImages(): void
     {
-        $oversizedCount = 0;
-        foreach ($this->images as $index => $image) {
-            if ($this->isImageOversized($index)) {
-                $oversizedCount++;
-            }
-        }
+        $oversizedCount = collect($this->images)
+            ->filter(fn($image, $index) => $this->isImageOversized($index))
+            ->count();
 
         if ($oversizedCount > 0) {
-            session()->flash('error',
-                __('Attēli ar sarkanu apmali pārsniedz 512 KB ierobežojumu un netiks saglabāti.'));
+            $this->flashError(__('Attēli ar sarkanu apmali pārsniedz :size KB ierobežojumu un netiks saglabāti.', [
+                'size' => self::MAX_FILE_SIZE_KB,
+            ]));
         } else {
             session()->forget('error');
         }
@@ -67,57 +67,92 @@ class ProductGallery extends Component
 
     public function store(): void
     {
-        $this->validate([
-            'images'   => 'required|array',
-            'images.*' => 'image|max:512',
-        ], [
-            'images.required' => 'Lūdzu, izvēlies vismaz vienu attēlu.',
-            'images.*.image'  => 'Katram failam jābūt attēlam.',
-            'images.*.max'    => 'Attēls nedrīkst pārsniegt 512 KB.',
-        ]);
+        $this->validateImages();
 
         try {
-            foreach ($this->images as $image) {
-                $path = $image->store('product-images/gallery', 'public');
-
-                ProductImage::create([
-                    'product_id' => $this->product->id,
-                    'filename'   => $path,
-                ]);
-            }
-            $this->images = [];
-            session()->flash('message', __('Galerija veiksmīgi atjaunināta!'));
+            $this->storeImages();
+            $this->resetForm();
+            $this->flashSuccess(__('Galerija veiksmīgi atjaunināta!'));
         } catch (\Exception $e) {
-            Log::error('Failed to save product gallery.', [
-                'error'      => $e->getMessage(),
-                'product_id' => $this->product->id,
-            ]);
-            session()->flash('error', __('Radās kļūda. Lūdzu, mēģiniet vēlreiz.'));
+            $this->logError('Failed to save product gallery.', $e);
+            $this->flashError(__('Radās kļūda. Lūdzu, mēģiniet vēlreiz.'));
         }
     }
 
-    public function removeImage($imageId): void
+    public function removeImage(int $imageId): void
     {
         $image = ProductImage::findOrFail($imageId);
 
-        if (Storage::disk('public')->exists($image->filename)) {
-            Storage::disk('public')->delete($image->filename);
-        }
+        $this->deleteImageFile($image->filename);
         $image->delete();
-        session()->flash('message', __('Attēls dzēsts!'));
+
+        $this->flashSuccess(__('Attēls dzēsts!'));
     }
 
-    public function removeNewImage($index): void
+    public function removeNewImage(int $index): void
     {
         unset($this->images[$index]);
         $this->images = array_values($this->images);
-
-        // Re-check for oversized images after removal
         $this->updatedImages();
     }
 
     public function render(): View
     {
-        return view('livewire.admin.product.product-gallery')->layout('layouts.admin.app');
+        return view('livewire.admin.product.product-gallery')
+            ->layout('layouts.admin.app');
+    }
+
+    private function validateImages(): void
+    {
+        $this->validate([
+            'images'   => 'required|array',
+            'images.*' => 'image|max:'.self::MAX_FILE_SIZE_KB,
+        ], [
+            'images.required' => 'Lūdzu, izvēlies vismaz vienu attēlu.',
+            'images.*.image'  => 'Katram failam jābūt attēlam.',
+            'images.*.max'    => 'Attēls nedrīkst pārsniegt :max KB.',
+        ]);
+    }
+
+    private function storeImages(): void
+    {
+        foreach ($this->images as $image) {
+            $path = $image->store(self::STORAGE_PATH, 'public');
+
+            ProductImage::create([
+                'product_id' => $this->product->id,
+                'filename'   => $path,
+            ]);
+        }
+    }
+
+    private function deleteImageFile(string $filename): void
+    {
+        if (Storage::disk('public')->exists($filename)) {
+            Storage::disk('public')->delete($filename);
+        }
+    }
+
+    private function resetForm(): void
+    {
+        $this->images = [];
+    }
+
+    private function flashSuccess(string $message): void
+    {
+        session()->flash('message', $message);
+    }
+
+    private function flashError(string $message): void
+    {
+        session()->flash('error', $message);
+    }
+
+    private function logError(string $message, \Exception $e): void
+    {
+        Log::error($message, [
+            'error'      => $e->getMessage(),
+            'product_id' => $this->product->id,
+        ]);
     }
 }
