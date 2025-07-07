@@ -15,24 +15,6 @@
                             <x-input-error :messages="$errors->get('title')" class="mt-2"/>
                         </div>
                     </div>
-
-                    <div class="mt-1">
-                        <div class="block mt-4">
-                            <label class="mt-4 self-start flex text-sm text-gray-900 space-x-2 cursor-pointer">
-                        <span class="relative">
-                            <input wire:model="is_active"
-                                   type="checkbox"
-                                   class="peer appearance-none h-5 w-5 border-1 border-ss-dark rounded bg-white checked:bg-ss-dark checked:border-ss-dark transition duration-200">
-                            <svg
-                                class="pointer-events-none absolute left-0 top-0 h-5 w-5 text-white opacity-0 peer-checked:opacity-100 transition-opacity duration-150"
-                                fill="none" viewBox="0 0 20 20" stroke="currentColor" stroke-width="3">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6"/>
-                            </svg>
-                        </span>
-                                <span>{{ __('Rādīt mājas lapā?') }}</span>
-                            </label>
-                        </div>
-                    </div>
                     <div class="mt-5">
                         <label for="cover" class="block text-sm/6 font-medium text-gray-900">{{ __('Attēls') }}</label>
                         <div class="mt-2">

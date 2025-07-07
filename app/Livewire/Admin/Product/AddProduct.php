@@ -24,7 +24,7 @@ class AddProduct extends Component
     #[Validate('image', message: 'Drīkst pievienot tikai vienu bildi.')]
     public $cover;
 
-    public bool $is_active;
+    public bool $is_active = false;
 
     public string $slug;
 
