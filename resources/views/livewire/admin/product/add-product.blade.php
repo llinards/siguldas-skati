@@ -6,9 +6,8 @@
                 <h2 class="text-h-sm-mob lg:text-h-mob mb-3 leading-none">
                     {{ __('Pievienot jaunu māju') }}
                 </h2>
-
-                <div class="mt-10">
-                    <div>
+                <div class="mt-5 flex flex-col sm:flex-row sm:space-x-6">
+                    <div class="sm:flex-1/3">
                         <label for="title" class="block text-sm/6 font-medium text-gray-900">Nosaukums</label>
                         <div class="mt-2">
                             <input
@@ -20,7 +19,7 @@
                             <x-input-error :messages="$errors->get('title')" class="mt-2"/>
                         </div>
                     </div>
-                    <div class="mt-5">
+                    <div class="mt-5 sm:mt-0">
                         <label for="personCount" class="block text-sm/6 font-medium text-gray-900">Cilvēku
                             skaits</label>
                         <div class="mt-2">
@@ -32,11 +31,13 @@
                             <x-input-error :messages="$errors->get('personCount')" class="mt-2"/>
                         </div>
                     </div>
-                    <div class="mt-5">
-                        <label for="cover" class="block text-sm/6 font-medium text-gray-900">
-                            {{ __('Attēls') }}
-                        </label>
-                        <div class="mt-2">
+                </div>
+                <div class="mt-5">
+                    <label for="cover" class="block text-sm/6 font-medium text-gray-900">
+                        {{ __('Attēls') }}
+                    </label>
+                    <div class="mt-2">
+                        <div class="flex flex-col sm:flex-row sm:space-x-6">
                             @if ($cover)
                                 <div class="mb-4">
                                     <img
@@ -46,8 +47,7 @@
                                     />
                                 </div>
                             @endif
-
-                            <div class="flex w-full items-center justify-center">
+                            <div class="mt-5 sm:mt-0 flex w-full items-start justify-center">
                                 <label
                                     for="cover-upload"
                                     class="flex h-32 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 transition-colors duration-200 hover:bg-gray-100"
@@ -142,37 +142,34 @@
                                     />
                                 </label>
                             </div>
-                            <x-input-error :messages="$errors->get('cover')" class="mt-2"/>
                         </div>
+                        <x-input-error :messages="$errors->get('cover')" class="mt-2"/>
                     </div>
-
-                    <div class="mt-5">
-                        <label for="description" class="block text-sm/6 font-medium text-gray-900">Apraksts</label>
-                        <div class="mt-2">
+                </div>
+                <div class="mt-5">
+                    <label for="description" class="block text-sm/6 font-medium text-gray-900">Apraksts</label>
+                    <div class="mt-2">
                             <textarea
                                 rows="3"
                                 wire:model="description"
                                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                             ></textarea>
-                            <x-input-error :messages="$errors->get('description')" class="mt-2"/>
-                        </div>
+                        <x-input-error :messages="$errors->get('description')" class="mt-2"/>
                     </div>
-
-                    <div class="mt-5">
-                        <label for="pricelist" class="block text-sm/6 font-medium text-gray-900">Cenrādis</label>
-                        <div class="mt-2" wire:ignore>
+                </div>
+                <div class="mt-5">
+                    <label for="pricelist" class="block text-sm/6 font-medium text-gray-900">Cenrādis</label>
+                    <div class="mt-2" wire:ignore>
                             <textarea
                                 id="pricelist-editor"
                                 rows="3"
                                 class=""
                             ></textarea>
-                        </div>
-                        <x-input-error :messages="$errors->get('pricelist')" class="mt-2"/>
                     </div>
+                    <x-input-error :messages="$errors->get('pricelist')" class="mt-2"/>
                 </div>
             </div>
         </div>
-
         <div class="mt-6 flex items-center justify-end gap-x-6">
             <a href="{{ route('dashboard') }}" wire:navigate class="text-sm/6 font-semibold text-gray-900">
                 @lang('Atpakaļ')
@@ -232,7 +229,6 @@
                 }
             }
         },
-        placeholder: 'Type or paste your content here!'
     };
 
     let editor;

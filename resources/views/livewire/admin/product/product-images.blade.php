@@ -1,13 +1,11 @@
 <div>
-    <x-admin.flash-message />
+    <x-admin.flash-message/>
     <form wire:submit="store">
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
                 <h2 class="text-h-sm-mob lg:text-h-mob mb-3 leading-none">
                     {{ __('Rediģēt galeriju') }} - {{ $product->title }}
                 </h2>
-
-                <!-- Existing Images -->
                 @if ($product->images->count() > 0)
                     <div class="mb-8">
                         <h3 class="mb-4 text-lg font-medium text-gray-900">
@@ -48,8 +46,6 @@
                         </div>
                     </div>
                 @endif
-
-                <!-- New Images Preview -->
                 @if ($images && count($images) > 0)
                     <div class="mb-8">
                         <h3 class="mb-4 text-lg font-medium text-gray-900">
@@ -112,8 +108,6 @@
                         </div>
                     </div>
                 @endif
-
-                <!-- Upload Area -->
                 <div class="mt-5">
                     <label class="mb-2 block text-sm/6 font-medium text-gray-900">
                         {{ __('Pievienot attēlus') }}
@@ -196,8 +190,8 @@
                         </label>
                     </div>
                     <!-- Show both array-level errors and individual file errors -->
-                    <x-input-error :messages="$errors->get('images')" class="mt-2" />
-                    <x-input-error :messages="collect($errors->get('images.*'))->flatten()" class="mt-2" />
+                    <x-input-error :messages="$errors->get('images')" class="mt-2"/>
+                    <x-input-error :messages="collect($errors->get('images.*'))->flatten()" class="mt-2"/>
                 </div>
             </div>
         </div>

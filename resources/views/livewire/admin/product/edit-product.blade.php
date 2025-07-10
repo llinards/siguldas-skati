@@ -6,50 +6,9 @@
                 <h2 class="text-h-sm-mob lg:text-h-mob mb-3 leading-none">
                     {{ __('Rediģēt') }} - {{ $product->title }}
                 </h2>
-                <div>
-                    <a
-                        href="{{ route('product.images', $product) }}"
-                        class="rounded-md bg-white py-1.5 text-gray-500 hover:underline sm:text-sm/6"
-                    >
-                        <svg class="inline h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                            ></path>
-                        </svg>
-                        Galerija
-                    </a>
-                </div>
                 <div class="mt-5">
-                    <div>
-                        <label for="title" class="block text-sm/6 font-medium text-gray-900">Nosaukums</label>
-                        <div class="mt-2">
-                            <input
-                                type="text"
-                                wire:model="title"
-                                autocomplete="given-name"
-                                class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                            />
-                            <x-input-error :messages="$errors->get('title')" class="mt-2"/>
-                        </div>
-                    </div>
-                    <div class="mt-5">
-                        <label for="personCount" class="block text-sm/6 font-medium text-gray-900">Cilvēku
-                            skaits</label>
-                        <div class="mt-2">
-                            <input
-                                type="number"
-                                wire:model="personCount"
-                                class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                            />
-                            <x-input-error :messages="$errors->get('personCount')" class="mt-2"/>
-                        </div>
-                    </div>
-                    <div class="mt-1">
-                        <div class="mt-4 block">
-                            <label class="mt-4 flex cursor-pointer space-x-2 self-start text-sm text-gray-900">
+                    <div class="block">
+                        <label class="flex cursor-pointer space-x-2 self-start text-sm text-gray-900">
                                 <span class="relative">
                                     <input
                                         wire:model="is_active"
@@ -66,31 +25,60 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6"/>
                                     </svg>
                                 </span>
-                                <span>{{ __('Rādīt mājas lapā?') }}</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="mt-5">
-                        <label class="block text-sm/6 font-medium text-gray-900">Adrese</label>
-                        <div class="flex items-center rounded-md bg-white">
-                            <a
-                                href="{{ url('/') }}/{{ app()->getLocale() }}/{{ $product->slug }}"
-                                target="_blank"
-                                class="block w-full rounded-md bg-white py-1.5 text-base text-gray-500 underline sm:text-sm/6"
-                            >
-                                {{ url('/') }}/{{ app()->getLocale() }}/{{ $product->slug }}
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="mt-5">
-                        <label for="cover" class="block text-sm/6 font-medium text-gray-900">
-                            {{ __('Attēls') }}
+                            <span>{{ __('Rādīt mājas lapā?') }}</span>
                         </label>
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <a
+                        href="{{ route('product.images', $product) }}"
+                        class="rounded-md bg-white py-1.5 text-gray-500 hover:underline sm:text-sm/6"
+                    >
+                        <svg class="inline h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                            ></path>
+                        </svg>
+                        Rediģēt galeriju mājai
+                    </a>
+                </div>
+                <div class="mt-5 flex flex-col sm:flex-row sm:space-x-6">
+                    <div class="sm:flex-1/3">
+                        <label for="title" class="block text-sm/6 font-medium text-gray-900">Nosaukums</label>
                         <div class="mt-2">
+                            <input
+                                type="text"
+                                wire:model="title"
+                                autocomplete="given-name"
+                                class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                            />
+                            <x-input-error :messages="$errors->get('title')" class="mt-2"/>
+                        </div>
+                    </div>
+                    <div class="mt-5 sm:mt-0">
+                        <label for="personCount" class="block text-sm/6 font-medium text-gray-900">Cilvēku
+                            skaits</label>
+                        <div class="mt-2">
+                            <input
+                                type="number"
+                                wire:model="personCount"
+                                class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                            />
+                            <x-input-error :messages="$errors->get('personCount')" class="mt-2"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <label for="cover" class="block text-sm/6 font-medium text-gray-900">
+                        {{ __('Attēls') }}
+                    </label>
+                    <div class="mt-2">
+                        <div class="flex flex-col sm:flex-row sm:space-x-6">
                             @if (! $cover && $product->cover)
-                                <div class="mb-4">
+                                <div>
                                     <img
                                         src="{{ Storage::url($product->cover) }}"
                                         alt="{{ __('Pašreizējais attēls') }}"
@@ -101,9 +89,8 @@
                                     </p>
                                 </div>
                             @endif
-
                             @if ($cover)
-                                <div class="mb-4">
+                                <div>
                                     <img
                                         src="{{ $cover->temporaryUrl() }}"
                                         alt="{{ __('Priekšskatījums') }}"
@@ -114,8 +101,7 @@
                                     </p>
                                 </div>
                             @endif
-
-                            <div class="flex w-full items-center justify-center">
+                            <div class="mt-5 sm:mt-0 flex w-full items-start justify-center">
                                 <label
                                     for="cover-upload"
                                     class="flex h-32 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 transition-colors duration-200 hover:bg-gray-100"
@@ -210,36 +196,34 @@
                                     />
                                 </label>
                             </div>
-                            <x-input-error :messages="$errors->get('cover')" class="mt-2"/>
                         </div>
+                        <x-input-error :messages="$errors->get('cover')" class="mt-2"/>
                     </div>
-
-                    <div class="mt-5">
-                        <label for="description" class="block text-sm/6 font-medium text-gray-900">Apraksts</label>
-                        <div class="mt-2">
+                </div>
+                <div class="mt-5">
+                    <label for="description" class="block text-sm/6 font-medium text-gray-900">Apraksts</label>
+                    <div class="mt-2">
                             <textarea
                                 rows="3"
                                 wire:model="description"
                                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                             ></textarea>
-                            <x-input-error :messages="$errors->get('description')" class="mt-2"/>
-                        </div>
+                        <x-input-error :messages="$errors->get('description')" class="mt-2"/>
                     </div>
-                    <div class="mt-5">
-                        <label for="pricelist" class="block text-sm/6 font-medium text-gray-900">Cenrādis</label>
-                        <div class="mt-2" wire:ignore>
+                </div>
+                <div class="mt-5">
+                    <label for="pricelist" class="block text-sm/6 font-medium text-gray-900">Cenrādis</label>
+                    <div class="mt-2" wire:ignore>
                             <textarea
                                 id="pricelist-editor"
                                 rows="3"
                                 class=""
                             ></textarea>
-                        </div>
-                        <x-input-error :messages="$errors->get('pricelist')" class="mt-2"/>
                     </div>
+                    <x-input-error :messages="$errors->get('pricelist')" class="mt-2"/>
                 </div>
             </div>
         </div>
-
         <div class="mt-6 flex items-center justify-end gap-x-6">
             <a href="{{ route('dashboard') }}" wire:navigate class="text-sm/6 font-semibold text-gray-900">
                 @lang('Atpakaļ')
