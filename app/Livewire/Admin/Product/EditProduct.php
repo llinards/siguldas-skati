@@ -22,6 +22,9 @@ class EditProduct extends Component
     #[Validate('required', message: 'validation.required')]
     public string $description = '';
 
+    #[Validate('required', message: 'validation.required')]
+    public int $personCount = 0;
+
     #[Validate('nullable')]
     #[Validate('max:512', message: 'Bildes izmērs nedrīkst pārsniegt 512 kb.')]
     #[Validate('image', message: 'Drīkst pievienot tikai vienu bildi.')]
@@ -83,6 +86,7 @@ class EditProduct extends Component
         $this->title = $this->product->title;
         $this->description = $this->product->description;
         $this->is_active = (bool) $this->product->is_active;
+        $this->personCount = $this->product->person_count;
     }
 
     private function updateProduct(): void
@@ -97,6 +101,7 @@ class EditProduct extends Component
             'title' => $this->title,
             'description' => $this->description,
             'is_active' => $this->is_active,
+            'person_count' => $this->personCount,
             'slug' => $this->productServices->generateSlug($this->title),
         ];
 

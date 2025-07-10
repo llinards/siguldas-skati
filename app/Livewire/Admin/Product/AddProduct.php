@@ -21,6 +21,9 @@ class AddProduct extends Component
     public string $description = '';
 
     #[Validate('required', message: 'validation.required')]
+    public int $personCount = 0;
+
+    #[Validate('required', message: 'validation.required')]
     #[Validate('max:512', message: 'Bildes izmērs nedrīkst pārsniegt 512 kb.')]
     #[Validate('image', message: 'Drīkst pievienot tikai vienu bildi.')]
     public $cover;
@@ -77,6 +80,7 @@ class AddProduct extends Component
             'title' => $this->title,
             'description' => $this->description,
             'is_active' => $this->is_active,
+            'person_count' => $this->personCount,
             'cover' => $this->productServices->storeProductCover($this->cover),
             'slug' => $this->productServices->generateSlug($this->title),
         ];

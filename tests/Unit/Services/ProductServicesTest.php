@@ -178,6 +178,8 @@ test('createProduct successfully creates a product with provided data', function
         'title' => 'Test Product',
         'description' => 'Test Description',
         'is_active' => true,
+        'pricelist' => 'Euro 1',
+        'person_count' => 2,
         'slug' => 'test-product',
         'cover' => 'product-images/test.jpg',
     ];
@@ -188,6 +190,8 @@ test('createProduct successfully creates a product with provided data', function
         ->and($product->title)->toBe('Test Product')
         ->and($product->description)->toBe('Test Description')
         ->and($product->is_active)->toBeTrue()
+        ->and($product->pricelist)->toBe('Euro 1')
+        ->and($product->person_count)->toBe(2)
         ->and($product->slug)->toBe('test-product')
         ->and($product->cover)->toBe('product-images/test.jpg');
 });

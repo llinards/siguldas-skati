@@ -47,6 +47,7 @@ test('successfully creates product with localized data, uploads cover image, and
             ->set('title', 'Jaunais Produkts')
             ->set('description', 'Produkta Apraksts')
             ->set('is_active', true)
+            ->set('personCount', 2)
             ->set('cover', $file)
             ->call('store')
             ->assertSessionHas('_flash.new.0', 'message');
@@ -56,6 +57,7 @@ test('successfully creates product with localized data, uploads cover image, and
             'title' => json_encode(['lv' => 'Jaunais Produkts']),
             'description' => json_encode(['lv' => 'Produkta Apraksts']),
             'is_active' => 1,
+            'person_count' => 2,
             'slug' => json_encode(['lv' => 'jaunais-produkts']),
             'cover' => 'product-images/'.$file->hashName(),
         ]);
