@@ -17,7 +17,8 @@ return new class extends Migration
             $table->json('title');
             $table->json('slug');
             $table->json('description');
-            $table->integer('person_count')->default(2);
+            $table->integer('person_count');
+            $table->json('pricelist')->nullable();
             $table->boolean('is_active')->default(false);
             $table->string('cover');
             $table->timestamps();

@@ -26,6 +26,11 @@ class ProductFactory extends Factory
         'en' => 'Portable wooden frame modular house. This type of house construction is relatively fast and does not require a long project approval time. This project does not require a building permit (up to a building area of 60m²) and it is possible to live in it immediately. The projects allow for various interior and exterior finishing solutions, and it is also possible to make changes to room layouts.',
     ];
 
+    private array $productPricelist = [
+        'lv' => 'NA',
+        'en' => 'NA',
+    ];
+
     private array $productCovers = [
         'siguldas-skati-product-1.jpg',
         'siguldas-skati-product-2.jpg',
@@ -62,6 +67,7 @@ class ProductFactory extends Factory
             'title' => $title,
             'slug' => $slug,
             'description' => $this->productDescriptions,
+            'pricelist' => $this->productPricelist,
             'is_active' => true,
             'cover' => $copiedImagePath,
             'person_count' => $this->faker->numberBetween(1, 4),

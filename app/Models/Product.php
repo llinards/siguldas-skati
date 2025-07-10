@@ -14,7 +14,7 @@ class Product extends Model
     use HasFactory;
     use HasTranslations;
 
-    public array $translatable = ['title', 'slug', 'description'];
+    public array $translatable = ['title', 'slug', 'description', 'pricelist'];
 
     public function getRouteKeyName(): string
     {
@@ -30,6 +30,8 @@ class Product extends Model
         'title' => 'array',
         'slug' => 'array',
         'description' => 'array',
+        'pricelist' => 'array',
+        'order' => 'integer',
         'is_active' => 'boolean',
     ];
 
