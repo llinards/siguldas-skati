@@ -27,8 +27,8 @@ class ProductFactory extends Factory
     ];
 
     private array $productPricelist = [
-        'lv' => 'NA',
-        'en' => 'NA',
+        'lv' => '<p><strong>Cena par nakti</strong></p><ul><li>159 EUR – 2 viesiem</li><li>209 EUR – 2 viesiem nedēļas nogalēs</li><li>+20 EUR katru papildu viesi (par nakti)</li></ul><p><strong>Papildu maksa</strong></p><ul><li>10 EUR – uzkopšana uzturēšanās reizēs no 1 līdz 2 naktīm</li><li>30 EUR – uzkopšana uzturēšanās reizēs no 3 līdz 4 naktīm</li><li>20 EUR – mājdzīvnieku uzņemšana</li><li>70 EUR – kubls</li></ul><p>* Cenas svētku dienās, kā arī dienu pirms un pēc tām, var būt augstākas.</p><p>Pārbaudi pieejamos datumus un <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://siguldasskati.slmedia.lv/lv/brivdienu-dizaina-maja-minus#\"><strong>rezervē Airbnb</strong></a> platformā vai rezervē rakstot uz <a href=\"mailto:info@siguldasskati.lv\"><strong>info@siguldasskati.lv</strong></a>.</p>',
+        'en' => '<p><strong>Price per night</strong></p><ul><li>159 EUR – 2 guests</li><li>209 EUR – 2 guests on weekends</li><li>+20 EUR each additional guest (per night)</li></ul><p><strong>Additional fees</strong></p><ul><li>10 EUR – cleaning for stays from 1 to 2 nights</li><li>30 EUR – cleaning for stays from 3 to 4 nights</li><li>20 EUR – pet accommodation</li><li>70 EUR – hot tub</li></ul><p>* Prices on holidays, as well as the day before and after them, may be higher.</p><p>Check available dates and <a href=\"\\&quot;https://siguldasskati.slmedia.lv/lv/brivdienu-dizaina-maja-minus#\\&quot;\"><strong>book on Airbnb</strong></a> platform or book by writing to <a href=\"\\&quot;mailto:info@siguldasskati.lv\\&quot;\"><strong>info@siguldasskati.lv</strong></a>.</p>',
     ];
 
     private array $productCovers = [

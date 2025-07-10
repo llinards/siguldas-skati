@@ -225,6 +225,17 @@
                             <x-input-error :messages="$errors->get('description')" class="mt-2"/>
                         </div>
                     </div>
+                    <div class="mt-5">
+                        <label for="pricelist" class="block text-sm/6 font-medium text-gray-900">Cenrādis</label>
+                        <div class="mt-2" wire:ignore>
+                            <textarea
+                                id="pricelist-editor"
+                                rows="3"
+                                class=""
+                            ></textarea>
+                        </div>
+                        <x-input-error :messages="$errors->get('pricelist')" class="mt-2"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -239,3 +250,62 @@
         </div>
     </form>
 </div>
+
+@script
+<script>
+    const LICENSE_KEY = 'GPL';
+    const editorConfig = {
+        toolbar: {
+            items: [
+                'undo',
+                'redo',
+                '|',
+                'heading',
+                '|',
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'code',
+                '|',
+                'link',
+                '|',
+                'bulletedList',
+                'numberedList'
+            ],
+            shouldNotGroupWhenFull: false
+        },
+        plugins: [Autosave, Bold, Heading, Essentials, Italic, Link, List, Paragraph, Strikethrough, Underline],
+        heading: {
+            options: [
+                {
+                    model: 'paragraph',
+                    title: 'Paragraph',
+                },
+            ]
+        },
+        initialData: @js($pricelist ?? ''),
+        licenseKey: LICENSE_KEY,
+        link: {
+            addTargetToExternalLinks: true,
+            defaultProtocol: 'https://',
+        },
+        placeholder: 'Type or paste your content here!'
+    };
+
+    let editor;
+
+    ClassicEditor.create(document.querySelector('#pricelist-editor'), editorConfig)
+        .then(newEditor => {
+            editor = newEditor;
+
+            // Sync CKEditor content with Livewire on every change
+            editor.model.document.on('change:data', () => {
+                $wire.set('pricelist', editor.getData());
+            });
+        })
+        .catch(error => {
+            console.error('CKEditor initialization error:', error);
+        });
+</script>
+@endscript

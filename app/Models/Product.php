@@ -30,6 +30,7 @@ class Product extends Model
         'title' => 'array',
         'slug' => 'array',
         'description' => 'array',
+        'person_count' => 'integer',
         'pricelist' => 'array',
         'order' => 'integer',
         'is_active' => 'boolean',

@@ -11,7 +11,7 @@
         <p class="mb-6 text-justify lg:max-w-11/12">
             {{ $product->description }}
         </p>
-        <x-product.description.facilities />
+        <x-product.description.facilities/>
     </div>
     <div class="2xl:col-span-2">
         <div class="relative mb-3 inline-block">
@@ -21,7 +21,9 @@
             </h2>
             <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
         </div>
-        <x-product.description.pricing />
+        <div class="product-pricelist">
+            {!! $product->pricelist !!}
+        </div>
         <div class="flex xl:justify-end">
             <x-btn-primary>@lang('Rezervēt')</x-btn-primary>
         </div>
@@ -34,7 +36,7 @@
             </h2>
             <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
         </div>
-        <x-product.description.good-to-know />
+        <x-product.description.good-to-know/>
     </div>
 </div>
 
@@ -50,7 +52,7 @@
                 @lang('Ērtības un
                                         aprīkojums')
             </h2>
-            <x-accordion-arrows />
+            <x-accordion-arrows/>
         </button>
         <div
             id="hs-basic-with-arrow-collapse-one"
@@ -61,7 +63,7 @@
             <p class="mb-6 text-justify lg:max-w-11/12">
                 {{ $product->description }}
             </p>
-            <x-product.description.facilities />
+            <x-product.description.facilities/>
         </div>
     </div>
 
@@ -75,15 +77,15 @@
                 @lang('Cenas un papildu
                                         informācija')
             </h2>
-            <x-accordion-arrows />
+            <x-accordion-arrows/>
         </button>
         <div
             id="hs-basic-with-arrow-collapse-two"
-            class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
+            class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300 product-pricelist"
             role="region"
             aria-labelledby="hs-basic-with-arrow-heading-two"
         >
-            <x-product.description.pricing />
+            {!! $product->pricelist !!}
         </div>
     </div>
 
@@ -96,7 +98,7 @@
             <h2 class="text-h-sm-mob lg:text-h-mob text-left leading-none">
                 @lang('Lietas, ko ņemt vērā')
             </h2>
-            <x-accordion-arrows />
+            <x-accordion-arrows/>
         </button>
         <div
             id="hs-basic-with-arrow-collapse-three"
@@ -104,7 +106,7 @@
             role="region"
             aria-labelledby="hs-basic-with-arrow-heading-three"
         >
-            <x-product.description.good-to-know />
+            <x-product.description.good-to-know/>
         </div>
     </div>
 </div>
