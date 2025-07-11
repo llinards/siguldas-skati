@@ -197,7 +197,7 @@
         </div>
 
         <div class="mt-6 flex items-center justify-end gap-x-6">
-            <a href="{{ route('product.edit', $product) }}" class="text-sm/6 font-semibold text-gray-900">
+            <a href="{{ route('dashboard') }}" class="text-sm/6 font-semibold text-gray-900">
                 @lang('Atpakaļ')
             </a>
             <x-btn-primary type="submit" class="">
