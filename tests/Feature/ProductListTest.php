@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\Admin\ProductList;
+use App\Livewire\Admin\Product\ProductList;
 use App\Models\Product;
 use App\Models\User;
 use App\Services\ErrorLogService;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Admin\Product;
 
 use App\Services\ErrorLogService;
 use App\Services\FlashMessageService;
@@ -78,12 +78,12 @@ class ProductList extends Component
         try {
             $products = $this->productServices->getAllProducts();
 
-            return view('livewire.admin.product-list', compact('products'));
+            return view('livewire.admin.product.product-list', compact('products'));
         } catch (\Exception $e) {
             $this->errorLogService->logError('Failed to load products list', $e, []);
             $this->flashMessageService->error(__('Ielādējot produktus, radās kļūda. Lūdzu, atsvaidziniet lapu.'));
 
-            return view('livewire.admin.product-list', [
+            return view('livewire.admin.product.product-list', [
                 'products' => collect([]),
             ]);
         }

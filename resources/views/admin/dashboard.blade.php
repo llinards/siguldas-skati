@@ -1,3 +1,3 @@
 <x-admin.app-layout>
-    <livewire:admin.product-list />
+    <livewire:admin.product.product-list/>
 </x-admin.app-layout>
