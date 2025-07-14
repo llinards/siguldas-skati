@@ -12,16 +12,12 @@ class FeatureFactory extends Factory
         'bicycle.svg',
         'bone.svg',
         'camera.svg',
-        'check.svg',
         'clock.svg',
         'door-enter.svg',
         'fire.svg',
         'fridge.svg',
-        'happy_face.svg',
-        'location.svg',
         'microwave.svg',
         'washing-machine.svg',
-        'wave.svg',
         'wi-fi.svg',
     ];
 
