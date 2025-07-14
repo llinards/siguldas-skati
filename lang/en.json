@@ -1,1 +1,19 @@
-{}
+{
+    "validation.first_name.required": "First name is required",
+    "validation.first_name.min": "First name must be at least 2 characters",
+    "validation.first_name.max": "First name cannot exceed 50 characters",
+    "validation.first_name.regex": "First name contains invalid characters",
+    "validation.last_name.required": "Last name is required",
+    "validation.last_name.min": "Last name must be at least 2 characters",
+    "validation.last_name.max": "Last name cannot exceed 50 characters",
+    "validation.last_name.regex": "Last name contains invalid characters",
+    "validation.phone.required": "Phone number is required",
+    "validation.phone.regex": "Please enter a valid phone number",
+    "validation.phone.min": "Phone number is too short",
+    "validation.phone.max": "Phone number is too long",
+    "validation.email.required": "Email address is required",
+    "validation.email.email": "Please enter a valid email address",
+    "validation.email.max": "Email address is too long",
+    "validation.question.max": "Question cannot exceed 1000 characters",
+    "validation.consent.accepted": "You must agree to the terms and conditions"
+}

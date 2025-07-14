@@ -1,0 +1,19 @@
+{
+    "validation.first_name.required": "Vārds ir obligāts.",
+    "validation.first_name.min": "Vārdam jābūt vismaz 2 rakstzīmes.",
+    "validation.first_name.max": "Vārds nedrīkst pārsniegt 50 rakstzīmes.",
+    "validation.first_name.regex": "Vārdā ir nederīgas rakstzīmes.",
+    "validation.last_name.required": "Uzvārds ir obligāts.",
+    "validation.last_name.min": "Uzvārdam jābūt vismaz 2 rakstzīmes.",
+    "validation.last_name.max": "Uzvārds nedrīkst pārsniegt 50 rakstzīmes.",
+    "validation.last_name.regex": "Uzvārdā ir nederīgas rakstzīmes.",
+    "validation.phone.required": "Telefona numurs ir obligāts.",
+    "validation.phone.regex": "Lūdzu ievadiet derīgu telefona numuru.",
+    "validation.phone.min": "Telefona numurs ir par īsu.",
+    "validation.phone.max": "Telefona numurs ir par garu.",
+    "validation.email.required": "E-pasta adrese ir obligāta.",
+    "validation.email.email": "Lūdzu ievadiet derīgu e-pasta adresi.",
+    "validation.email.max": "E-pasta adrese ir par garu.",
+    "validation.question.max": "Jautājums nedrīkst pārsniegt 1000 rakstzīmes.",
+    "validation.consent.accepted": "Jums jāpiekrīt noteikumiem un nosacījumiem."
+}

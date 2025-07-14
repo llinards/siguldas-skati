@@ -86,70 +86,7 @@
                 </div>
 
                 <div class="col-span-1 items-center justify-center md:flex lg:flex-none">
-                    <form action="/" method="POST" class="md:w-4/5 lg:w-full" x-data="{ agreed: false }">
-                        <div
-                            class="border-ss-gray text-ss-gray mb-6 flex flex-col space-y-6 rounded-3xl border-1 p-6 shadow-md"
-                        >
-                            <label for="firstName">
-                                @lang('Vārds')
-                                *
-                            </label>
-                            <input class="border-b" id="firstName" type="text" required />
-                            <label for="lastName">
-                                @lang('Uzvārds')
-                                *
-                            </label>
-                            <input class="border-b" id="lastName" type="text" required />
-                            <label for="email">
-                                @lang('E-pasts')
-                                *
-                            </label>
-                            <input class="border-b" id="email" type="email" required />
-                            <label for="question">
-                                @lang('Jautājums')
-                                *
-                            </label>
-                            <textarea
-                                class="w-full resize-none border-b"
-                                rows="5"
-                                cols="30"
-                                id="question"
-                                required
-                            ></textarea>
-                            <label class="mt-4 flex cursor-pointer space-x-2 self-start text-sm text-gray-600">
-                                <span class="relative">
-                                    <input
-                                        type="checkbox"
-                                        x-model="agreed"
-                                        class="peer border-ss-dark bg-ss checked:bg-ss-dark checked:border-ss-dark h-5 w-5 appearance-none rounded border-1 transition duration-200"
-                                    />
-                                    <svg
-                                        class="pointer-events-none absolute top-0 left-0 h-5 w-5 text-white opacity-0 transition-opacity duration-150 peer-checked:opacity-100"
-                                        fill="none"
-                                        viewBox="0 0 20 20"
-                                        stroke="currentColor"
-                                        stroke-width="3"
-                                    >
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6" />
-                                    </svg>
-                                </span>
-                                <span>
-                                    @lang('Es piekrītu datu uzglabāšanai un apstrādei')
-                                </span>
-                            </label>
-                        </div>
-
-                        <div class="flex w-full">
-                            <x-btn-primary
-                                type="submit"
-                                class="w-full"
-                                x-bind:disabled="!agreed"
-                                x-bind:class="!agreed ? 'opacity-50 ' : ''"
-                            >
-                                @lang('Nosūtīt')
-                            </x-btn-primary>
-                        </div>
-                    </form>
+                    <livewire:contact-us/>
                 </div>
             </div>
         </div>

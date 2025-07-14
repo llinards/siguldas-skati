@@ -30,7 +30,7 @@
 
 @if ($message)
     <div
-        {{ $attributes->merge(['class' => "mb-4 border text-sm rounded-lg p-4 {$currentStyle}"]) }}
+        {{ $attributes->merge(['class' => "mb-4 border text-sm rounded-3xl p-4 {$currentStyle}"]) }}
         role="alert"
         tabindex="-1"
     >
