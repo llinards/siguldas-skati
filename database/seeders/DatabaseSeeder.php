@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Feature;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\User;
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
         Product::factory()
             ->count(5)
             ->has(ProductImage::factory()->count(10), 'images')
+            ->has(Feature::factory()->count(5), 'features')
             ->create();
     }
 }
