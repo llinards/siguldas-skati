@@ -11,7 +11,7 @@
         <p class="mb-6 text-justify lg:max-w-11/12">
             {{ $product->description }}
         </p>
-        <x-product.description.facilities/>
+        <x-product.description.facilities :product="$product"/>
     </div>
     <div class="2xl:col-span-2">
         <div class="relative mb-3 inline-block">
@@ -63,7 +63,7 @@
             <p class="mb-6 text-justify lg:max-w-11/12">
                 {{ $product->description }}
             </p>
-            <x-product.description.facilities/>
+            <x-product.description.facilities :product="$product"/>
         </div>
     </div>
 
