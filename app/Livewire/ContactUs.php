@@ -2,8 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Mail\ContactUsMail;
 use App\Services\ErrorLogService;
 use App\Services\FlashMessageService;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -72,6 +74,15 @@ class ContactUs extends Component
         $this->validate();
 
         try {
+            Mail::send(new ContactUsMail(
+                $this->firstName,
+                $this->lastName,
+                $this->phoneNumber,
+                $this->email,
+                $this->question,
+                request()->ip()
+            ));
+
             $this->flashMessageService->success(__('Paldies! Jūsu ziņa ir saņemta.'));
             $this->reset();
         } catch (\Exception $e) {
