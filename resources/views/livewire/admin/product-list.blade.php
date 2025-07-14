@@ -93,7 +93,7 @@
                             </a>
 
                             <a
-                                href="#"
+                                href="{{ route('product.features', $product) }}"
                                 class="inline-flex items-center rounded-md p-2 text-bg-ss-600 transition-colors duration-200 hover:bg-gray-50 hover:text-gray-900"
                             >
                                 <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

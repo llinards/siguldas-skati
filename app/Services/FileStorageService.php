@@ -13,6 +13,8 @@ class FileStorageService
 
     public const PRODUCT_GALLERY_PATH = 'product-images/gallery';
 
+    public const FEATURE_ICON_PATH = 'feature-icons';
+
     public const MAX_FILE_SIZE_KB = 512;
 
     public function storeFile(UploadedFile $file, string $path, string $disk = self::DEFAULT_DISK): string

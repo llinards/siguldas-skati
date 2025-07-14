@@ -133,4 +133,9 @@ class ProductServices
                 ->update(['order' => $image['order']]);
         }
     }
+
+    public function syncProductFeatures(Product $product, array $featureIds): void
+    {
+        $product->features()->sync($featureIds);
+    }
 }
