@@ -41,7 +41,7 @@ class FeatureFactory extends Factory
     private function copyImageToStorage(string $filename): string
     {
         $sourcePath = public_path('icons/'.$filename);
-        $destinationDir = public_path('storage/product-icons');
+        $destinationDir = public_path('storage/feature-icons');
 
         // Get file extension
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
@@ -61,6 +61,6 @@ class FeatureFactory extends Factory
         }
 
         // Return the path relative to storage
-        return 'product-icons/'.$randomFilename;
+        return 'feature-icons/'.$randomFilename;
     }
 }
