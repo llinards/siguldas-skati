@@ -16,7 +16,7 @@
     <meta name="locale" content="{{ app()->getLocale() }}"/>
     <meta
         name="description"
-        content="@lang('Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai.')"
+        content="{{ $description ?? __('Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai.')}}"
     />
     <meta name="keywords" content="@lang('Siguldas Skati, brīvdienu mājas, atpūta, daba, dizains, Sigulda')"/>
 
@@ -28,7 +28,7 @@
     />
     <meta
         property="og:description"
-        content="@lang('Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai.')"
+        content="{{ $description ?? __('Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai.')}}"
     />
     <meta property="og:image" content="{{ asset('images/ss-meta-logo.svg') }}"/>
     <meta property="og:site_name" content="{{ config('app.name') }}"/>
@@ -43,7 +43,7 @@
     />
     <meta
         name="twitter:description"
-        content="@lang('Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai.')"
+        content="{{ $description ?? __('Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai.')}}"
     />
     <meta name="twitter:image" content="{{ asset('images/ss-meta-logo.svg') }}"/>
     <meta name="robots" content="index, follow"/>

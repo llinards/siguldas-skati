@@ -1,4 +1,4 @@
-<x-app-layout :title="$product->title">
+<x-app-layout :title="$product->title" :description="$product->description">
     <div class="bg-ss">
         <div class="container mx-auto grid grid-cols-1 px-4">
             <x-product.title>
