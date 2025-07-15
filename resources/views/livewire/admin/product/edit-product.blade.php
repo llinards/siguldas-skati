@@ -1,5 +1,5 @@
 <div>
-    <x-admin.flash-message/>
+    <x-admin.flash-message />
     <form wire:submit="update">
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
@@ -9,22 +9,22 @@
                 <div class="mt-5">
                     <div class="block">
                         <label class="flex cursor-pointer space-x-2 self-start text-sm text-gray-900">
-                                <span class="relative">
-                                    <input
-                                        wire:model="is_active"
-                                        type="checkbox"
-                                        class="peer border-ss-dark checked:bg-ss-dark checked:border-ss-dark h-5 w-5 appearance-none rounded border-1 bg-white transition duration-200"
-                                    />
-                                    <svg
-                                        class="pointer-events-none absolute top-0 left-0 h-5 w-5 text-white opacity-0 transition-opacity duration-150 peer-checked:opacity-100"
-                                        fill="none"
-                                        viewBox="0 0 20 20"
-                                        stroke="currentColor"
-                                        stroke-width="3"
-                                    >
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6"/>
-                                    </svg>
-                                </span>
+                            <span class="relative">
+                                <input
+                                    wire:model="is_active"
+                                    type="checkbox"
+                                    class="peer border-ss-dark checked:bg-ss-dark checked:border-ss-dark h-5 w-5 appearance-none rounded border-1 bg-white transition duration-200"
+                                />
+                                <svg
+                                    class="pointer-events-none absolute top-0 left-0 h-5 w-5 text-white opacity-0 transition-opacity duration-150 peer-checked:opacity-100"
+                                    fill="none"
+                                    viewBox="0 0 20 20"
+                                    stroke="currentColor"
+                                    stroke-width="3"
+                                >
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6" />
+                                </svg>
+                            </span>
                             <span>{{ __('Rādīt mājas lapā?') }}</span>
                         </label>
                     </div>
@@ -39,19 +39,20 @@
                                 autocomplete="given-name"
                                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                             />
-                            <x-input-error :messages="$errors->get('title')" class="mt-2"/>
+                            <x-input-error :messages="$errors->get('title')" class="mt-2" />
                         </div>
                     </div>
                     <div class="mt-5 sm:mt-0">
-                        <label for="personCount" class="block text-sm/6 font-medium text-gray-900">Cilvēku
-                            skaits</label>
+                        <label for="personCount" class="block text-sm/6 font-medium text-gray-900">
+                            Cilvēku skaits
+                        </label>
                         <div class="mt-2">
                             <input
                                 type="number"
                                 wire:model="personCount"
                                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                             />
-                            <x-input-error :messages="$errors->get('personCount')" class="mt-2"/>
+                            <x-input-error :messages="$errors->get('personCount')" class="mt-2" />
                         </div>
                     </div>
                 </div>
@@ -73,6 +74,7 @@
                                     </p>
                                 </div>
                             @endif
+
                             @if ($cover)
                                 <div>
                                     <img
@@ -85,7 +87,8 @@
                                     </p>
                                 </div>
                             @endif
-                            <div class="mt-5 sm:mt-0 flex w-full items-start justify-center">
+
+                            <div class="mt-5 flex w-full items-start justify-center sm:mt-0">
                                 <label
                                     for="cover-upload"
                                     class="flex h-32 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 transition-colors duration-200 hover:bg-gray-100"
@@ -181,30 +184,26 @@
                                 </label>
                             </div>
                         </div>
-                        <x-input-error :messages="$errors->get('cover')" class="mt-2"/>
+                        <x-input-error :messages="$errors->get('cover')" class="mt-2" />
                     </div>
                 </div>
                 <div class="mt-5">
                     <label for="description" class="block text-sm/6 font-medium text-gray-900">Apraksts</label>
                     <div class="mt-2">
-                            <textarea
-                                rows="3"
-                                wire:model="description"
-                                class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                            ></textarea>
-                        <x-input-error :messages="$errors->get('description')" class="mt-2"/>
+                        <textarea
+                            rows="3"
+                            wire:model="description"
+                            class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                        ></textarea>
+                        <x-input-error :messages="$errors->get('description')" class="mt-2" />
                     </div>
                 </div>
                 <div class="mt-5">
                     <label for="pricelist" class="block text-sm/6 font-medium text-gray-900">Cenrādis</label>
                     <div class="mt-2" wire:ignore>
-                            <textarea
-                                id="pricelist-editor"
-                                rows="3"
-                                class=""
-                            ></textarea>
+                        <textarea id="pricelist-editor" rows="3" class=""></textarea>
                     </div>
-                    <x-input-error :messages="$errors->get('pricelist')" class="mt-2"/>
+                    <x-input-error :messages="$errors->get('pricelist')" class="mt-2" />
                 </div>
             </div>
         </div>
@@ -220,60 +219,60 @@
 </div>
 
 @script
-<script>
-    const LICENSE_KEY = 'GPL';
-    const editorConfig = {
-        toolbar: {
-            items: [
-                'undo',
-                'redo',
-                '|',
-                'heading',
-                '|',
-                'bold',
-                'italic',
-                'underline',
-                'strikethrough',
-                'code',
-                '|',
-                'link',
-                '|',
-                'bulletedList',
-                'numberedList'
-            ],
-            shouldNotGroupWhenFull: false
-        },
-        plugins: [Autosave, Bold, Heading, Essentials, Italic, Link, List, Paragraph, Strikethrough, Underline],
-        heading: {
-            options: [
-                {
-                    model: 'paragraph',
-                    title: 'Paragraph',
-                },
-            ]
-        },
-        initialData: @js($pricelist ?? ''),
-        licenseKey: LICENSE_KEY,
-        link: {
-            addTargetToExternalLinks: true,
-            defaultProtocol: 'https://',
-        },
-        placeholder: 'Type or paste your content here!'
-    };
+    <script>
+        const LICENSE_KEY = 'GPL';
+        const editorConfig = {
+            toolbar: {
+                items: [
+                    'undo',
+                    'redo',
+                    '|',
+                    'heading',
+                    '|',
+                    'bold',
+                    'italic',
+                    'underline',
+                    'strikethrough',
+                    'code',
+                    '|',
+                    'link',
+                    '|',
+                    'bulletedList',
+                    'numberedList',
+                ],
+                shouldNotGroupWhenFull: false,
+            },
+            plugins: [Autosave, Bold, Heading, Essentials, Italic, Link, List, Paragraph, Strikethrough, Underline],
+            heading: {
+                options: [
+                    {
+                        model: 'paragraph',
+                        title: 'Paragraph',
+                    },
+                ],
+            },
+            initialData: @js($pricelist ?? ''),
+            licenseKey: LICENSE_KEY,
+            link: {
+                addTargetToExternalLinks: true,
+                defaultProtocol: 'https://',
+            },
+            placeholder: 'Type or paste your content here!',
+        };
 
-    let editor;
+        let editor;
 
-    ClassicEditor.create(document.querySelector('#pricelist-editor'), editorConfig)
-        .then(newEditor => {
-            editor = newEditor;
+        ClassicEditor.create(document.querySelector('#pricelist-editor'), editorConfig)
+            .then((newEditor) => {
+                editor = newEditor;
 
-            // Sync CKEditor content with Livewire on every change
-            editor.model.document.on('change:data', () => {
-                $wire.set('pricelist', editor.getData());
+                // Sync CKEditor content with Livewire on every change
+                editor.model.document.on('change:data', () => {
+                    $wire.set('pricelist', editor.getData());
+                });
+            })
+            .catch((error) => {
+                console.error('CKEditor initialization error:', error);
             });
-        })
-        .catch(error => {
-            console.error('CKEditor initialization error:', error);
-        });
-</script>
+    </script>
 @endscript

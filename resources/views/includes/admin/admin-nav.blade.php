@@ -4,7 +4,7 @@
     <nav class="mx-auto w-full max-w-7xl px-4 sm:flex sm:items-center sm:justify-between">
         <div class="flex items-center justify-between">
             <a href="{{ route('dashboard') }}">
-                <x-application-logo class="block h-9 w-auto fill-current text-gray-800"/>
+                <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
             </a>
             <div class="sm:hidden">
                 <button
@@ -28,9 +28,9 @@
                         stroke-linecap="round"
                         stroke-linejoin="round"
                     >
-                        <line x1="3" x2="21" y1="6" y2="6"/>
-                        <line x1="3" x2="21" y1="12" y2="12"/>
-                        <line x1="3" x2="21" y1="18" y2="18"/>
+                        <line x1="3" x2="21" y1="6" y2="6" />
+                        <line x1="3" x2="21" y1="12" y2="12" />
+                        <line x1="3" x2="21" y1="18" y2="18" />
                     </svg>
                     <svg
                         class="hs-collapse-open:block hidden size-4 shrink-0"
@@ -44,8 +44,8 @@
                         stroke-linecap="round"
                         stroke-linejoin="round"
                     >
-                        <path d="M18 6 6 18"/>
-                        <path d="m6 6 12 12"/>
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
                     </svg>
                     <span class="sr-only">Toggle navigation</span>
                 </button>

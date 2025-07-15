@@ -2,11 +2,11 @@
 
 @php
     $baseStyles = 'flex sm:inline-block justify-center text-center px-6 py-4 uppercase rounded-xl
-                   transition-all duration-200 border-1 border-transparent';
+                           transition-all duration-200 border-1 border-transparent';
 
-    $enabledStyles = 'bg-ss-dark text-white hover:bg-white hover:text-black hover:border-ss-dark cursor-pointer';
+    $enabledStyles = 'bg-ss-dark hover:border-ss-dark cursor-pointer text-white hover:bg-white hover:text-black';
 
-    $disabledStyles = 'bg-gray-300 text-gray-500 cursor-not-allowed';
+    $disabledStyles = 'cursor-not-allowed bg-gray-300 text-gray-500';
 
     $styling = $baseStyles . ' ' . ($disabled ? $disabledStyles : $enabledStyles);
 @endphp

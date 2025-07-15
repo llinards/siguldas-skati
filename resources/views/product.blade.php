@@ -13,14 +13,14 @@
                 </x-slot>
             </x-product.title>
 
-            <x-product.gallery.mobile :product="$product"/>
+            <x-product.gallery.mobile :product="$product" />
             <div class="mt-6 mb-6 sm:hidden">
                 <x-btn-primary>@lang('Rezervēt')</x-btn-primary>
             </div>
 
-            <x-product.gallery.desktop :product="$product"/>
+            <x-product.gallery.desktop :product="$product" />
 
-            <x-product.wrapper :product="$product"/>
+            <x-product.wrapper :product="$product" />
         </div>
     </div>
 
@@ -80,9 +80,12 @@
                     <ul class="xs:grid mb-6 grid-cols-2 grid-rows-5 space-y-3">
                         @foreach ($product->features as $feature)
                             <li class="flex items-center gap-x-4">
-                                <img src="{{ Storage::url($feature->icon_image) }}" alt="{{$feature->title}}"
-                                     class="h-8 w-8"/>
-                                {{$feature->title}}
+                                <img
+                                    src="{{ Storage::url($feature->icon_image) }}"
+                                    alt="{{ $feature->title }}"
+                                    class="h-8 w-8"
+                                />
+                                {{ $feature->title }}
                             </li>
                         @endforeach
                     </ul>

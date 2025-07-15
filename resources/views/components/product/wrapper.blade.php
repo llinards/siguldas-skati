@@ -4,20 +4,20 @@
         <div class="relative mb-3 inline-block">
             <h2 class="text-h-sm-mob lg:text-h-mob mb-3 leading-none">
                 @lang('Ērtības un
-                                        aprīkojums')
+                                                                        aprīkojums')
             </h2>
             <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
         </div>
         <p class="mb-6 text-justify lg:max-w-11/12">
             {{ $product->description }}
         </p>
-        <x-product.description.facilities :product="$product"/>
+        <x-product.description.facilities :product="$product" />
     </div>
     <div class="2xl:col-span-2">
         <div class="relative mb-3 inline-block">
             <h2 class="text-h-sm-mob lg:text-h-mob mt-6 mb-3 leading-none xl:mt-0">
                 @lang('Cenas un papildu
-                                        informācija')
+                                                                        informācija')
             </h2>
             <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
         </div>
@@ -36,7 +36,7 @@
             </h2>
             <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
         </div>
-        <x-product.description.good-to-know/>
+        <x-product.description.good-to-know />
     </div>
 </div>
 
@@ -50,9 +50,9 @@
         >
             <h2 class="text-h-sm-mob lg:text-h-mob text-left leading-none">
                 @lang('Ērtības un
-                                        aprīkojums')
+                                                                        aprīkojums')
             </h2>
-            <x-accordion-arrows/>
+            <x-accordion-arrows />
         </button>
         <div
             id="hs-basic-with-arrow-collapse-one"
@@ -63,7 +63,7 @@
             <p class="mb-6 text-justify lg:max-w-11/12">
                 {{ $product->description }}
             </p>
-            <x-product.description.facilities :product="$product"/>
+            <x-product.description.facilities :product="$product" />
         </div>
     </div>
 
@@ -75,13 +75,13 @@
         >
             <h2 class="text-h-sm-mob lg:text-h-mob text-left leading-none">
                 @lang('Cenas un papildu
-                                        informācija')
+                                                                        informācija')
             </h2>
-            <x-accordion-arrows/>
+            <x-accordion-arrows />
         </button>
         <div
             id="hs-basic-with-arrow-collapse-two"
-            class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300 product-pricelist"
+            class="hs-accordion-content product-pricelist hidden w-full overflow-hidden transition-[height] duration-300"
             role="region"
             aria-labelledby="hs-basic-with-arrow-heading-two"
         >
@@ -98,7 +98,7 @@
             <h2 class="text-h-sm-mob lg:text-h-mob text-left leading-none">
                 @lang('Lietas, ko ņemt vērā')
             </h2>
-            <x-accordion-arrows/>
+            <x-accordion-arrows />
         </button>
         <div
             id="hs-basic-with-arrow-collapse-three"
@@ -106,7 +106,7 @@
             role="region"
             aria-labelledby="hs-basic-with-arrow-heading-three"
         >
-            <x-product.description.good-to-know/>
+            <x-product.description.good-to-know />
         </div>
     </div>
 </div>

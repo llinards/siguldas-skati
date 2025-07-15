@@ -6,10 +6,10 @@
                 class="text-h-mob xs:text-6xl xl:text-h font-heading absolute top-48 z-10 max-w-7xl text-center leading-12 text-white uppercase sm:top-1/2 sm:-translate-y-1/2 sm:text-7xl sm:leading-16 md:text-8xl md:leading-24 xl:leading-28"
             >
                 @lang('Modernas
-                                        brīvdienu
-                                        dizaina
-                                        mājas tavai
-                                        atpūtai!')
+                                                                        brīvdienu
+                                                                        dizaina
+                                                                        mājas tavai
+                                                                        atpūtai!')
             </h1>
 
             <x-btn-header href="#" class="absolute bottom-48 z-10 sm:bottom-16">
@@ -47,35 +47,35 @@
                     >
                         <p>
                             @lang('Īpaša atpūtas vieta tiem, kuri meklē mieru, klātbūtnes un skaistuma sajūtu pašā
-                                                                      Siguldas
-                                                                      sirdī.
-                                                                      Mūsu
-                                                                      stāsts sākas
-                                                                      vietā, kur dizains saplūst ar dabu un miers kļūst par lielāko greznību.')
+                                                                                                                              Siguldas
+                                                                                                                              sirdī.
+                                                                                                                              Mūsu
+                                                                                                                              stāsts sākas
+                                                                                                                              vietā, kur dizains saplūst ar dabu un miers kļūst par lielāko greznību.')
                         </p>
                         <p>
                             @lang('Atrodoties tieši līdzās Panorāmas ratam un Svētku laukumam, esam radījuši modernas
-                                                                      brīvdienu
-                                                                      dizaina
-                                                                      mājas, kas piedāvā
-                                                                      ne tikai naktsmītni, bet arī sajūtu pieredzi. Šeit ainava kļūst par interjera daļu, un katrs
-                                                                      gadalaiks
-                                                                      sniedz jaunu
-                                                                      skatpunktu – no miglainiem rudens rītiem līdz sniegotām virsotnēm vai saulainām vasaras
-                                                                      dienām.')
+                                                                                                                              brīvdienu
+                                                                                                                              dizaina
+                                                                                                                              mājas, kas piedāvā
+                                                                                                                              ne tikai naktsmītni, bet arī sajūtu pieredzi. Šeit ainava kļūst par interjera daļu, un katrs
+                                                                                                                              gadalaiks
+                                                                                                                              sniedz jaunu
+                                                                                                                              skatpunktu – no miglainiem rudens rītiem līdz sniegotām virsotnēm vai saulainām vasaras
+                                                                                                                              dienām.')
                         </p>
                         <p>
                             @lang('Mēs piedāvājam vietu, kur vienkāršība nozīmē kvalitāti, minimālisms – apzinātu
-                                                                      komfortu,
-                                                                      un
-                                                                      katrā
-                                                                      detaļā
-                                                                      jūtama
-                                                                      mīlestība pret vietu, kur dzīvojam. Šis projekts ir mūsu aicinājums atgriezties pie tā, kas
-                                                                      būtisks
-                                                                      –
-                                                                      miera, klātbūtnes
-                                                                      un skaistuma.')
+                                                                                                                              komfortu,
+                                                                                                                              un
+                                                                                                                              katrā
+                                                                                                                              detaļā
+                                                                                                                              jūtama
+                                                                                                                              mīlestība pret vietu, kur dzīvojam. Šis projekts ir mūsu aicinājums atgriezties pie tā, kas
+                                                                                                                              būtisks
+                                                                                                                              –
+                                                                                                                              miera, klātbūtnes
+                                                                                                                              un skaistuma.')
                         </p>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
         </x-slot>
         <x-slot name="bannerText">
             @lang('Miers nav kaut kur tālu!
-                              tas ir šeit - starp dizainu, dabu un Tevi!')
+                                                      tas ir šeit - starp dizainu, dabu un Tevi!')
         </x-slot>
         <x-slot name="bannerImageAlt">
             @lang('Drona skats uz māju parku')
@@ -114,20 +114,20 @@
     </x-banner>
 
     {{-- GALLERY --}}
-    {{--    <div class="bg-ss">--}}
-    {{--        <div class="container mx-auto px-4 pt-12 md:pt-18 lg:pt-24 xl:pt-30">--}}
-    {{--            <div class="relative mb-3 inline-block">--}}
-    {{--                <h2 class="text-h-mob lg:text-h-md leading-none">--}}
-    {{--                    @lang('Galerija')--}}
-    {{--                </h2>--}}
-    {{--                <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>--}}
-    {{--            </div>--}}
-    {{--            <p class="text-ss-gray pb-6 text-sm leading-none xl:pb-12">--}}
-    {{--                @lang('Siguldas skatu galerija.')--}}
-    {{--            </p>--}}
-    {{--            <x-carousels.gallery.wrapper></x-carousels.gallery.wrapper>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
+    {{-- <div class="bg-ss"> --}}
+    {{-- <div class="container mx-auto px-4 pt-12 md:pt-18 lg:pt-24 xl:pt-30"> --}}
+    {{-- <div class="relative mb-3 inline-block"> --}}
+    {{-- <h2 class="text-h-mob lg:text-h-md leading-none"> --}}
+    {{-- @lang('Galerija') --}}
+    {{-- </h2> --}}
+    {{-- <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span> --}}
+    {{-- </div> --}}
+    {{-- <p class="text-ss-gray pb-6 text-sm leading-none xl:pb-12"> --}}
+    {{-- @lang('Siguldas skatu galerija.') --}}
+    {{-- </p> --}}
+    {{-- <x-carousels.gallery.wrapper></x-carousels.gallery.wrapper> --}}
+    {{-- </div> --}}
+    {{-- </div> --}}
 
     {{-- EXPERIENCES --}}
     <div class="bg-ss">
@@ -146,48 +146,48 @@
                     <x-slot name="experienceSvg">wave</x-slot>
                     <x-slot name="experienceTitle">
                         @lang('Klusums
-                                                            un miers')
+                                                                                                            un miers')
                     </x-slot>
                     <x-slot name="experienceText">
                         @lang('Mūsu brīvdienu dizaina mājās nav steigas – šī ir vieta, kur Tu
-                                                            vari
-                                                            elpot dziļāk, dzirdēt sevi un atpūsties bez stresa.')
+                                                                                                            vari
+                                                                                                            elpot dziļāk, dzirdēt sevi un atpūsties bez stresa.')
                     </x-slot>
                 </x-experience-card>
                 <x-experience-card>
                     <x-slot name="experienceSvg">check</x-slot>
                     <x-slot name="experienceTitle">
                         @lang('Estētika un
-                                                            komforts')
+                                                                                                            komforts')
                     </x-slot>
                     <x-slot name="experienceText">
                         @lang('Pārdomāts dizains, kvalitatīvas detaļas un mājīgums, kas ļauj
-                                                            justies
-                                                            kā mājās – tikai vēl labāk.')
+                                                                                                            justies
+                                                                                                            kā mājās – tikai vēl labāk.')
                     </x-slot>
                 </x-experience-card>
                 <x-experience-card>
                     <x-slot name="experienceSvg">happy_face</x-slot>
                     <x-slot name="experienceTitle">
                         @lang('Atmiņas un
-                                                            sajūtas')
+                                                                                                            sajūtas')
                     </x-slot>
                     <x-slot name="experienceText">
                         @lang('Šī nav tikai naktsmītne – tā ir iespēja apstāties, sajust vidi
-                                                            un
-                                                            ieraudzīt Siguldu citām acīm.')
+                                                                                                            un
+                                                                                                            ieraudzīt Siguldu citām acīm.')
                     </x-slot>
                 </x-experience-card>
                 <x-experience-card>
                     <x-slot name="experienceSvg">location</x-slot>
                     <x-slot name="experienceTitle">
                         @lang('Izcila
-                                                            lokācija')
+                                                                                                            lokācija')
                     </x-slot>
                     <x-slot name="experienceText">
                         @lang('Vietu pašā Siguldas sirdī, kur daba un pilsētas kultūras
-                                                            notikumi
-                                                            satiekas viena soļa attālumā.')
+                                                                                                            notikumi
+                                                                                                            satiekas viena soļa attālumā.')
                     </x-slot>
                 </x-experience-card>
             </div>
@@ -201,7 +201,7 @@
         </x-slot>
         <x-slot name="bannerText">
             @lang('Sigulda nav tikai galamērķis –
-                              tā ir sajūta.')
+                                                      tā ir sajūta.')
         </x-slot>
         <x-slot name="secondaryBannerText">
             @lang('Mēs esam tepat, lai palīdzētu Tev to iepazīt savā ritmā.')
@@ -220,10 +220,10 @@
             </div>
             <p class="text-ss-gray pb-6 text-sm leading-none md:max-w-2/3 lg:max-w-2/5 xl:pb-12">
                 @lang('Sigulda ir vieta, kur daba, kultūra un piedzīvojumi saplūst vienā ainavā. Neatkarīgi no
-                                        gadalaika, šeit katrs var atrast
-                                        sev piemērotu ritmu – vai tā būtu nesteidzīga pastaiga dabas takās, kultūras baudījums vai mazs
-                                        piedzīvojums virs koku
-                                        galotnēm.')
+                                                                        gadalaika, šeit katrs var atrast
+                                                                        sev piemērotu ritmu – vai tā būtu nesteidzīga pastaiga dabas takās, kultūras baudījums vai mazs
+                                                                        piedzīvojums virs koku
+                                                                        galotnēm.')
             </p>
             <x-carousels.todo.wrapper></x-carousels.todo.wrapper>
         </div>

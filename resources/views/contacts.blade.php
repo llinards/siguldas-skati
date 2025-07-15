@@ -9,7 +9,7 @@
             </div>
             <p class="text-ss-gray pb-6 text-sm leading-none lg:max-w-1/3">
                 @lang('Sazinies ar mums, ja rodas neskaidrības vai vēlies uzzināt vairāk par mūsu brīvdienu dizaina
-                                        mājām')
+                                                                        mājām')
                 !
             </p>
 
@@ -86,7 +86,7 @@
                 </div>
 
                 <div class="col-span-1 items-center justify-center md:flex lg:flex-none">
-                    <livewire:contact-us/>
+                    <livewire:contact-us />
                 </div>
             </div>
         </div>

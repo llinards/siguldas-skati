@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Feature;
-use App\Models\Product;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 
