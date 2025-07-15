@@ -14,6 +14,7 @@
     "validation.email.required": "Email address is required",
     "validation.email.email": "Please enter a valid email address",
     "validation.email.max": "Email address is too long",
+    "validation.email.unique": "Email adress has been already registred",
     "validation.question.max": "Question cannot exceed 1000 characters",
     "validation.consent.accepted": "You must agree to the terms and conditions"
 }
