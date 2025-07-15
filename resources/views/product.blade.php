@@ -13,14 +13,14 @@
                 </x-slot>
             </x-product.title>
 
-            <x-product.gallery.mobile :product="$product" />
+            <x-product.gallery.mobile :product="$product"/>
             <div class="mt-6 mb-6 sm:hidden">
                 <x-btn-primary>@lang('Rezervēt')</x-btn-primary>
             </div>
 
-            <x-product.gallery.desktop :product="$product" />
+            <x-product.gallery.desktop :product="$product"/>
 
-            <x-product.wrapper :product="$product" />
+            <x-product.wrapper :product="$product"/>
         </div>
     </div>
 
@@ -78,63 +78,13 @@
 
                 <div class="overflow-y-auto p-4">
                     <ul class="xs:grid mb-6 grid-cols-2 grid-rows-5 space-y-3">
-                        <li class="flex items-center gap-x-4">
-                            <img src="{{ asset('icons/wi-fi.svg') }}" alt="WiFi" class="h-8 w-8" />
-                            @lang('Wi-Fi')
-                        </li>
-                        <li class="flex items-center gap-x-4">
-                            <img
-                                src="{{ asset('icons/microwave.svg') }}"
-                                alt="@lang('Mikroviļņu krāsns')"
-                                class="h-8 w-8"
-                            />
-                            @lang('Virtuves
-                                                                      zona ar
-                                                                      viesistabu')
-                        </li>
-                        <li class="flex items-center gap-x-4">
-                            <img
-                                src="{{ asset('icons/washing-machine.svg') }}"
-                                alt="@lang('Veļas mašīna')"
-                                class="h-8 w-8"
-                            />
-                            @lang('Veļas
-                                                                      mašīna')
-                        </li>
-                        <li class="flex items-center gap-x-4">
-                            <img src="{{ asset('icons/bone.svg') }}" alt="@lang('Kauls')" class="h-8 w-8" />
-                            @lang('Atļauts ar
-                                                                      mājdzīvniekiem')
-                        </li>
-                        <li class="flex items-center gap-x-4">
-                            <img
-                                src="{{ asset('icons/ac.svg') }}"
-                                alt="@lang('Gaisa kondicionieris')"
-                                class="h-8 w-8"
-                            />
-                            @lang('Gaisa
-                                                                      kondicionieris')
-                        </li>
-                        <li class="flex items-center gap-x-4">
-                            <img src="{{ asset('icons/fire.svg') }}" alt="@lang('Uguns')" class="h-8 w-8" />
-                            @lang('Ugunskura
-                                                                      vieta')
-                        </li>
-                        <li class="flex items-center gap-x-4">
-                            <img src="{{ asset('icons/fridge.svg') }}" alt="@lang('Ledusskapis')" class="h-8 w-8" />
-                            @lang('Ledusskapis')
-                        </li>
-                        <li class="flex items-center gap-x-4">
-                            <img src="{{ asset('icons/camera.svg') }}" alt="@lang('Kamera')" class="h-8 w-8" />
-                            @lang('Teritorija
-                                                                      tiek
-                                                                      apsargāta')
-                        </li>
-                        <li class="flex items-center gap-x-4">
-                            <img src="{{ asset('icons/bicycle.svg') }}" alt="@lang('Velosipēds')" class="h-8 w-8" />
-                            @lang('Velosipēdu
-                                                                      novietne')
-                        </li>
+                        @foreach ($product->features as $feature)
+                            <li class="flex items-center gap-x-4">
+                                <img src="{{ Storage::url($feature->icon_image) }}" alt="{{$feature->title}}"
+                                     class="h-8 w-8"/>
+                                {{$feature->title}}
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
 
