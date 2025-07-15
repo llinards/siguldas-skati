@@ -45,7 +45,7 @@
                                 stroke="currentColor"
                                 stroke-width="3"
                             >
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6"/>
                             </svg>
                         </span>
                         <span>
@@ -65,7 +65,7 @@
         >
             <div class="flex flex-col py-6 sm:col-span-2 md:col-span-4 md:items-center md:pt-12 lg:col-span-1 lg:py-0">
                 <a href="/{{ app()->getLocale() }}" class="flex items-center">
-                    <img src="{{ asset('images/logo.png') }}" class="mb-4 w-xs" alt="Siguldas Skati Logo" />
+                    <img src="{{ asset('images/logo.png') }}" class="mb-4 w-xs" alt="Siguldas Skati Logo"/>
                 </a>
                 <p class="text-sm">
                     @lang('© Siguldas skati 2025 | Visas tiesības rezervētas.')
@@ -76,13 +76,13 @@
                     <h4 class="mb-4 text-2xl font-medium">
                         @lang('Izvēlne')
                     </h4>
-                    <x-nav.footer-link href="#">
+                    <x-nav.footer-link href="{{ route('products') }}">
                         @lang('Dizaina mājas')
                     </x-nav.footer-link>
-                    <x-nav.footer-link href="#">
+                    <x-nav.footer-link href="{{ route('faq') }}">
                         @lang('BUJ')
                     </x-nav.footer-link>
-                    <x-nav.footer-link href="#">
+                    <x-nav.footer-link href="{{ route('contacts') }}">
                         @lang('Kontakti')
                     </x-nav.footer-link>
                 </ul>
@@ -117,15 +117,15 @@
                 </h4>
                 <ul class="flex flex-row gap-4">
                     <x-social.icon href="https://www.facebook.com/ModernHouseLV">
-                        <x-social.facebook class="transition-colors duration-200 hover:text-gray-500" />
+                        <x-social.facebook class="transition-colors duration-200 hover:text-gray-500"/>
                     </x-social.icon>
 
                     <x-social.icon href="https://www.instagram.com/siguldasskati">
-                        <x-social.instagram class="transition-colors duration-200 hover:text-gray-500" />
+                        <x-social.instagram class="transition-colors duration-200 hover:text-gray-500"/>
                     </x-social.icon>
 
                     <x-social.icon href="https://www.tiktok.com/@modernhouse_lv">
-                        <x-social.tiktok class="transition-colors duration-200 hover:text-gray-500" />
+                        <x-social.tiktok class="transition-colors duration-200 hover:text-gray-500"/>
                     </x-social.icon>
                 </ul>
             </div>

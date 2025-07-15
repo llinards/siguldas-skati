@@ -47,13 +47,11 @@ Route::group(
                     return view('admin.dashboard');
                 })->name('dashboard');
 
-                // Products management
                 Route::get('/product/add', AddProduct::class)->name('product.add');
                 Route::get('/product/{product:id}/edit', EditProduct::class)->name('product.edit');
                 Route::get('/product/{product:id}/images', ProductImages::class)->name('product.images');
                 Route::get('/product/{product:id}/features', ProductFeatures::class)->name('product.features');
 
-                // Features management
                 Route::get('/features', App\Livewire\Admin\Feature\FeatureList::class)->name('dashboard.features');
                 Route::get('/feature/add', App\Livewire\Admin\Feature\AddFeature::class)->name('dashboard.feature.add');
                 Route::get('/feature/{feature}/edit', App\Livewire\Admin\Feature\EditFeature::class)->name('dashboard.feature.edit');
