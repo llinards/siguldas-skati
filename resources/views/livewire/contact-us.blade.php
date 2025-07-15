@@ -1,31 +1,31 @@
 <form wire:submit.prevent="save" class="md:w-4/5 lg:w-full">
-    <x-honeypot livewire-model="extraFields" />
-    <x-admin.flash-message />
+    <x-honeypot livewire-model="extraFields"/>
+    <x-admin.flash-message/>
     <div class="border-ss-gray text-ss-gray mb-6 flex flex-col space-y-6 rounded-3xl border-1 p-6 shadow-md">
         <label class="mb-2" for="firstName">
             @lang('Vārds')
             *
         </label>
-        <x-input-error :messages="$errors->get('firstName')" />
-        <input class="border-b" id="firstName" wire:model="firstName" type="text" />
+        <x-input-error :messages="$errors->get('firstName')"/>
+        <input class="border-b" id="firstName" wire:model="firstName" required="required" type="text"/>
         <label class="mb-2" for="lastName">
             @lang('Uzvārds')
             *
         </label>
-        <x-input-error :messages="$errors->get('lastName')" />
-        <input class="border-b" id="lastName" wire:model="lastName" type="text" />
+        <x-input-error :messages="$errors->get('lastName')"/>
+        <input class="border-b" id="lastName" wire:model="lastName" required="required" type="text"/>
         <label class="mb-2" for="phoneNumber">
             @lang('Telefons')
             *
         </label>
-        <x-input-error :messages="$errors->get('phoneNumber')" />
-        <input class="border-b" id="phoneNumber" wire:model="phoneNumber" type="phoneNumber" />
+        <x-input-error :messages="$errors->get('phoneNumber')"/>
+        <input class="border-b" id="phoneNumber" wire:model="phoneNumber" required="required" type="phoneNumber"/>
         <label class="mb-2" for="email">
             @lang('E-pasts')
             *
         </label>
-        <x-input-error :messages="$errors->get('email')" />
-        <input class="border-b" id="email" wire:model="email" type="email" />
+        <x-input-error :messages="$errors->get('email')"/>
+        <input class="border-b" id="email" wire:model="email" required="required" type="email"/>
         <label class="mb-2" for="question">
             @lang('Jautājums')
         </label>
@@ -44,7 +44,7 @@
                     stroke="currentColor"
                     stroke-width="3"
                 >
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6"/>
                 </svg>
             </span>
             <span>

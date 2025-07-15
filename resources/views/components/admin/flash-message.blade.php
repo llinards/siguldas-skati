@@ -18,8 +18,8 @@
     }
 
     $styles = [
-        'success' => 'border-teal-200 bg-teal-100 text-teal-800',
-        'error' => 'border-red-200 bg-red-100 text-red-800',
+        'success' => 'bg-ss-dark text-white',
+        'error' => 'bg-red-100 text-red-800',
         'warning' => 'border-yellow-200 bg-yellow-100 text-yellow-800',
         'info' => 'border-blue-200 bg-blue-100 text-blue-800',
         'secondary' => 'border-gray-200 bg-gray-50 text-gray-600',

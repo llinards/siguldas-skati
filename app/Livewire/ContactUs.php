@@ -66,6 +66,7 @@ class ContactUs extends Component
             'phoneNumber.min' => __('validation.phone.min'),
             'phoneNumber.max' => __('validation.phone.max'),
 
+            'email.required' => __('validation.email.required'),
             'email.email' => __('validation.email.email'),
             'email.max' => __('validation.email.max'),
 
@@ -97,7 +98,7 @@ class ContactUs extends Component
         }
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->extraFields = new HoneypotData;
     }
