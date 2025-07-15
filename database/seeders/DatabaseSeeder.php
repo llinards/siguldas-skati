@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Feature;
+use App\Models\Newsletter;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\User;
@@ -29,5 +30,7 @@ class DatabaseSeeder extends Seeder
             ->has(ProductImage::factory()->count(10), 'images')
             ->has(Feature::factory()->count(15), 'features')
             ->create();
+
+        Newsletter::factory()->count(10)->create();
     }
 }
