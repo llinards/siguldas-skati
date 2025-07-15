@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Services\ErrorLogService;
 use App\Services\FlashMessageService;
+use App\Services\NewsletterService;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Spatie\Honeypot\Http\Livewire\Concerns\HoneypotData;
@@ -17,9 +18,11 @@ class Newsletter extends Component
 
     private ErrorLogService $errorLogService;
 
+    private NewsletterService $newsletterService;
+
     public HoneypotData $extraFields;
 
-    #[Validate('required|email|max:255')]
+    #[Validate('required|unique:newsletters|email|max:255')]
     public string $email = '';
 
     #[Validate('accepted')]
@@ -28,9 +31,11 @@ class Newsletter extends Component
     public function boot(
         FlashMessageService $flashMessageService,
         ErrorLogService $errorLogService,
+        NewsletterService $newsletterService,
     ): void {
         $this->flashMessageService = $flashMessageService;
         $this->errorLogService = $errorLogService;
+        $this->newsletterService = $newsletterService;
     }
 
     protected function messages(): array
@@ -39,6 +44,7 @@ class Newsletter extends Component
             'email.required' => __('validation.email.required'),
             'email.email' => __('validation.email.email'),
             'email.max' => __('validation.email.max'),
+            'email.unique' => __('validation.email.unique'),
 
             'consent.accepted' => __('validation.consent.accepted'),
         ];
@@ -49,7 +55,7 @@ class Newsletter extends Component
         $this->protectAgainstSpam();
         $this->validate();
         try {
-
+            $this->subscribeToNewsletter();
             $this->flashMessageService->success(__('Paldies! Jūsu pieteikums ir saņemts.'));
             $this->reset();
         } catch (\Exception $e) {
@@ -61,6 +67,19 @@ class Newsletter extends Component
     public function mount(): void
     {
         $this->extraFields = new HoneypotData;
+    }
+
+    private function subscribeToNewsletter(): void
+    {
+        $subscriber = $this->prepareData();
+        $this->newsletterService->store($subscriber);
+    }
+
+    private function prepareData(): array
+    {
+        return [
+            'email' => $this->email,
+        ];
     }
 
     public function render()

@@ -3,6 +3,10 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Admin\Feature\AddFeature;
+use App\Livewire\Admin\Feature\EditFeature;
+use App\Livewire\Admin\Feature\FeatureList;
+use App\Livewire\Admin\NewsletterList;
 use App\Livewire\Admin\Product\AddProduct;
 use App\Livewire\Admin\Product\EditProduct;
 use App\Livewire\Admin\Product\ProductFeatures;
@@ -52,9 +56,11 @@ Route::group(
                 Route::get('/product/{product:id}/images', ProductImages::class)->name('product.images');
                 Route::get('/product/{product:id}/features', ProductFeatures::class)->name('product.features');
 
-                Route::get('/features', App\Livewire\Admin\Feature\FeatureList::class)->name('dashboard.features');
-                Route::get('/feature/add', App\Livewire\Admin\Feature\AddFeature::class)->name('dashboard.feature.add');
-                Route::get('/feature/{feature}/edit', App\Livewire\Admin\Feature\EditFeature::class)->name('dashboard.feature.edit');
+                Route::get('/features', FeatureList::class)->name('dashboard.features');
+                Route::get('/feature/add', AddFeature::class)->name('dashboard.feature.add');
+                Route::get('/feature/{feature}/edit', EditFeature::class)->name('dashboard.feature.edit');
+
+                Route::get('/newsletter', NewsletterList::class)->name('newsletter.list');
             });
         });
 

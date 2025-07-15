@@ -14,6 +14,7 @@
     "validation.email.required": "E-pasta adrese ir obligāta.",
     "validation.email.email": "Lūdzu ievadiet derīgu e-pasta adresi.",
     "validation.email.max": "E-pasta adrese ir par garu.",
+    "validation.email.unique": "E-pasta adrese jau ir reģistrēta.",
     "validation.question.max": "Jautājums nedrīkst pārsniegt 1000 rakstzīmes.",
     "validation.consent.accepted": "Jums jāpiekrīt noteikumiem un nosacījumiem."
 }
