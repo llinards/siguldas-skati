@@ -6,9 +6,9 @@
                 <x-slot name="productCapacityLong">
                     @lang('Paredzēts')
                     {{
-                        $product->person_count === 1
-                            ? __('1 personai')
-                            : __(':count personām', ['count' => $product->person_count])
+                    $product->person_count === 1
+                    ? __('1 personai')
+                    : __(':count personām', ['count' => $product->person_count])
                     }}
                 </x-slot>
             </x-product.title>
@@ -42,34 +42,21 @@
 
     {{-- PRODUCT MODAL --}}
     <dialog id="modal">
-        <summary tabindex="1"
-            id="modalContainer"
-            class="fixed z-130 flex h-full w-full items-center justify-center bg-black/50 opacity-0 transition-opacity duration-300" 
-            >
-            <div class="bg-ss flex max-h-[90vh] flex-col overflow-hidden rounded-xl border shadow-2xs w-xs sm:w-lg md:w-xl xl:w-2xl">
+        <summary tabindex="1" id="modalContainer"
+            class="fixed z-130 flex h-full w-full items-center justify-center bg-black/50 opacity-0 transition-opacity duration-300">
+            <div
+                class="bg-ss flex max-h-[90vh] flex-col overflow-hidden rounded-xl border shadow-2xs w-xs sm:w-lg md:w-xl xl:w-2xl">
                 <div class="border-ss-dark flex items-center justify-between border-b px-4 py-3">
                     <h3 id="modal-label" class="font-bold">
                         @lang('Papildērtības')
                     </h3>
-                    <span
-                        id="modalBtnClose"
-                        type="button"
+                    <span id="modalBtnClose" type="button"
                         class="bg-ss-dark hover:bg-white inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent hover:border-ss-dark transition-all duration-200 cursor-pointer group"
-                        aria-label="Close"
-                        tabindex="2"
-                    >
+                        aria-label="Close" tabindex="2">
                         <span class="sr-only">Close</span>
-                        <svg
-                            class="size-4 shrink-0 stroke-white group-hover:stroke-ss-dark group-hover:duration-200"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="white"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
+                        <svg class="size-4 shrink-0 stroke-white group-hover:stroke-ss-dark group-hover:duration-200"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M18 6 6 18"></path>
                             <path d="m6 6 12 12"></path>
                         </svg>
@@ -79,14 +66,11 @@
                 <div class="overflow-y-auto p-4">
                     <ul class="sm:grid mb-6 grid-cols-2 grid-rows-5 space-y-3">
                         @foreach ($product->features as $feature)
-                            <li class="flex items-center gap-x-4">
-                                <img
-                                    src="{{ Storage::url($feature->icon_image) }}"
-                                    alt="{{ $feature->title }}"
-                                    class="h-8 w-8"
-                                />
-                                {{ $feature->title }}
-                            </li>
+                        <li class="flex items-center gap-x-4">
+                            <img src="{{ Storage::url($feature->icon_image) }}" alt="{{ $feature->title }}"
+                                class="h-8 w-8" />
+                            {{ $feature->title }}
+                        </li>
                         @endforeach
                     </ul>
                 </div>
@@ -117,6 +101,7 @@
             productModalBtnOpen.forEach((btn) => {
                 btn.addEventListener('click', () => {
                     productModal.showModal();
+                    document.body.classList.add('overflow-hidden');
 
                     productModalContainer.classList.add('opacity-0');
                     productModalContainer.classList.remove('opacity-100');
@@ -131,11 +116,13 @@
 
             productModalBtnClose.addEventListener('click', () => {
                 closeModal();
+                document.body.classList.remove('overflow-hidden');
             });
 
             productModalContainer.addEventListener('click', function (e) {
                 if (e.target === productModalContainer) {
                     closeModal();
+                    document.body.classList.remove('overflow-hidden');
                 }
             });
         }
