@@ -1,5 +1,5 @@
 <div>
-    <x-admin.flash-message />
+    <x-admin.flash-message/>
     <form wire:submit="save">
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
@@ -9,7 +9,7 @@
 
                 @if (! $features->isEmpty())
                     <div class="mt-8">
-                        <div class="grid grid-cols-1 grid-cols-2 gap-4 sm:grid-cols-4">
+                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                             @foreach ($features as $feature)
                                 <label
                                     class="relative flex cursor-pointer items-center justify-center rounded-lg border p-4 hover:bg-gray-50"
@@ -28,7 +28,7 @@
                                             stroke="currentColor"
                                             stroke-width="3"
                                         >
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6"/>
                                         </svg>
                                     </div>
                                     <div class="flex items-center">
