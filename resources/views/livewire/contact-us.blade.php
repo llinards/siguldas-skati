@@ -1,4 +1,5 @@
 <form wire:submit.prevent="save" class="md:w-4/5 lg:w-full">
+    <x-honeypot livewire-model="extraFields"/>
     <x-admin.flash-message/>
     <div
         class="border-ss-gray text-ss-gray mb-6 flex flex-col space-y-6 rounded-3xl border-1 p-6 shadow-md"

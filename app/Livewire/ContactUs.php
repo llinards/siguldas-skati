@@ -9,12 +9,18 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Spatie\Honeypot\Http\Livewire\Concerns\HoneypotData;
+use Spatie\Honeypot\Http\Livewire\Concerns\UsesSpamProtection;
 
 class ContactUs extends Component
 {
+    use UsesSpamProtection;
+
     private FlashMessageService $flashMessageService;
 
     private ErrorLogService $errorLogService;
+
+    public HoneypotData $extraFields;
 
     #[Validate('required|min:2|max:50|regex:/^[a-zA-ZāčēģīķļņšūžĀČĒĢĪĶĻŅŠŪŽ\s\-\']+$/')]
     public string $firstName = '';
@@ -71,8 +77,8 @@ class ContactUs extends Component
 
     public function save(): void
     {
+        $this->protectAgainstSpam();
         $this->validate();
-
         try {
             Mail::send(new ContactUsMail(
                 $this->firstName,
@@ -89,6 +95,11 @@ class ContactUs extends Component
             $this->errorLogService->logError('Failed to send message from contact us form.', $e, []);
             $this->flashMessageService->error(__('Notikusi kļūda! Mēģini vēlreiz vai sazinies ar mums pa telefonu.'));
         }
+    }
+
+    public function mount()
+    {
+        $this->extraFields = new HoneypotData;
     }
 
     public function render(): View
