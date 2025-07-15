@@ -42,21 +42,21 @@
 
     {{-- PRODUCT MODAL --}}
     <dialog id="modal">
-        <div
+        <summary tabindex="1"
             id="modalContainer"
-            class="fixed z-130 flex h-full w-full items-center justify-center bg-black/50 opacity-0 transition-opacity duration-300"
-        >
+            class="fixed z-130 flex h-full w-full items-center justify-center bg-black/50 opacity-0 transition-opacity duration-300" 
+            >
             <div class="bg-ss flex max-h-[90vh] flex-col overflow-hidden rounded-xl border shadow-2xs w-xs sm:w-lg md:w-xl xl:w-2xl">
                 <div class="border-ss-dark flex items-center justify-between border-b px-4 py-3">
                     <h3 id="modal-label" class="font-bold">
                         @lang('Papildērtības')
                     </h3>
-                    <button
+                    <span
                         id="modalBtnClose"
                         type="button"
                         class="bg-ss-dark hover:bg-white inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent hover:border-ss-dark transition-all duration-200 cursor-pointer group"
                         aria-label="Close"
-                        tabindex="-1"
+                        tabindex="2"
                     >
                         <span class="sr-only">Close</span>
                         <svg
@@ -73,7 +73,7 @@
                             <path d="M18 6 6 18"></path>
                             <path d="m6 6 12 12"></path>
                         </svg>
-                    </button>
+                    </span>
                 </div>
 
                 <div class="overflow-y-auto p-4">
@@ -92,10 +92,10 @@
                 </div>
 
                 <div class="border-ss-gray gap-x-2 border-t px-4 py-3">
-                    <x-btn-primary>@lang('Rezervēt')</x-btn-primary>
+                    <x-btn-primary tabindex="3">@lang('Rezervēt')</x-btn-primary>
                 </div>
             </div>
-        </div>
+        </summary>
     </dialog>
 
     <script type="module">
