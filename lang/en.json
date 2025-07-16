@@ -127,7 +127,17 @@
     "Ievadiet savu e-pastu": "Enter your email address",
     "Abonēt": "Subscribe",
     "Paldies! Jūsu pieteikums ir saņemts.": "Thank you! You have subscribed.",
-    "Paldies! Jūsu ziņa ir saņemta": "Thank you! Your message has been received",
+    "Paldies! Jūsu ziņa ir saņemta.": "Thank you! Your message has been received.",
     "Notikusi kļūda! Mēģini vēlreiz vai sazinies ar mums pa telefonu.": "An error occurred! Please try again or contact us by phone.",
-    "Izvēlies...": "Choose..."
+    "Izvēlies...": "Choose...",
+    "Ērtības un aprīkojums": "Amenities and equipment",
+    "Cenas un papildu informācija": "Prices and additional information",
+    "Sazinies ar mums, ja rodas neskaidrības vai vēlies uzzināt vairāk par mūsu brīvdienu dizaina mājām.": "Contact us if you have any questions or want to learn more about our holiday design houses.",
+    "Vārds": "Name",
+    "Uzvārds": "Surname",
+    "Telefons": "Phone",
+    "E-pasts": "Email",
+    "Jautājums": "Question",
+    "Nosūtīt": "Send",
+    "Cēsu iela 17, Sigulda, Latvija": "Cēsu street 17, Sigulda, Latvia"
 }

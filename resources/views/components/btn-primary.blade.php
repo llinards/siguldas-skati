@@ -2,7 +2,7 @@
 
 @php
     $baseStyles = 'flex sm:inline-block justify-center text-center px-6 py-4 uppercase rounded-xl
-                                           transition-all duration-200 border-1 border-transparent';
+                                                       transition-all duration-200 border-1 border-transparent';
 
     $enabledStyles = 'bg-ss-dark hover:border-ss-dark cursor-pointer text-white hover:bg-white hover:text-black';
 

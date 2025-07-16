@@ -8,9 +8,8 @@
                 <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
             </div>
             <p class="text-ss-gray pb-6 text-sm leading-none lg:max-w-1/3">
-                @lang('Sazinies ar mums, ja rodas neskaidrības vai vēlies uzzināt vairāk par mūsu brīvdienu dizaina
-                                                                                                                                        mājām')
-                !
+                {{-- prettier-ignore --}}
+                @lang('Sazinies ar mums, ja rodas neskaidrības vai vēlies uzzināt vairāk par mūsu brīvdienu dizaina mājām.')
             </p>
 
             <div class="grid-cols-2 items-center gap-x-6 lg:grid lg:gap-x-12 xl:grid-cols-3">
