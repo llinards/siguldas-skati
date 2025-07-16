@@ -4,7 +4,7 @@
         <div class="relative mb-3 inline-block">
             <h2 class="text-h-sm-mob lg:text-h-mob mb-3 leading-none">
                 @lang('Ērtības un
-                                                                        aprīkojums')
+                                                                                                                                        aprīkojums')
             </h2>
             <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
         </div>
@@ -17,7 +17,7 @@
         <div class="relative mb-3 inline-block">
             <h2 class="text-h-sm-mob lg:text-h-mob mt-6 mb-3 leading-none xl:mt-0">
                 @lang('Cenas un papildu
-                                                                        informācija')
+                                                                                                                                        informācija')
             </h2>
             <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
         </div>
@@ -50,7 +50,7 @@
         >
             <h2 class="text-h-sm-mob lg:text-h-mob text-left leading-none">
                 @lang('Ērtības un
-                                                                        aprīkojums')
+                                                                                                                                        aprīkojums')
             </h2>
             <x-accordion-arrows />
         </button>
@@ -75,7 +75,7 @@
         >
             <h2 class="text-h-sm-mob lg:text-h-mob text-left leading-none">
                 @lang('Cenas un papildu
-                                                                        informācija')
+                                                                                                                                        informācija')
             </h2>
             <x-accordion-arrows />
         </button>

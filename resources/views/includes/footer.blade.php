@@ -7,7 +7,7 @@
                 >
                     @lang('Uzzini pirmais par jaunumiem!')
                 </h3>
-                <livewire:newsletter/>
+                <livewire:newsletter />
             </div>
         </div>
     </div>
@@ -20,7 +20,7 @@
         >
             <div class="flex flex-col py-6 sm:col-span-2 md:col-span-4 md:items-center md:pt-12 lg:col-span-1 lg:py-0">
                 <a href="/{{ app()->getLocale() }}" class="flex items-center">
-                    <img src="{{ asset('images/logo.png') }}" class="mb-4 w-xs" alt="Siguldas Skati Logo"/>
+                    <img src="{{ asset('images/logo.png') }}" class="mb-4 w-xs" alt="Siguldas Skati Logo" />
                 </a>
             </div>
             <div class="mb-6 lg:my-0">
@@ -58,8 +58,8 @@
                     <x-nav.footer-link href="mailto:info@siguldasskati.lv">info@siguldasskati.lv</x-nav.footer-link>
                     <x-nav.footer-link href="https://maps.app.goo.gl/gEtDt5FS3qpzUtWE9" target="_blank">
                         @lang('Cēsu
-                                                                                                            iela 17,
-                                                                                                            Sigulda, Latvija')
+                                                                                                                                                                                                            iela 17,
+                                                                                                                                                                                                            Sigulda, Latvija')
                     </x-nav.footer-link>
                 </ul>
             </div>
@@ -69,15 +69,15 @@
                 </h4>
                 <ul class="flex flex-row gap-4">
                     <x-social.icon href="https://www.facebook.com/ModernHouseLV">
-                        <x-social.facebook class="transition-colors duration-200 hover:text-gray-500"/>
+                        <x-social.facebook class="transition-colors duration-200 hover:text-gray-500" />
                     </x-social.icon>
 
                     <x-social.icon href="https://www.instagram.com/siguldasskati">
-                        <x-social.instagram class="transition-colors duration-200 hover:text-gray-500"/>
+                        <x-social.instagram class="transition-colors duration-200 hover:text-gray-500" />
                     </x-social.icon>
 
                     <x-social.icon href="https://www.tiktok.com/@modernhouse_lv">
-                        <x-social.tiktok class="transition-colors duration-200 hover:text-gray-500"/>
+                        <x-social.tiktok class="transition-colors duration-200 hover:text-gray-500" />
                     </x-social.icon>
                 </ul>
             </div>

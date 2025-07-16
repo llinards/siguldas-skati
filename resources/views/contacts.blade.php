@@ -9,7 +9,7 @@
             </div>
             <p class="text-ss-gray pb-6 text-sm leading-none lg:max-w-1/3">
                 @lang('Sazinies ar mums, ja rodas neskaidrības vai vēlies uzzināt vairāk par mūsu brīvdienu dizaina
-                                                                        mājām')
+                                                                                                                                        mājām')
                 !
             </p>
 

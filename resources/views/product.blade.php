@@ -42,11 +42,14 @@
 
     {{-- PRODUCT MODAL --}}
     <dialog id="modal">
-        <summary tabindex="1"
+        <summary
+            tabindex="1"
             id="modalContainer"
-            class="fixed z-130 flex h-full w-full items-center justify-center bg-black/50 opacity-0 transition-opacity duration-300" 
+            class="fixed z-130 flex h-full w-full items-center justify-center bg-black/50 opacity-0 transition-opacity duration-300"
+        >
+            <div
+                class="bg-ss flex max-h-[90vh] w-xs flex-col overflow-hidden rounded-xl border shadow-2xs sm:w-lg md:w-xl xl:w-2xl"
             >
-            <div class="bg-ss flex max-h-[90vh] flex-col overflow-hidden rounded-xl border shadow-2xs w-xs sm:w-lg md:w-xl xl:w-2xl">
                 <div class="border-ss-dark flex items-center justify-between border-b px-4 py-3">
                     <h3 id="modal-label" class="font-bold">
                         @lang('Papildērtības')
@@ -54,13 +57,13 @@
                     <span
                         id="modalBtnClose"
                         type="button"
-                        class="bg-ss-dark hover:bg-white inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent hover:border-ss-dark transition-all duration-200 cursor-pointer group"
+                        class="bg-ss-dark hover:border-ss-dark group inline-flex size-8 cursor-pointer items-center justify-center gap-x-2 rounded-full border border-transparent transition-all duration-200 hover:bg-white"
                         aria-label="Close"
                         tabindex="2"
                     >
                         <span class="sr-only">Close</span>
                         <svg
-                            class="size-4 shrink-0 stroke-white group-hover:stroke-ss-dark group-hover:duration-200"
+                            class="group-hover:stroke-ss-dark size-4 shrink-0 stroke-white group-hover:duration-200"
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
                             height="24"
@@ -77,7 +80,7 @@
                 </div>
 
                 <div class="overflow-y-auto p-4">
-                    <ul class="sm:grid mb-6 grid-cols-2 grid-rows-5 space-y-3">
+                    <ul class="mb-6 grid-cols-2 grid-rows-5 space-y-3 sm:grid">
                         @foreach ($product->features as $feature)
                             <li class="flex items-center gap-x-4">
                                 <img

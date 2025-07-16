@@ -1,5 +1,5 @@
 <div>
-    <x-admin.flash-message/>
+    <x-admin.flash-message />
     <form wire:submit="save">
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
@@ -28,7 +28,7 @@
                                             stroke="currentColor"
                                             stroke-width="3"
                                         >
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6" />
                                         </svg>
                                     </div>
                                     <div class="flex items-center">
