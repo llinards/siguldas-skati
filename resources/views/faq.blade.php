@@ -20,7 +20,7 @@
                     >
                         <h2 class="text-h-sm-mob lg:text-h-mob text-left leading-none">
                             @lang('Ērtības un
-                                                                                                                                                                                                                                                                                                                                  aprīkojums')
+                                                                                                                                                                                                                                                                                                                                                                                          aprīkojums')
                         </h2>
                         <x-accordion-arrows />
                     </button>
