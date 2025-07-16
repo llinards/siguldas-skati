@@ -50,7 +50,7 @@
                                 </li>
                                 <li>
                                     <x-link href="https://maps.app.goo.gl/gEtDt5FS3qpzUtWE9" target="_blank">
-                                        Cēsu iela 17, Sigulda, Latvija
+                                        @lang('Cēsu iela 17, Sigulda, Latvija')
                                     </x-link>
                                 </li>
                             </ul>
@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="col-span-1 items-center justify-center md:flex lg:flex-none">
-                    <livewire:contact-us />
+                    <livewire:contact-us/>
                 </div>
             </div>
         </div>
