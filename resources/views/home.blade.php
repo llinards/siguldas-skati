@@ -12,14 +12,14 @@
                                                                         atpūtai!')
             </h1>
 
-            <x-btn-header href="#" class="absolute bottom-48 z-10 sm:bottom-16">
+            <x-btn-header href="#about-us" class="absolute bottom-48 z-10 sm:bottom-16">
                 @lang('Uzzināt vairāk')
             </x-btn-header>
         </div>
     </div>
 
     {{-- ABOUT US --}}
-    <div class="bg-ss">
+    <div id="about-us" class="bg-ss">
         <div class="container mx-auto px-4 py-12 md:py-18 lg:py-24 xl:py-30">
             <div>
                 <div class="relative mb-3 inline-block">

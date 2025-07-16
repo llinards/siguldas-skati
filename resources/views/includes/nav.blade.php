@@ -12,9 +12,9 @@
             />
         </a>
         <ul class="{{ Route::is('home') ? 'text-white' : 'text-black' }} hidden uppercase lg:flex">
-            <x-nav.nav-link href="#" class="{{ Route::is('book') ? 'border-b-ss-gray text-ss-gray' : '' }}">
-                @lang('Rezervēt')
-            </x-nav.nav-link>
+            {{--            <x-nav.nav-link href="#" class="{{ Route::is('book') ? 'border-b-ss-gray text-ss-gray' : '' }}">--}}
+            {{--                @lang('Rezervēt')--}}
+            {{--            </x-nav.nav-link>--}}
             <x-nav.nav-link
                 href="{{ route('products') }}"
                 class="{{ Route::is('products') ? 'border-b-ss-gray text-ss-gray' : '' }}"
@@ -88,9 +88,9 @@
         class="bg-ss bg-opacity-90 fixed inset-0 z-40 lg:hidden"
     >
         <ul class="flex h-full flex-col items-center justify-center space-y-2 text-black uppercase lg:text-white">
-            <x-nav.nav-link href="#" class="{{ Route::is('book') ? 'border-b-ss-gray text-ss-gray' : '' }}">
-                @lang('Rezervēt')
-            </x-nav.nav-link>
+            {{--            <x-nav.nav-link href="#" class="{{ Route::is('book') ? 'border-b-ss-gray text-ss-gray' : '' }}">--}}
+            {{--                @lang('Rezervēt')--}}
+            {{--            </x-nav.nav-link>--}}
             <x-nav.nav-link
                 href="{{ route('products') }}"
                 class="{{ Route::is('products') ? 'border-b-ss-gray text-ss-gray' : '' }}"
@@ -121,15 +121,15 @@
         </ul>
         <ul class="absolute right-0 bottom-12 left-0 flex items-center justify-center space-x-8">
             <x-social.icon href="https://www.facebook.com/ModernHouseLV">
-                <x-social.facebook />
+                <x-social.facebook/>
             </x-social.icon>
 
             <x-social.icon href="https://www.instagram.com/siguldasskati">
-                <x-social.instagram />
+                <x-social.instagram/>
             </x-social.icon>
 
             <x-social.icon href="https://www.tiktok.com/@modernhouse_lv">
-                <x-social.tiktok />
+                <x-social.tiktok/>
             </x-social.icon>
         </ul>
     </div>

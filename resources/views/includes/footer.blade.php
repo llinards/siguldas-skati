@@ -22,9 +22,6 @@
                 <a href="/{{ app()->getLocale() }}" class="flex items-center">
                     <img src="{{ asset('images/logo.png') }}" class="mb-4 w-xs" alt="Siguldas Skati Logo"/>
                 </a>
-                <p class="text-sm">
-                    @lang('© Siguldas skati 2025 | Visas tiesības rezervētas.')
-                </p>
             </div>
             <div class="mb-6 lg:my-0">
                 <ul>
@@ -86,6 +83,9 @@
             </div>
         </div>
         <div class="container mx-auto my-6 px-4 text-sm text-white md:text-center lg:mt-12">
+            <p class="text-sm">
+                @lang('© Siguldas skati 2025 | Visas tiesības rezervētas.')
+            </p>
             @lang('Mājaslapu izstrādāja')
             <a
                 href="https://slmedia.lv"
