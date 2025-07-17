@@ -40,7 +40,49 @@
         </div>
     </div>
 
-    <script type="module">
+    <div id="modal"
+        class="hs-overlay hs-overlay-open:opacity-100 hs-overlay-open:duration-500 hidden size-full fixed top-0 start-0 z-80 opacity-0 overflow-x-hidden transition-all overflow-y-auto pointer-events-none"
+        role="dialog" tabindex="-1" aria-labelledby="modal-label">
+        <div class="h-full w-full flex items-center justify-center">
+            <div
+                class="bg-ss flex max-h-[90vh] flex-col overflow-hidden rounded-xl border shadow-2xs w-xs sm:w-lg md:w-xl xl:w-2xl">
+                <div class="border-ss-dark flex items-center justify-between border-b px-4 py-3">
+                    <h3 id="modal-label" class="text-h-sm-mob lg:text-h-mob leading-none ">
+                        @lang('Papildērtības')
+                    </h3>
+                    <span id="modalBtnClose" type="button"
+                        class="bg-ss-dark hover:bg-white inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent hover:border-ss-dark transition-all duration-200 cursor-pointer group"
+                        aria-label="Close" tabindex="2">
+                        <span class="sr-only">Close</span>
+                        <svg class="size-4 shrink-0 stroke-white group-hover:stroke-ss-dark group-hover:duration-200"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 6 6 18"></path>
+                            <path d="m6 6 12 12"></path>
+                        </svg>
+                    </span>
+                </div>
+
+                <div class="overflow-y-auto p-4">
+                    <ul class="sm:grid mb-6 grid-cols-2 grid-rows-5 space-y-3">
+                        @foreach ($product->features as $feature)
+                        <li class="flex items-center gap-x-4">
+                            <img src="{{ Storage::url($feature->icon_image) }}" alt="{{ $feature->title }}"
+                                class="h-8 w-8" />
+                            {{ $feature->title }}
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+
+                <div class="border-ss-gray gap-x-2 border-t px-4 py-3">
+                    <x-btn-primary tabindex="3">@lang('Rezervēt')</x-btn-primary>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- <script type="module">
         const productModalBtnOpen = document.querySelectorAll('.modalBtnOpen');
             const productModalBtnClose = document.getElementById('modalBtnClose');
             const productModal = document.getElementById('modal');
@@ -90,7 +132,7 @@
     </script>
 
     {{-- PRODUCT MODAL --}}
-    <dialog id="modal">
+    {{-- <dialog id="modal">
         <summary tabindex="1" id="modalContainer"
             class="fixed z-130 flex h-full w-full items-center justify-center bg-black/50 opacity-0 transition-opacity duration-300">
             <div
@@ -129,7 +171,7 @@
                 </div>
             </div>
         </summary>
-    </dialog>
+    </dialog> --}}
 
 
 </x-app-layout>
