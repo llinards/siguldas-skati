@@ -85,31 +85,36 @@
 
     <script type="module">
         // Get modal and trigger elements
-        const modal = document.getElementById('modal');
-        const modalCloseBtn = document.getElementById('modalBtnClose');
+const modal = document.getElementById('modal');
+const modalCloseBtn = document.getElementById('modalBtnClose');
 
-        // Function to disable body scroll
-        function disableBodyScroll() {
-        document.body.style.overflow = 'hidden';
-        document.body.style.position = 'fixed';
-        document.body.style.width = '100%';
-        }
+// Function to disable body scroll
+function disableBodyScroll() {
+const scrollY = window.scrollY;
+document.body.style.overflow = 'hidden';
+document.body.style.position = 'fixed';
+document.body.style.top = `-${scrollY}px`;
+document.body.style.width = '100%';
+}
 
-        // Function to enable body scroll
-        function enableBodyScroll() {
-        document.body.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.width = '';
-        }
+// Function to enable body scroll
+function enableBodyScroll() {
+const scrollY = document.body.style.top;
+document.body.style.overflow = '';
+document.body.style.position = '';
+document.body.style.top = '';
+document.body.style.width = '';
+window.scrollTo(0, parseInt(scrollY || '0') * -1);
+}
 
-        // Listen for Preline UI modal events
-        modal.addEventListener('open.hs.overlay', disableBodyScroll);
-        modal.addEventListener('close.hs.overlay', enableBodyScroll);
+// Listen for Preline UI modal events
+modal.addEventListener('open.hs.overlay', disableBodyScroll);
+modal.addEventListener('close.hs.overlay', enableBodyScroll);
 
-        // Also handle manual close button
-        modalCloseBtn.addEventListener('click', () => {
-        setTimeout(enableBodyScroll, 100);
-        });
+// Also handle manual close button
+modalCloseBtn.addEventListener('click', () => {
+setTimeout(enableBodyScroll, 100);
+});
     </script>
 
 </x-app-layout>
