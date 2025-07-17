@@ -8,7 +8,8 @@
     @endforeach
 </ul>
 
-<x-btn-primary @click="openModal()" class="modalBtnOpen">
+<x-btn-primary aria-haspopup="dialog" aria-expanded="false" aria-controls="modal" data-hs-overlay="#modal"
+    class="modalBtnOpen">
     @lang('Rādīt visas papildērtības')
     ({{ count($product->features) }})
 </x-btn-primary>
