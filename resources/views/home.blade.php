@@ -1,5 +1,21 @@
 <x-app-layout :title="__('Sākums')">
 
+
+
+    {{-- HEADER --}}
+    <div class="home-introduction relative flex justify-center bg-cover bg-center bg-no-repeat px-2">
+        <div class="container mx-auto flex flex-col items-center px-4">
+            <h1
+                class="text-h-mob xs:text-6xl xl:text-h font-heading absolute top-48 z-10 max-w-7xl text-center leading-12 text-white uppercase sm:top-1/2 sm:-translate-y-1/2 sm:text-7xl sm:leading-16 md:text-8xl md:leading-24 xl:leading-28">
+                {{-- prettier-ignore --}}
+                @lang('Modernas brīvdienu dizaina mājas tavai atpūtai!')
+            </h1>
+
+            <x-btn-header href="#about-us" class="absolute bottom-48 z-10 sm:bottom-16">
+                @lang('Uzzināt vairāk')
+            </x-btn-header>
+        </div>
+    </div>
     <button type="button"
         class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
         aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-vertically-centered-modal"
@@ -51,22 +67,6 @@
             </div>
         </div>
     </div>
-
-    {{-- HEADER --}}
-    <div class="home-introduction relative flex justify-center bg-cover bg-center bg-no-repeat px-2">
-        <div class="container mx-auto flex flex-col items-center px-4">
-            <h1
-                class="text-h-mob xs:text-6xl xl:text-h font-heading absolute top-48 z-10 max-w-7xl text-center leading-12 text-white uppercase sm:top-1/2 sm:-translate-y-1/2 sm:text-7xl sm:leading-16 md:text-8xl md:leading-24 xl:leading-28">
-                {{-- prettier-ignore --}}
-                @lang('Modernas brīvdienu dizaina mājas tavai atpūtai!')
-            </h1>
-
-            <x-btn-header href="#about-us" class="absolute bottom-48 z-10 sm:bottom-16">
-                @lang('Uzzināt vairāk')
-            </x-btn-header>
-        </div>
-    </div>
-
     {{-- ABOUT US --}}
     <div id="about-us" class="bg-ss">
         <div class="container mx-auto px-4 py-12 md:py-18 lg:py-24 xl:py-30">
