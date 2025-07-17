@@ -130,37 +130,4 @@
             });
         }
     </script>
-
-    <style>
-        /* Additional CSS for Safari and mobile browser fixes */
-        .modal-open {
-            position: fixed !important;
-            overflow: hidden !important;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        /* Prevent iOS bounce scrolling when modal is open */
-        .modal-open,
-        .modal-open body {
-            height: 100% !important;
-            overflow: hidden !important;
-        }
-
-        /* Ensure modal content itself can scroll */
-        #modal [class*="overflow-y-auto"] {
-            -webkit-overflow-scrolling: touch;
-        }
-
-        /* Additional Safari-specific fixes */
-        @supports (-webkit-touch-callout: none) {
-            .modal-open {
-                position: fixed !important;
-                top: 0 !important;
-                left: 0 !important;
-                width: 100% !important;
-                height: 100% !important;
-                overflow: hidden !important;
-            }
-        }
-    </style>
 </x-app-layout>
