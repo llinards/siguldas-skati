@@ -47,7 +47,7 @@
             <div
                 class="bg-ss flex max-h-[90vh] flex-col overflow-hidden rounded-xl border shadow-2xs w-xs sm:w-lg md:w-xl xl:w-2xl">
                 <div class="border-ss-dark flex items-center justify-between border-b px-4 py-3">
-                    <h3 id="modal-label" class="font-bold">
+                    <h3 id="modal-label" class="text-h-sm-mob lg:text-h-mob leading-none ">
                         @lang('Papildērtības')
                     </h3>
                     <span id="modalBtnClose" type="button"
@@ -101,6 +101,7 @@
             productModalBtnOpen.forEach((btn) => {
                 btn.addEventListener('click', () => {
                     productModal.showModal();
+                    productModalContainer.classList.add('modal-open');
                     document.body.classList.add('overflow-hidden');
 
                     productModalContainer.classList.add('opacity-0');
@@ -116,15 +117,50 @@
 
             productModalBtnClose.addEventListener('click', () => {
                 closeModal();
+                productModalContainer.classList.remove('modal-open');
                 document.body.classList.remove('overflow-hidden');
             });
 
             productModalContainer.addEventListener('click', function (e) {
                 if (e.target === productModalContainer) {
                     closeModal();
+                    productModalContainer.classList.remove('modal-open');
                     document.body.classList.remove('overflow-hidden');
                 }
             });
         }
     </script>
+
+    <style>
+        /* Additional CSS for Safari and mobile browser fixes */
+        .modal-open {
+            position: fixed !important;
+            overflow: hidden !important;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Prevent iOS bounce scrolling when modal is open */
+        .modal-open,
+        .modal-open body {
+            height: 100% !important;
+            overflow: hidden !important;
+        }
+
+        /* Ensure modal content itself can scroll */
+        #modal [class*="overflow-y-auto"] {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Additional Safari-specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            .modal-open {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                overflow: hidden !important;
+            }
+        }
+    </style>
 </x-app-layout>
