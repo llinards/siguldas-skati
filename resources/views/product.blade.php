@@ -40,6 +40,55 @@
         </div>
     </div>
 
+    <script type="module">
+        const productModalBtnOpen = document.querySelectorAll('.modalBtnOpen');
+            const productModalBtnClose = document.getElementById('modalBtnClose');
+            const productModal = document.getElementById('modal');
+            const productModalContainer = document.getElementById('modalContainer');
+    
+            function closeModal() {
+                productModalContainer.classList.remove('opacity-100');
+                productModalContainer.classList.add('opacity-0');
+                productModalContainer.addEventListener('transitionend', function handler() {
+                    productModal.close();
+                    productModalContainer.removeEventListener('transitionend', handler);
+                });
+            }
+    
+            if (productModal) {
+                productModalBtnOpen.forEach((btn) => {
+                    btn.addEventListener('click', () => {
+                        productModalContainer.classList.add('modal-open');
+                        document.body.classList.add('overflow-hidden');
+                        productModal.showModal();
+    
+                        productModalContainer.classList.add('opacity-0');
+                        productModalContainer.classList.remove('opacity-100');
+    
+                        // Ensures transition.
+                        void productModalContainer.offsetWidth;
+    
+                        productModalContainer.classList.add('opacity-100');
+                        productModalContainer.classList.remove('opacity-0');
+                    });
+                });
+    
+                productModalBtnClose.addEventListener('click', () => {
+                    productModalContainer.classList.remove('modal-open');
+                    document.body.classList.remove('overflow-hidden');
+                    closeModal();
+                });
+    
+                productModalContainer.addEventListener('click', function (e) {
+                    if (e.target === productModalContainer) {
+                        productModalContainer.classList.remove('modal-open');
+                        document.body.classList.remove('overflow-hidden');
+                        closeModal();
+                    }
+                });
+            }
+    </script>
+
     {{-- PRODUCT MODAL --}}
     <dialog id="modal">
         <summary tabindex="1" id="modalContainer"
@@ -82,52 +131,5 @@
         </summary>
     </dialog>
 
-    <script type="module">
-        const productModalBtnOpen = document.querySelectorAll('.modalBtnOpen');
-        const productModalBtnClose = document.getElementById('modalBtnClose');
-        const productModal = document.getElementById('modal');
-        const productModalContainer = document.getElementById('modalContainer');
 
-        function closeModal() {
-            productModalContainer.classList.remove('opacity-100');
-            productModalContainer.classList.add('opacity-0');
-            productModalContainer.addEventListener('transitionend', function handler() {
-                productModal.close();
-                productModalContainer.removeEventListener('transitionend', handler);
-            });
-        }
-
-        if (productModal) {
-            productModalBtnOpen.forEach((btn) => {
-                btn.addEventListener('click', () => {
-                    productModal.showModal();
-                    productModalContainer.classList.add('modal-open');
-                    document.body.classList.add('overflow-hidden');
-
-                    productModalContainer.classList.add('opacity-0');
-                    productModalContainer.classList.remove('opacity-100');
-
-                    // Ensures transition.
-                    void productModalContainer.offsetWidth;
-
-                    productModalContainer.classList.add('opacity-100');
-                    productModalContainer.classList.remove('opacity-0');
-                });
-            });
-
-            productModalBtnClose.addEventListener('click', () => {
-                closeModal();
-                productModalContainer.classList.remove('modal-open');
-                document.body.classList.remove('overflow-hidden');
-            });
-
-            productModalContainer.addEventListener('click', function (e) {
-                if (e.target === productModalContainer) {
-                    closeModal();
-                    productModalContainer.classList.remove('modal-open');
-                    document.body.classList.remove('overflow-hidden');
-                }
-            });
-        }
-    </script>
 </x-app-layout>
