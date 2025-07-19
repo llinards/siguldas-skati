@@ -48,7 +48,7 @@
             <div
                 class="bg-ss flex max-h-[90vh] flex-col overflow-hidden rounded-xl border shadow-2xs w-xs sm:w-lg md:w-xl xl:w-2xl">
                 <div class="border-ss-dark flex items-center justify-between border-b px-4 py-3">
-                    <h3 id="modal-label" class="text-h-sm-mob lg:text-h-mob leading-0.5">
+                    <h3 id="modal-label" class="text-h-sm-mob lg:text-h-mob leading-none mt-2">
                         @lang('Papildērtības')
                     </h3>
                     <span id="modalBtnClose" type="button"
