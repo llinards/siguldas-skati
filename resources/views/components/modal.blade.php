@@ -51,7 +51,7 @@ $maxWidth = [
     </div>
 
     <div x-show="show"
-        class="{{ $maxWidth }} fixed max-h-[90vh] transform flex flex-col overflow-y-auto rounded-xl bg-ss border shadow-2xs transition-all w-xs sm:w-lg md:w-xl xl:w-2xl relative z-10"
+        class="{{ $maxWidth }} max-h-[90vh] transform flex flex-col overflow-y-auto rounded-xl bg-ss border shadow-2xs transition-all w-xs sm:w-lg md:w-xl xl:w-2xl relative z-10"
         x-transition:enter="duration-300 ease-out"
         x-transition:enter-start="translate-y-4 opacity-0 sm:translate-y-0 sm:scale-95"
         x-transition:enter-end="translate-y-0 opacity-100 sm:scale-100" x-transition:leave="duration-200 ease-in"
