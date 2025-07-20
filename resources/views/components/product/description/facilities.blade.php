@@ -8,9 +8,18 @@
     @endforeach
 </ul>
 
-<x-btn-primary aria-haspopup="dialog" aria-expanded="false" aria-controls="modal" data-hs-overlay="#modal"
+{{-- <x-btn-primary aria-haspopup="dialog" aria-expanded="false" aria-controls="modal" data-hs-overlay="#modal"
     class="modalBtnOpen">
     @lang('Rādīt visas papildērtības')
     ({{ count($product->features) }})
-</x-btn-primary>
+</x-btn-primary> --}}
+
+<div x-data="{}">
+    <x-btn-primary aria-haspopup="dialog" aria-expanded="false" aria-controls="modal" class="modalBtnOpen"
+        x-on:click="$dispatch('open-modal', 'example-modal')">
+        @lang('Rādīt visas papildērtības')
+        ({{ count($product->features) }})
+    </x-btn-primary>
+</div>
+
 @endif

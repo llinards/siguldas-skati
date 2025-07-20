@@ -28,7 +28,6 @@ function handleMobileMenu() {
     };
 }
 
-window.Alpine = Alpine;
 window.handleMobileMenu = handleMobileMenu;
 
 document.querySelectorAll('[id^="gallery-main-"]').forEach((el) => {
