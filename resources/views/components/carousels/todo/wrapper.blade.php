@@ -11,7 +11,7 @@
                     <x-slot name="todoImage">
                         {{ asset('images/siguldas-skati-todo-1.jpg') }}
                     </x-slot>
-                    <x-slot name="todoLink">#</x-slot>
+                    <x-slot name="modalId">nature-trails</x-slot>
                 </x-carousels.todo.card>
                 <x-carousels.todo.card>
                     <x-slot name="todoTitle">
@@ -20,7 +20,7 @@
                     <x-slot name="todoImage">
                         {{ asset('images/siguldas-skati-todo-2.jpg') }}
                     </x-slot>
-                    <x-slot name="todoLink">#</x-slot>
+                    <x-slot name="modalId">active-recreation</x-slot>
                 </x-carousels.todo.card>
                 <x-carousels.todo.card>
                     <x-slot name="todoTitle">
@@ -29,7 +29,7 @@
                     <x-slot name="todoImage">
                         {{ asset('images/siguldas-skati-todo-3.jpg') }}
                     </x-slot>
-                    <x-slot name="todoLink">#</x-slot>
+                    <x-slot name="modalId">taste-experience</x-slot>
                 </x-carousels.todo.card>
                 <x-carousels.todo.card>
                     <x-slot name="todoTitle">
@@ -38,7 +38,7 @@
                     <x-slot name="todoImage">
                         {{ asset('images/siguldas-skati-todo-4.jpg') }}
                     </x-slot>
-                    <x-slot name="todoLink">#</x-slot>
+                    <x-slot name="modalId">culture-and-history</x-slot>
                 </x-carousels.todo.card>
             </div>
         </div>

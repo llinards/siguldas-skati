@@ -206,4 +206,65 @@
             <x-carousels.todo.wrapper></x-carousels.todo.wrapper>
         </div>
     </div>
+
+    {{-- WHAT TO DO IN SIGULDA MODALS --}}
+    <x-main-modal>
+        <x-slot name="modalId">nature-trails</x-slot>
+        <x-slot name="modalHeading">@lang('Dabas takas')</x-slot>
+        <x-slot name="modalContent">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, quasi rem explicabo corrupti
+                necessitatibus aperiam illo quam placeat consequatur laudantium beatae sequi quae dolorem? Voluptate,
+                impedit laboriosam. Illo, commodi rem!
+                Consequuntur, tempora ad alias perspiciatis a, neque tempore, voluptatem dignissimos quasi quos in
+                quibusdam est! Rem expedita eum qui nobis beatae aut quas facilis illo, totam, voluptate maxime aliquid.
+                Eveniet.
+                Fuga veniam temporibus, blanditiis totam obcaecati deleniti laborum, unde ratione doloremque et
+                aspernatur ut, quibusdam earum nam iste facilis reprehenderit! Quo repellat expedita fuga numquam, ipsa
+                harum adipisci voluptatum officia.</p>
+        </x-slot>
+        <x-slot name="modalCTA">@lang('Uzzināt vairāk')</x-slot>
+    </x-main-modal>
+    <x-main-modal>
+        <x-slot name="modalId">active-recreation</x-slot>
+        <x-slot name="modalHeading">@lang('Aktīva atpūta')</x-slot>
+        <x-slot name="modalContent">
+            <p><span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam nisi et beatae consequatur vero
+                    qui nobis quam libero quis aperiam fugiat sunt, magni provident excepturi dicta quidem neque. Velit,
+                    repellendus!</span><span>Reiciendis odit, qui temporibus nulla placeat, incidunt dicta ea harum
+                    quidem cupiditate ullam ducimus tempore ipsa corporis aut optio saepe quis amet corrupti. Laborum,
+                    nisi id asperiores culpa commodi dignissimos.</span></p>
+        </x-slot>
+        <x-slot name="modalCTA">@lang('Uzzināt vairāk')</x-slot>
+    </x-main-modal>
+    <x-main-modal>
+        <x-slot name="modalId">taste-experience</x-slot>
+        <x-slot name="modalHeading">@lang('Garšu pieredze')</x-slot>
+        <x-slot name="modalContent">
+            <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam similique expedita quas omnis
+                    vitae architecto quam aperiam, voluptate hic. Totam corrupti maiores ipsam pariatur. Similique
+                    tenetur nobis quas eaque vero!</span></p>
+        </x-slot>
+        <x-slot name="modalCTA">@lang('Uzzināt vairāk')</x-slot>
+    </x-main-modal>
+    <x-main-modal>
+        <x-slot name="modalId">culture-and-history</x-slot>
+        <x-slot name="modalHeading">@lang('Kultūra un vēsture')</x-slot>
+        <x-slot name="modalContent">
+            <p>
+                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore incidunt reiciendis architecto
+                    quidem optio corporis laudantium numquam excepturi sunt, nulla assumenda provident accusamus
+                    suscipit hic dolore explicabo itaque molestias porro!</span>
+                <span>Repellendus suscipit nobis tempora, beatae distinctio possimus numquam quibusdam cupiditate modi
+                    veritatis unde natus similique inventore id corporis in perferendis laboriosam, ratione fugit
+                    deleniti. Dolorum error fugit distinctio ad consequuntur.</span>
+                <span>Temporibus laudantium ut quis quo laborum dicta necessitatibus non eveniet pariatur dolorum,
+                    consequuntur iste alias odit, id laboriosam rem. Officia iure molestias vitae quaerat ullam
+                    blanditiis vero obcaecati cum voluptatum!</span>
+                <span>Ratione facere quae neque itaque commodi nobis suscipit amet nulla dicta quas, voluptatibus
+                    deleniti laborum laboriosam enim officiis. Inventore nemo fugiat hic eum enim asperiores saepe atque
+                    optio dignissimos odio.</span>
+            </p>
+        </x-slot>
+        <x-slot name="modalCTA">@lang('Uzzināt vairāk')</x-slot>
+    </x-main-modal>
 </x-app-layout>

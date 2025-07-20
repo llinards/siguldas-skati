@@ -40,23 +40,10 @@
         </div>
     </div>
 
-    <x-modal name="example-modal">
-        <div class="flex items-center justify-between border-ss-dark border-b px-4 py-3">
-            <h3 class="text-h-sm-mob lg:text-h-mob leading-none mt-2">@lang('Papildērtības')</h3>
-            </h3>
-            <span id="modalBtnClose" type="button" x-on:click="$dispatch('close-modal', 'example-modal')"
-                class="bg-ss-dark hover:bg-white inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent hover:border-ss-dark transition-all duration-200 cursor-pointer group"
-                aria-label="Close" tabindex="2">
-                <span class="sr-only">Close</span>
-                <svg class="size-4 shrink-0 stroke-white group-hover:stroke-ss-dark group-hover:duration-200"
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 6 6 18"></path>
-                    <path d="m6 6 12 12"></path>
-                </svg>
-            </span>
-        </div>
-        <div class="p-4">
+    <x-main-modal>
+        <x-slot name="modalId">product-modal</x-slot>
+        <x-slot name="modalHeading">@lang('Papildērtības')</x-slot>
+        <x-slot name="modalContent">
             <ul class="sm:grid mb-6 grid-cols-2 grid-rows-5 space-y-3 mt-4">
                 @foreach ($product->features as $feature)
                 <li class="flex items-center gap-x-4">
@@ -65,7 +52,7 @@
                 </li>
                 @endforeach
             </ul>
-        </div>
-    </x-modal>
-
+        </x-slot>
+        <x-slot name="modalCTA">@lang('Rezervēt')</x-slot>
+    </x-main-modal>
 </x-app-layout>
