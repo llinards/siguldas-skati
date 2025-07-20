@@ -10,7 +10,7 @@
                     {{ $modalHeading }}
                 </h3>
                 <button type="button" aria-label="Close" data-hs-overlay="#{{ $modalId }}">
-                    <span id="modalBtnClose" type="button"
+                    <span type="button"
                         class="z-90 bg-ss-dark hover:bg-white inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent hover:border-ss-dark transition-all duration-200 cursor-pointer group"
                         aria-label="Close">
                         <span class="sr-only">@lang('Aizvērt')</span>
@@ -39,7 +39,6 @@
 <script type="module">
     // Get modal and trigger elements
         const modal = document.getElementById('{{ $modalId }}');
-        const modalCloseBtn = document.getElementById('modalBtnClose');
 
         // Function to disable body scroll
         function disableBodyScroll() {
@@ -66,9 +65,4 @@
         // Listen for Preline UI modal events
         modal.addEventListener('open.hs.overlay', disableBodyScroll);
         modal.addEventListener('close.hs.overlay', enableBodyScroll);
-
-        // Also handle manual close button
-        modalCloseBtn.addEventListener('click', () => {
-        setTimeout(enableBodyScroll, 100);
-        });
 </script>
