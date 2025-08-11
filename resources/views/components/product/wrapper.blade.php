@@ -10,7 +10,7 @@
         <p class="mb-6 text-justify lg:max-w-11/12">
             {{ $product->description }}
         </p>
-        <x-product.description.facilities :product="$product" />
+        <x-product.description.facilities :product="$product"/>
     </div>
     <div class="2xl:col-span-2">
         <div class="relative mb-3 inline-block">
@@ -23,7 +23,8 @@
             {!! $product->pricelist !!}
         </div>
         <div class="flex xl:justify-end">
-            <x-btn-primary>@lang('Rezervēt')</x-btn-primary>
+            <x-btn-primary
+                href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html">@lang('Rezervēt')</x-btn-primary>
         </div>
     </div>
 
@@ -33,7 +34,7 @@
                 @lang('Lietas, ko ņemt vērā')
             </h2>
         </div>
-        <x-product.description.good-to-know />
+        <x-product.description.good-to-know/>
     </div>
 </div>
 
@@ -41,51 +42,51 @@
 <div class="hs-accordion-group space-y-6 pb-6 sm:hidden" data-hs-accordion-always-open="">
     <div class="hs-accordion active" id="hs-basic-with-arrow-heading-one">
         <button class="hs-accordion-toggle relative mb-3 flex w-full items-center justify-between border-b-2 pt-3"
-            aria-expanded="true" aria-controls="hs-basic-with-arrow-collapse-one">
+                aria-expanded="true" aria-controls="hs-basic-with-arrow-collapse-one">
             <h2 class="text-h-sm-mob lg:text-h-mob text-left leading-none">
                 {{-- prettier-ignore --}}
                 @lang('Ērtības un aprīkojums')
             </h2>
-            <x-accordion-arrows />
+            <x-accordion-arrows/>
         </button>
         <div id="hs-basic-with-arrow-collapse-one"
-            class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300" role="region"
-            aria-labelledby="hs-basic-with-arrow-heading-one">
+             class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300" role="region"
+             aria-labelledby="hs-basic-with-arrow-heading-one">
             <p class="mb-6 text-justify lg:max-w-11/12">
                 {{ $product->description }}
             </p>
-            <x-product.description.facilities :product="$product" />
+            <x-product.description.facilities :product="$product"/>
         </div>
     </div>
 
     <div class="hs-accordion" id="hs-basic-with-arrow-heading-two">
         <button class="hs-accordion-toggle relative mb-3 flex w-full items-center justify-between border-b-2 pt-3"
-            aria-expanded="false" aria-controls="hs-basic-with-arrow-collapse-two">
+                aria-expanded="false" aria-controls="hs-basic-with-arrow-collapse-two">
             <h2 class="text-h-sm-mob lg:text-h-mob text-left leading-none">
                 {{-- prettier-ignore --}}
                 @lang('Cenas un papildu informācija')
             </h2>
-            <x-accordion-arrows />
+            <x-accordion-arrows/>
         </button>
         <div id="hs-basic-with-arrow-collapse-two"
-            class="hs-accordion-content product-pricelist hidden w-full overflow-hidden transition-[height] duration-300"
-            role="region" aria-labelledby="hs-basic-with-arrow-heading-two">
+             class="hs-accordion-content product-pricelist hidden w-full overflow-hidden transition-[height] duration-300"
+             role="region" aria-labelledby="hs-basic-with-arrow-heading-two">
             {!! $product->pricelist !!}
         </div>
     </div>
 
     <div class="hs-accordion" id="hs-basic-with-arrow-heading-three">
         <button class="hs-accordion-toggle relative mb-3 flex w-full items-center justify-between border-b-2 pt-3"
-            aria-expanded="false" aria-controls="hs-basic-with-arrow-collapse-three">
+                aria-expanded="false" aria-controls="hs-basic-with-arrow-collapse-three">
             <h2 class="text-h-sm-mob lg:text-h-mob text-left leading-none">
                 @lang('Lietas, ko ņemt vērā')
             </h2>
-            <x-accordion-arrows />
+            <x-accordion-arrows/>
         </button>
         <div id="hs-basic-with-arrow-collapse-three"
-            class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region"
-            aria-labelledby="hs-basic-with-arrow-heading-three">
-            <x-product.description.good-to-know />
+             class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region"
+             aria-labelledby="hs-basic-with-arrow-heading-three">
+            <x-product.description.good-to-know/>
         </div>
     </div>
 </div>
