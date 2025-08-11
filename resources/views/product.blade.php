@@ -10,6 +10,10 @@
                     ? __('1 personai')
                     : __(':count personām', ['count' => $product->person_count])
                     }}
+                    @if($product->children_count > 0)
+                        +  {{ $product->children_count === 1 ? __('1 bērns') : __(':count bērni', ['count' =>
+                                $product->children_count]) }}
+                    @endif
                 </x-slot>
             </x-product.title>
 

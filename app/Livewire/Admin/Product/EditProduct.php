@@ -25,6 +25,8 @@ class EditProduct extends Component
     #[Validate('required', message: 'validation.required')]
     public int $personCount = 0;
 
+    public int $childrenCount = 0;
+
     #[Validate('required', message: 'validation.required')]
     public string $pricelist = '';
 
@@ -90,6 +92,7 @@ class EditProduct extends Component
         $this->description = $this->product->description;
         $this->is_active = (bool) $this->product->is_active;
         $this->personCount = $this->product->person_count;
+        $this->childrenCount = $this->product->children_count;
         $this->pricelist = $this->product->pricelist;
     }
 
@@ -106,6 +109,7 @@ class EditProduct extends Component
             'description' => $this->description,
             'is_active' => $this->is_active,
             'person_count' => $this->personCount,
+            'children_count' => $this->childrenCount,
             'pricelist' => $this->pricelist,
             'slug' => $this->productServices->generateSlug($this->title),
         ];

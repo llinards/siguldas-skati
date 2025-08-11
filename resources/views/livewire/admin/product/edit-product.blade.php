@@ -1,5 +1,5 @@
 <div>
-    <x-admin.flash-message />
+    <x-admin.flash-message/>
     <form wire:submit="update">
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
@@ -22,7 +22,7 @@
                                     stroke="currentColor"
                                     stroke-width="3"
                                 >
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6"/>
                                 </svg>
                             </span>
                             <span>{{ __('Rādīt mājas lapā?') }}</span>
@@ -39,7 +39,7 @@
                                 autocomplete="given-name"
                                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                             />
-                            <x-input-error :messages="$errors->get('title')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('title')" class="mt-2"/>
                         </div>
                     </div>
                     <div class="mt-5 sm:mt-0">
@@ -52,7 +52,20 @@
                                 wire:model="personCount"
                                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                             />
-                            <x-input-error :messages="$errors->get('personCount')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('personCount')" class="mt-2"/>
+                        </div>
+                    </div>
+                    <div class="mt-5 sm:mt-0">
+                        <label for="childrenCount" class="block text-sm/6 font-medium text-gray-900">
+                            Bērnu skaits
+                        </label>
+                        <div class="mt-2">
+                            <input
+                                type="number"
+                                wire:model="childrenCount"
+                                class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                            />
+                            <x-input-error :messages="$errors->get('childrenCount')" class="mt-2"/>
                         </div>
                     </div>
                 </div>
@@ -184,7 +197,7 @@
                                 </label>
                             </div>
                         </div>
-                        <x-input-error :messages="$errors->get('cover')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('cover')" class="mt-2"/>
                     </div>
                 </div>
                 <div class="mt-5">
@@ -195,7 +208,7 @@
                             wire:model="description"
                             class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                         ></textarea>
-                        <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('description')" class="mt-2"/>
                     </div>
                 </div>
                 <div class="mt-5">
@@ -203,7 +216,7 @@
                     <div class="mt-2" wire:ignore>
                         <textarea id="pricelist-editor" rows="3" class=""></textarea>
                     </div>
-                    <x-input-error :messages="$errors->get('pricelist')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('pricelist')" class="mt-2"/>
                 </div>
             </div>
         </div>
@@ -219,60 +232,60 @@
 </div>
 
 @script
-    <script>
-        const LICENSE_KEY = 'GPL';
-        const editorConfig = {
-            toolbar: {
-                items: [
-                    'undo',
-                    'redo',
-                    '|',
-                    'heading',
-                    '|',
-                    'bold',
-                    'italic',
-                    'underline',
-                    'strikethrough',
-                    'code',
-                    '|',
-                    'link',
-                    '|',
-                    'bulletedList',
-                    'numberedList',
-                ],
-                shouldNotGroupWhenFull: false,
-            },
-            plugins: [Autosave, Bold, Heading, Essentials, Italic, Link, List, Paragraph, Strikethrough, Underline],
-            heading: {
-                options: [
-                    {
-                        model: 'paragraph',
-                        title: 'Paragraph',
-                    },
-                ],
-            },
-            initialData: @js($pricelist ?? ''),
-            licenseKey: LICENSE_KEY,
-            link: {
-                addTargetToExternalLinks: true,
-                defaultProtocol: 'https://',
-            },
-            placeholder: 'Type or paste your content here!',
-        };
+<script>
+    const LICENSE_KEY = 'GPL';
+    const editorConfig = {
+        toolbar: {
+            items: [
+                'undo',
+                'redo',
+                '|',
+                'heading',
+                '|',
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'code',
+                '|',
+                'link',
+                '|',
+                'bulletedList',
+                'numberedList',
+            ],
+            shouldNotGroupWhenFull: false,
+        },
+        plugins: [Autosave, Bold, Heading, Essentials, Italic, Link, List, Paragraph, Strikethrough, Underline],
+        heading: {
+            options: [
+                {
+                    model: 'paragraph',
+                    title: 'Paragraph',
+                },
+            ],
+        },
+        initialData: @js($pricelist ?? ''),
+        licenseKey: LICENSE_KEY,
+        link: {
+            addTargetToExternalLinks: true,
+            defaultProtocol: 'https://',
+        },
+        placeholder: 'Type or paste your content here!',
+    };
 
-        let editor;
+    let editor;
 
-        ClassicEditor.create(document.querySelector('#pricelist-editor'), editorConfig)
-            .then((newEditor) => {
-                editor = newEditor;
+    ClassicEditor.create(document.querySelector('#pricelist-editor'), editorConfig)
+        .then((newEditor) => {
+            editor = newEditor;
 
-                // Sync CKEditor content with Livewire on every change
-                editor.model.document.on('change:data', () => {
-                    $wire.set('pricelist', editor.getData());
-                });
-            })
-            .catch((error) => {
-                console.error('CKEditor initialization error:', error);
+            // Sync CKEditor content with Livewire on every change
+            editor.model.document.on('change:data', () => {
+                $wire.set('pricelist', editor.getData());
             });
-    </script>
+        })
+        .catch((error) => {
+            console.error('CKEditor initialization error:', error);
+        });
+</script>
 @endscript

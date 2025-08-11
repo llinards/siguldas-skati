@@ -49,6 +49,7 @@ test('successfully creates product with localized data, uploads cover image, and
             ->set('pricelist', '200 EUR par nakti')
             ->set('is_active', true)
             ->set('personCount', 2)
+            ->set('childrenCount', '2')
             ->set('cover', $file)
             ->call('store')
             ->assertSessionHas('_flash.new.0', 'message');
@@ -60,6 +61,7 @@ test('successfully creates product with localized data, uploads cover image, and
             'pricelist' => json_encode(['lv' => '200 EUR par nakti']),
             'is_active' => 1,
             'person_count' => 2,
+            'children_count' => 2,
             'slug' => json_encode(['lv' => 'jaunais-produkts']),
             'cover' => 'product-images/'.$file->hashName(),
         ]);

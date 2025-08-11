@@ -23,6 +23,8 @@ class AddProduct extends Component
     #[Validate('required', message: 'validation.required')]
     public int $personCount;
 
+    public int $childrenCount = 0;
+
     #[Validate('required', message: 'validation.required')]
     public string $pricelist = '';
 
@@ -84,6 +86,7 @@ class AddProduct extends Component
             'description' => $this->description,
             'is_active' => $this->is_active,
             'person_count' => $this->personCount,
+            'children_count' => $this->childrenCount,
             'pricelist' => $this->pricelist,
             'cover' => $this->productServices->storeProductCover($this->cover),
             'slug' => $this->productServices->generateSlug($this->title),
