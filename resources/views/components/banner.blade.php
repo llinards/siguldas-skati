@@ -4,7 +4,8 @@
     <div class="container mx-auto flex h-full flex-col items-center justify-center px-4 text-center">
 
         @if(!empty($bannerImage))
-        <img class="mb-12 max-h-60" src="{{ $bannerImage ?? '' }}" alt="{{ $bannerImageAlt ?? '' }}">
+        <img {{ $attributes->merge(['class' => 'mb-12 max-h-30 sm:max-h-36 md:max-h-48 lg:max-h-58 2xl:max-h-64']) }}
+        src="{{ $bannerImage ?? '' }}" alt="{{ $bannerImageAlt ?? '' }}">
         @endif
 
         @if(!empty($bannerText))

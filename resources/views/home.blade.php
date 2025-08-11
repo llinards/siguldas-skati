@@ -77,9 +77,6 @@
 
     {{-- FIRST SECONDARY BANNER --}}
     <x-banner>
-        <x-slot name="bannerImage">
-            {{ asset('images/siguldas_skati_logo.svg') }}
-        </x-slot>
         <x-slot name="bannerBackgroundImage">
             {{ asset('images/siguldas-skati-home-3.jpg') }}
         </x-slot>
@@ -175,7 +172,7 @@
     {{-- SECOND SECONDARY BANNER --}}
     <x-banner>
         <x-slot name="bannerImage">
-            {{ asset('images/siguldas_skati_logo.png') }}
+            {{ asset('images/siguldas-skati-logo.svg') }}
         </x-slot>
         <x-slot name="bannerBackgroundImage">
             {{ asset('images/siguldas-skati-home-4.jpg') }}
