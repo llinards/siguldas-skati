@@ -1,7 +1,8 @@
 <x-app-layout :title="__('Dizaina mājas un sauna')">
     <div class="bg-ss">
         <div class="container mx-auto px-4">
-            <div class="relative mt-36 mb-3 inline-block">
+            <div class="relative mt-26 lg:mt-30 xl:mt-36 mb-3 inline-block">
+                <x-btn-back class="pb-3" />
                 <h1 class="text-h-mob lg:text-h-md leading-none border-b-2">
                     @lang('Dizaina mājas un sauna')
                 </h1>
