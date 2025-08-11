@@ -21,7 +21,7 @@
                 {{ $productCapacity ?? '' }}
             </p>
             <x-btn-secondary href="{{ $productLink ?? '' }}">
-                @lang('Rezervēt')
+                @lang('Uzzināt vairāk')
             </x-btn-secondary>
         </div>
     </a>

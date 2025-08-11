@@ -13,20 +13,21 @@
                 </x-slot>
             </x-product.title>
 
-            <x-product.gallery.mobile :product="$product" />
+            <x-product.gallery.mobile :product="$product"/>
             <div class="mt-6 mb-6 sm:hidden">
-                <x-btn-primary>@lang('Rezervēt')</x-btn-primary>
+                <x-btn-primary
+                    href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html">@lang('Rezervēt')</x-btn-primary>
             </div>
 
-            <x-product.gallery.desktop :product="$product" />
+            <x-product.gallery.desktop :product="$product"/>
 
-            <x-product.wrapper :product="$product" />
+            <x-product.wrapper :product="$product"/>
         </div>
     </div>
 
     {{-- PRODUCTS CAROUSEL --}}
     <div class="bg-ss">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-4">'
             <div class="relative mb-3 inline-block">
                 <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
                     @lang('Apskati citas dizaina mājas!')
@@ -45,10 +46,11 @@
         <x-slot name="modalContent">
             <ul class="sm:grid mb-6 grid-cols-2 grid-rows-5 space-y-3 mt-4">
                 @foreach ($product->features as $feature)
-                <li class="flex items-center gap-x-4">
-                    <img src="{{ Storage::url($feature->icon_image) }}" alt="{{ $feature->title }}" class="h-8 w-8" />
-                    {{ $feature->title }}
-                </li>
+                    <li class="flex items-center gap-x-4">
+                        <img src="{{ Storage::url($feature->icon_image) }}" alt="{{ $feature->title }}"
+                             class="h-8 w-8"/>
+                        {{ $feature->title }}
+                    </li>
                 @endforeach
             </ul>
         </x-slot>

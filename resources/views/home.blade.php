@@ -8,8 +8,9 @@
                 @lang('Modernas brīvdienu dizaina mājas tavai atpūtai!')
             </h1>
 
-            <x-btn-header href="#about-us" class="absolute bottom-48 z-10 sm:bottom-16">
-                @lang('Uzzināt vairāk')
+            <x-btn-header href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html"
+                          class="absolute bottom-48 z-10 sm:bottom-16">
+                @lang('Rezervēt')
             </x-btn-header>
         </div>
     </div>
@@ -64,7 +65,7 @@
         <div class="container mx-auto px-4 pb-12 md:pb-18 lg:pb-24 xl:pb-30">
             <div class="relative mb-3 inline-block">
                 <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
-                    @lang('Dizaina mājas un sauna')
+                    @lang('Dizaina mājas, sauna un džakūzis')
                 </h2>
 
             </div>

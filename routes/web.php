@@ -27,7 +27,7 @@ Route::group(
     function () {
         Route::get('/', HomeController::class)->name('home');
 
-        Route::get('/dizaina-majas-un-sauna', [ProductController::class, 'index'])->name('products');
+        Route::get('/dizaina-majas-sauna-un-dzakuzis', [ProductController::class, 'index'])->name('products');
 
         Route::get('/buj', function () {
             return view('faq');
