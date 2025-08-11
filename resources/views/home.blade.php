@@ -26,15 +26,14 @@
                     @lang('Klusuma greznība Siguldas sirdī!')
                 </p>
             </div>
-            <div class="gap-6 lg:grid lg:grid-cols-2">
-                <img class="rounded-3xl object-cover lg:h-240" src="{{ asset('images/siguldas-skati-home-2.jpg') }}"
+            <div class="gap-6 lg:gap-18 lg:grid lg:grid-cols-2">
+                <img class="rounded-3xl w-full" src="{{ asset('images/siguldas-skati-home-5.jpg') }}"
                     alt="@lang('Siguldas Skati - Moduļu māju parks')" />
                 <div class="lg:flex lg:flex-col lg:justify-center">
                     <h3 class="text-h-sm-mob lg:text-h-sm mt-6 mb-3 leading-none lg:mt-0">
                         @lang('Siguldas skati')
                     </h3>
-                    <div
-                        class="space-y-6 text-justify text-base leading-7.5 md:space-y-10 md:text-xl md:leading-10 xl:text-2xl">
+                    <div class="space-y-6 text-justify text-base ">
                         <p>
                             {{-- prettier-ignore --}}
                             @lang('Īpaša atpūtas vieta tiem, kuri meklē mieru, klātbūtnes un skaistuma sajūtu pašā
