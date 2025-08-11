@@ -32,7 +32,7 @@
     --color-ss: #f2f3ed;
     --color-menu-hover: rgba(0, 0, 0, 0.5);
     --color-ss-gray: #767e86;
-    --color-ss-dark: rgb(30, 38, 1);
+    --color-ss-dark: #181E05;
     --text-btn: 1.25rem;
     --text-btn-sm: 1rem;
     --text-btn-md: 1.125rem;
@@ -68,7 +68,7 @@ li h3 {
 
 .footer-form :focus-visible,
 main :focus-visible {
-    outline: 1px solid rgb(30, 38, 1);
+    outline: 1px solid #181E05;
     outline-offset: 3px;
 }
 
@@ -91,7 +91,7 @@ nav li :focus-visible {
     --f-button-prev-pos: 5rem;
     --f-button-next-pos: 5rem;
 
-    --f-button-bg: rgb(30, 38, 1);
+    --f-button-bg: #181E05;
     --f-button-color: white;
 
     --f-button-width: 48px;

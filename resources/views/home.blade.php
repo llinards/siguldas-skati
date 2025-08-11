@@ -18,24 +18,22 @@
         <div class="container mx-auto px-4 py-12 md:py-18 lg:py-24 xl:py-30">
             <div>
                 <div class="relative mb-3 inline-block">
-                    <h2 class="text-h-mob lg:text-h-md leading-none">
+                    <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
                         @lang('Par mums')
                     </h2>
-                    <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
                 </div>
                 <p class="text-ss-gray pb-6 text-sm leading-none">
                     @lang('Klusuma greznība Siguldas sirdī!')
                 </p>
             </div>
-            <div class="gap-6 lg:grid lg:grid-cols-2">
-                <img class="rounded-3xl object-cover lg:h-240" src="{{ asset('images/siguldas-skati-home-2.jpg') }}"
+            <div class="gap-6 lg:gap-18 lg:grid lg:grid-cols-2">
+                <img class="rounded-3xl w-full" src="{{ asset('images/siguldas-skati-home-5.jpg') }}"
                     alt="@lang('Siguldas Skati - Moduļu māju parks')" />
                 <div class="lg:flex lg:flex-col lg:justify-center">
                     <h3 class="text-h-sm-mob lg:text-h-sm mt-6 mb-3 leading-none lg:mt-0">
                         @lang('Siguldas skati')
                     </h3>
-                    <div
-                        class="space-y-6 text-justify text-base leading-7.5 md:space-y-10 md:text-xl md:leading-10 xl:text-2xl">
+                    <div class="space-y-6 text-justify text-base ">
                         <p>
                             {{-- prettier-ignore --}}
                             @lang('Īpaša atpūtas vieta tiem, kuri meklē mieru, klātbūtnes un skaistuma sajūtu pašā
@@ -65,10 +63,10 @@
     <div class="bg-ss">
         <div class="container mx-auto px-4 pb-12 md:pb-18 lg:pb-24 xl:pb-30">
             <div class="relative mb-3 inline-block">
-                <h2 class="text-h-mob lg:text-h-md leading-none">
+                <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
                     @lang('Dizaina mājas un sauna')
                 </h2>
-                <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
+
             </div>
             <p class="text-ss-gray pb-6 text-sm leading-none">
                 @lang('Izsmalcināta atpūta starp pilsētu un dabu!')
@@ -80,13 +78,16 @@
     {{-- FIRST SECONDARY BANNER --}}
     <x-banner>
         <x-slot name="bannerImage">
+            {{ asset('images/siguldas_skati_logo.svg') }}
+        </x-slot>
+        <x-slot name="bannerBackgroundImage">
             {{ asset('images/siguldas-skati-home-3.jpg') }}
         </x-slot>
         <x-slot name="bannerText">
             {{-- prettier-ignore --}}
             @lang('Miers nav kaut kur tālu! Tas ir šeit - starp dizainu, dabu un Tevi!')
         </x-slot>
-        <x-slot name="bannerImageAlt">
+        <x-slot name="bannerBackgroundImageAlt">
             @lang('Drona skats uz māju parku')
         </x-slot>
     </x-banner>
@@ -95,10 +96,10 @@
     {{-- <div class="bg-ss"> --}}
         {{-- <div class="container mx-auto px-4 pt-12 md:pt-18 lg:pt-24 xl:pt-30"> --}}
             {{-- <div class="relative mb-3 inline-block"> --}}
-                {{-- <h2 class="text-h-mob lg:text-h-md leading-none"> --}}
+                {{-- <h2 class="text-h-mob lg:text-h-md leading-none border-b-2"> --}}
                     {{-- @lang('Galerija') --}}
                     {{-- </h2> --}}
-                {{-- <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span> --}}
+
                 {{-- </div> --}}
             {{-- <p class="text-ss-gray pb-6 text-sm leading-none xl:pb-12"> --}}
                 {{-- @lang('Siguldas skatu galerija.') --}}
@@ -111,10 +112,9 @@
     <div class="bg-ss">
         <div class="container mx-auto px-4 py-12 md:py-18 lg:py-24 xl:py-30">
             <div class="relative mb-3 inline-block">
-                <h2 class="text-h-mob lg:text-h-md leading-none">
+                <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
                     @lang('Ko sniedz pieredze Siguldas Skatos?')
                 </h2>
-                <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
             </div>
             <p class="text-ss-gray pb-6 text-sm leading-none sm:pb-12">
                 @lang('Dizaina brīvdienu mājas ar skatu uz Siguldu!')
@@ -175,27 +175,26 @@
     {{-- SECOND SECONDARY BANNER --}}
     <x-banner>
         <x-slot name="bannerImage">
+            {{ asset('images/siguldas_skati_logo.png') }}
+        </x-slot>
+        <x-slot name="bannerBackgroundImage">
             {{ asset('images/siguldas-skati-home-4.jpg') }}
         </x-slot>
         <x-slot name="bannerText">
             {{-- prettier-ignore --}}
             @lang('Sigulda nav tikai galamērķis – tā ir sajūta.')
         </x-slot>
-        <x-slot name="secondaryBannerText">
-            {{-- prettier-ignore --}}
-            @lang('Mēs esam tepat, lai palīdzētu Tev to iepazīt savā ritmā.')
-        </x-slot>
-        <x-slot name="bannerImageAlt">@lang('Sigulda Skati Sauna')</x-slot>
+
+        <x-slot name="bannerBackgroundImageAlt">@lang('Sigulda Skati Sauna')</x-slot>
     </x-banner>
 
     {{-- WHAT TO DO IN SIGULDA --}}
     <div class="bg-ss">
         <div class="container mx-auto px-4 pt-12 md:pt-18 lg:pt-24 xl:pt-30">
             <div class="relative mb-3 inline-block">
-                <h2 class="text-h-mob lg:text-h-md leading-none">
+                <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
                     @lang('Ko vēl darīt Siguldā?')
                 </h2>
-                <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
             </div>
             <p class="text-ss-gray pb-6 text-sm leading-none md:max-w-2/3 lg:max-w-2/5 xl:pb-12">
                 {{-- prettier-ignore --}}
