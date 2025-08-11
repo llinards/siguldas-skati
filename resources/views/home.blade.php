@@ -78,13 +78,16 @@
     {{-- FIRST SECONDARY BANNER --}}
     <x-banner>
         <x-slot name="bannerImage">
+            {{ asset('images/siguldas_skati_logo.svg') }}
+        </x-slot>
+        <x-slot name="bannerBackgroundImage">
             {{ asset('images/siguldas-skati-home-3.jpg') }}
         </x-slot>
         <x-slot name="bannerText">
             {{-- prettier-ignore --}}
             @lang('Miers nav kaut kur tālu! Tas ir šeit - starp dizainu, dabu un Tevi!')
         </x-slot>
-        <x-slot name="bannerImageAlt">
+        <x-slot name="bannerBackgroundImageAlt">
             @lang('Drona skats uz māju parku')
         </x-slot>
     </x-banner>
@@ -172,17 +175,17 @@
     {{-- SECOND SECONDARY BANNER --}}
     <x-banner>
         <x-slot name="bannerImage">
+            {{ asset('images/siguldas_skati_logo.png') }}
+        </x-slot>
+        <x-slot name="bannerBackgroundImage">
             {{ asset('images/siguldas-skati-home-4.jpg') }}
         </x-slot>
         <x-slot name="bannerText">
             {{-- prettier-ignore --}}
             @lang('Sigulda nav tikai galamērķis – tā ir sajūta.')
         </x-slot>
-        <x-slot name="secondaryBannerText">
-            {{-- prettier-ignore --}}
-            @lang('Mēs esam tepat, lai palīdzētu Tev to iepazīt savā ritmā.')
-        </x-slot>
-        <x-slot name="bannerImageAlt">@lang('Sigulda Skati Sauna')</x-slot>
+
+        <x-slot name="bannerBackgroundImageAlt">@lang('Sigulda Skati Sauna')</x-slot>
     </x-banner>
 
     {{-- WHAT TO DO IN SIGULDA --}}
