@@ -28,7 +28,7 @@
             </div>
             <div class="gap-6 lg:gap-18 lg:grid lg:grid-cols-2">
                 <img class="rounded-3xl w-full" src="{{ asset('images/siguldas-skati-home-5.jpg') }}"
-                    alt="@lang('Siguldas Skati - Moduļu māju parks')" />
+                     alt="@lang('Siguldas Skati - Moduļu māju parks')"/>
                 <div class="lg:flex lg:flex-col lg:justify-center">
                     <h3 class="text-h-sm-mob lg:text-h-sm mt-6 mb-3 leading-none lg:mt-0">
                         @lang('Siguldas skati')
@@ -94,19 +94,19 @@
 
     {{-- GALLERY --}}
     {{-- <div class="bg-ss"> --}}
-        {{-- <div class="container mx-auto px-4 pt-12 md:pt-18 lg:pt-24 xl:pt-30"> --}}
-            {{-- <div class="relative mb-3 inline-block"> --}}
-                {{-- <h2 class="text-h-mob lg:text-h-md leading-none border-b-2"> --}}
-                    {{-- @lang('Galerija') --}}
-                    {{-- </h2> --}}
+    {{-- <div class="container mx-auto px-4 pt-12 md:pt-18 lg:pt-24 xl:pt-30"> --}}
+    {{-- <div class="relative mb-3 inline-block"> --}}
+    {{-- <h2 class="text-h-mob lg:text-h-md leading-none border-b-2"> --}}
+    {{-- @lang('Galerija') --}}
+    {{-- </h2> --}}
 
-                {{-- </div> --}}
-            {{-- <p class="text-ss-gray pb-6 text-sm leading-none xl:pb-12"> --}}
-                {{-- @lang('Siguldas skatu galerija.') --}}
-                {{-- </p> --}}
-            {{-- <x-carousels.gallery.wrapper></x-carousels.gallery.wrapper> --}}
-            {{-- </div> --}}
-        {{-- </div> --}}
+    {{-- </div> --}}
+    {{-- <p class="text-ss-gray pb-6 text-sm leading-none xl:pb-12"> --}}
+    {{-- @lang('Siguldas skatu galerija.') --}}
+    {{-- </p> --}}
+    {{-- <x-carousels.gallery.wrapper></x-carousels.gallery.wrapper> --}}
+    {{-- </div> --}}
+    {{-- </div> --}}
 
     {{-- EXPERIENCES --}}
     <div class="bg-ss">
@@ -182,7 +182,7 @@
         </x-slot>
         <x-slot name="bannerText">
             {{-- prettier-ignore --}}
-            @lang('Sigulda nav tikai galamērķis – tā ir sajūta.')
+            @lang('Sigulda ir vairāk nekā galamērķis – tā ir sajūta.')
         </x-slot>
 
         <x-slot name="bannerBackgroundImageAlt">@lang('Sigulda Skati Sauna')</x-slot>
