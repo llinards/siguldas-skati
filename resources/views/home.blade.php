@@ -206,61 +206,42 @@
     {{-- WHAT TO DO IN SIGULDA MODALS --}}
     <x-main-modal>
         <x-slot name="modalId">nature-trails</x-slot>
-        <x-slot name="modalHeading">@lang('Dabas takas')</x-slot>
+        <x-slot name="modalHeading">@lang('Siguldas dabas takas – piedzīvojums jebkurā gadalaikā')</x-slot>
         <x-slot name="modalContent">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, quasi rem explicabo corrupti
-                necessitatibus aperiam illo quam placeat consequatur laudantium beatae sequi quae dolorem? Voluptate,
-                impedit laboriosam. Illo, commodi rem!
-                Consequuntur, tempora ad alias perspiciatis a, neque tempore, voluptatem dignissimos quasi quos in
-                quibusdam est! Rem expedita eum qui nobis beatae aut quas facilis illo, totam, voluptate maxime aliquid.
-                Eveniet.
-                Fuga veniam temporibus, blanditiis totam obcaecati deleniti laborum, unde ratione doloremque et
-                aspernatur ut, quibusdam earum nam iste facilis reprehenderit! Quo repellat expedita fuga numquam, ipsa
-                harum adipisci voluptatum officia.</p>
+            {{-- prettier-ignore --}}
+            <p class="mb-2">@lang('Sigulda ir viena no Latvijas ainaviskākajām vietām, kur daba atklājas visā krāšņumā. Pilsētu ieskauj Gaujas Nacionālā parka takas, kas piemērotas gan mierīgām pastaigām, gan aktīvai atpūtai. Te iespējams izbaudīt elpu aizraujošus skatus no Gaujas senlejas kraujām, šķērsot vēsturiskos tiltiņus, iepazīt alas un avotus, kā arī doties maršrutos, kas ved cauri mežiem, pļavām un gar upes krastiem.')</p>
+            <p>@lang('Populārākās takas ir Paradīzes taka, Kājnieku tilta maršruts, Krimuldas dabas taka un Velnalas taka – katra no tām piedāvā unikālu pieredzi un savas ainavas. Pavasarī un vasarā tās ir pilnas ar zaļumu un ziediem, rudenī – krāsainu lapu jūru, bet ziemā pārtop klusā, sniegotā pasakā.')</p>
         </x-slot>
-        <x-slot name="modalCTA">@lang('Uzzināt vairāk')</x-slot>
     </x-main-modal>
     <x-main-modal>
         <x-slot name="modalId">active-recreation</x-slot>
-        <x-slot name="modalHeading">@lang('Aktīva atpūta')</x-slot>
+        <x-slot name="modalHeading">@lang('Siguldas aktīvā atpūta – piedzīvojumi ikvienam')</x-slot>
         <x-slot name="modalContent">
-            <p><span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam nisi et beatae consequatur vero
-                    qui nobis quam libero quis aperiam fugiat sunt, magni provident excepturi dicta quidem neque. Velit,
-                    repellendus!</span><span>Reiciendis odit, qui temporibus nulla placeat, incidunt dicta ea harum
-                    quidem cupiditate ullam ducimus tempore ipsa corporis aut optio saepe quis amet corrupti. Laborum,
-                    nisi id asperiores culpa commodi dignissimos.</span></p>
+            {{-- prettier-ignore --}}
+            <p class="mb-2">@lang('Sigulda ir Latvijas aktīvās atpūtas galvaspilsēta, kur piedzīvojumi pieejami visa gada garumā. Vasarā pilsēta piedāvā iespēju izmēģināt trošu un rodeļu nobraucienus piedzīvojuma parkā “Tarzāns” gaisa tramvaju pāri Gaujai, braucienus ar SUP dēļiem, kā arī velomaršrutus dažādās grūtības pakāpēs. Īpašu adrenalīna devu nodrošina bobsleja un kamaniņu trase, kur iespējams izjust ātrumu gan vasarā, gan ziemā.')</p>
+            <p class="mb-2">@lang('Rudenī un pavasarī Sigulda piesaista pārgājienu entuziastus ar krāšņām Gaujas Nacionālā parka takām, bet ziemā pilsēta pārtop par slēpošanas un snovborda centru ar vairākām trasēm un aprīkojuma nomu.')</p>
+            <p>@lang('Neatkarīgi no sezonas Siguldā iespējams apvienot aktīvu atpūtu ar kultūras un dabas baudījumu, radot neaizmirstamu pieredzi ikvienam viesim.')</p>
         </x-slot>
-        <x-slot name="modalCTA">@lang('Uzzināt vairāk')</x-slot>
     </x-main-modal>
     <x-main-modal>
         <x-slot name="modalId">taste-experience</x-slot>
-        <x-slot name="modalHeading">@lang('Garšu pieredze')</x-slot>
+        <x-slot name="modalHeading">@lang('Siguldas kafejnīcas un restorāni – garšu ceļojums pilsētas sirdī')</x-slot>
         <x-slot name="modalContent">
-            <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam similique expedita quas omnis
-                    vitae architecto quam aperiam, voluptate hic. Totam corrupti maiores ipsam pariatur. Similique
-                    tenetur nobis quas eaque vero!</span></p>
+            {{-- prettier-ignore --}}
+            <p class="mb-2">@lang('Sigulda piedāvā daudzveidīgu gastronomisko pieredzi – no mājīgām kafejnīcām līdz izsmalcinātiem restorāniem. Pilsētas centrā atrodami gan bistro ar sezonāliem ēdieniem, gan vietas, kas specializējas tradicionālajā latviešu virtuvē. Gardēžus priecēs arī desertu kafejnīcas, kurās iespējams nogaršot vietējo konditoru darinājumus.')</p>
+            <p class="mb-2">@lang('Vakara noskaņām piemēroti ir restorāni ar plašu vīnu un kokteiļu izvēli. Savukārt mierīgai pēcpusdienai ideāli iederēsies nelielas kafejnīcas, kur baudīt svaigi grauzdētu kafiju un mājās gatavotus desertus.')</p>
+            <p class="mb2">@lang('Siguldas gastronomiskā ainava apvieno vietējo raksturu ar starptautiskām garšu tendencēm, piedāvājot izvēles iespējas ikvienai gaumei un noskaņojumam – gan ātrām maltītēm pēc aktīvās atpūtas, gan nesteidzīgām vakariņām īpašā atmosfērā.')</p>
+            <p>@lang('Iesakām apmeklēt: ESI cafe (Pils 4b), Aparjods (Ventas iela 1A), Lielais Loms suši (Krišjāņa Valdemāra iela 2).')</p>
         </x-slot>
-        <x-slot name="modalCTA">@lang('Uzzināt vairāk')</x-slot>
     </x-main-modal>
     <x-main-modal>
         <x-slot name="modalId">culture-and-history</x-slot>
-        <x-slot name="modalHeading">@lang('Kultūra un vēsture')</x-slot>
+        <x-slot name="modalHeading">@lang('Siguldas vēsture un kultūras dzīve')</x-slot>
         <x-slot name="modalContent">
-            <p>
-                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore incidunt reiciendis architecto
-                    quidem optio corporis laudantium numquam excepturi sunt, nulla assumenda provident accusamus
-                    suscipit hic dolore explicabo itaque molestias porro!</span>
-                <span>Repellendus suscipit nobis tempora, beatae distinctio possimus numquam quibusdam cupiditate modi
-                    veritatis unde natus similique inventore id corporis in perferendis laboriosam, ratione fugit
-                    deleniti. Dolorum error fugit distinctio ad consequuntur.</span>
-                <span>Temporibus laudantium ut quis quo laborum dicta necessitatibus non eveniet pariatur dolorum,
-                    consequuntur iste alias odit, id laboriosam rem. Officia iure molestias vitae quaerat ullam
-                    blanditiis vero obcaecati cum voluptatum!</span>
-                <span>Ratione facere quae neque itaque commodi nobis suscipit amet nulla dicta quas, voluptatibus
-                    deleniti laborum laboriosam enim officiis. Inventore nemo fugiat hic eum enim asperiores saepe atque
-                    optio dignissimos odio.</span>
-            </p>
+            {{-- prettier-ignore --}}
+            <p class="mb-2">@lang('Sigulda, bieži dēvēta par “Vidzemes Šveici”, ir pilsēta ar bagātu vēsturi un izteiktu kultūras identitāti. Pirmās rakstītās ziņas par Siguldu datētas ar 13. gadsimtu, kad tika uzcelts Siguldas viduslaiku pils komplekss, vēlāk papildināts ar Turaidas pili un Krimuldas muižu. Šie vēsturiskie objekti šodien ir nozīmīgas kultūras un tūrisma vietas, kas stāsta par reģiona attīstību vairāk nekā astoņu gadsimtu garumā.')</p>
+            <p class="mb-2">@lang('Sigulda vienmēr bijusi kultūras un mākslas centrs, kur regulāri notiek mūzikas festivāli, teātra izrādes, tautas tradīciju pasākumi un mākslas izstādes. Īpaši izceļas Siguldas Opermūzikas svētki un vasaras koncerti pilsdrupās, kas apvieno unikālu vidi ar augstvērtīgu muzikālo programmu.')</p>
+            <p>@lang('Mūsdienās pilsēta harmoniski apvieno senatnes mantojumu ar mūsdienīgu kultūras dzīvi, piedāvājot gan vietējiem iedzīvotājiem, gan viesiem daudzveidīgas iespējas izzināt vēsturi, baudīt mākslu un piedalīties radošos notikumos. No viduslaiku pilsdrupām līdz laikmetīgajām mākslas instalācijām – Sigulda ir vieta, kur vēsture un kultūra dzīvo līdzās un papildina viena otru.')</p>
         </x-slot>
-        <x-slot name="modalCTA">@lang('Uzzināt vairāk')</x-slot>
     </x-main-modal>
 </x-app-layout>
