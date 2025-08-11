@@ -2,11 +2,10 @@
 <div class="hidden grid-cols-2 gap-4 pb-12 sm:block xl:grid xl:pb-30 2xl:grid-cols-5">
     <div class="2xl:col-span-3">
         <div class="relative mb-3 inline-block">
-            <h2 class="text-h-sm-mob lg:text-h-mob mb-3 leading-none">
+            <h2 class="text-h-sm-mob lg:text-h-mob mb-3 leading-none border-b-2">
                 {{-- prettier-ignore --}}
                 @lang('Ērtības un aprīkojums')
             </h2>
-            <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
         </div>
         <p class="mb-6 text-justify lg:max-w-11/12">
             {{ $product->description }}
@@ -15,11 +14,10 @@
     </div>
     <div class="2xl:col-span-2">
         <div class="relative mb-3 inline-block">
-            <h2 class="text-h-sm-mob lg:text-h-mob mt-6 mb-3 leading-none xl:mt-0">
+            <h2 class="text-h-sm-mob lg:text-h-mob mt-6 mb-3 leading-none xl:mt-0 border-b-2">
                 {{-- prettier-ignore --}}
                 @lang('Cenas un papildu informācija')
             </h2>
-            <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
         </div>
         <div class="product-pricelist">
             {!! $product->pricelist !!}
@@ -31,10 +29,9 @@
 
     <div class="col-span-5 hidden sm:block xl:border-b-2">
         <div class="relative mb-3 inline-block">
-            <h2 class="text-h-sm-mob lg:text-h-mob mt-6 mb-3 leading-none xl:mt-0">
+            <h2 class="text-h-sm-mob lg:text-h-mob mt-6 mb-3 leading-none xl:mt-0 border-b-2">
                 @lang('Lietas, ko ņemt vērā')
             </h2>
-            <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
         </div>
         <x-product.description.good-to-know />
     </div>

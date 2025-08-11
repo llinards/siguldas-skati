@@ -1,6 +1,6 @@
 <x-app-layout :title="$product->title" :description="$product->description">
     <div class="bg-ss">
-        <div class="container mx-auto grid grid-cols-1 px-4">
+        <div class="container mx-auto px-4">
             <x-product.title>
                 <x-slot name="productTitle">{{ $product->title }}</x-slot>
                 <x-slot name="productCapacityLong">
@@ -28,10 +28,9 @@
     <div class="bg-ss">
         <div class="container mx-auto px-4">
             <div class="relative mb-3 inline-block">
-                <h2 class="text-h-mob lg:text-h-md leading-none">
+                <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
                     @lang('Apskati citas dizaina mājas!')
                 </h2>
-                <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
             </div>
             <p class="text-ss-gray pb-6 text-sm leading-none">
                 @lang('Izsmalcināta atpūta starp pilsētu un dabu!')

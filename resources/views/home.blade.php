@@ -18,10 +18,9 @@
         <div class="container mx-auto px-4 py-12 md:py-18 lg:py-24 xl:py-30">
             <div>
                 <div class="relative mb-3 inline-block">
-                    <h2 class="text-h-mob lg:text-h-md leading-none">
+                    <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
                         @lang('Par mums')
                     </h2>
-                    <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
                 </div>
                 <p class="text-ss-gray pb-6 text-sm leading-none">
                     @lang('Klusuma greznība Siguldas sirdī!')
@@ -65,10 +64,10 @@
     <div class="bg-ss">
         <div class="container mx-auto px-4 pb-12 md:pb-18 lg:pb-24 xl:pb-30">
             <div class="relative mb-3 inline-block">
-                <h2 class="text-h-mob lg:text-h-md leading-none">
+                <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
                     @lang('Dizaina mājas un sauna')
                 </h2>
-                <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
+
             </div>
             <p class="text-ss-gray pb-6 text-sm leading-none">
                 @lang('Izsmalcināta atpūta starp pilsētu un dabu!')
@@ -95,10 +94,10 @@
     {{-- <div class="bg-ss"> --}}
         {{-- <div class="container mx-auto px-4 pt-12 md:pt-18 lg:pt-24 xl:pt-30"> --}}
             {{-- <div class="relative mb-3 inline-block"> --}}
-                {{-- <h2 class="text-h-mob lg:text-h-md leading-none"> --}}
+                {{-- <h2 class="text-h-mob lg:text-h-md leading-none border-b-2"> --}}
                     {{-- @lang('Galerija') --}}
                     {{-- </h2> --}}
-                {{-- <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span> --}}
+
                 {{-- </div> --}}
             {{-- <p class="text-ss-gray pb-6 text-sm leading-none xl:pb-12"> --}}
                 {{-- @lang('Siguldas skatu galerija.') --}}
@@ -111,10 +110,9 @@
     <div class="bg-ss">
         <div class="container mx-auto px-4 py-12 md:py-18 lg:py-24 xl:py-30">
             <div class="relative mb-3 inline-block">
-                <h2 class="text-h-mob lg:text-h-md leading-none">
+                <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
                     @lang('Ko sniedz pieredze Siguldas Skatos?')
                 </h2>
-                <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
             </div>
             <p class="text-ss-gray pb-6 text-sm leading-none sm:pb-12">
                 @lang('Dizaina brīvdienu mājas ar skatu uz Siguldu!')
@@ -192,10 +190,9 @@
     <div class="bg-ss">
         <div class="container mx-auto px-4 pt-12 md:pt-18 lg:pt-24 xl:pt-30">
             <div class="relative mb-3 inline-block">
-                <h2 class="text-h-mob lg:text-h-md leading-none">
+                <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
                     @lang('Ko vēl darīt Siguldā?')
                 </h2>
-                <span class="bg-ss-dark absolute bottom-0 left-0 h-0.5 w-2/3"></span>
             </div>
             <p class="text-ss-gray pb-6 text-sm leading-none md:max-w-2/3 lg:max-w-2/5 xl:pb-12">
                 {{-- prettier-ignore --}}
