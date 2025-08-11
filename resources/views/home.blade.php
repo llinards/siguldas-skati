@@ -80,10 +80,6 @@
         <x-slot name="bannerBackgroundImage">
             {{ asset('images/siguldas-skati-home-3.jpg') }}
         </x-slot>
-        <x-slot name="bannerText">
-            {{-- prettier-ignore --}}
-            @lang('Miers nav kaut kur tālu! Tas ir šeit - starp dizainu, dabu un Tevi!')
-        </x-slot>
         <x-slot name="bannerBackgroundImageAlt">
             @lang('Drona skats uz māju parku')
         </x-slot>
