@@ -5,20 +5,32 @@
                 <h3>@lang('Mājokļa noteikumi')</h3>
             </li>
             <li class="flex items-center gap-x-4">
-                <img src="{{ asset('icons/clock.svg') }}" alt="Pulkstens" class="h-8 w-8" />
-                @lang('Check-in pēc plkst. 16:00')
+                <img src="{{ asset('icons/clock.svg') }}" alt="Pulkstens" class="h-8 w-8"/>
+                @lang('Check-in: 15:00 - 18:00')
             </li>
             <li class="flex items-center gap-x-4">
-                <img src="{{ asset('icons/clock.svg') }}" alt="Pulkstens" class="h-8 w-8" />
-                @lang('Checkout līdz plkst. 12:00')
+                <img src="{{ asset('icons/clock.svg') }}" alt="Pulkstens" class="h-8 w-8"/>
+                @lang('Check-out: 08:00 - 11:00')
             </li>
             <li class="flex items-center gap-x-4">
-                <img src="{{ asset('icons/door-enter.svg') }}" alt="Fire" class="h-8 w-8" />
-                @lang('Pašreģistrēšanās (aizslēdzama kastīte)')
+                <img src="{{ asset('icons/door-enter.svg') }}" alt="Fire" class="h-8 w-8"/>
+                @lang('Reģistrācijai nav vecuma ierobežojumu')
             </li>
             <li class="flex items-center gap-x-4">
-                <img src="{{ asset('icons/fire.svg') }}" alt="@lang('Uguns')" class="h-8 w-8" />
-                @lang('Smēķēt aizliegts')
+                <img src="{{ asset('icons/fire.svg') }}" alt="@lang('Uguns')" class="h-8 w-8"/>
+                @lang('Smēķēšana nav atļauta')
+            </li>
+            <li class="flex items-center gap-x-4">
+                <img src="{{ asset('icons/clock.svg') }}" alt="@lang('Pulkstens')" class="h-8 w-8"/>
+                @lang('Ballītes/pasākumi nav atļauti')
+            </li>
+            <li class="flex items-center gap-x-4">
+                <img src="{{ asset('icons/clock.svg') }}" alt="@lang('Pulkstens')" class="h-8 w-8"/>
+                @lang('Viesiem ir jāuzvedas klusu no plkst. 23:00 līdz 07:00')
+            </li>
+            <li class="flex items-center gap-x-4">
+                <img src="{{ asset('icons/bone.svg') }}" alt="@lang('Kauls')" class="h-8 w-8"/>
+                @lang('Mājdzīvnieki nav atļauti')
             </li>
         </ul>
     </div>
@@ -28,7 +40,7 @@
                 <h3>@lang('Drošība un īpašums')</h3>
             </li>
             <li class="flex items-center gap-x-4">
-                <img src="{{ asset('icons/washing-machine.svg') }}" alt="@lang('Dūmu detektors')" class="h-8 w-8" />
+                <img src="{{ asset('icons/washing-machine.svg') }}" alt="@lang('Dūmu detektors')" class="h-8 w-8"/>
                 @lang('Mājoklis aprīkots ar dūmu detektoru')
             </li>
         </ul>
@@ -39,7 +51,7 @@
                 <h3>@lang('Atcelšanas politika')</h3>
             </li>
             <li class="text-ss-gray">
-                @lang('Rezervācijas atcelšanas gadījumā nauda netiek atgriezta.')
+                @lang('Atcelšanas politika pieejama Booking platformā <a href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html#availability" target="blank" class="underline">šeit</a>.')
             </li>
         </ul>
     </div>
