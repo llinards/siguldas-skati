@@ -54,6 +54,7 @@
         center: true,
         transition: 'fade',
         Dots: false,
+        Autoplay: false,
     });
 
     document.getElementById('galleryPrev').addEventListener('click', () => carousel.slidePrev());
