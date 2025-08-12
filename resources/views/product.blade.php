@@ -31,7 +31,7 @@
 
     {{-- PRODUCTS CAROUSEL --}}
     <div class="bg-ss">
-        <div class="container mx-auto px-4">'
+        <div class="container mx-auto px-4">
             <div class="relative mb-3 inline-block">
                 <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
                     @lang('Apskati citas dizaina mājas!')
