@@ -23,7 +23,7 @@
                     </span>
                 </button>
             </div>
-            <div class="overflow-y-auto p-4">
+            <div class="overflow-y-scroll p-4">
                 {{ $modalContent }}
             </div>
             @if(isset($modalCTA))
