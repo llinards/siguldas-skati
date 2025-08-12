@@ -4,9 +4,16 @@ import { Fancybox } from '@fancyapps/ui';
 import '@fancyapps/ui/dist/fancybox/fancybox.css';
 import '@fancyapps/ui/dist/carousel/carousel.css';
 import { Carousel } from '@fancyapps/ui/dist/carousel/carousel.esm.js';
+import { Autoplay } from "@fancyapps/ui/dist/carousel/carousel.autoplay.esm.js";
+import "@fancyapps/ui/dist/carousel/carousel.autoplay.css";
 
+// Register Autoplay plugin
+Carousel.Plugins.Autoplay = Autoplay;
+
+// Make Carousel available globally with Autoplay plugin
 window.Carousel = Carousel;
 window.Fancybox = Fancybox;
+
 
 function handleMobileMenu() {
     return {

@@ -1,19 +1,34 @@
 <x-app-layout :title="__('Sākums')">
     {{-- HEADER --}}
-    <div class="home-introduction relative flex justify-center bg-cover bg-center bg-no-repeat px-2">
-        <div class="container mx-auto flex flex-col items-center px-4">
+    <div class="home-introduction relative flex justify-center bg-black overflow-hidden">
+        <!-- Carousel background -->
+        <div class="absolute inset-0 z-0">
+            <div class="f-carousel" id="header-carousel">
+                @foreach (range(1, 7) as $index)
+                    <div class="f-carousel__slide relative w-full">
+                        <div class="absolute inset-0 bg-black/50 z-10"></div>
+                        <img src="{{ asset('images/header-image' . $index . '.jpg') }}" 
+                             class="w-full h-screen object-cover" 
+                             alt="Header Image {{ $index }}">
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <!-- Foreground content -->
+        <div class="container relative z-10 mx-auto flex flex-col items-center px-4">
             <h1
                 class="text-h-mob xs:text-6xl xl:text-h font-heading absolute top-48 z-10 max-w-7xl text-center leading-12 text-white uppercase sm:top-1/2 sm:-translate-y-1/2 sm:text-7xl sm:leading-16 md:text-8xl md:leading-24 xl:leading-28">
-                {{-- prettier-ignore --}}
                 @lang('Modernas brīvdienu dizaina mājas tavai atpūtai!')
             </h1>
 
             <x-btn-header href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html"
-                          class="absolute bottom-48 z-10 sm:bottom-16">
+                        class="absolute bottom-48 z-10 sm:bottom-16">
                 @lang('Rezervēt')
             </x-btn-header>
         </div>
     </div>
+
     {{-- ABOUT US --}}
     <div id="about-us" class="bg-ss">
         <div class="container mx-auto px-4 py-12 md:py-18 lg:py-24 xl:py-30">
@@ -242,3 +257,18 @@
         </x-slot>
     </x-main-modal>
 </x-app-layout>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const container = document.getElementById("header-carousel");
+        const options = {
+            Autoplay: {
+                timeout: 5000,
+                showProgress: false
+            },
+            Navigation: false,
+            Dots: false
+        };
+        new Carousel(container, options);
+    })
+</script>

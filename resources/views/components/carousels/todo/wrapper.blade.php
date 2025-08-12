@@ -52,6 +52,7 @@
         center: true,
         transition: 'fade',
         Dots: false,
+        Autoplay: false,
     });
 
     document.getElementById('todoPrev').addEventListener('click', () => carousel.slidePrev());
