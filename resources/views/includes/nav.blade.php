@@ -6,7 +6,7 @@
                  class="{{ Route::is('home') ? '' : 'invert' }} w-44 transition-all duration-300 lg:w-56 xl:w-82"
                  :class="open ? 'invert' : ''" alt="Siguldas Skati Logo"/>
         </a>
-        <ul class="{{ Route::is('home') ? 'text-white' : 'text-black' }} hidden uppercase lg:flex">
+        <ul class="{{ Route::is('home') ? 'text-white' : 'text-black' }} hidden uppercase xl:flex">
             <x-nav.nav-link href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html"
                             class="{{ Route::is('book') ? 'border-b-ss-gray text-ss-gray' : '' }}">
                 @lang('Rezervēt')
@@ -34,7 +34,7 @@
         </ul>
 
         <button x-on:click="open = !open"
-                class="{{ Route::is('home') ? 'focus-visible:outline-white' : 'focus-visible:outline-ss-dark' }} relative z-50 focus-visible:outline! lg:hidden"
+                class="{{ Route::is('home') ? 'focus-visible:outline-white' : 'focus-visible:outline-ss-dark' }} relative z-50 focus-visible:outline! xl:hidden"
                 :class="open ? 'focus-visible:outline-ss-dark' : 'focus-visible:outline-ss-dark'">
             <svg x-show="!open" class="{{ Route::is('home') ? 'fill-white' : 'fill-black' }} size-12 cursor-pointer"
                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
