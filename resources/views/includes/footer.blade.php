@@ -58,7 +58,7 @@
                         @lang('Kontakti')
                     </h4>
                     <x-nav.footer-link href="tel:+37125666622">+371 25666622</x-nav.footer-link>
-                    <x-nav.footer-link href="mailto:info@siguldasskati.lv">info@siguldasskati.lv</x-nav.footer-link>
+                    <x-nav.footer-link href="mailto:siguldasskati@gmail.com">siguldasskati@gmail.com</x-nav.footer-link>
                     <x-nav.footer-link href="https://maps.app.goo.gl/gEtDt5FS3qpzUtWE9" target="_blank">
                         {{-- prettier-ignore --}}
                         @lang('Cēsu iela 17, Sigulda, Latvija')
