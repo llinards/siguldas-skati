@@ -24,7 +24,7 @@ function handleMobileMenu() {
             });
 
             window.addEventListener('resize', () => {
-                if (window.innerWidth >= 1024) {
+                if (window.innerWidth >= 1280) {
                     this.open = false;
                     document.body.style.overflow = 'auto';
                 }

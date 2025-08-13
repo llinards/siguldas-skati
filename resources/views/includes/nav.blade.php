@@ -3,7 +3,7 @@
         <a href="/{{ app()->getLocale() }}"
            class="{{ Route::is('home') ? 'focus-visible:outline-white' : 'focus-visible:outline-ss-dark' }} flex items-center focus-visible:outline! focus-visible:outline-offset-6!">
             <img src="{{ asset('images/logo.png') }}"
-                 class="{{ Route::is('home') ? '' : 'invert' }} w-44 transition-all duration-300 lg:w-56 xl:w-82"
+                 class="{{ Route::is('home') ? '' : 'invert' }} w-44 transition-all duration-300 xl:w-56 xl:w-82"
                  :class="open ? 'invert' : ''" alt="Siguldas Skati Logo"/>
         </a>
         <ul class="{{ Route::is('home') ? 'text-white' : 'text-black' }} hidden uppercase xl:flex">
@@ -53,8 +53,8 @@
     <div x-show="open" x-transition:enter="transition duration-300 ease-out"
          x-transition:enter-start="translate-x-full opacity-0" x-transition:enter-end="translate-x-0 opacity-100"
          x-transition:leave="transition duration-300 ease-in" x-transition:leave-start="translate-x-0 opacity-100"
-         x-transition:leave-end="translate-x-full opacity-0" class="bg-ss bg-opacity-90 fixed inset-0 z-40 lg:hidden">
-        <ul class="flex h-full flex-col items-center justify-center space-y-2 text-black uppercase lg:text-white">
+         x-transition:leave-end="translate-x-full opacity-0" class="bg-ss bg-opacity-90 fixed inset-0 z-40 xl:hidden">
+        <ul class="flex h-full flex-col items-center justify-center space-y-2 text-black uppercase xl:text-white">
             <x-nav.nav-link href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html"
                             class="{{ Route::is('book') ? 'border-b-ss-gray text-ss-gray' : '' }}">
                 @lang('Rezervēt')
