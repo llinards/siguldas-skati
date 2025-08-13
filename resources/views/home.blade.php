@@ -43,7 +43,7 @@
                 </p>
             </div>
             <div class="gap-6 lg:gap-18 lg:grid lg:grid-cols-2">
-                <img class="rounded-3xl w-full" src="{{ asset('images/siguldas-skati-home-5.jpg') }}"
+                <img class="rounded-3xl h-full object-cover w-full" src="{{ asset('images/siguldas-skati-home-5.jpg') }}"
                      alt="@lang('Siguldas Skati - Moduļu māju parks')"/>
                 <div class="lg:flex lg:flex-col lg:justify-center">
                     <h3 class="text-h-sm-mob lg:text-h-sm mt-6 mb-3 leading-none lg:mt-0">

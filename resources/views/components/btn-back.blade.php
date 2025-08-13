@@ -1,7 +1,8 @@
-<a href="{{ route('home') }}" id="backBtn" aria-label="Previous page" {{ $attributes->merge([
-    'class' => 'inline-block px-3 py-2 mb-3 lg:mb-6 uppercase bg-ss-dark rounded-xl text-white text-center
-    hover:bg-white
-    hover:text-black cursor-pointer hover:border-ss-dark border-1 border-transparent transition-all duration-300'
+<a href="{{ route('home') }}" id="backBtn" aria-label="Previous page" 
+    {{ $attributes->merge([
+        'class' => 'inline-block px-3 py-2 mb-3 lg:mb-6 uppercase bg-ss-dark rounded-xl text-white text-center
+        hover:bg-white
+        hover:text-black cursor-pointer hover:border-ss-dark border-1 border-transparent transition-all duration-300'
     ]) }}>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-7">
         <path fill-rule="evenodd"
@@ -11,13 +12,17 @@
 </a>
 
 <script type="module">
-    const backBtn = document.getElementById('backBtn')
-    backBtn.addEventListener('click', goBack)
-    function goBack() {
+    const backBtn = document.getElementById('backBtn');
+
+    backBtn.addEventListener('click', function (event) {
+        event.preventDefault(); 
         const prev = document.referrer;
+        const homeUrl = "{{ route('home') }}";
+
         if (prev && prev.startsWith(window.location.origin)) {
-            history.back();
-            return false;
+            window.history.back();
+        } else {
+            window.location.href = homeUrl;
         }
-    }
+    });
 </script>
