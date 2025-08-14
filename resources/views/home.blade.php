@@ -7,8 +7,8 @@
                 @foreach (range(1, 7) as $index)
                     <div class="f-carousel__slide relative w-full">
                         <div class="absolute inset-0 bg-black/50 z-10"></div>
-                        <img src="{{ asset('images/header-image' . $index . '.jpg') }}" 
-                             class="w-full h-screen object-cover" 
+                        <img src="{{ asset('images/header-image' . $index . '.jpg') }}"
+                             class="w-full h-screen object-cover"
                              alt="Header Image {{ $index }}">
                     </div>
                 @endforeach
@@ -22,8 +22,8 @@
                 @lang('Modernas brīvdienu dizaina mājas tavai atpūtai!')
             </h1>
 
-            <x-btn-header href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html"
-                        class="absolute bottom-48 z-10 sm:bottom-16">
+            <x-btn-header target="_blank" href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html"
+                          class="absolute bottom-48 z-10 sm:bottom-16">
                 @lang('Rezervēt')
             </x-btn-header>
         </div>
@@ -43,7 +43,8 @@
                 </p>
             </div>
             <div class="gap-6 lg:gap-18 lg:grid lg:grid-cols-2">
-                <img class="rounded-3xl h-full object-cover w-full" src="{{ asset('images/siguldas-skati-home-5.jpg') }}"
+                <img class="rounded-3xl h-full object-cover w-full"
+                     src="{{ asset('images/siguldas-skati-home-5.jpg') }}"
                      alt="@lang('Siguldas Skati - Moduļu māju parks')"/>
                 <div class="lg:flex lg:flex-col lg:justify-center">
                     <h3 class="text-h-sm-mob lg:text-h-sm mt-6 mb-3 leading-none lg:mt-0">
@@ -80,7 +81,7 @@
         <div class="container mx-auto px-4 pb-12 md:pb-18 lg:pb-24 xl:pb-30">
             <div class="relative mb-3 inline-block">
                 <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
-                    @lang('Dizaina mājas, sauna un džakūzis')
+                    @lang('Dizaina mājas, sauna un džakuzi')
                 </h2>
 
             </div>
@@ -259,7 +260,7 @@
 </x-app-layout>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const container = document.getElementById("header-carousel");
         const options = {
             Autoplay: {

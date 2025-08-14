@@ -28,8 +28,8 @@
             </div>
             @if(isset($modalCTA))
                 <div class="flex items-center gap-x-2 py-3 px-4 border-t border-ss-dark">
-                    <x-btn-primary
-                        href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html">@lang('Rezervēt')</x-btn-primary>
+                    <x-btn-primary target="_blank"
+                                   href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html">@lang('Rezervēt')</x-btn-primary>
                 </div>
             @endif
         </div>

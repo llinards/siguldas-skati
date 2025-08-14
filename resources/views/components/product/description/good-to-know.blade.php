@@ -13,10 +13,6 @@
                 @lang('Check-out: 08:00 - 11:00')
             </li>
             <li class="flex items-center gap-x-4">
-                <img src="{{ asset('icons/door-enter.svg') }}" alt="Fire" class="h-8 w-8"/>
-                @lang('Reģistrācijai nav vecuma ierobežojumu')
-            </li>
-            <li class="flex items-center gap-x-4">
                 <img src="{{ asset('icons/fire.svg') }}" alt="@lang('Uguns')" class="h-8 w-8"/>
                 @lang('Smēķēšana nav atļauta')
             </li>
@@ -26,7 +22,7 @@
             </li>
             <li class="flex items-center gap-x-4">
                 <img src="{{ asset('icons/clock.svg') }}" alt="@lang('Pulkstens')" class="h-8 w-8"/>
-                @lang('Viesiem ir jāuzvedas klusu no plkst. 23:00 līdz 07:00')
+                @lang('Viesiem jāievēro klusums no plkst. 23:00 līdz 07:00')
             </li>
             <li class="flex items-center gap-x-4">
                 <img src="{{ asset('icons/bone.svg') }}" alt="@lang('Kauls')" class="h-8 w-8"/>
@@ -42,6 +38,18 @@
             <li class="flex items-center gap-x-4">
                 <img src="{{ asset('icons/washing-machine.svg') }}" alt="@lang('Dūmu detektors')" class="h-8 w-8"/>
                 @lang('Mājoklis aprīkots ar dūmu detektoru')
+            </li>
+            <li class="flex items-center gap-x-4">
+                <img src="{{ asset('icons/camera.svg') }}" alt="@lang('Dūmu detektors')" class="h-8 w-8"/>
+                @lang('Īpašuma drošību nodrošina Mustang apsardze')
+            </li>
+            <li class="flex items-center gap-x-4">
+                <img src="{{ asset('icons/camera.svg') }}" alt="@lang('Dūmu detektors')" class="h-8 w-8"/>
+                @lang('Tiek veikta video novērošana')
+            </li>
+            <li class="flex items-center gap-x-4">
+                <img src="{{ asset('icons/camera.svg') }}" alt="@lang('Dūmu detektors')" class="h-8 w-8"/>
+                @lang('Īpašumā drīkst uzturēties tikai viesi, kuri ir veikuši rezervāciju')
             </li>
         </ul>
     </div>

@@ -7,13 +7,13 @@
                  :class="open ? 'invert' : ''" alt="Siguldas Skati Logo"/>
         </a>
         <ul class="{{ Route::is('home') ? 'text-white' : 'text-black' }} hidden uppercase xl:flex">
-            <x-nav.nav-link href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html"
+            <x-nav.nav-link target="_blank" href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html"
                             class="{{ Route::is('book') ? 'border-b-ss-gray text-ss-gray' : '' }}">
                 @lang('Rezervēt')
             </x-nav.nav-link>
             <x-nav.nav-link href="{{ route('products') }}"
                             class="{{ Route::is('products') ? 'border-b-ss-gray text-ss-gray' : '' }}">
-                @lang('Dizaina mājas, sauna un džakūzis')
+                @lang('Dizaina mājas, sauna un džakuzi')
             </x-nav.nav-link>
             <x-nav.nav-link href="{{ route('faq') }}"
                             class="{{ Route::is('faq') ? 'border-b-ss-gray text-ss-gray' : '' }}">
@@ -55,7 +55,7 @@
          x-transition:leave="transition duration-300 ease-in" x-transition:leave-start="translate-x-0 opacity-100"
          x-transition:leave-end="translate-x-full opacity-0" class="bg-ss bg-opacity-90 fixed inset-0 z-40 xl:hidden">
         <ul class="flex h-full flex-col items-center justify-center space-y-2 text-black uppercase xl:text-white">
-            <x-nav.nav-link href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html"
+            <x-nav.nav-link target="_blank" href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html"
                             class="{{ Route::is('book') ? 'border-b-ss-gray text-ss-gray' : '' }}">
                 @lang('Rezervēt')
             </x-nav.nav-link>

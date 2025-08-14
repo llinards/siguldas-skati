@@ -2,7 +2,7 @@
     <div class="bg-ss">
         <div class="container mx-auto px-4">
             <div class="relative mt-26 lg:mt-30 xl:mt-36 mb-3 inline-block">
-                <x-btn-back class="pb-3" />
+                <x-btn-back class="pb-3"/>
                 <h1 class="text-h-mob lg:text-h-md leading-none border-b-2">
                     @lang('Sazinies ar mums')
                 </h1>
@@ -36,7 +36,8 @@
                                     <h2>@lang('E-pasts')</h2>
                                 </li>
                                 <li>
-                                    <x-link href="mailto:info@siguldasskati.lv" class="">info@siguldasskati.lv</x-link>
+                                    <x-link href="mailto:siguldasskati@gmail.com" class="">siguldasskati@gmail.com
+                                    </x-link>
                                 </li>
                             </ul>
                         </div>
@@ -59,17 +60,17 @@
                                     <ul class="flex justify-center space-x-3 sm:justify-start">
                                         <x-social.icon href="https://www.facebook.com/ModernHouseLV">
                                             <x-social.facebook
-                                                class="transition-colors duration-200 hover:text-gray-500" />
+                                                class="transition-colors duration-200 hover:text-gray-500"/>
                                         </x-social.icon>
 
                                         <x-social.icon href="https://www.instagram.com/siguldasskati">
                                             <x-social.instagram
-                                                class="transition-colors duration-200 hover:text-gray-500" />
+                                                class="transition-colors duration-200 hover:text-gray-500"/>
                                         </x-social.icon>
 
                                         <x-social.icon href="https://www.tiktok.com/@modernhouse_lv">
                                             <x-social.tiktok
-                                                class="transition-colors duration-200 hover:text-gray-500" />
+                                                class="transition-colors duration-200 hover:text-gray-500"/>
                                         </x-social.icon>
                                     </ul>
                                 </li>
@@ -79,7 +80,7 @@
                 </div>
 
                 <div class="col-span-1 items-center justify-center md:flex lg:flex-none">
-                    <livewire:contact-us />
+                    <livewire:contact-us/>
                 </div>
             </div>
         </div>

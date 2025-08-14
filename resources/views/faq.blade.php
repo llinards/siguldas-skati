@@ -10,7 +10,7 @@
             </div>
             <p class="text-ss-gray mb-12 text-sm leading-none">
                 {{-- prettier-ignore --}}
-                @lang('Šeit ir atbildes uz biežāk uzdotajiem jautājumiem par mūsu dizaina mājām un saunām.')
+                @lang('Šeit ir atbildes uz biežāk uzdotajiem jautājumiem par mūsu brīvdienu dizaina mājām.')
             </p>
 
             <div class="hs-accordion-group container mx-auto space-y-6" data-hs-accordion-always-open="">
@@ -192,7 +192,7 @@
                         aria-expanded="false" aria-controls="hs-basic-with-arrow-collapse-nine">
                         <h3 class="text-h-sm-mob lg:text-h-mob text-left leading-none">
                             {{-- prettier-ignore --}}
-                            @lang('Vai sauna un džakūzis ir iekļauts cenā?')
+                            @lang('Vai sauna un džakuzi ir iekļauts cenā?')
                         </h3>
                         <x-accordion-arrows/>
                     </button>

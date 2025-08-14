@@ -5,11 +5,8 @@
                 <x-slot name="productTitle">{{ $product->title }}</x-slot>
                 <x-slot name="productCapacityLong">
                     @lang('Paredzēts')
-                    {{
-                    $product->person_count === 1
-                    ? __('1 personai')
-                    : __(':count personām', ['count' => $product->person_count])
-                    }}
+                    {{ $product->person_count === 1 ? __('1 pieaugušais') : __(':count pieaugušie', ['count' =>
+                       $product->person_count]) }}
                     @if($product->children_count > 0)
                         +  {{ $product->children_count === 1 ? __('1 bērns') : __(':count bērni', ['count' =>
                                 $product->children_count]) }}
@@ -19,8 +16,8 @@
 
             <x-product.gallery.mobile :product="$product"/>
             <div class="mt-6 mb-6 sm:hidden">
-                <x-btn-primary
-                    href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html">@lang('Rezervēt')</x-btn-primary>
+                <x-btn-primary target="_blank"
+                               href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html">@lang('Rezervēt')</x-btn-primary>
             </div>
 
             <x-product.gallery.desktop :product="$product"/>

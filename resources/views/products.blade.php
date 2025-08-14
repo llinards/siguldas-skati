@@ -4,11 +4,11 @@
             <div class="relative mt-26 lg:mt-30 xl:mt-36 mb-3 inline-block">
                 <x-btn-back class="pb-3"/>
                 <h1 class="text-h-mob lg:text-h-md leading-none border-b-2">
-                    @lang('Dizaina mājas, sauna un džakūzis')
+                    @lang('Dizaina mājas, sauna un džakuzi')
                 </h1>
             </div>
             <p class="text-ss-gray pb-6 text-sm leading-none">
-                @lang('Izvēlies...')
+                @lang('Rezervē savu brīvdienu māju jau tagad!')
             </p>
 
             @if ($products->isEmpty())
@@ -30,8 +30,8 @@
                                 {{ Storage::url($product->cover) }}
                             </x-slot>
                             <x-slot name="productCapacity">
-                                {{ $product->person_count === 1 ? __('1 personai') : __(':count personām', ['count' =>
-                                $product->person_count]) }}
+                                {{ $product->person_count === 1 ? __('1 pieaugušais') : __(':count pieaugušie', ['count' =>
+                      $product->person_count]) }}
                                 @if($product->children_count > 0)
                                     +  {{ $product->children_count === 1 ? __('1 bērns') : __(':count bērni', ['count' =>
                                 $product->children_count]) }}

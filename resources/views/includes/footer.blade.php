@@ -28,11 +28,12 @@
                     <h4 class="mb-4 text-2xl font-medium">
                         @lang('Izvēlne')
                     </h4>
-                    <x-nav.footer-link href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html">
+                    <x-nav.footer-link target="_blank"
+                                       href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html">
                         @lang('Rezervēt')
                     </x-nav.footer-link>
                     <x-nav.footer-link href="{{ route('products') }}">
-                        @lang('Dizaina mājas, sauna un džakūzis')
+                        @lang('Dizaina mājas, sauna un džakuzi')
                     </x-nav.footer-link>
                     <x-nav.footer-link href="{{ route('faq') }}">
                         @lang('BUJ')

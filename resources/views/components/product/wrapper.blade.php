@@ -23,8 +23,8 @@
             {!! $product->pricelist !!}
         </div>
         <div class="flex xl:justify-end">
-            <x-btn-primary
-                href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html">@lang('Rezervēt')</x-btn-primary>
+            <x-btn-primary target="_blank"
+                           href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html">@lang('Rezervēt')</x-btn-primary>
         </div>
     </div>
 
