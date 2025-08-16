@@ -5,10 +5,10 @@
                 <x-slot name="productTitle">{{ $product->title }}</x-slot>
                 <x-slot name="productCapacityLong">
                     @lang('Paredzēts')
-                    {{ $product->person_count === 1 ? __('1 pieaugušais') : __(':count pieaugušie', ['count' =>
+                    {{ $product->person_count === 1 ? __('1 pieaugušajam') : __(':count pieaugušajiem', ['count' =>
                        $product->person_count]) }}
                     @if($product->children_count > 0)
-                        +  {{ $product->children_count === 1 ? __('1 bērns') : __(':count bērni', ['count' =>
+                        +  {{ $product->children_count === 1 ? __('1 bērnam') : __(':count bērniem', ['count' =>
                                 $product->children_count]) }}
                     @endif
                 </x-slot>
