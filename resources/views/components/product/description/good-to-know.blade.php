@@ -31,7 +31,7 @@
         </ul>
     </div>
     <div class="mb-6">
-        <ul>
+        <ul class="space-y-3">
             <li>
                 <h3>@lang('Drošība un īpašums')</h3>
             </li>
