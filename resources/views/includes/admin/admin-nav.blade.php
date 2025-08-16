@@ -74,6 +74,12 @@
                     {{ __('Ērtības') }}
                 </a>
                 <a
+                    class="hover:border-b-menu-hover hover:text-menu-hover text-btn-md {{ Route::is('dashboard.rules*') ? 'border-b-menu-hover text-menu-hover' : '' }} border-b-1 border-transparent text-center transition-all duration-200 ease-in-out"
+                    href="{{ route('dashboard.rules') }}"
+                >
+                    {{ __('Noteikumi') }}
+                </a>
+                <a
                     class="hover:border-b-menu-hover hover:text-menu-hover text-btn-md {{ Route::is('profile.edit') ? 'border-b-menu-hover text-menu-hover' : '' }} border-b-1 border-transparent text-center transition-all duration-200 ease-in-out"
                     href="{{ route('profile.edit') }}"
                     wire:navigate

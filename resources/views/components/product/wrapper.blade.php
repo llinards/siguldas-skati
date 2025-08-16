@@ -34,7 +34,7 @@
                 @lang('Lietas, ko ņemt vērā')
             </h2>
         </div>
-        <x-product.description.good-to-know/>
+        <x-product.description.good-to-know :product="$product"/>
     </div>
 </div>
 
@@ -86,7 +86,7 @@
         <div id="hs-basic-with-arrow-collapse-three"
              class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region"
              aria-labelledby="hs-basic-with-arrow-heading-three">
-            <x-product.description.good-to-know/>
+            <x-product.description.good-to-know :product="$product"/>
         </div>
     </div>
 </div>

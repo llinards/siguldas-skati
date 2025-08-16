@@ -11,6 +11,10 @@ use App\Livewire\Admin\Product\AddProduct;
 use App\Livewire\Admin\Product\EditProduct;
 use App\Livewire\Admin\Product\ProductFeatures;
 use App\Livewire\Admin\Product\ProductImages;
+use App\Livewire\Admin\Product\ProductRules;
+use App\Livewire\Admin\Rule\AddRule;
+use App\Livewire\Admin\Rule\EditRule;
+use App\Livewire\Admin\Rule\RuleList;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -55,10 +59,15 @@ Route::group(
                 Route::get('/product/{product:id}/edit', EditProduct::class)->name('product.edit');
                 Route::get('/product/{product:id}/images', ProductImages::class)->name('product.images');
                 Route::get('/product/{product:id}/features', ProductFeatures::class)->name('product.features');
+                Route::get('/product/{product:id}/rules', ProductRules::class)->name('product.rules');
 
                 Route::get('/features', FeatureList::class)->name('dashboard.features');
                 Route::get('/feature/add', AddFeature::class)->name('dashboard.feature.add');
                 Route::get('/feature/{feature}/edit', EditFeature::class)->name('dashboard.feature.edit');
+
+                Route::get('/rules', RuleList::class)->name('dashboard.rules');
+                Route::get('/rule/add', AddRule::class)->name('dashboard.rule.add');
+                Route::get('/rule/{rule}/edit', EditRule::class)->name('dashboard.rule.edit');
 
                 Route::get('/newsletter', NewsletterList::class)->name('newsletter.list');
             });

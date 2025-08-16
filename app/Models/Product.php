@@ -32,6 +32,11 @@ class Product extends Model
         return $this->belongsToMany(Feature::class);
     }
 
+    public function rules(): BelongsToMany
+    {
+        return $this->belongsToMany(Rule::class);
+    }
+
     protected $casts = [
         'title' => 'array',
         'slug' => 'array',

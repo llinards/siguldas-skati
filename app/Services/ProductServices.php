@@ -138,4 +138,9 @@ class ProductServices
     {
         $product->features()->sync($featureIds);
     }
+
+    public function syncProductRules(Product $product, array $ruleIds): void
+    {
+        $product->rules()->sync($ruleIds);
+    }
 }
