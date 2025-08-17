@@ -6,6 +6,7 @@ use App\Models\Feature;
 use App\Models\Newsletter;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\Rule;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -29,6 +30,7 @@ class DatabaseSeeder extends Seeder
             ->count(5)
             ->has(ProductImage::factory()->count(10), 'images')
             ->has(Feature::factory()->count(5), 'features')
+            ->has(Rule::factory()->count(6), 'rules')
             ->create();
 
         Newsletter::factory()->count(10)->create();
