@@ -180,15 +180,6 @@
         </div>
     </div>
 
-    <!-- Show empty state only if no rules at all -->
-    @if($rules->isEmpty())
-        <div class="py-12 text-center">
-            <p class="text-base leading-7.5 md:text-xl xl:text-2xl">
-                @lang('Nav pievienoti noteikumi!')
-            </p>
-        </div>
-    @endif
-
     <div class="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-end">
         <x-btn-primary :href="route('dashboard.rule.add')">
             {{ __('Pievienot jaunu noteikumu') }}
