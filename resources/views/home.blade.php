@@ -23,7 +23,7 @@
             </h1>
 
             <x-btn-header target="_blank" href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html"
-                          class="mb-32">
+                          class="mb-10 md:mb-34">
                 @lang('Rezervēt')
             </x-btn-header>
         </div>
