@@ -14,7 +14,10 @@ class Rule extends Model
     use HasTranslations;
 
     public const SECTION_HOUSE = 'house';
+
     public const SECTION_SAFETY = 'safety';
+
+    public const SECTION_PROHIBITED = 'prohibited';
 
     public array $translatable = ['title'];
 

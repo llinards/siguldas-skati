@@ -29,6 +29,7 @@
                         >
                             <option value="house">{{ __('Mājokļa noteikumi') }}</option>
                             <option value="safety">{{ __('Drošība un īpašums') }}</option>
+                            <option value="prohibited">{{ __('Aizliegumi') }}</option>
                         </select>
                         <x-input-error :messages="$errors->get('section')" class="mt-2"/>
                     </div>

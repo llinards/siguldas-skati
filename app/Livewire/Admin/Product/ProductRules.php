@@ -69,10 +69,12 @@ class ProductRules extends Component
         $rules = $this->ruleService->getAllActiveRules();
         $houseRules = $rules->where('section', Rule::SECTION_HOUSE);
         $safetyRules = $rules->where('section', Rule::SECTION_SAFETY);
+        $prohibitedRules = $rules->where('section', Rule::SECTION_PROHIBITED);
 
         return view('livewire.admin.product.product-rules', [
             'houseRules' => $houseRules,
             'safetyRules' => $safetyRules,
+            'prohibitedRules' => $prohibitedRules,
         ])->layout('layouts.admin.app');
     }
 }
