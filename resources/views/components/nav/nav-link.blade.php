@@ -3,7 +3,7 @@
     <a
         {{
             $attributes->class([
-                'mx-4 border-b-1 text-center border-transparent hover:border-b-menu-hover hover:text-menu-hover transition-all
+                'mr-3 border-b-1 text-center border-transparent hover:border-b-menu-hover hover:text-menu-hover transition-all
                  ease-in-out duration-200 text-btn-md xl:text-btn',
                 'xl:hover:border-b-white xl:hover:text-white' => Route::is('home'),
             ])
