@@ -9,7 +9,8 @@
             @endif
         @endforeach
     </ul>
-
+@endif
+@if($product->show_all_features)
     <x-btn-primary aria-haspopup="dialog" aria-expanded="false" aria-controls="modal" data-hs-overlay="#product-modal">
         @lang('Rādīt visas papildērtības')
     </x-btn-primary>

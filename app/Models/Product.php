@@ -42,9 +42,11 @@ class Product extends Model
         'slug' => 'array',
         'description' => 'array',
         'person_count' => 'integer',
+        'children_count' => 'integer',
         'pricelist' => 'array',
         'order' => 'integer',
         'is_active' => 'boolean',
+        'show_all_features' => 'boolean',
     ];
 
     public function resolveRouteBinding($value, $field = null)
