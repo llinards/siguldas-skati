@@ -23,9 +23,8 @@
 }
 
 @theme {
-    --font-sans:
-        'Arial', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-        'Noto Color Emoji';
+    --font-sans: 'Arial', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
     --font-heading: 'Charpentier';
     --font-main: 'Rubik';
     --breakpoint-xs: 30rem;
@@ -46,7 +45,8 @@
 }
 
 .home-introduction {
-    min-height: calc(100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0));
+    /*min-height: calc(100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0));*/
+    min-height: 100vh;
 }
 
 h1,
@@ -101,9 +101,8 @@ nav li :focus-visible {
     --f-button-svg-height: 27px;
     --f-button-svg-stroke-width: 1.5;
 
-    --f-button-shadow:
-        rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
-        rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    --f-button-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
 .ck-editor__editable ul,
@@ -116,7 +115,7 @@ nav li :focus-visible {
     text-decoration: underline !important;
 }
 
-.product-pricelist>p {
+.product-pricelist > p {
     margin-bottom: 0.75rem;
 }
 
