@@ -9,13 +9,16 @@ use Illuminate\Support\Collection;
 
 class GalleryServices
 {
-    public function __construct(private FileStorageService $fileStorageService)
-    {
-    }
+    public function __construct(private FileStorageService $fileStorageService) {}
 
     public function getAllGalleries(): Collection
     {
         return Gallery::all();
+    }
+
+    public function getAllActiveGalleries(): Collection
+    {
+        return Gallery::all()->where('is_active', 1);
     }
 
     public function getGalleryById(int $id): ?Gallery
