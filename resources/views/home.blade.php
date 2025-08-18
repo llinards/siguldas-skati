@@ -115,7 +115,7 @@
                 <p class="text-ss-gray pb-6 text-sm leading-none xl:pb-12">
                     @lang('Siguldas skatu galerija.')
                 </p>
-                <x-carousels.gallery.wrapper></x-carousels.gallery.wrapper>
+                <x-carousels.gallery.wrapper :galleries="$galleries"></x-carousels.gallery.wrapper>
             </div>
         </div>
     @endif

@@ -6,42 +6,17 @@
         </x-carousels.nav>
         <div id="galleryCarousel" class="f-carousel">
             <div class="f-carousel__viewport">
-                <x-carousels.gallery.card>
-                    <x-slot name="imageGallery">galleryOne</x-slot>
-                    <x-slot name="imageLink">
-                        {{ asset('images/gallery/siguldas-skati-house-1-1.jpg') }}
-                    </x-slot>
-                    <x-slot name="extraImages">
-                        {{ json_encode([asset('images/gallery/siguldas-skati-house-1-2.jpg')]) }}
-                    </x-slot>
-                </x-carousels.gallery.card>
-                <x-carousels.gallery.card>
-                    <x-slot name="imageGallery">galleryTwo</x-slot>
-                    <x-slot name="imageLink">
-                        {{ asset('images/gallery/siguldas-skati-house-2-1.jpg') }}
-                    </x-slot>
-                    <x-slot name="extraImages">
-                        {{ json_encode([asset('images/gallery/siguldas-skati-house-2-2.jpg')]) }}
-                    </x-slot>
-                </x-carousels.gallery.card>
-                <x-carousels.gallery.card>
-                    <x-slot name="imageGallery">galleryThree</x-slot>
-                    <x-slot name="imageLink">
-                        {{ asset('images/gallery/siguldas-skati-house-3-1.jpg') }}
-                    </x-slot>
-                    <x-slot name="extraImages">
-                        {{ json_encode([asset('images/gallery/siguldas-skati-house-3-2.jpg')]) }}
-                    </x-slot>
-                </x-carousels.gallery.card>
-                <x-carousels.gallery.card>
-                    <x-slot name="imageGallery">galleryFour</x-slot>
-                    <x-slot name="imageLink">
-                        {{ asset('images/gallery/siguldas-skati-house-4-1.jpg') }}
-                    </x-slot>
-                    <x-slot name="extraImages">
-                        {{ json_encode([asset('images/gallery/siguldas-skati-house-4-2.jpg')]) }}
-                    </x-slot>
-                </x-carousels.gallery.card>
+                @foreach($galleries as $gallery)
+                    <x-carousels.gallery.card>
+                        <x-slot name="title">{{$gallery->title}}</x-slot>
+                        <x-slot name="cover">
+                            {{ Storage::url($gallery->images->first()->filename) }}
+                        </x-slot>
+                        <x-slot name="images">
+                            {{ json_encode($gallery->images->skip(1)->pluck('filename')->map(fn($filename) => Storage::url($filename))->toArray()) }}
+                        </x-slot>
+                    </x-carousels.gallery.card>
+                @endforeach
             </div>
         </div>
     </div>
