@@ -1,6 +1,6 @@
 <div class="bg-ss">
     <div class="carousel-section container mx-auto grid grid-cols-1">
-        <x-carousels.nav class="xl:hidden">
+        <x-carousels.nav>
             <x-slot name="prev">galleryPrev</x-slot>
             <x-slot name="next">galleryNext</x-slot>
         </x-carousels.nav>

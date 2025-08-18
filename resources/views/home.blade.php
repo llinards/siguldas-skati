@@ -103,20 +103,20 @@
     </x-banner>
 
     {{-- GALLERY --}}
-    {{-- <div class="bg-ss"> --}}
-    {{-- <div class="container mx-auto px-4 pt-12 md:pt-18 lg:pt-24 xl:pt-30"> --}}
-    {{-- <div class="relative mb-3 inline-block"> --}}
-    {{-- <h2 class="text-h-mob lg:text-h-md leading-none border-b-2"> --}}
-    {{-- @lang('Galerija') --}}
-    {{-- </h2> --}}
+    <div class="bg-ss">
+        <div class="container mx-auto px-4 pt-12 md:pt-18 lg:pt-24 xl:pt-30">
+            <div class="relative mb-3 inline-block">
+                <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
+                    @lang('Galerija')
+                </h2>
 
-    {{-- </div> --}}
-    {{-- <p class="text-ss-gray pb-6 text-sm leading-none xl:pb-12"> --}}
-    {{-- @lang('Siguldas skatu galerija.') --}}
-    {{-- </p> --}}
-    {{-- <x-carousels.gallery.wrapper></x-carousels.gallery.wrapper> --}}
-    {{-- </div> --}}
-    {{-- </div> --}}
+            </div>
+            <p class="text-ss-gray pb-6 text-sm leading-none xl:pb-12">
+                @lang('Siguldas skatu galerija.')
+            </p>
+            <x-carousels.gallery.wrapper></x-carousels.gallery.wrapper>
+        </div>
+    </div>
 
     {{-- EXPERIENCES --}}
     <div class="bg-ss">
