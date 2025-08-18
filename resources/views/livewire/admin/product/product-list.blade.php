@@ -17,9 +17,6 @@
                             alt="{{ $product->title }}"
                             class="h-full w-full object-cover"
                         />
-                        {{-- <img src="{{ asset('storage/product-images/siguldas-skati-product-1.jpg') }}" --}}
-                        {{-- alt="{{ $product->title }}" --}}
-                        {{-- class="w-full h-full object-cover"> --}}
                     @else
                         <div class="flex h-full w-full items-center justify-center">
                             <svg class="h-16 w-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

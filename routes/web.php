@@ -15,6 +15,10 @@ use App\Livewire\Admin\Product\ProductRules;
 use App\Livewire\Admin\Rule\AddRule;
 use App\Livewire\Admin\Rule\EditRule;
 use App\Livewire\Admin\Rule\RuleList;
+use App\Livewire\Admin\Gallery\GalleryList;
+use App\Livewire\Admin\Gallery\AddGallery;
+use App\Livewire\Admin\Gallery\EditGallery;
+use App\Livewire\Admin\Gallery\GalleryImages;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -68,6 +72,11 @@ Route::group(
                 Route::get('/rules', RuleList::class)->name('dashboard.rules');
                 Route::get('/rule/add', AddRule::class)->name('dashboard.rule.add');
                 Route::get('/rule/{rule}/edit', EditRule::class)->name('dashboard.rule.edit');
+
+                Route::get('/galleries', GalleryList::class)->name('dashboard.galleries');
+                Route::get('/gallery/add', AddGallery::class)->name('dashboard.gallery.add');
+                Route::get('/gallery/{gallery}/edit', EditGallery::class)->name('dashboard.gallery.edit');
+                Route::get('/gallery/{gallery:id}/images', GalleryImages::class)->name('dashboard.gallery.images');
 
                 Route::get('/newsletter', NewsletterList::class)->name('newsletter.list');
             });
