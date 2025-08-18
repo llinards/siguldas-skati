@@ -67,6 +67,10 @@
                             class="{{ Route::is('products') ? 'border-b-ss-gray text-ss-gray' : '' }}">
                 @lang('Dizaina mājas, sauna un džakūzis')
             </x-nav.nav-link>
+            <x-nav.nav-link href="#galerija"
+                            class="">
+                @lang('Galerija')
+            </x-nav.nav-link>
             <x-nav.nav-link href="/buj" class="{{ Route::is('faq') ? 'border-b-ss-gray text-ss-gray' : '' }}">
                 @lang('BUJ')
             </x-nav.nav-link>
