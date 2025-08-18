@@ -3,7 +3,7 @@
         <a href="/{{ app()->getLocale() }}"
            class="{{ Route::is('home') ? 'focus-visible:outline-white' : 'focus-visible:outline-ss-dark' }} flex items-center focus-visible:outline! focus-visible:outline-offset-6!">
             <img src="{{ asset('images/logo.png') }}"
-                 class="{{ Route::is('home') ? '' : 'invert' }} w-44 transition-all duration-300 xl:w-56 xl:w-82"
+                 class="{{ Route::is('home') ? '' : 'invert' }} w-44 transition-all duration-300 xl:w-56"
                  :class="open ? 'invert' : ''" alt="Siguldas Skati Logo"/>
         </a>
         <ul class="{{ Route::is('home') ? 'text-white' : 'text-black' }} hidden uppercase xl:flex">
@@ -14,6 +14,10 @@
             <x-nav.nav-link href="{{ route('products') }}"
                             class="{{ Route::is('products') ? 'border-b-ss-gray text-ss-gray' : '' }}">
                 @lang('Dizaina mājas, sauna un džakuzi')
+            </x-nav.nav-link>
+            <x-nav.nav-link href="#galerija"
+                            class="">
+                @lang('Galerija')
             </x-nav.nav-link>
             <x-nav.nav-link href="{{ route('faq') }}"
                             class="{{ Route::is('faq') ? 'border-b-ss-gray text-ss-gray' : '' }}">

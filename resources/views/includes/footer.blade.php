@@ -35,6 +35,9 @@
                     <x-nav.footer-link href="{{ route('products') }}">
                         @lang('Dizaina mājas, sauna un džakuzi')
                     </x-nav.footer-link>
+                    <x-nav.footer-link href="#galerija">
+                        @lang('Galerija')
+                    </x-nav.footer-link>
                     <x-nav.footer-link href="{{ route('faq') }}">
                         @lang('BUJ')
                     </x-nav.footer-link>

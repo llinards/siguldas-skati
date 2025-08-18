@@ -104,7 +104,7 @@
 
     {{-- GALLERY --}}
     @if($galleries->isNotEmpty())
-        <div class="bg-ss">
+        <div id="galerija" class="bg-ss">
             <div class="container mx-auto px-4 pt-12 md:pt-18 lg:pt-24 xl:pt-30">
                 <div class="relative mb-3 inline-block">
                     <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
