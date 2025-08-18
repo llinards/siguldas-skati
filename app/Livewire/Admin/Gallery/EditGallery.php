@@ -40,7 +40,7 @@ class EditGallery extends Component
     public function mount(Gallery $gallery): void
     {
         $this->gallery = $gallery;
-        $this->title = $gallery->getTranslation('title', app()->getLocale()) ?? '';
+        $this->title = $gallery->title;
         $this->is_active = (bool) $gallery->is_active;
     }
 
@@ -50,10 +50,6 @@ class EditGallery extends Component
 
         try {
             $this->updateGallery();
-            //            $this->galleryServices->updateGallery($this->gallery, [
-            //                'title' => $this->title,
-            //                'is_active' => $this->is_active,
-            //            ]);
             $this->flashMessageService->success(__('Galerija atjaunināta.'));
             $this->redirect(route(self::SUCCESS_ROUTE));
         } catch (\Exception $e) {

@@ -21,12 +21,6 @@ class Gallery extends Model
         'is_active' => 'boolean',
     ];
 
-    protected $fillable = [
-        'title',
-        'order',
-        'is_active',
-    ];
-
     public function images(): HasMany
     {
         return $this->hasMany(GalleryImage::class);
