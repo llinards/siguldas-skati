@@ -22,7 +22,7 @@
     <div
         class="absolute bottom-12 left-1/2 z-10 flex w-full max-w-[320px] -translate-x-1/2 flex-col items-center text-center text-white">
         <!-- Siguldas Skati Logo -->
-        <div class="mb-10">
+        <div class="absolute bottom-50 lg:bottom-65">
             <img
                 src=" {{ asset('images/siguldas-skati-logo.svg') }}"
                 alt="Siguldas Skati"
