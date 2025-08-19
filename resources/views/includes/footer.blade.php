@@ -38,12 +38,6 @@
                     <x-nav.footer-link href="#galerija">
                         @lang('Galerija')
                     </x-nav.footer-link>
-                    <x-nav.footer-link href="{{ route('faq') }}">
-                        @lang('BUJ')
-                    </x-nav.footer-link>
-                    <x-nav.footer-link href="{{ route('contacts') }}">
-                        @lang('Kontakti')
-                    </x-nav.footer-link>
                 </ul>
             </div>
             <div class="mb-6 lg:my-0">
@@ -51,6 +45,12 @@
                     <h4 class="mb-4 text-2xl font-medium md:text-xl xl:text-2xl">
                         @lang('Informācija')
                     </h4>
+                    <x-nav.footer-link href="{{ route('contacts') }}">
+                        @lang('Kontakti')
+                    </x-nav.footer-link>
+                    <x-nav.footer-link href="{{ route('faq') }}">
+                        @lang('BUJ')
+                    </x-nav.footer-link>
                     <x-nav.footer-link href="{{route('privacy-policy')}}">
                         @lang('Privātuma politika')
                     </x-nav.footer-link>

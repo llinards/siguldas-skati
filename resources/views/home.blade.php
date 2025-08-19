@@ -18,7 +18,7 @@
         <!-- Foreground content -->
         <div class="container relative z-10 mx-auto flex flex-col justify-end items-center px-4">
             <h1
-                class="mb-6 text-h-mob xs:text-6xl font-heading max-w-7xl text-center leading-12 text-white uppercase xs:leading-16 md:text-6xl xl:leading-28">
+                class="mb-6 text-h-mob xs:text-6xl font-heading max-w-7xl text-center leading-12 text-white uppercase xs:leading-16 md:text-6xl">
                 @lang('Modernas brīvdienu dizaina mājas tavai atpūtai!')
             </h1>
 
