@@ -5,6 +5,7 @@
                 <div class="flex sm:inline-block justify-center items-start border-b-2">
                     <x-btn-back class="pb-3 mr-5"/>
                     <h1 class="text-h-mob lg:text-h-md leading-none">
+                        {{-- prettier-ignore --}}
                         @lang('Dizaina mājas, sauna un džakūzī')
                     </h1>
                 </div>

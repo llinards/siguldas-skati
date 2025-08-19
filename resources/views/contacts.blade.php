@@ -2,10 +2,13 @@
     <div class="bg-ss">
         <div class="container mx-auto px-4">
             <div class="relative mt-26 lg:mt-30 xl:mt-36 mb-3 inline-block">
-                <x-btn-back class="pb-3"/>
-                <h1 class="text-h-mob lg:text-h-md leading-none border-b-2">
-                    @lang('Sazinies ar mums')
-                </h1>
+                <div class="flex sm:inline-block justify-center items-start border-b-2">
+                    <x-btn-back class="pb-3 mr-5"/>
+                    <h1 class="text-h-mob lg:text-h-md leading-none">
+                        {{-- prettier-ignore --}}
+                        @lang('Sazinies ar mums')
+                    </h1>
+                </div>
             </div>
             <p class="text-ss-gray pb-6 text-sm leading-none lg:max-w-1/3">
                 {{-- prettier-ignore --}}

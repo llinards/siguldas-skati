@@ -2,10 +2,13 @@
     <div class="bg-ss">
         <div class="container mx-auto px-4">
             <div class="relative mt-26 lg:mt-30 xl:mt-36 mb-3 inline-block">
-                <x-btn-back class="pb-3"/>
-                <h1 class="text-h-mob lg:text-h-md leading-none border-b-2">
-                    @lang('Iekšējās kārtības noteikumi')
-                </h1>
+                <div class="flex sm:inline-block justify-center items-start border-b-2">
+                    <x-btn-back class="pb-3 mr-5"/>
+                    <h1 class="text-h-mob lg:text-h-md leading-none">
+                        {{-- prettier-ignore --}}
+                        @lang('Iekšējās kārtības noteikumi')
+                    </h1>
+                </div>
             </div>
             <div class="text-base leading-7.5 md:text-xl md:leading-10 xl:text-2xl">
                 <div class="mb-8">

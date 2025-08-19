@@ -2,11 +2,13 @@
     <div class="bg-ss">
         <div class="container mx-auto px-4">
             <div class="relative mt-26 lg:mt-30 xl:mt-36 mb-3 inline-block">
-                <x-btn-back class="pb-3" />
-                <h1 class="text-h-mob lg:text-h-md leading-none border-b-2">
-                    @lang('Privātuma politika')
-                </h1>
-
+                <div class="flex sm:inline-block justify-center items-start border-b-2">
+                    <x-btn-back class="pb-3 mr-5"/>
+                    <h1 class="text-h-mob lg:text-h-md leading-none">
+                        {{-- prettier-ignore --}}
+                        @lang('Privātuma politika')
+                    </h1>
+                </div>
             </div>
             <p class="text-ss-gray mb-12 text-sm leading-none">
                 {{ __('Pēdējoreiz atjaunināts: 14.04.2025') }}
@@ -39,44 +41,44 @@
                 <div class="mb-12 overflow-x-auto rounded-lg lg:mb-12">
                     <table class="my-2 w-full text-left rtl:text-right">
                         <thead class="hidden sm:table-header-group">
-                            <tr class="border-storex-inactive-grey border-y-1 text-center">
-                                <th class="px-4 py-2">
-                                    @lang('Sīkdatne')
-                                </th>
-                                <th class="px-4 py-2">@lang('Mērķis')</th>
-                                <th class="px-4 py-2">
-                                    @lang('Derīguma termiņš')
-                                </th>
-                            </tr>
+                        <tr class="border-storex-inactive-grey border-y-1 text-center">
+                            <th class="px-4 py-2">
+                                @lang('Sīkdatne')
+                            </th>
+                            <th class="px-4 py-2">@lang('Mērķis')</th>
+                            <th class="px-4 py-2">
+                                @lang('Derīguma termiņš')
+                            </th>
+                        </tr>
                         </thead>
                         <tbody>
-                            @foreach (Whitecube\LaravelCookieConsent\Facades\Cookies::getCategories() as $category)
+                        @foreach (Whitecube\LaravelCookieConsent\Facades\Cookies::getCategories() as $category)
                             @foreach ($category->getCookies() as $cookie)
-                            <tr class="border-ss-dark mb-4 block border-b-1 sm:mb-0 sm:table-row sm:text-left">
-                                <td class="block px-4 py-2 sm:table-cell">
+                                <tr class="border-ss-dark mb-4 block border-b-1 sm:mb-0 sm:table-row sm:text-left">
+                                    <td class="block px-4 py-2 sm:table-cell">
                                     <span class="font-semibold sm:hidden">
                                         @lang('Sīkdatne')
                                         :
                                     </span>
-                                    {{ $cookie->name }}
-                                </td>
-                                <td class="block px-4 py-2 sm:table-cell">
+                                        {{ $cookie->name }}
+                                    </td>
+                                    <td class="block px-4 py-2 sm:table-cell">
                                     <span class="font-semibold sm:hidden">
                                         @lang('Mērķis')
                                         :
                                     </span>
-                                    {{ $cookie->description }}
-                                </td>
-                                <td class="block px-4 py-2 sm:table-cell">
+                                        {{ $cookie->description }}
+                                    </td>
+                                    <td class="block px-4 py-2 sm:table-cell">
                                     <span class="font-semibold sm:hidden">
                                         @lang('Derīguma termiņš')
                                         :
                                     </span>
-                                    {{ \Carbon\CarbonInterval::minutes($cookie->duration)->cascade() }}
-                                </td>
-                            </tr>
+                                        {{ \Carbon\CarbonInterval::minutes($cookie->duration)->cascade() }}
+                                    </td>
+                                </tr>
                             @endforeach
-                            @endforeach
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
