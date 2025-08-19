@@ -4,7 +4,7 @@
             <div class="relative mt-26 lg:mt-30 xl:mt-36 mb-3 inline-block">
                 <x-btn-back class="pb-3"/>
                 <h1 class="text-h-mob lg:text-h-md leading-none border-b-2">
-                    @lang('Dizaina mājas, sauna un džakuzi')
+                    @lang('Dizaina mājas, sauna un džakūzī')
                 </h1>
             </div>
             <p class="text-ss-gray pb-6 text-sm leading-none">

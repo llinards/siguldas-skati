@@ -192,7 +192,7 @@
                         aria-expanded="false" aria-controls="hs-basic-with-arrow-collapse-nine">
                         <h3 class="text-h-sm-mob lg:text-h-mob text-left leading-none">
                             {{-- prettier-ignore --}}
-                            @lang('Vai sauna un džakuzi ir iekļauts cenā?')
+                            @lang('Vai sauna un džakūzī ir iekļauts cenā?')
                         </h3>
                         <x-accordion-arrows/>
                     </button>

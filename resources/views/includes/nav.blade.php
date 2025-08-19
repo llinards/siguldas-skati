@@ -13,7 +13,7 @@
             </x-nav.nav-link>
             <x-nav.nav-link href="{{ route('products') }}"
                             class="{{ Route::is('products') ? 'border-b-ss-gray text-ss-gray' : '' }}">
-                @lang('Dizaina mājas, sauna un džakuzi')
+                @lang('Dizaina mājas, sauna un džakūzī')
             </x-nav.nav-link>
             <x-nav.nav-link href="{{route('home')}}#galerija"
                             class="">

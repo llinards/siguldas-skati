@@ -33,7 +33,7 @@
                         @lang('Rezervēt')
                     </x-nav.footer-link>
                     <x-nav.footer-link href="{{ route('products') }}">
-                        @lang('Dizaina mājas, sauna un džakuzi')
+                        @lang('Dizaina mājas, sauna un džakūzī')
                     </x-nav.footer-link>
                     <x-nav.footer-link href="#galerija">
                         @lang('Galerija')
