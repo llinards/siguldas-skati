@@ -15,7 +15,7 @@
                             class="{{ Route::is('products') ? 'border-b-ss-gray text-ss-gray' : '' }}">
                 @lang('Dizaina mājas, sauna un džakuzi')
             </x-nav.nav-link>
-            <x-nav.nav-link href="#galerija"
+            <x-nav.nav-link href="{{route('home')}}#galerija"
                             class="">
                 @lang('Galerija')
             </x-nav.nav-link>
@@ -67,11 +67,12 @@
                             class="{{ Route::is('products') ? 'border-b-ss-gray text-ss-gray' : '' }}">
                 @lang('Dizaina mājas, sauna un džakūzis')
             </x-nav.nav-link>
-            <x-nav.nav-link href="#galerija"
+            <x-nav.nav-link href="{{route('home')}}#galerija"
                             class="">
                 @lang('Galerija')
             </x-nav.nav-link>
-            <x-nav.nav-link href="/buj" class="{{ Route::is('faq') ? 'border-b-ss-gray text-ss-gray' : '' }}">
+            <x-nav.nav-link href="{{ route('faq') }}"
+                            class="{{ Route::is('faq') ? 'border-b-ss-gray text-ss-gray' : '' }}">
                 @lang('BUJ')
             </x-nav.nav-link>
             <x-nav.nav-link href="{{ route('contacts') }}"
@@ -89,17 +90,17 @@
             </ul>
         </ul>
         <ul class="absolute right-0 bottom-12 left-0 flex items-center justify-center space-x-8">
-            <x-social.icon href="https://www.facebook.com/ModernHouseLV">
-                <x-social.facebook/>
-            </x-social.icon>
+            {{--            <x-social.icon href="https://www.facebook.com/ModernHouseLV">--}}
+            {{--                <x-social.facebook/>--}}
+            {{--            </x-social.icon>--}}
 
             <x-social.icon href="https://www.instagram.com/siguldasskati">
                 <x-social.instagram/>
             </x-social.icon>
 
-            <x-social.icon href="https://www.tiktok.com/@modernhouse_lv">
-                <x-social.tiktok/>
-            </x-social.icon>
+            {{--            <x-social.icon href="https://www.tiktok.com/@modernhouse_lv">--}}
+            {{--                <x-social.tiktok/>--}}
+            {{--            </x-social.icon>--}}
         </ul>
     </div>
 </nav>
