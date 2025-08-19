@@ -29,7 +29,7 @@ function handleMobileMenu() {
                     document.body.style.overflow = 'auto';
                 }
             });
-            
+
             this.$nextTick(() => {
                 const mobileMenuLinks = this.$el.querySelectorAll('a');
                 mobileMenuLinks.forEach(link => {
@@ -85,3 +85,27 @@ for (let item of accordions) {
         item.scrollIntoView({behavior: 'smooth', block: 'start'});
     });
 }
+
+function handleHashNavigation() {
+    const hash = window.location.hash;
+    if (hash) {
+        const targetId = hash.substring(1);
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+            setTimeout(() => {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 100);
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', handleHashNavigation);
+window.addEventListener('hashchange', handleHashNavigation);
+
+window.addEventListener('load', () => {
+    setTimeout(handleHashNavigation, 200);
+});
