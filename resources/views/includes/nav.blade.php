@@ -46,12 +46,14 @@
                       d="M2 4.75A.75.75 0 0 1 2.75 4h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75ZM2 10a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 10Zm0 5.25a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"
                       clip-rule="evenodd"/>
             </svg>
-            <svg x-show="open" class="hover:fill-menu-hover size-12 duration-200" xmlns="http://www.w3.org/2000/svg"
+            <svg x-show="open" x-cloak class="hover:fill-menu-hover size-12 duration-200"
+                 xmlns="http://www.w3.org/2000/svg"
                  fill="black" viewBox="0 0 24 24">
                 <path
                     d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6L6.4 19Z"/>
             </svg>
         </button>
+
     </div>
 
     <div x-show="open" x-transition:enter="transition duration-300 ease-out"
