@@ -10,10 +10,9 @@
                     </h1>
                 </div>
             </div>
-            <p class="text-ss-gray pb-6 text-sm leading-none lg:max-w-1/3">
+            <p class="text-ss-gray pb-6 text-sm lg:max-w-1/3">
                 {{-- prettier-ignore --}}
-                @lang('Sazinies ar mums, ja rodas neskaidrības vai vēlies uzzināt vairāk par mūsu brīvdienu dizaina
-                mājām.')
+                @lang('Sazinies ar mums, ja rodas neskaidrības vai vēlies uzzināt vairāk par mūsu brīvdienu dizaina mājām.')
             </p>
 
             <div class="grid-cols-2 items-center gap-x-6 lg:grid lg:gap-x-12 xl:grid-cols-3">
@@ -61,20 +60,20 @@
                                 </li>
                                 <li>
                                     <ul class="flex justify-center space-x-3 sm:justify-start">
-                                        <x-social.icon href="https://www.facebook.com/ModernHouseLV">
-                                            <x-social.facebook
-                                                class="transition-colors duration-200 hover:text-gray-500"/>
-                                        </x-social.icon>
+                                        {{--                                        <x-social.icon href="https://www.facebook.com/ModernHouseLV">--}}
+                                        {{--                                            <x-social.facebook--}}
+                                        {{--                                                class="transition-colors duration-200 hover:text-gray-500"/>--}}
+                                        {{--                                        </x-social.icon>--}}
 
                                         <x-social.icon href="https://www.instagram.com/siguldasskati">
                                             <x-social.instagram
                                                 class="transition-colors duration-200 hover:text-gray-500"/>
                                         </x-social.icon>
 
-                                        <x-social.icon href="https://www.tiktok.com/@modernhouse_lv">
-                                            <x-social.tiktok
-                                                class="transition-colors duration-200 hover:text-gray-500"/>
-                                        </x-social.icon>
+                                        {{--                                        <x-social.icon href="https://www.tiktok.com/@modernhouse_lv">--}}
+                                        {{--                                            <x-social.tiktok--}}
+                                        {{--                                                class="transition-colors duration-200 hover:text-gray-500"/>--}}
+                                        {{--                                        </x-social.icon>--}}
                                     </ul>
                                 </li>
                             </ul>
