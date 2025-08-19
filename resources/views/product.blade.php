@@ -56,7 +56,52 @@
                                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                       clip-rule="evenodd"></path>
                             </svg>
-                            <span>@lang('Ledusskapis')</span>
+                            <span>@lang('Cepeškrāsns')</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <svg class="w-4 h-4 text-black flex-shrink-0" fill="currentColor"
+                                 viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <span>@lang('Kafija un tēja')</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <svg class="w-4 h-4 text-black flex-shrink-0" fill="currentColor"
+                                 viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <span>@lang('Virtuves piederumi un trauki')</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <svg class="w-4 h-4 text-black flex-shrink-0" fill="currentColor"
+                                 viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <span>@lang('Pusdienu galds un krēsli')</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <svg class="w-4 h-4 text-black flex-shrink-0" fill="currentColor"
+                                 viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <span>@lang('Tvaika nosūcējs')</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <svg class="w-4 h-4 text-black flex-shrink-0" fill="currentColor"
+                                 viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <span>@lang('Ledusskapis un saldētava')</span>
                         </div>
                         <div class="flex items-center space-x-2">
                             <svg class="w-4 h-4 text-black flex-shrink-0" fill="currentColor"
@@ -151,7 +196,34 @@
                                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                       clip-rule="evenodd"></path>
                             </svg>
-                            <span>@lang('Vanna vai duša')</span>
+                            <span>@lang('Duša')</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <svg class="w-4 h-4 text-black flex-shrink-0" fill="currentColor"
+                                 viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <span>@lang('Matu fēns')</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <svg class="w-4 h-4 text-black flex-shrink-0" fill="currentColor"
+                                 viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <span>@lang('Dušas želeja un ziepes')</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <svg class="w-4 h-4 text-black flex-shrink-0" fill="currentColor"
+                                 viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <span>@lang('Dvieļu žāvētājs')</span>
                         </div>
                         <div class="flex items-center space-x-2">
                             <svg class="w-4 h-4 text-black flex-shrink-0" fill="currentColor"
@@ -234,6 +306,24 @@
                                       clip-rule="evenodd"></path>
                             </svg>
                             <span>@lang('Virtuve')</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <svg class="w-4 h-4 text-black flex-shrink-0" fill="currentColor"
+                                 viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <span>@lang('Gludināmais dēlis')</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <svg class="w-4 h-4 text-black flex-shrink-0" fill="currentColor"
+                                 viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <span>@lang('Gludeklis')</span>
                         </div>
                         <div class="flex items-center space-x-2">
                             <svg class="w-4 h-4 text-black flex-shrink-0" fill="currentColor"
@@ -368,7 +458,7 @@
                                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                       clip-rule="evenodd"></path>
                             </svg>
-                            <span>@lang('Drēbju stativs')</span>
+                            <span>@lang('Drēbju statīvs')</span>
                         </div>
                         <div class="flex items-center space-x-2">
                             <svg class="w-4 h-4 text-black flex-shrink-0" fill="currentColor"

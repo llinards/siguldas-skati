@@ -50,25 +50,18 @@
                     <h3 class="text-h-sm-mob lg:text-h-sm mt-6 mb-3 leading-none lg:mt-0">
                         @lang('Siguldas skati')
                     </h3>
-                    <div class="space-y-6 text-justify text-base ">
+                    <div class="space-y-6 text-justify text-base">
                         <p>
                             {{-- prettier-ignore --}}
-                            @lang('Īpaša atpūtas vieta tiem, kuri meklē mieru, klātbūtnes un skaistuma sajūtu pašā
-                            Siguldas sirdī. Mūsu stāsts sākas vietā, kur dizains saplūst ar dabu un miers kļūst par
-                            lielāko greznību.')
+                            @lang('Īpaša atpūtas vieta tiem, kuri meklē mieru, klātbūtnes un skaistuma sajūtu pašā Siguldas sirdī. Mūsu stāsts sākas vietā, kur dizains saplūst ar dabu un miers kļūst par lielāko greznību.')
                         </p>
                         <p>
                             {{-- prettier-ignore --}}
-                            @lang('Atrodoties tieši līdzās Panorāmas ratam un Svētku laukumam, esam radījuši modernas
-                            brīvdienu dizaina mājas, kas piedāvā ne tikai naktsmītni, bet arī sajūtu pieredzi. Šeit
-                            ainava kļūst par interjera daļu, un katrs gadalaiks sniedz jaunu skatpunktu – no miglainiem
-                            rudens rītiem līdz sniegotām virsotnēm vai saulainām vasaras dienām.')
+                            @lang('Atrodoties tieši līdzās Panorāmas ratam un Svētku laukumam, esam radījuši modernas brīvdienu dizaina mājas, kas piedāvā ne tikai naktsmītni, bet arī sajūtu pieredzi. Šeit ainava kļūst par interjera daļu, un katrs gadalaiks sniedz jaunu skatpunktu – no miglainiem rudens rītiem līdz sniegotām virsotnēm vai saulainām vasaras dienām.')
                         </p>
                         <p>
                             {{-- prettier-ignore --}}
-                            @lang('Mēs piedāvājam vietu, kur vienkāršība nozīmē kvalitāti, minimālisms – apzinātu
-                            komfortu, un katrā detaļā jūtama mīlestība pret vietu, kur dzīvojam. Šis projekts ir mūsu
-                            aicinājums atgriezties pie tā, kas būtisks – miera, klātbūtnes un skaistuma.')
+                            @lang('Mēs piedāvājam vietu, kur vienkāršība nozīmē kvalitāti, minimālisms – apzinātu komfortu, un katrā detaļā jūtama mīlestība pret vietu, kur dzīvojam. Šis projekts ir mūsu aicinājums atgriezties pie tā, kas būtisks – miera, klātbūtnes un skaistuma.')
                         </p>
                     </div>
                 </div>
@@ -140,8 +133,7 @@
                     </x-slot>
                     <x-slot name="experienceText">
                         {{-- prettier-ignore --}}
-                        @lang('Mūsu brīvdienu dizaina mājās nav steigas – šī ir vieta, kur Tu vari elpot dziļāk, dzirdēt
-                        sevi un atpūsties bez stresa.')
+                        @lang('Mūsu brīvdienu dizaina mājās nav steigas – šī ir vieta, kur Tu vari elpot dziļāk, dzirdēt sevi un atpūsties bez stresa.')
                     </x-slot>
                 </x-experience-card>
                 <x-experience-card>
@@ -152,8 +144,7 @@
                     </x-slot>
                     <x-slot name="experienceText">
                         {{-- prettier-ignore --}}
-                        @lang('Pārdomāts dizains, kvalitatīvas detaļas un mājīgums, kas ļauj justies kā mājās – tikai
-                        vēl labāk.')
+                        @lang('Pārdomāts dizains, kvalitatīvas detaļas un mājīgums, kas ļauj justies kā mājās – tikai vēl labāk.')
                     </x-slot>
                 </x-experience-card>
                 <x-experience-card>
@@ -164,8 +155,7 @@
                     </x-slot>
                     <x-slot name="experienceText">
                         {{-- prettier-ignore --}}
-                        @lang('Šī nav tikai naktsmītne – tā ir iespēja apstāties, sajust vidi un ieraudzīt Siguldu citām
-                        acīm.')
+                        @lang('Šī nav tikai naktsmītne – tā ir iespēja apstāties, sajust vidi un ieraudzīt Siguldu citām acīm.')
                     </x-slot>
                 </x-experience-card>
                 <x-experience-card>
@@ -176,8 +166,7 @@
                     </x-slot>
                     <x-slot name="experienceText">
                         {{-- prettier-ignore --}}
-                        @lang('Vietu pašā Siguldas sirdī, kur daba un pilsētas kultūras notikumi satiekas viena soļa
-                        attālumā.')
+                        @lang('Vietu pašā Siguldas sirdī, kur daba un pilsētas kultūras notikumi satiekas viena soļa attālumā.')
                     </x-slot>
                 </x-experience-card>
             </div>
@@ -208,11 +197,9 @@
                     @lang('Ko vēl darīt Siguldā?')
                 </h2>
             </div>
-            <p class="text-ss-gray pb-6 text-sm leading-none md:max-w-2/3 lg:max-w-2/5 xl:pb-12">
+            <p class="text-ss-gray pb-6 text-sm md:max-w-2/3 lg:max-w-2/5 xl:pb-12">
                 {{-- prettier-ignore --}}
-                @lang('Sigulda ir vieta, kur daba, kultūra un piedzīvojumi saplūst vienā ainavā. Neatkarīgi no
-                gadalaika, šeit katrs var atrast sev piemērotu ritmu – vai tā būtu nesteidzīga pastaiga dabas takās,
-                kultūras baudījums vai mazs piedzīvojums virs koku galotnēm.')
+                @lang('Sigulda ir vieta, kur daba, kultūra un piedzīvojumi saplūst vienā ainavā. Neatkarīgi no gadalaika, šeit katrs var atrast sev piemērotu ritmu – vai tā būtu nesteidzīga pastaiga dabas takās, kultūras baudījums vai mazs piedzīvojums virs koku galotnēm.')
             </p>
             <x-carousels.todo.wrapper></x-carousels.todo.wrapper>
         </div>
