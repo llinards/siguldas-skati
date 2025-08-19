@@ -6,7 +6,7 @@
                     <x-btn-back class="pb-3 mr-5"/>
                     <h1 class="text-h-mob lg:text-h-md leading-none">
                         {{-- prettier-ignore --}}
-                        @lang('Dizaina mājas, sauna un džakūzī')
+                        @lang('Dizaina mājas, sauna un džakuzi')
                     </h1>
                 </div>
             </div>
