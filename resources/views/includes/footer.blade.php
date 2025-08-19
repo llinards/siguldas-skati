@@ -51,6 +51,9 @@
                     <x-nav.footer-link href="{{ route('faq') }}">
                         @lang('BUJ')
                     </x-nav.footer-link>
+                    <x-nav.footer-link href="{{ route('terms') }}">
+                        @lang('Noteikumi')
+                    </x-nav.footer-link>
                     <x-nav.footer-link href="{{route('privacy-policy')}}">
                         @lang('Privātuma politika')
                     </x-nav.footer-link>

@@ -6,6 +6,10 @@ use App\Http\Controllers\ProfileController;
 use App\Livewire\Admin\Feature\AddFeature;
 use App\Livewire\Admin\Feature\EditFeature;
 use App\Livewire\Admin\Feature\FeatureList;
+use App\Livewire\Admin\Gallery\AddGallery;
+use App\Livewire\Admin\Gallery\EditGallery;
+use App\Livewire\Admin\Gallery\GalleryImages;
+use App\Livewire\Admin\Gallery\GalleryList;
 use App\Livewire\Admin\NewsletterList;
 use App\Livewire\Admin\Product\AddProduct;
 use App\Livewire\Admin\Product\EditProduct;
@@ -15,10 +19,6 @@ use App\Livewire\Admin\Product\ProductRules;
 use App\Livewire\Admin\Rule\AddRule;
 use App\Livewire\Admin\Rule\EditRule;
 use App\Livewire\Admin\Rule\RuleList;
-use App\Livewire\Admin\Gallery\GalleryList;
-use App\Livewire\Admin\Gallery\AddGallery;
-use App\Livewire\Admin\Gallery\EditGallery;
-use App\Livewire\Admin\Gallery\GalleryImages;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -36,6 +36,10 @@ Route::group(
         Route::get('/', HomeController::class)->name('home');
 
         Route::get('/dizaina-majas-sauna-un-dzakuzis', [ProductController::class, 'index'])->name('products');
+
+        Route::get('/noteikumi', function () {
+            return view('terms');
+        })->name('terms');
 
         Route::get('/buj', function () {
             return view('faq');
