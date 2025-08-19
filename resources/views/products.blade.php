@@ -1,4 +1,4 @@
-<x-app-layout :title="__('Dizaina mājas, sauna un džakūzis')">
+<x-app-layout :title="__('Dizaina mājas, sauna un džakūzī')">
     <div class="bg-ss">
         <div class="container mx-auto px-4">
             <div class="relative mt-26 lg:mt-30 xl:mt-36 mb-3 inline-block">
