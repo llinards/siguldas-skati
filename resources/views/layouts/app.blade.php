@@ -16,7 +16,7 @@
     <meta name="author" content="{{ config('app.name') }}"/>
     <meta name="locale" content="{{ app()->getLocale() }}"/>
     <meta name="description"
-          content="{{ $description ?? __('Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai.') }}"/>
+          content="{{ $description ?? __('Atklājiet “Siguldas Skatus” – Tavas jaunās dizaina brīvdienu mājas Siguldas sirdī!') }}"/>
     <meta name="keywords" content="@lang('Siguldas Skati, brīvdienu mājas, atpūta, daba, dizains, Sigulda')"/>
 
     <meta property="og:url" content="{{ Request::url() }}"/>
@@ -24,7 +24,7 @@
     <meta property="og:title"
           content="{{ isset($title) ? $title . ' | ' . config('app.name') : config('app.name') }}"/>
     <meta property="og:description"
-          content="{{ $description ?? __('Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai.') }}"/>
+          content="{{ $description ?? __('Atklājiet “Siguldas Skatus” – Tavas jaunās dizaina brīvdienu mājas Siguldas sirdī!') }}"/>
     <meta property="og:image" content="{{ asset('images/ss-meta-logo.png') }}"/>
     <meta property="og:site_name" content="{{ config('app.name') }}"/>
     <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}"/>
@@ -35,7 +35,7 @@
     <meta name="twitter:title"
           content="{{ isset($title) ? $title . ' | ' . config('app.name') : config('app.name') }}"/>
     <meta name="twitter:description"
-          content="{{ $description ?? __('Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai.') }}"/>
+          content="{{ $description ?? __('Atklājiet “Siguldas Skatus” – Tavas jaunās dizaina brīvdienu mājas Siguldas sirdī!') }}"/>
     <meta name="twitter:image" content="{{ asset('images/ss-meta-logo.png') }}"/>
     <meta name="robots" content="index, follow"/>
 
@@ -53,8 +53,8 @@
                 "@type": "Organization",
                 "name": "{{ config('app.name') }}",
                 "url": "{{ config('app.url') }}",
-                "logo": "{{ asset('images/ss-meta-logo.svg') }}",
-                "description": "Atklājiet Siguldas Skatus, modernas brīvdienu mājas ar dabu un dizainu, ideālas jūsu atpūtai."
+                "logo": "{{ asset('images/ss-meta-logo.png') }}",
+                "description": "Atklājiet “Siguldas Skatus” – Tavas jaunās dizaina brīvdienu mājas Siguldas sirdī!"
             }
     </script>
     @livewireStyles
