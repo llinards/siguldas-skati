@@ -24,8 +24,8 @@ class ContactUsMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            to: 'info@siguldasskati.lv',
-            //            to: 'siguldasskati@gmail.com',
+            //            to: 'info@siguldasskati.lv',
+            to: 'siguldasskati@gmail.com',
             replyTo: $this->email,
             subject: 'Jauns kontaktu ziņojums no mājas lapas',
         );
