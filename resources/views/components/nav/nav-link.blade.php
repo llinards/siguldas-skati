@@ -1,5 +1,6 @@
+@props(['active' => false])
+
 <li class="xl:mt-2 2xl:mt-0">
-    @props(['active' => false])
     <a
         {{
             $attributes->class([
