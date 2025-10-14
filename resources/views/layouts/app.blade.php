@@ -49,12 +49,12 @@
     @cookieconsentscripts
     <script type="application/ld+json">
         {
-                "@context": "https://schema.org",
-                "@type": "Organization",
+                "@@context": "https://schema.org",
+                "@@type": "Organization",
                 "name": "{{ config('app.name') }}",
                 "url": "{{ config('app.url') }}",
                 "logo": "{{ asset('images/ss-meta-logo.png') }}",
-                "description": "Atklājiet “Siguldas Skatus” – Tavas jaunās dizaina brīvdienu mājas Siguldas sirdī!"
+                "description": "Atklājiet "Siguldas Skatus" – Tavas jaunās dizaina brīvdienu mājas Siguldas sirdī!"
             }
     </script>
     @livewireStyles
