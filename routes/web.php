@@ -57,6 +57,10 @@ Route::group(
     function () {
         Route::get('/', HomeController::class)->name('home');
 
+        Route::get('/booking', static function () {
+            return redirect('https://www.booking.com/hotel/lv/siguldas-skati-sigulda.en-gb.html?label=gen173rf-10CAsoigFCFnNpZ3VsZGFzLXNrYXRpLXNpZ3VsZGFIGlgDaIoBiAEBmAEzuAEHyAEN2AED6AEB-AEBiAIBogIQc2lndWxkYXNza2F0aS5sdqgCAbgC8P6-xwbAAgHSAiQxYWQ0YmE0Mi0yN2YwLTQxYWItYjQ0Yi0xM2U3YzNkZDJjNDDYAgHgAgE&sid=86ee30aeab7a65423e93b60cdc1321d2&dist=0&group_adults=2&group_children=0&keep_landing=1&no_rooms=1&sb_price_type=total&type=total&');
+        });
+
         Route::get('/dizaina-majas-sauna-un-dzakuzis', [ProductController::class, 'index'])->name('products');
 
         Route::get('/noteikumi', function () {
