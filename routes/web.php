@@ -23,6 +23,28 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+Livewire::setUpdateRoute(static function ($handle) {
+    return Route::post('/livewire/update', $handle)
+        ->name('livewire.update')
+        ->prefix(LaravelLocalization::setLocale())
+        ->middleware([
+            'localeSessionRedirect',
+            'localizationRedirect',
+            'localeViewPath',
+        ]);
+});
+
+Livewire::setScriptRoute(static function ($handle) {
+    return Route::get('/livewire/livewire.js', $handle)
+        ->name('livewire.script')
+        ->prefix(LaravelLocalization::setLocale())
+        ->middleware([
+            'localeSessionRedirect',
+            'localizationRedirect',
+            'localeViewPath',
+        ]);
+});
+
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
@@ -84,14 +106,6 @@ Route::group(
 
                 Route::get('/newsletter', NewsletterList::class)->name('newsletter.list');
             });
-        });
-
-        Livewire::setUpdateRoute(function ($handle) {
-            return Route::post('/livewire/update', $handle);
-        });
-
-        Livewire::setScriptRoute(function ($handle) {
-            return Route::get('/livewire/livewire.js', $handle);
         });
 
         require __DIR__.'/auth.php';
