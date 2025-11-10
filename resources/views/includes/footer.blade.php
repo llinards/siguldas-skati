@@ -96,15 +96,28 @@
             <p class="text-sm">
                 @lang('© Siguldas skati 2025 | Visas tiesības rezervētas.')
             </p>
-            @lang('Mājaslapu izstrādāja')
-            <a
-                href="https://slmedia.lv"
-                class="hover:text-ss-gray underline transition-all duration-200"
-                target="_blank"
-                rel="noopener"
-            >
-                S&amp;L Media SIA
-            </a>
+            <p>
+                @lang('Dizains:')
+                <a
+                    href="https://simpledesign.lv"
+                    class="hover:text-ss-gray underline transition-all duration-200"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    SIMPLE DESIGN
+                </a>
+            </p>
+            <p>
+                @lang('Izstrādāja:')
+                <a
+                    href="https://slmedia.lv"
+                    class="hover:text-ss-gray underline transition-all duration-200"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    S&amp;L MEDIA
+                </a>
+            </p>
         </div>
     </div>
 </footer>
