@@ -13,18 +13,18 @@
         "autoprefixer": "^10.4.2",
         "axios": "^1.8.2",
         "concurrently": "^9.0.1",
-        "laravel-vite-plugin": "^1.2.0",
+        "laravel-vite-plugin": "^2.0.0",
         "livewire-sortable": "^1.0.0",
         "postcss": "^8.5.3",
         "prettier": "^3.6.2",
         "prettier-plugin-blade": "^2.1.21",
-        "prettier-plugin-tailwindcss": "^0.6.13",
+        "prettier-plugin-tailwindcss": "^0.7.0",
         "tailwindcss": "^4.1.7",
-        "vite": "^6.2.4"
+        "vite": "^7.0.0"
     },
     "dependencies": {
-        "@fancyapps/ui": "^5.0.36",
-        "ckeditor5": "^46.0.0",
+        "@fancyapps/ui": "^5.0.0",
+        "ckeditor5": "^47.0.0",
         "preline": "^3.1.0",
         "vanilla-calendar-pro": "^3.0.4"
     }
