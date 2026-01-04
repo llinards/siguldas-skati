@@ -94,7 +94,7 @@
         </div>
         <div class="container mx-auto my-6 px-4 text-sm text-white md:text-center lg:mt-12">
             <p class="text-sm">
-                @lang('© Siguldas skati 2025 | Visas tiesības rezervētas.')
+                @lang('© Siguldas skati :year | Visas tiesības rezervētas.', ['year' => now()->year])
             </p>
             <p>
                 @lang('Dizains:')
