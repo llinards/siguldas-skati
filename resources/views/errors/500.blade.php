@@ -1,5 +1,5 @@
 <x-error-layout>
-    <x-slot name="title">404</x-slot>
+    <x-slot name="title">500</x-slot>
     <h1 class="mb-2 text-center text-2xl">
         @lang('Ups... ir notikusi kļūda. :(')
     </h1>
