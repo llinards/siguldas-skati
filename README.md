@@ -1,8 +1,7 @@
-[![Laravel Forge Site Deployment Status](https://img.shields.io/endpoint?url=https%3A%2F%2Fforge.laravel.com%2Fsite-badges%2Fcc553746-5161-4958-a481-b734ac09818e%3Fdate%3D1%26label%3D1&style=for-the-badge)](https://forge.laravel.com/servers/743822/sites/2730865)
-
 # Siguldas Skati
 
-A web application for managing and presenting rental properties (design houses, saunas, and hot tubs) in Sigulda, Latvia. Built with Laravel 12, Livewire 3, and Tailwind CSS v4.
+A web application for managing and presenting rental properties (design houses, saunas, and hot tubs) in Sigulda,
+Latvia. Built with Laravel 12, Livewire 3, and Tailwind CSS v4.
 
 **Production:** [siguldasskati.lv](https://siguldasskati.lv)
 
@@ -76,15 +75,15 @@ Alternatively, if using [Laravel Herd](https://herd.laravel.com), the site is av
 
 ### Domain Models
 
-| Model | Description |
-|-------|-------------|
-| **Product** | Rental properties (translatable title, description, pricelist) |
-| **ProductImage** | Product photo gallery |
-| **Feature** | Product amenities with icons (translatable) |
-| **Rule** | Booking rules/conditions with icons (translatable) |
-| **Gallery** | Photo galleries (translatable title) |
-| **GalleryImage** | Gallery photos |
-| **Newsletter** | Newsletter subscribers |
+| Model            | Description                                                    |
+|------------------|----------------------------------------------------------------|
+| **Product**      | Rental properties (translatable title, description, pricelist) |
+| **ProductImage** | Product photo gallery                                          |
+| **Feature**      | Product amenities with icons (translatable)                    |
+| **Rule**         | Booking rules/conditions with icons (translatable)             |
+| **Gallery**      | Photo galleries (translatable title)                           |
+| **GalleryImage** | Gallery photos                                                 |
+| **Newsletter**   | Newsletter subscribers                                         |
 
 ### Services Layer
 
@@ -102,7 +101,8 @@ Business logic is organized in `app/Services/`:
 
 **Public:** Newsletter subscription, Contact form
 
-**Admin Dashboard (`/dashboard`):** Full CRUD for products, features, rules, galleries, and newsletter management with drag-and-drop ordering.
+**Admin Dashboard (`/dashboard`):** Full CRUD for products, features, rules, galleries, and newsletter management with
+drag-and-drop ordering.
 
 ## Testing
 
