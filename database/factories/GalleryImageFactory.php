@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Gallery;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryImageFactory extends Factory
 {
@@ -39,27 +40,15 @@ class GalleryImageFactory extends Factory
     private function copyImageToStorage(string $filename): string
     {
         $sourcePath = public_path('images/assets/seeder-gallery-images/'.$filename);
-        $destinationDir = public_path('storage/gallery-images');
-
-        // Get file extension
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
-
-        // Generate random filename
         $randomFilename = $this->faker->uuid.'.'.$extension;
-        $destinationPath = $destinationDir.'/'.$randomFilename;
+        $storagePath = 'gallery-images/'.$randomFilename;
 
-        // Create the destination directory if it doesn't exist
-        if (! File::exists($destinationDir)) {
-            File::makeDirectory($destinationDir, 0755, true);
-        }
-
-        // Copy the file if source exists
         if (File::exists($sourcePath)) {
-            File::copy($sourcePath, $destinationPath);
+            Storage::disk('public')->put($storagePath, File::get($sourcePath));
         }
 
-        // Return the path relative to storage
-        return 'gallery-images/'.$randomFilename;
+        return $storagePath;
     }
 
     public function forGallery(Gallery $gallery): static

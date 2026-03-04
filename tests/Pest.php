@@ -18,6 +18,10 @@ pest()->extend(Tests\TestCase::class)
     })
     ->in('Feature');
 
+pest()->beforeEach(function () {
+    Illuminate\Support\Facades\Storage::fake('public');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Expectations

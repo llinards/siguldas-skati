@@ -4,9 +4,14 @@ use App\Livewire\Admin\Feature\AddFeature;
 use App\Models\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 
 uses(RefreshDatabase::class);
+
+beforeEach(function () {
+    Storage::fake('public');
+});
 
 test('component renders successfully', function () {
     Livewire::test(AddFeature::class)

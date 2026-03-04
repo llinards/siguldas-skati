@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class FeatureFactory extends Factory
 {
@@ -41,26 +42,14 @@ class FeatureFactory extends Factory
     private function copyImageToStorage(string $filename): string
     {
         $sourcePath = public_path('icons/'.$filename);
-        $destinationDir = public_path('storage/feature-icons');
-
-        // Get file extension
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
-
-        // Generate random filename
         $randomFilename = $this->faker->uuid.'.'.$extension;
-        $destinationPath = $destinationDir.'/'.$randomFilename;
+        $storagePath = 'feature-icons/'.$randomFilename;
 
-        // Create the destination directory if it doesn't exist
-        if (! File::exists($destinationDir)) {
-            File::makeDirectory($destinationDir, 0755, true);
-        }
-
-        // Copy the file if source exists
         if (File::exists($sourcePath)) {
-            File::copy($sourcePath, $destinationPath);
+            Storage::disk('public')->put($storagePath, File::get($sourcePath));
         }
 
-        // Return the path relative to storage
-        return 'feature-icons/'.$randomFilename;
+        return $storagePath;
     }
 }

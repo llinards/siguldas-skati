@@ -4,9 +4,14 @@ use App\Livewire\Admin\Rule\EditRule;
 use App\Models\Rule;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 
 uses(RefreshDatabase::class);
+
+beforeEach(function () {
+    Storage::fake('public');
+});
 
 it('component renders with existing rule data', function () {
     $rule = Rule::factory()->create([

@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ProductImage>
@@ -48,27 +49,15 @@ class ProductImageFactory extends Factory
     private function copyImageToStorage(string $filename): string
     {
         $sourcePath = public_path('images/gallery/'.$filename);
-        $destinationDir = public_path('storage/product-images/gallery');
-
-        // Get file extension
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
-
-        // Generate random filename
         $randomFilename = $this->faker->uuid.'.'.$extension;
-        $destinationPath = $destinationDir.'/'.$randomFilename;
+        $storagePath = 'product-images/gallery/'.$randomFilename;
 
-        // Create the destination directory if it doesn't exist
-        if (! File::exists($destinationDir)) {
-            File::makeDirectory($destinationDir, 0755, true);
-        }
-
-        // Copy the file if source exists
         if (File::exists($sourcePath)) {
-            File::copy($sourcePath, $destinationPath);
+            Storage::disk('public')->put($storagePath, File::get($sourcePath));
         }
 
-        // Return the path relative to storage
-        return 'product-images/gallery/'.$randomFilename;
+        return $storagePath;
     }
 
     /**
