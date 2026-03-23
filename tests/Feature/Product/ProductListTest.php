@@ -149,7 +149,7 @@ test('handles gallery not found during deletion with error message', function ()
 });
 
 test('handles error during gallery loading', function () {
-    $exception = new \Exception('Database error');
+    $exception = new Exception('Database error');
 
     $this->galleryServices->shouldReceive('getAllGalleries')
         ->atLeast()->once()
@@ -245,7 +245,7 @@ test('refreshes gallery list after performing actions', function () {
 
 test('handles error during gallery deletion', function () {
     $gallery = Gallery::factory()->create();
-    $exception = new \Exception('Deletion failed');
+    $exception = new Exception('Deletion failed');
 
     $this->galleryServices->shouldReceive('getAllGalleries')
         ->atLeast()->once()
@@ -276,7 +276,7 @@ test('handles error during gallery deletion', function () {
 
 test('handles error during gallery status toggle', function () {
     $gallery = Gallery::factory()->create();
-    $exception = new \Exception('Toggle failed');
+    $exception = new Exception('Toggle failed');
 
     $this->galleryServices->shouldReceive('getAllGalleries')
         ->atLeast()->once()
@@ -338,15 +338,9 @@ test('component handles empty gallery collection', function () {
 });
 
 test('updates individual gallery order in sequence', function () {
-    $gallery1 = Gallery::factory()->create(['order' => 1]);
-    $gallery2 = Gallery::factory()->create(['order' => 2]);
-    $gallery3 = Gallery::factory()->create(['order' => 3]);
-
-    $orderData = [
-        ['value' => $gallery3->id, 'order' => 1],
-        ['value' => $gallery1->id, 'order' => 2],
-        ['value' => $gallery2->id, 'order' => 3],
-    ];
+    $gallery1 = Gallery::factory()->create(['order' => 0]);
+    $gallery2 = Gallery::factory()->create(['order' => 1]);
+    $gallery3 = Gallery::factory()->create(['order' => 2]);
 
     $this->galleryServices->shouldReceive('getAllGalleries')
         ->atLeast()->once()
@@ -359,12 +353,13 @@ test('updates individual gallery order in sequence', function () {
     // Allow error logging (but don't require it)
     $this->errorLogService->shouldReceive('logError')->zeroOrMoreTimes();
 
+    // Move gallery3 to position 0 (first)
     Livewire::test(GalleryList::class)
-        ->call('updateGalleryOrder', $orderData)
+        ->call('updateGalleryOrder', (string) $gallery3->id, 0)
         ->assertHasNoErrors();
 
     // Verify order was updated in database
-    expect(Gallery::find($gallery3->id)->order)->toBe(1)
-        ->and(Gallery::find($gallery1->id)->order)->toBe(2)
-        ->and(Gallery::find($gallery2->id)->order)->toBe(3);
+    expect(Gallery::find($gallery3->id)->order)->toBe(0)
+        ->and(Gallery::find($gallery1->id)->order)->toBe(1)
+        ->and(Gallery::find($gallery2->id)->order)->toBe(2);
 });

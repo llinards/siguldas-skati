@@ -1,16 +1,16 @@
 <div>
     <x-admin.flash-message/>
     <h2 class="text-h-sm-mob lg:text-h-mob mb-3 leading-none">{{ __('Ērtības') }}</h2>
-    <div wire:sortable="updateFeatureOrder" class="space-y-4">
+    <div wire:sort="updateFeatureOrder" class="space-y-4">
         @forelse ($features as $feature)
             <div
                 class="flex items-center overflow-hidden rounded-lg bg-white shadow-md transition-shadow duration-300 hover:shadow-lg"
                 wire:key="feature-{{ $feature->id }}"
-                wire:sortable.item="{{ $feature->id }}"
+                wire:sort:item="{{ $feature->id }}"
             >
                 <!-- Drag Handle -->
                 <div class="flex items-center justify-center p-4 cursor-move text-gray-400 hover:text-gray-600"
-                     wire:sortable.handle>
+                     wire:sort:handle>
                     <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                         <path
                             d="M7 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM7 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM7 14a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM17 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM17 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM17 14a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>

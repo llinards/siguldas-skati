@@ -51,23 +51,18 @@ test('deletes feature successfully', function () {
 });
 
 test('updates feature order successfully', function () {
-    $feature1 = Feature::factory()->create(['order' => 1]);
-    $feature2 = Feature::factory()->create(['order' => 2]);
-    $feature3 = Feature::factory()->create(['order' => 3]);
+    $feature1 = Feature::factory()->create(['order' => 0]);
+    $feature2 = Feature::factory()->create(['order' => 1]);
+    $feature3 = Feature::factory()->create(['order' => 2]);
 
-    $orderData = [
-        ['value' => $feature1->id, 'order' => 3],
-        ['value' => $feature2->id, 'order' => 1],
-        ['value' => $feature3->id, 'order' => 2],
-    ];
-
+    // Move feature3 to position 0 (first)
     Livewire::test(FeatureList::class)
-        ->call('updateFeatureOrder', $orderData)
+        ->call('updateFeatureOrder', (string) $feature3->id, 0)
         ->assertSessionHas('_flash.new.0', 'message');
 
-    expect($feature1->fresh()->order)->toBe(3)
-        ->and($feature2->fresh()->order)->toBe(1)
-        ->and($feature3->fresh()->order)->toBe(2);
+    expect($feature3->fresh()->order)->toBe(0)
+        ->and($feature1->fresh()->order)->toBe(1)
+        ->and($feature2->fresh()->order)->toBe(2);
 });
 
 test('shows active and inactive features with different styling', function () {

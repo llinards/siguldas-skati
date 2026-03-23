@@ -4,9 +4,11 @@ use App\Models\Rule;
 use App\Services\FileStorageService;
 use App\Services\RuleService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Testing\File;
 use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
 
-uses(Tests\TestCase::class);
+uses(TestCase::class);
 uses(RefreshDatabase::class);
 
 beforeEach(function () {
@@ -114,21 +116,16 @@ test('toggleRuleStatus returns false for non-existent rule', function () {
 });
 
 test('updateRuleOrder successfully updates rule order values', function () {
-    $rule1 = Rule::factory()->create(['order' => 1]);
-    $rule2 = Rule::factory()->create(['order' => 2]);
-    $rule3 = Rule::factory()->create(['order' => 3]);
+    $rule1 = Rule::factory()->create(['order' => 0, 'section' => 'house']);
+    $rule2 = Rule::factory()->create(['order' => 1, 'section' => 'house']);
+    $rule3 = Rule::factory()->create(['order' => 2, 'section' => 'house']);
 
-    $orderData = [
-        ['value' => $rule1->id, 'order' => 3],
-        ['value' => $rule2->id, 'order' => 1],
-        ['value' => $rule3->id, 'order' => 2],
-    ];
+    // Move rule3 to position 0 (first)
+    $this->ruleService->updateRuleOrder($rule3->id, 0);
 
-    $this->ruleService->updateRuleOrder($orderData);
-
-    expect($rule1->fresh()->order)->toBe(3)
-        ->and($rule2->fresh()->order)->toBe(1)
-        ->and($rule3->fresh()->order)->toBe(2);
+    expect($rule3->fresh()->order)->toBe(0)
+        ->and($rule1->fresh()->order)->toBe(1)
+        ->and($rule2->fresh()->order)->toBe(2);
 });
 
 test('returns empty collection when no rules exist', function () {
@@ -136,7 +133,7 @@ test('returns empty collection when no rules exist', function () {
 });
 
 test('storeRuleIcon calls fileStorageService with correct parameters', function () {
-    $uploadedFile = \Illuminate\Http\Testing\File::fake()->image('icon.jpg');
+    $uploadedFile = File::fake()->image('icon.jpg');
 
     $this->fileStorageService->shouldReceive('storeFile')
         ->once()
@@ -150,7 +147,7 @@ test('storeRuleIcon calls fileStorageService with correct parameters', function 
 
 test('updateRuleIcon deletes old icon and stores new one', function () {
     $rule = Rule::factory()->create(['icon_image' => 'old-icon.jpg']);
-    $uploadedFile = \Illuminate\Http\Testing\File::fake()->image('new-icon.jpg');
+    $uploadedFile = File::fake()->image('new-icon.jpg');
 
     $this->fileStorageService->shouldReceive('deleteFile')
         ->once()

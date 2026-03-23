@@ -8,12 +8,12 @@
     </div>
 
     <!-- Galleries Grid -->
-    <div wire:sortable="updateGalleryOrder" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div wire:sort="updateGalleryOrder" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         @forelse ($galleries as $gallery)
             <div
                 class="overflow-hidden rounded-lg bg-white shadow-md transition-shadow duration-300 hover:shadow-lg"
                 wire:key="gallery-{{ $gallery->id }}"
-                wire:sortable.item="{{ $gallery->id }}"
+                wire:sort:item="{{ $gallery->id }}"
             >
                 <!-- Gallery Image Placeholder -->
                 <div class="relative aspect-square bg-gray-200">

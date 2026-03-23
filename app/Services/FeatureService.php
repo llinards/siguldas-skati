@@ -60,11 +60,16 @@ class FeatureService
         return $feature->update(['is_active' => ! $feature->is_active]);
     }
 
-    public function updateFeatureOrder(array $features): void
+    public function updateFeatureOrder(int $id, int $position): void
     {
-        foreach ($features as $featureData) {
-            Feature::findOrFail($featureData['value'])
-                ->update(['order' => $featureData['order']]);
+        $feature = Feature::findOrFail($id);
+        $features = Feature::orderBy('order')->get()->reject(fn ($f) => $f->id === $feature->id)->values();
+        $features->splice($position, 0, [$feature]);
+
+        foreach ($features as $index => $f) {
+            if ($f->order !== $index) {
+                $f->update(['order' => $index]);
+            }
         }
     }
 

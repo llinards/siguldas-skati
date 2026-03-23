@@ -8,15 +8,15 @@
         <h3 class="text-lg font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
             {{ __('Mājokļa noteikumi') }}
         </h3>
-        <div wire:sortable="updateRuleOrder" class="space-y-4" data-section="house">
+        <div wire:sort="updateRuleOrder" class="space-y-4" data-section="house">
             @forelse ($rules->where('section', Rule::SECTION_HOUSE) as $rule)
                 <div
                     class="flex items-center overflow-hidden rounded-lg bg-white shadow-md transition-shadow duration-300 hover:shadow-lg"
                     wire:key="rule-{{ $rule->id }}"
-                    wire:sortable.item="{{ $rule->id }}"
+                    wire:sort:item="{{ $rule->id }}"
                 >
                     <div class="flex items-center justify-center p-4 cursor-move text-gray-400 hover:text-gray-600"
-                         wire:sortable.handle>
+                         wire:sort:handle>
                         <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                             <path
                                 d="M7 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM7 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM7 14a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM17 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM17 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM17 14a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
@@ -97,15 +97,15 @@
         <h3 class="text-lg font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
             {{ __('Drošība un īpašums') }}
         </h3>
-        <div wire:sortable="updateRuleOrder" class="space-y-4" data-section="safety">
+        <div wire:sort="updateRuleOrder" class="space-y-4" data-section="safety">
             @forelse ($rules->where('section', Rule::SECTION_SAFETY) as $rule)
                 <div
                     class="flex items-center overflow-hidden rounded-lg bg-white shadow-md transition-shadow duration-300 hover:shadow-lg"
                     wire:key="rule-{{ $rule->id }}"
-                    wire:sortable.item="{{ $rule->id }}"
+                    wire:sort:item="{{ $rule->id }}"
                 >
                     <div class="flex items-center justify-center p-4 cursor-move text-gray-400 hover:text-gray-600"
-                         wire:sortable.handle>
+                         wire:sort:handle>
                         <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                             <path
                                 d="M7 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM7 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM7 14a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM17 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM17 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM17 14a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
@@ -185,15 +185,15 @@
         <h3 class="text-lg font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
             {{ __('Aizliegts') }}
         </h3>
-        <div wire:sortable="updateRuleOrder" class="space-y-4" data-section="safety">
+        <div wire:sort="updateRuleOrder" class="space-y-4" data-section="safety">
             @forelse ($rules->where('section', Rule::SECTION_PROHIBITED) as $rule)
                 <div
                     class="flex items-center overflow-hidden rounded-lg bg-white shadow-md transition-shadow duration-300 hover:shadow-lg"
                     wire:key="rule-{{ $rule->id }}"
-                    wire:sortable.item="{{ $rule->id }}"
+                    wire:sort:item="{{ $rule->id }}"
                 >
                     <div class="flex items-center justify-center p-4 cursor-move text-gray-400 hover:text-gray-600"
-                         wire:sortable.handle>
+                         wire:sort:handle>
                         <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                             <path
                                 d="M7 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM7 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM7 14a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM17 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM17 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM17 14a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>

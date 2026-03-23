@@ -43,10 +43,10 @@ class ProductImages extends Component
         $this->product = $this->productServices->getProductById($product);
     }
 
-    public function updateImageOrder(array $images): void
+    public function updateImageOrder(string $id, int $position): void
     {
         try {
-            $this->productServices->updateImageOrder($images);
+            $this->productServices->updateImageOrder((int) $id, $position);
             $this->flashMessageService->success(__('Secība atjaunota.'));
         } catch (\Exception $e) {
             $this->errorLogService->logError('Failed to update product order', $e, []);

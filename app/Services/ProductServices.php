@@ -118,19 +118,30 @@ class ProductServices
         return $image->delete();
     }
 
-    public function updateProductOrder(array $products): void
+    public function updateProductOrder(int $id, int $position): void
     {
-        foreach ($products as $productData) {
-            Product::findOrFail($productData['value'])
-                ->update(['order' => $productData['order']]);
+        $product = Product::findOrFail($id);
+        $products = Product::orderBy('order')->get()->reject(fn ($p) => $p->id === $product->id)->values();
+        $products->splice($position, 0, [$product]);
+
+        foreach ($products as $index => $p) {
+            if ($p->order !== $index) {
+                $p->update(['order' => $index]);
+            }
         }
     }
 
-    public function updateImageOrder(array $images): void
+    public function updateImageOrder(int $id, int $position): void
     {
-        foreach ($images as $image) {
-            ProductImage::findOrFail($image['value'])
-                ->update(['order' => $image['order']]);
+        $image = ProductImage::findOrFail($id);
+        $images = ProductImage::where('product_id', $image->product_id)->orderBy('order')->get()
+            ->reject(fn ($i) => $i->id === $image->id)->values();
+        $images->splice($position, 0, [$image]);
+
+        foreach ($images as $index => $i) {
+            if ($i->order !== $index) {
+                $i->update(['order' => $index]);
+            }
         }
     }
 

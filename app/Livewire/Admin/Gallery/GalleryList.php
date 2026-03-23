@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Gallery;
 
+use App\Models\Gallery;
 use App\Services\ErrorLogService;
 use App\Services\FlashMessageService;
 use App\Services\GalleryServices;
@@ -62,12 +63,18 @@ class GalleryList extends Component
         }
     }
 
-    public function updateGalleryOrder(array $galleries): void
+    public function updateGalleryOrder(string $id, int $position): void
     {
         try {
-            foreach ($galleries as $galleryData) {
-                \App\Models\Gallery::findOrFail($galleryData['value'])
-                    ->update(['order' => $galleryData['order']]);
+            $gallery = Gallery::findOrFail($id);
+            $galleries = Gallery::orderBy('order')->get()
+                ->reject(fn ($g) => $g->id === $gallery->id)->values();
+            $galleries->splice($position, 0, [$gallery]);
+
+            foreach ($galleries as $index => $g) {
+                if ($g->order !== $index) {
+                    $g->update(['order' => $index]);
+                }
             }
             $this->flashMessageService->success(__('Secība atjaunota.'));
         } catch (\Exception $e) {

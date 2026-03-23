@@ -13,13 +13,13 @@
                         </h3>
                         <div
                             class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4"
-                            wire:sortable="updateImageOrder"
+                            wire:sort="updateImageOrder"
                         >
                             @foreach ($product->images as $image)
                                 <div
                                     class="group relative"
                                     wire:key="existing-image-{{ $image->id }}"
-                                    wire:sortable.item="{{ $image->id }}"
+                                    wire:sort:item="{{ $image->id }}"
                                 >
                                     <img
                                         src="{{ Storage::url($image->filename) }}"

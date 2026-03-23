@@ -60,11 +60,17 @@ class RuleService
         return $rule->update(['is_active' => ! $rule->is_active]);
     }
 
-    public function updateRuleOrder(array $rules): void
+    public function updateRuleOrder(int $id, int $position): void
     {
-        foreach ($rules as $ruleData) {
-            Rule::findOrFail($ruleData['value'])
-                ->update(['order' => $ruleData['order']]);
+        $rule = Rule::findOrFail($id);
+        $rules = Rule::where('section', $rule->section)->orderBy('order')->get()
+            ->reject(fn ($r) => $r->id === $rule->id)->values();
+        $rules->splice($position, 0, [$rule]);
+
+        foreach ($rules as $index => $r) {
+            if ($r->order !== $index) {
+                $r->update(['order' => $index]);
+            }
         }
     }
 

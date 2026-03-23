@@ -74,26 +74,26 @@ Route::group(
                     return view('admin.dashboard');
                 })->name('dashboard');
 
-                Route::get('/product/add', AddProduct::class)->name('product.add');
-                Route::get('/product/{product:id}/edit', EditProduct::class)->name('product.edit');
-                Route::get('/product/{product:id}/images', ProductImages::class)->name('product.images');
-                Route::get('/product/{product:id}/features', ProductFeatures::class)->name('product.features');
-                Route::get('/product/{product:id}/rules', ProductRules::class)->name('product.rules');
+                Route::livewire('/product/add', AddProduct::class)->name('product.add');
+                Route::livewire('/product/{product:id}/edit', EditProduct::class)->name('product.edit');
+                Route::livewire('/product/{product:id}/images', ProductImages::class)->name('product.images');
+                Route::livewire('/product/{product:id}/features', ProductFeatures::class)->name('product.features');
+                Route::livewire('/product/{product:id}/rules', ProductRules::class)->name('product.rules');
 
-                Route::get('/features', FeatureList::class)->name('dashboard.features');
-                Route::get('/feature/add', AddFeature::class)->name('dashboard.feature.add');
-                Route::get('/feature/{feature}/edit', EditFeature::class)->name('dashboard.feature.edit');
+                Route::livewire('/features', FeatureList::class)->name('dashboard.features');
+                Route::livewire('/feature/add', AddFeature::class)->name('dashboard.feature.add');
+                Route::livewire('/feature/{feature}/edit', EditFeature::class)->name('dashboard.feature.edit');
 
-                Route::get('/rules', RuleList::class)->name('dashboard.rules');
-                Route::get('/rule/add', AddRule::class)->name('dashboard.rule.add');
-                Route::get('/rule/{rule}/edit', EditRule::class)->name('dashboard.rule.edit');
+                Route::livewire('/rules', RuleList::class)->name('dashboard.rules');
+                Route::livewire('/rule/add', AddRule::class)->name('dashboard.rule.add');
+                Route::livewire('/rule/{rule}/edit', EditRule::class)->name('dashboard.rule.edit');
 
-                Route::get('/galleries', GalleryList::class)->name('dashboard.galleries');
-                Route::get('/gallery/add', AddGallery::class)->name('dashboard.gallery.add');
-                Route::get('/gallery/{gallery}/edit', EditGallery::class)->name('dashboard.gallery.edit');
-                Route::get('/gallery/{gallery:id}/images', GalleryImages::class)->name('dashboard.gallery.images');
+                Route::livewire('/galleries', GalleryList::class)->name('dashboard.galleries');
+                Route::livewire('/gallery/add', AddGallery::class)->name('dashboard.gallery.add');
+                Route::livewire('/gallery/{gallery}/edit', EditGallery::class)->name('dashboard.gallery.edit');
+                Route::livewire('/gallery/{gallery:id}/images', GalleryImages::class)->name('dashboard.gallery.images');
 
-                Route::get('/newsletter', NewsletterList::class)->name('newsletter.list');
+                Route::livewire('/newsletter', NewsletterList::class)->name('newsletter.list');
             });
         });
 

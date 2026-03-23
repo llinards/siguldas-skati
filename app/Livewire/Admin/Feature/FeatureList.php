@@ -62,10 +62,10 @@ class FeatureList extends Component
         }
     }
 
-    public function updateFeatureOrder(array $features): void
+    public function updateFeatureOrder(string $id, int $position): void
     {
         try {
-            $this->featureService->updateFeatureOrder($features);
+            $this->featureService->updateFeatureOrder((int) $id, $position);
             $this->flashMessageService->success(__('Secība atjaunota.'));
         } catch (\Exception $e) {
             $this->errorLogService->logError('Failed to update feature order', $e, []);

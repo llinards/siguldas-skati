@@ -78,11 +78,17 @@ class GalleryServices
         return $image->delete();
     }
 
-    public function updateImageOrder(array $images): void
+    public function updateImageOrder(int $id, int $position): void
     {
-        foreach ($images as $image) {
-            GalleryImage::findOrFail($image['value'])
-                ->update(['order' => $image['order']]);
+        $image = GalleryImage::findOrFail($id);
+        $images = GalleryImage::where('gallery_id', $image->gallery_id)->orderBy('order')->get()
+            ->reject(fn ($i) => $i->id === $image->id)->values();
+        $images->splice($position, 0, [$image]);
+
+        foreach ($images as $index => $i) {
+            if ($i->order !== $index) {
+                $i->update(['order' => $index]);
+            }
         }
     }
 }

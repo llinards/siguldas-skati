@@ -4,11 +4,13 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Services\FileStorageService;
 use App\Services\ProductServices;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
 
-uses(Tests\TestCase::class);
+uses(TestCase::class);
 uses(RefreshDatabase::class);
 
 beforeEach(function () {
@@ -295,21 +297,16 @@ test('deleteProductImage deletes image file and database record', function () {
 });
 
 test('updateProductOrder successfully updates product order values', function () {
-    $product1 = Product::factory()->create(['order' => 1]);
-    $product2 = Product::factory()->create(['order' => 2]);
-    $product3 = Product::factory()->create(['order' => 3]);
+    $product1 = Product::factory()->create(['order' => 0]);
+    $product2 = Product::factory()->create(['order' => 1]);
+    $product3 = Product::factory()->create(['order' => 2]);
 
-    $orderData = [
-        ['value' => $product1->id, 'order' => 3],
-        ['value' => $product2->id, 'order' => 1],
-        ['value' => $product3->id, 'order' => 2],
-    ];
+    // Move product3 to position 0 (first)
+    $this->productServices->updateProductOrder($product3->id, 0);
 
-    $this->productServices->updateProductOrder($orderData);
-
-    expect($product1->fresh()->order)->toBe(3)
-        ->and($product2->fresh()->order)->toBe(1)
-        ->and($product3->fresh()->order)->toBe(2);
+    expect($product3->fresh()->order)->toBe(0)
+        ->and($product1->fresh()->order)->toBe(1)
+        ->and($product2->fresh()->order)->toBe(2);
 });
 
 test('updateImageOrder successfully updates order of product images', function () {
@@ -317,37 +314,28 @@ test('updateImageOrder successfully updates order of product images', function (
 
     $image1 = ProductImage::factory()->create([
         'product_id' => $product->id,
-        'order' => 1,
+        'order' => 0,
     ]);
 
     $image2 = ProductImage::factory()->create([
         'product_id' => $product->id,
-        'order' => 2,
+        'order' => 1,
     ]);
 
     $image3 = ProductImage::factory()->create([
         'product_id' => $product->id,
-        'order' => 3,
+        'order' => 2,
     ]);
 
-    $orderData = [
-        ['value' => $image1->id, 'order' => 3],
-        ['value' => $image2->id, 'order' => 1],
-        ['value' => $image3->id, 'order' => 2],
-    ];
+    // Move image3 to position 0 (first)
+    $this->productServices->updateImageOrder($image3->id, 0);
 
-    $this->productServices->updateImageOrder($orderData);
-
-    expect($image1->fresh()->order)->toBe(3)
-        ->and($image2->fresh()->order)->toBe(1)
-        ->and($image3->fresh()->order)->toBe(2);
+    expect($image3->fresh()->order)->toBe(0)
+        ->and($image1->fresh()->order)->toBe(1)
+        ->and($image2->fresh()->order)->toBe(2);
 });
 
 test('updateImageOrder throws exception for non-existent image', function () {
-    $orderData = [
-        ['value' => 999, 'order' => 1],
-    ];
-
-    expect(fn () => $this->productServices->updateImageOrder($orderData))
-        ->toThrow(\Illuminate\Database\Eloquent\ModelNotFoundException::class);
+    expect(fn () => $this->productServices->updateImageOrder(999, 0))
+        ->toThrow(ModelNotFoundException::class);
 });

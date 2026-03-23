@@ -50,21 +50,16 @@ it('deletes a rule', function () {
 });
 
 it('updates rule order', function () {
-    $ruleA = Rule::factory()->create(['order' => 1]);
-    $ruleB = Rule::factory()->create(['order' => 2]);
+    $ruleA = Rule::factory()->create(['order' => 0, 'section' => 'house']);
+    $ruleB = Rule::factory()->create(['order' => 1, 'section' => 'house']);
 
-    // Swap their order using the expected payload shape
-    $payload = [
-        ['value' => $ruleA->id, 'order' => 2],
-        ['value' => $ruleB->id, 'order' => 1],
-    ];
-
+    // Move ruleB to position 0 (first)
     Livewire::test(RuleList::class)
-        ->call('updateRuleOrder', $payload);
+        ->call('updateRuleOrder', (string) $ruleB->id, 0);
 
     $ruleA->refresh();
     $ruleB->refresh();
 
-    expect($ruleA->order)->toBe(2)
-        ->and($ruleB->order)->toBe(1);
+    expect($ruleB->order)->toBe(0)
+        ->and($ruleA->order)->toBe(1);
 });

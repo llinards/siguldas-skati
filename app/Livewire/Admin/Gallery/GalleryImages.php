@@ -43,10 +43,10 @@ class GalleryImages extends Component
         $this->gallery = $this->galleryServices->getGalleryById($gallery);
     }
 
-    public function updateImageOrder(array $images): void
+    public function updateImageOrder(string $id, int $position): void
     {
         try {
-            $this->galleryServices->updateImageOrder($images);
+            $this->galleryServices->updateImageOrder((int) $id, $position);
             $this->flashMessageService->success(__('Secība atjaunota.'));
         } catch (\Exception $e) {
             $this->errorLogService->logError('Failed to update gallery image order', $e, []);

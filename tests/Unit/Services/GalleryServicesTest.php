@@ -5,11 +5,13 @@ use App\Models\Gallery;
 use App\Models\GalleryImage;
 use App\Services\FileStorageService;
 use App\Services\GalleryServices;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
 
-uses(Tests\TestCase::class);
+uses(TestCase::class);
 uses(RefreshDatabase::class);
 
 beforeEach(function () {
@@ -205,39 +207,30 @@ test('deleteGalleryImage throws exception for non-existent image', function () {
     $this->fileStorageService->shouldNotReceive('deleteFile');
 
     expect(fn () => $this->galleryServices->deleteGalleryImage(999))
-        ->toThrow(Illuminate\Database\Eloquent\ModelNotFoundException::class);
+        ->toThrow(ModelNotFoundException::class);
 });
 
 test('updateImageOrder updates order for multiple images', function () {
     $gallery = Gallery::factory()->create();
-    $image1 = GalleryImage::factory()->create(['gallery_id' => $gallery->id, 'order' => 1]);
-    $image2 = GalleryImage::factory()->create(['gallery_id' => $gallery->id, 'order' => 2]);
-    $image3 = GalleryImage::factory()->create(['gallery_id' => $gallery->id, 'order' => 3]);
+    $image1 = GalleryImage::factory()->create(['gallery_id' => $gallery->id, 'order' => 0]);
+    $image2 = GalleryImage::factory()->create(['gallery_id' => $gallery->id, 'order' => 1]);
+    $image3 = GalleryImage::factory()->create(['gallery_id' => $gallery->id, 'order' => 2]);
 
-    $orderData = [
-        ['value' => $image3->id, 'order' => 1],
-        ['value' => $image1->id, 'order' => 2],
-        ['value' => $image2->id, 'order' => 3],
-    ];
-
-    $this->galleryServices->updateImageOrder($orderData);
+    // Move image3 to position 0 (first)
+    $this->galleryServices->updateImageOrder($image3->id, 0);
 
     $image1->refresh();
     $image2->refresh();
     $image3->refresh();
 
-    expect($image3->order)->toBe(1)
-        ->and($image1->order)->toBe(2)
-        ->and($image2->order)->toBe(3);
+    expect($image3->order)->toBe(0)
+        ->and($image1->order)->toBe(1)
+        ->and($image2->order)->toBe(2);
 });
 
 test('updateImageOrder throws exception for non-existent image', function () {
-    $orderData = [
-        ['value' => 999, 'order' => 1],
-    ];
-
-    expect(fn () => $this->galleryServices->updateImageOrder($orderData))
-        ->toThrow(Illuminate\Database\Eloquent\ModelNotFoundException::class);
+    expect(fn () => $this->galleryServices->updateImageOrder(999, 0))
+        ->toThrow(ModelNotFoundException::class);
 });
 
 test('getAllGalleries returns galleries ordered by order column', function () {

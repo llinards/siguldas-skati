@@ -62,10 +62,10 @@ class ProductList extends Component
         }
     }
 
-    public function updateProductOrder(array $products): void
+    public function updateProductOrder(string $id, int $position): void
     {
         try {
-            $this->productServices->updateProductOrder($products);
+            $this->productServices->updateProductOrder((int) $id, $position);
             $this->flashMessageService->success(__('Secība atjaunota.'));
         } catch (\Exception $e) {
             $this->errorLogService->logError('Failed to update product order', $e, []);

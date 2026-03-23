@@ -2,12 +2,12 @@
     <x-admin.flash-message/>
 
     <!-- Products Grid -->
-    <div wire:sortable="updateProductOrder" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div wire:sort="updateProductOrder" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         @forelse ($products as $product)
             <div
                 class="overflow-hidden rounded-lg bg-white shadow-md transition-shadow duration-300 hover:shadow-lg"
                 wire:key="product-{{ $product->id }}"
-                wire:sortable.item="{{ $product->id }}"
+                wire:sort:item="{{ $product->id }}"
             >
                 <!-- Product Image -->
                 <div class="relative aspect-square bg-gray-200">

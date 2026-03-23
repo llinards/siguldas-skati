@@ -214,24 +214,19 @@ test('successfully updates image order with success message', function () {
     $gallery = Gallery::factory()->create();
 
     // Create some gallery images with specific orders
-    $image1 = GalleryImage::factory()->create(['gallery_id' => $gallery->id, 'order' => 1]);
-    $image2 = GalleryImage::factory()->create(['gallery_id' => $gallery->id, 'order' => 2]);
-    $image3 = GalleryImage::factory()->create(['gallery_id' => $gallery->id, 'order' => 3]);
+    $image1 = GalleryImage::factory()->create(['gallery_id' => $gallery->id, 'order' => 0]);
+    $image2 = GalleryImage::factory()->create(['gallery_id' => $gallery->id, 'order' => 1]);
+    $image3 = GalleryImage::factory()->create(['gallery_id' => $gallery->id, 'order' => 2]);
 
-    $newOrder = [
-        ['value' => $image3->id, 'order' => 1],
-        ['value' => $image1->id, 'order' => 2],
-        ['value' => $image2->id, 'order' => 3],
-    ];
-
+    // Move image3 to position 0 (first)
     Livewire::test(GalleryImages::class, ['gallery' => $gallery->id])
-        ->call('updateImageOrder', $newOrder)
+        ->call('updateImageOrder', (string) $image3->id, 0)
         ->assertSessionHas('_flash.new.0', 'message');
 
     // Verify the order was updated in database
-    expect(GalleryImage::find($image3->id)->order)->toBe(1)
-        ->and(GalleryImage::find($image1->id)->order)->toBe(2)
-        ->and(GalleryImage::find($image2->id)->order)->toBe(3);
+    expect(GalleryImage::find($image3->id)->order)->toBe(0)
+        ->and(GalleryImage::find($image1->id)->order)->toBe(1)
+        ->and(GalleryImage::find($image2->id)->order)->toBe(2);
 });
 
 test('validates maximum file size and shows custom error message', function () {

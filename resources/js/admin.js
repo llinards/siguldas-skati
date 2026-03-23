@@ -1,5 +1,3 @@
-import 'livewire-sortable';
-
 import {
     Autosave,
     Bold,

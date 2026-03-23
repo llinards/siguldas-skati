@@ -4,9 +4,11 @@ use App\Models\Feature;
 use App\Services\FeatureService;
 use App\Services\FileStorageService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Testing\File;
 use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
 
-uses(Tests\TestCase::class);
+uses(TestCase::class);
 uses(RefreshDatabase::class);
 
 beforeEach(function () {
@@ -109,21 +111,16 @@ test('toggleFeatureStatus returns false for non-existent feature', function () {
 });
 
 test('updateFeatureOrder successfully updates feature order values', function () {
-    $feature1 = Feature::factory()->create(['order' => 1]);
-    $feature2 = Feature::factory()->create(['order' => 2]);
-    $feature3 = Feature::factory()->create(['order' => 3]);
+    $feature1 = Feature::factory()->create(['order' => 0]);
+    $feature2 = Feature::factory()->create(['order' => 1]);
+    $feature3 = Feature::factory()->create(['order' => 2]);
 
-    $orderData = [
-        ['value' => $feature1->id, 'order' => 3],
-        ['value' => $feature2->id, 'order' => 1],
-        ['value' => $feature3->id, 'order' => 2],
-    ];
+    // Move feature3 to position 0 (first)
+    $this->featureService->updateFeatureOrder($feature3->id, 0);
 
-    $this->featureService->updateFeatureOrder($orderData);
-
-    expect($feature1->fresh()->order)->toBe(3)
-        ->and($feature2->fresh()->order)->toBe(1)
-        ->and($feature3->fresh()->order)->toBe(2);
+    expect($feature3->fresh()->order)->toBe(0)
+        ->and($feature1->fresh()->order)->toBe(1)
+        ->and($feature2->fresh()->order)->toBe(2);
 });
 
 test('returns empty collection when no features exist', function () {
@@ -131,7 +128,7 @@ test('returns empty collection when no features exist', function () {
 });
 
 test('storeFeatureIcon calls fileStorageService with correct parameters', function () {
-    $uploadedFile = \Illuminate\Http\Testing\File::fake()->image('icon.jpg');
+    $uploadedFile = File::fake()->image('icon.jpg');
 
     $this->fileStorageService->shouldReceive('storeFile')
         ->once()
@@ -145,7 +142,7 @@ test('storeFeatureIcon calls fileStorageService with correct parameters', functi
 
 test('updateFeatureIcon deletes old icon and stores new one', function () {
     $feature = Feature::factory()->create(['icon_image' => 'old-icon.jpg']);
-    $uploadedFile = \Illuminate\Http\Testing\File::fake()->image('new-icon.jpg');
+    $uploadedFile = File::fake()->image('new-icon.jpg');
 
     $this->fileStorageService->shouldReceive('deleteFile')
         ->once()

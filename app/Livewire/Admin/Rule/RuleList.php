@@ -62,10 +62,10 @@ class RuleList extends Component
         }
     }
 
-    public function updateRuleOrder(array $rules): void
+    public function updateRuleOrder(string $id, int $position): void
     {
         try {
-            $this->ruleService->updateRuleOrder($rules);
+            $this->ruleService->updateRuleOrder((int) $id, $position);
             $this->flashMessageService->success(__('Secība atjaunota.'));
         } catch (\Exception $e) {
             $this->errorLogService->logError('Failed to update rule order', $e, []);
