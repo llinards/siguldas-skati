@@ -55,11 +55,12 @@ jobs:
 
     steps:
       - name: Deploy to Staging
-        uses: fjogeleit/http-request-action@v1
-        with:
-          url: 'https://forge.laravel.com/api/v1/servers/${{ secrets.FORGE_STAGING_SERVER_ID }}/sites/${{ secrets.FORGE_STAGING_SITE_ID }}/deployment/deploy'
-          method: 'POST'
-          customHeaders: '{"Authorization": "Bearer ${{ secrets.FORGE_API_TOKEN }}", "Accept": "application/json", "Content-Type": "application/json"}'
+        run: |
+          curl -s -f -X POST \
+            -H "Authorization: Bearer ${{ secrets.FORGE_API_TOKEN }}" \
+            -H "Accept: application/json" \
+            -H "Content-Type: application/json" \
+            "https://forge.laravel.com/api/v1/servers/${{ secrets.FORGE_STAGING_SERVER_ID }}/sites/${{ secrets.FORGE_STAGING_SITE_ID }}/deployment/deploy"
 
   deploy-production:
     needs: tests
@@ -69,8 +70,9 @@ jobs:
 
     steps:
       - name: Deploy to Production
-        uses: fjogeleit/http-request-action@v1
-        with:
-          url: 'https://forge.laravel.com/api/v1/servers/${{ secrets.FORGE_PRODUCTION_SERVER_ID }}/sites/${{ secrets.FORGE_PRODUCTION_SITE_ID }}/deployment/deploy'
-          method: 'POST'
-          customHeaders: '{"Authorization": "Bearer ${{ secrets.FORGE_API_TOKEN }}", "Accept": "application/json", "Content-Type": "application/json"}'
+        run: |
+          curl -s -f -X POST \
+            -H "Authorization: Bearer ${{ secrets.FORGE_API_TOKEN }}" \
+            -H "Accept: application/json" \
+            -H "Content-Type: application/json" \
+            "https://forge.laravel.com/api/v1/servers/${{ secrets.FORGE_PRODUCTION_SERVER_ID }}/sites/${{ secrets.FORGE_PRODUCTION_SITE_ID }}/deployment/deploy"
