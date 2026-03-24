@@ -23,6 +23,14 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+Livewire::setUpdateRoute(static function ($handle, $path) {
+    return Route::post($path, $handle);
+});
+
+Livewire::setScriptRoute(static function ($handle, $path) {
+    return Route::get($path, $handle);
+});
+
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
@@ -33,13 +41,6 @@ Route::group(
         ],
     ],
     function () {
-        Livewire::setUpdateRoute(static function ($handle) {
-            return Route::post('/livewire/update', $handle);
-        });
-
-        Livewire::setScriptRoute(static function ($handle) {
-            return Route::get('/livewire/livewire.js', $handle);
-        });
         Route::get('/', HomeController::class)->name('home');
 
         Route::get('/booking', static function () {
