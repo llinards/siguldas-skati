@@ -71,7 +71,7 @@
 
     {{-- PRODUCT CAROUSEL --}}
     <div class="bg-ss">
-        <div class="container mx-auto px-4 pb-12 md:pb-18 lg:pb-24 xl:pb-30">
+        <div class="container mx-auto px-4">
             <div class="relative mb-3 inline-block">
                 <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
                     @lang('Dizaina mājas, sauna un džakuzi')
@@ -84,16 +84,6 @@
             <x-carousels.products.wrapper :products="$products"></x-carousels.products.wrapper>
         </div>
     </div>
-
-    {{-- FIRST SECONDARY BANNER --}}
-    <x-banner>
-        <x-slot name="bannerBackgroundImage">
-            {{ asset('images/siguldas-skati-home-3.jpg') }}
-        </x-slot>
-        <x-slot name="bannerBackgroundImageAlt">
-            @lang('Drona skats uz māju parku')
-        </x-slot>
-    </x-banner>
 
     {{-- GALLERY --}}
     @if($galleries->isNotEmpty())
@@ -173,25 +163,9 @@
         </div>
     </div>
 
-    {{-- SECOND SECONDARY BANNER --}}
-    <x-banner>
-        <x-slot name="bannerImage">
-            {{ asset('images/siguldas-skati-logo.svg') }}
-        </x-slot>
-        <x-slot name="bannerBackgroundImage">
-            {{ asset('images/siguldas-skati-home-4.jpg') }}
-        </x-slot>
-        <x-slot name="bannerText">
-            {{-- prettier-ignore --}}
-            @lang('Sigulda ir vairāk nekā galamērķis – tā ir sajūta.')
-        </x-slot>
-
-        <x-slot name="bannerBackgroundImageAlt">@lang('Sigulda Skati Sauna')</x-slot>
-    </x-banner>
-
     {{-- WHAT TO DO IN SIGULDA --}}
     <div class="bg-ss">
-        <div class="container mx-auto px-4 pt-12 md:pt-18 lg:pt-24 xl:pt-30">
+        <div class="container mx-auto px-4">
             <div class="relative mb-3 inline-block">
                 <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
                     @lang('Ko vēl darīt Siguldā?')
