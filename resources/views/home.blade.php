@@ -1,19 +1,20 @@
 <x-app-layout :title="__('Sākums')">
     {{-- HEADER --}}
     <div class="home-introduction relative flex justify-center bg-black overflow-hidden">
-        <!-- Carousel background -->
-        <div class="absolute inset-0 z-0">
-            <div class="f-carousel" id="header-carousel">
-                @foreach (range(1, 7) as $index)
-                    <div class="f-carousel__slide relative w-full">
-                        <div class="absolute inset-0 bg-black/50 z-10"></div>
-                        <img src="{{ asset('images/header-image' . $index . '.jpg') }}"
-                             class="w-full h-screen object-cover"
-                             alt="Header Image {{ $index }}">
-                    </div>
-                @endforeach
+        @if ($headerImages->isNotEmpty())
+            <!-- Carousel background -->
+            <div class="absolute inset-0 z-0">
+                <div class="f-carousel" id="header-carousel">
+                    @foreach ($headerImages as $image)
+                        <div class="f-carousel__slide relative w-full">
+                            <div class="absolute inset-0 bg-black/50 z-10"></div>
+                            <img src="{{ Storage::url($image->filename) }}"
+                                class="w-full h-screen object-cover" alt="@lang('Siguldas Skati')">
+                        </div>
+                    @endforeach
+                </div>
             </div>
-        </div>
+        @endif
 
         <!-- Foreground content -->
         <div class="container relative z-10 mx-auto flex flex-col justify-end items-center px-4">
@@ -23,7 +24,7 @@
             </h1>
 
             <x-btn-header target="_blank" href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html"
-                          class="mb-10 md:mb-34">
+                class="mb-10 md:mb-34">
                 @lang('Rezervēt')
             </x-btn-header>
         </div>
@@ -44,8 +45,7 @@
             </div>
             <div class="gap-6 lg:gap-18 lg:grid lg:grid-cols-2">
                 <img class="rounded-3xl h-full object-cover w-full"
-                     src="{{ asset('images/siguldas-skati-home-5.jpg') }}"
-                     alt="@lang('Siguldas Skati - Moduļu māju parks')"/>
+                    src="{{ asset('images/siguldas-skati-home-5.jpg') }}" alt="@lang('Siguldas Skati - Moduļu māju parks')" />
                 <div class="lg:flex lg:flex-col lg:justify-center">
                     <h3 class="text-h-sm-mob lg:text-h-sm mt-6 mb-3 leading-none lg:mt-0">
                         @lang('Siguldas skati')
@@ -86,7 +86,7 @@
     </div>
 
     {{-- GALLERY --}}
-    @if($galleries->isNotEmpty())
+    @if ($galleries->isNotEmpty())
         <div id="galerija" class="bg-ss">
             <div class="container mx-auto px-4 pt-12 md:pt-18 lg:pt-24 xl:pt-30">
                 <div class="relative mb-3 inline-block">
@@ -223,8 +223,11 @@
 </x-app-layout>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         const container = document.getElementById("header-carousel");
+        if (!container) {
+            return;
+        }
         const options = {
             Autoplay: {
                 timeout: 5000,

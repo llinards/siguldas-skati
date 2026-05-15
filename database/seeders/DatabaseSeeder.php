@@ -41,5 +41,7 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         Newsletter::factory()->count(10)->create();
+
+        $this->call(HeaderImageSeeder::class);
     }
 }

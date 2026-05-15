@@ -1,3 +1,8 @@
 <x-admin.app-layout>
-    <livewire:admin.product.product-list />
+    <div class="mb-8">
+        <livewire:admin.header-images />
+    </div>
+    <div class="mt-8">
+        <livewire:admin.product.product-list />
+    </div>
 </x-admin.app-layout>
