@@ -42,6 +42,6 @@ class DatabaseSeeder extends Seeder
 
         Newsletter::factory()->count(10)->create();
 
-        $this->call(HeaderImageSeeder::class);
+        $this->call(HeaderMediaSeeder::class);
     }
 }

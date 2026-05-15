@@ -1,15 +1,24 @@
 <x-app-layout :title="__('Sākums')">
     {{-- HEADER --}}
     <div class="home-introduction relative flex justify-center bg-black overflow-hidden">
-        @if ($headerImages->isNotEmpty())
+        @if ($headerMedia->isNotEmpty())
+            @php($singleSlide = $headerMedia->count() === 1)
             <!-- Carousel background -->
             <div class="absolute inset-0 z-0">
                 <div class="f-carousel" id="header-carousel">
-                    @foreach ($headerImages as $image)
+                    @foreach ($headerMedia as $item)
                         <div class="f-carousel__slide relative w-full">
                             <div class="absolute inset-0 bg-black/50 z-10"></div>
-                            <img src="{{ Storage::url($image->filename) }}"
-                                class="w-full h-screen object-cover" alt="@lang('Siguldas Skati')">
+                            @if ($item->isVideo())
+                                <video src="{{ Storage::url($item->filename) }}"
+                                    class="w-full h-screen object-cover"
+                                    data-header-video muted autoplay playsinline preload="metadata"
+                                    @if ($singleSlide) loop @endif
+                                    aria-label="@lang('Siguldas Skati')"></video>
+                            @else
+                                <img src="{{ Storage::url($item->filename) }}"
+                                    class="w-full h-screen object-cover" alt="@lang('Siguldas Skati')">
+                            @endif
                         </div>
                     @endforeach
                 </div>
@@ -228,14 +237,81 @@
         if (!container) {
             return;
         }
-        const options = {
+
+        const carousel = new Carousel(container, {
             Autoplay: {
                 timeout: 5000,
                 showProgress: false
             },
             Navigation: false,
             Dots: false
-        };
-        new Carousel(container, options);
+        });
+
+        let pendingTimeout = null;
+        let pendingEndedHandler = null;
+        let pendingVideo = null;
+
+        function clearPending() {
+            if (pendingTimeout) {
+                clearTimeout(pendingTimeout);
+                pendingTimeout = null;
+            }
+            if (pendingVideo && pendingEndedHandler) {
+                pendingVideo.removeEventListener("ended", pendingEndedHandler);
+            }
+            pendingVideo = null;
+            pendingEndedHandler = null;
+        }
+
+        function handleActiveSlide() {
+            clearPending();
+
+            const slides = container.querySelectorAll(".f-carousel__slide");
+            const activeIndex = typeof carousel.page === "number" ? carousel.page : 0;
+            const activeSlide = slides[activeIndex];
+            const video = activeSlide && activeSlide.querySelector("video[data-header-video]");
+
+            if (!video) {
+                return;
+            }
+
+            if (carousel.Autoplay && typeof carousel.Autoplay.pause === "function") {
+                carousel.Autoplay.pause();
+            }
+
+            try {
+                video.currentTime = 0;
+            } catch (_) {}
+
+            const playResult = video.play();
+            if (playResult && typeof playResult.catch === "function") {
+                playResult.catch(function() {});
+            }
+
+            pendingVideo = video;
+            pendingEndedHandler = function() {
+                clearPending();
+                if (typeof carousel.slideNext === "function") {
+                    carousel.slideNext();
+                }
+                if (carousel.Autoplay && typeof carousel.Autoplay.resume === "function") {
+                    carousel.Autoplay.resume();
+                }
+            };
+            video.addEventListener("ended", pendingEndedHandler);
+
+            pendingTimeout = setTimeout(function() {
+                clearPending();
+                if (typeof carousel.slideNext === "function") {
+                    carousel.slideNext();
+                }
+                if (carousel.Autoplay && typeof carousel.Autoplay.resume === "function") {
+                    carousel.Autoplay.resume();
+                }
+            }, 30000);
+        }
+
+        carousel.on("change", handleActiveSlide);
+        handleActiveSlide();
     })
 </script>

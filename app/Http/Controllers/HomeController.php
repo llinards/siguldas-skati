@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\GalleryServices;
-use App\Services\HeaderImageService;
+use App\Services\HeaderMediaService;
 use App\Services\ProductServices;
 use Illuminate\View\View;
 
@@ -13,16 +13,16 @@ class HomeController extends Controller
 
     protected GalleryServices $galleryService;
 
-    protected HeaderImageService $headerImageService;
+    protected HeaderMediaService $headerMediaService;
 
     public function __construct(
         ProductServices $productServices,
         GalleryServices $galleryService,
-        HeaderImageService $headerImageService,
+        HeaderMediaService $headerMediaService,
     ) {
         $this->productServices = $productServices;
         $this->galleryService = $galleryService;
-        $this->headerImageService = $headerImageService;
+        $this->headerMediaService = $headerMediaService;
     }
 
     /**
@@ -32,8 +32,8 @@ class HomeController extends Controller
     {
         $products = $this->productServices->getAllActiveProducts();
         $galleries = $this->galleryService->getAllActiveGalleries();
-        $headerImages = $this->headerImageService->getAllOrdered();
+        $headerMedia = $this->headerMediaService->getAllOrdered();
 
-        return view('home', compact('products', 'galleries', 'headerImages'));
+        return view('home', compact('products', 'galleries', 'headerMedia'));
     }
 }

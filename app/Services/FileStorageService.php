@@ -19,7 +19,11 @@ class FileStorageService
 
     public const HEADER_IMAGE_PATH = 'header-images';
 
+    public const HEADER_VIDEO_PATH = 'header-videos';
+
     public const MAX_FILE_SIZE_KB = 512;
+
+    public const MAX_VIDEO_FILE_SIZE_KB = 15360;
 
     public function storeFile(UploadedFile $file, string $path, string $disk = self::DEFAULT_DISK): string
     {

@@ -2,16 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\HeaderImage;
+use App\Models\HeaderMedia;
 use App\Services\FileStorageService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
-class HeaderImageSeeder extends Seeder
+class HeaderMediaSeeder extends Seeder
 {
     public function run(): void
     {
-        if (HeaderImage::query()->exists()) {
+        if (HeaderMedia::query()->exists()) {
             return;
         }
 
@@ -28,9 +28,10 @@ class HeaderImageSeeder extends Seeder
             $targetPath = FileStorageService::HEADER_IMAGE_PATH.'/header-image-'.$i.'-'.uniqid().'.jpg';
             $disk->put($targetPath, file_get_contents($source));
 
-            HeaderImage::create([
+            HeaderMedia::create([
                 'filename' => $targetPath,
                 'order' => $i - 1,
+                'type' => HeaderMedia::TYPE_IMAGE,
             ]);
         }
     }
