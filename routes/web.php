@@ -95,6 +95,10 @@ Route::group(
                 Route::livewire('/gallery/{gallery:id}/images', GalleryImages::class)->name('dashboard.gallery.images');
 
                 Route::livewire('/newsletter', NewsletterList::class)->name('newsletter.list');
+
+                Route::get('/site-settings', function () {
+                    return view('admin.site-settings');
+                })->name('dashboard.site-settings');
             });
         });
 
