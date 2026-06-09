@@ -10,51 +10,51 @@
                     {{ __('Saturs sadaļai "Par mums" sākumlapā.') }}
                 </p>
 
-                {{-- Title --}}
-                <div class="mb-6">
-                    <label for="about-title" class="block text-sm/6 font-medium text-gray-900">
-                        {{ __('Virsraksts') }}
-                    </label>
-                    <div class="mt-2">
-                        <input
-                            id="about-title"
-                            type="text"
-                            wire:model="title"
-                            class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                        />
-                        <x-input-error :messages="$errors->get('title')" class="mt-2" />
+                {{-- Title / Subtitle / Heading --}}
+                <div class="mb-6 grid gap-6 sm:grid-cols-3">
+                    <div>
+                        <label for="about-title" class="block text-sm/6 font-medium text-gray-900">
+                            {{ __('Virsraksts') }}
+                        </label>
+                        <div class="mt-2">
+                            <input
+                                id="about-title"
+                                type="text"
+                                wire:model="title"
+                                class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                            />
+                            <x-input-error :messages="$errors->get('title')" class="mt-2" />
+                        </div>
                     </div>
-                </div>
 
-                {{-- Subtitle --}}
-                <div class="mb-6">
-                    <label for="about-subtitle" class="block text-sm/6 font-medium text-gray-900">
-                        {{ __('Apakšvirsraksts') }}
-                    </label>
-                    <div class="mt-2">
-                        <input
-                            id="about-subtitle"
-                            type="text"
-                            wire:model="subtitle"
-                            class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                        />
-                        <x-input-error :messages="$errors->get('subtitle')" class="mt-2" />
+                    <div>
+                        <label for="about-subtitle" class="block text-sm/6 font-medium text-gray-900">
+                            {{ __('Apakšvirsraksts') }}
+                        </label>
+                        <div class="mt-2">
+                            <input
+                                id="about-subtitle"
+                                type="text"
+                                wire:model="subtitle"
+                                class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                            />
+                            <x-input-error :messages="$errors->get('subtitle')" class="mt-2" />
+                        </div>
                     </div>
-                </div>
 
-                {{-- Heading --}}
-                <div class="mb-6">
-                    <label for="about-heading" class="block text-sm/6 font-medium text-gray-900">
-                        {{ __('Sadaļas virsraksts') }}
-                    </label>
-                    <div class="mt-2">
-                        <input
-                            id="about-heading"
-                            type="text"
-                            wire:model="heading"
-                            class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                        />
-                        <x-input-error :messages="$errors->get('heading')" class="mt-2" />
+                    <div>
+                        <label for="about-heading" class="block text-sm/6 font-medium text-gray-900">
+                            {{ __('Sadaļas virsraksts') }}
+                        </label>
+                        <div class="mt-2">
+                            <input
+                                id="about-heading"
+                                type="text"
+                                wire:model="heading"
+                                class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                            />
+                            <x-input-error :messages="$errors->get('heading')" class="mt-2" />
+                        </div>
                     </div>
                 </div>
 
