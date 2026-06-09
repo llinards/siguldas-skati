@@ -11,9 +11,7 @@ use Livewire\Component;
 
 class HomeHeroSettings extends Component
 {
-    public string $titleLv = '';
-
-    public string $titleEn = '';
+    public string $title = '';
 
     private SiteSettingService $siteSettingService;
 
@@ -33,29 +31,20 @@ class HomeHeroSettings extends Component
 
     public function mount(): void
     {
-        $translations = $this->siteSettingService->getTranslations(SiteSetting::KEY_HOME_HERO_TITLE);
-
-        $this->titleLv = $translations['lv'] ?? '';
-        $this->titleEn = $translations['en'] ?? '';
+        $this->title = $this->siteSettingService->get(SiteSetting::KEY_HOME_HERO_TITLE) ?? '';
     }
 
     public function save(): void
     {
         $this->validate([
-            'titleLv' => 'required|string|max:255',
-            'titleEn' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
         ], [
-            'titleLv.required' => __('Lūdzu, ievadiet virsrakstu latviešu valodā.'),
-            'titleEn.required' => __('Lūdzu, ievadiet virsrakstu angļu valodā.'),
-            'titleLv.max' => __('Virsraksts nedrīkst pārsniegt :max rakstzīmes.'),
-            'titleEn.max' => __('Virsraksts nedrīkst pārsniegt :max rakstzīmes.'),
+            'title.required' => __('Lūdzu, ievadiet virsrakstu.'),
+            'title.max' => __('Virsraksts nedrīkst pārsniegt :max rakstzīmes.'),
         ]);
 
         try {
-            $this->siteSettingService->set(SiteSetting::KEY_HOME_HERO_TITLE, [
-                'lv' => $this->titleLv,
-                'en' => $this->titleEn,
-            ]);
+            $this->siteSettingService->setForCurrentLocale(SiteSetting::KEY_HOME_HERO_TITLE, $this->title);
 
             $this->flashMessageService->success(__('Virsraksts atjaunināts.'));
         } catch (\Exception $e) {

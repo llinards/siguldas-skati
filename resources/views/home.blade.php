@@ -10,14 +10,12 @@
                         <div class="f-carousel__slide relative w-full">
                             <div class="absolute inset-0 bg-black/50 z-10"></div>
                             @if ($item->isVideo())
-                                <video src="{{ Storage::url($item->filename) }}"
-                                    class="w-full h-screen object-cover"
+                                <video src="{{ Storage::url($item->filename) }}" class="w-full h-screen object-cover"
                                     data-header-video muted autoplay playsinline preload="metadata"
-                                    @if ($singleSlide) loop @endif
-                                    aria-label="@lang('Siguldas Skati')"></video>
+                                    @if ($singleSlide) loop @endif aria-label="@lang('Siguldas Skati')"></video>
                             @else
-                                <img src="{{ Storage::url($item->filename) }}"
-                                    class="w-full h-screen object-cover" alt="@lang('Siguldas Skati')">
+                                <img src="{{ Storage::url($item->filename) }}" class="w-full h-screen object-cover"
+                                    alt="@lang('Siguldas Skati')">
                             @endif
                         </div>
                     @endforeach
@@ -40,43 +38,35 @@
     </div>
 
     {{-- ABOUT US --}}
-    <div id="about-us" class="bg-ss">
-        <div class="container mx-auto px-4 py-12 md:py-18 lg:py-24 xl:py-30">
-            <div>
-                <div class="relative mb-3 inline-block">
-                    <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
-                        @lang('Par mums')
-                    </h2>
+    @if (isset($aboutTitle))
+        <div id="about-us" class="bg-ss">
+            <div class="container mx-auto px-4 py-12 md:py-18 lg:py-24 xl:py-30">
+                <div>
+                    <div class="relative mb-3 inline-block">
+                        <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
+                            {{ $aboutTitle }}
+                        </h2>
+                    </div>
+                    <p class="text-ss-gray pb-6 text-sm leading-none">
+                        {{ $aboutSubtitle }}
+                    </p>
                 </div>
-                <p class="text-ss-gray pb-6 text-sm leading-none">
-                    @lang('Klusuma greznība Siguldas sirdī!')
-                </p>
-            </div>
-            <div class="gap-6 lg:gap-18 lg:grid lg:grid-cols-2">
-                <img class="rounded-3xl h-full object-cover w-full"
-                    src="{{ asset('images/siguldas-skati-home-5.jpg') }}" alt="@lang('Siguldas Skati - Moduļu māju parks')" />
-                <div class="lg:flex lg:flex-col lg:justify-center">
-                    <h3 class="text-h-sm-mob lg:text-h-sm mt-6 mb-3 leading-none lg:mt-0">
-                        @lang('Siguldas skati')
-                    </h3>
-                    <div class="space-y-6 text-justify text-base">
-                        <p>
-                            {{-- prettier-ignore --}}
-                            @lang('Īpaša atpūtas vieta tiem, kuri meklē mieru, klātbūtnes un skaistuma sajūtu pašā Siguldas sirdī. Mūsu stāsts sākas vietā, kur dizains saplūst ar dabu un miers kļūst par lielāko greznību.')
-                        </p>
-                        <p>
-                            {{-- prettier-ignore --}}
-                            @lang('Atrodoties tieši līdzās Panorāmas ratam un Svētku laukumam, esam radījuši modernas brīvdienu dizaina mājas, kas piedāvā ne tikai naktsmītni, bet arī sajūtu pieredzi. Šeit ainava kļūst par interjera daļu, un katrs gadalaiks sniedz jaunu skatpunktu – no miglainiem rudens rītiem līdz sniegotām virsotnēm vai saulainām vasaras dienām.')
-                        </p>
-                        <p>
-                            {{-- prettier-ignore --}}
-                            @lang('Mēs piedāvājam vietu, kur vienkāršība nozīmē kvalitāti, minimālisms – apzinātu komfortu, un katrā detaļā jūtama mīlestība pret vietu, kur dzīvojam. Šis projekts ir mūsu aicinājums atgriezties pie tā, kas būtisks – miera, klātbūtnes un skaistuma.')
-                        </p>
+                <div class="gap-6 lg:gap-18 lg:grid lg:grid-cols-2">
+                    <img class="rounded-3xl h-full object-cover w-full"
+                        src="{{ $aboutImage ? Storage::url($aboutImage) : asset('images/siguldas-skati-home-5.jpg') }}"
+                        alt="@lang('Siguldas Skati - Moduļu māju parks')" />
+                    <div class="lg:flex lg:flex-col lg:justify-center">
+                        <h3 class="text-h-sm-mob lg:text-h-sm mt-6 mb-3 leading-none lg:mt-0">
+                            {{ $aboutHeading }}
+                        </h3>
+                        <div class="about-us-description space-y-6 text-justify text-base">
+                            {!! $aboutDescription !!}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 
     {{-- PRODUCT CAROUSEL --}}
     <div class="bg-ss">

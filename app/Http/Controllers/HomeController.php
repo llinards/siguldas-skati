@@ -44,6 +44,22 @@ class HomeController extends Controller
             __('Modernas brīvdienu dizaina mājas tavai atpūtai!')
         );
 
-        return view('home', compact('products', 'galleries', 'headerMedia', 'heroTitle'));
+        $aboutTitle = $this->siteSettingService->get(SiteSetting::KEY_ABOUT_TITLE, __('Par mums'));
+        $aboutSubtitle = $this->siteSettingService->get(SiteSetting::KEY_ABOUT_SUBTITLE, __('Klusuma greznība Siguldas sirdī!'));
+        $aboutHeading = $this->siteSettingService->get(SiteSetting::KEY_ABOUT_HEADING, __('Siguldas skati'));
+        $aboutDescription = $this->siteSettingService->get(SiteSetting::KEY_ABOUT_DESCRIPTION);
+        $aboutImage = $this->siteSettingService->get(SiteSetting::KEY_ABOUT_IMAGE);
+
+        return view('home', compact(
+            'products',
+            'galleries',
+            'headerMedia',
+            'heroTitle',
+            'aboutTitle',
+            'aboutSubtitle',
+            'aboutHeading',
+            'aboutDescription',
+            'aboutImage',
+        ));
     }
 }

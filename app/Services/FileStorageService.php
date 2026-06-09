@@ -21,6 +21,8 @@ class FileStorageService
 
     public const HEADER_VIDEO_PATH = 'header-videos';
 
+    public const ABOUT_IMAGE_PATH = 'about-images';
+
     public const MAX_FILE_SIZE_KB = 512;
 
     public const MAX_VIDEO_FILE_SIZE_KB = 15360;

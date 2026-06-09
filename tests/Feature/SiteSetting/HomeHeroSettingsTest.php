@@ -3,6 +3,7 @@
 use App\Livewire\Admin\HomeHeroSettings;
 use App\Models\SiteSetting;
 use App\Models\User;
+use App\Services\SiteSettingService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 
@@ -13,64 +14,56 @@ beforeEach(function () {
     $this->actingAs($this->user);
 });
 
-test('mount loads empty values when no setting exists', function () {
+test('mount loads empty value when no setting exists', function () {
     Livewire::test(HomeHeroSettings::class)
         ->assertStatus(200)
-        ->assertSet('titleLv', '')
-        ->assertSet('titleEn', '');
+        ->assertSet('title', '');
 });
 
-test('mount loads existing translations into per-locale fields', function () {
-    $setting = new SiteSetting(['key' => SiteSetting::KEY_HOME_HERO_TITLE]);
-    $setting->setTranslations('value', ['lv' => 'Sveiks!', 'en' => 'Hello!']);
-    $setting->save();
+test('mount loads the value for the active locale', function () {
+    app(SiteSettingService::class)->set(SiteSetting::KEY_HOME_HERO_TITLE, ['lv' => 'Sveiks!', 'en' => 'Hello!']);
 
     Livewire::test(HomeHeroSettings::class)
-        ->assertSet('titleLv', 'Sveiks!')
-        ->assertSet('titleEn', 'Hello!');
+        ->assertSet('title', 'Sveiks!');
 });
 
-test('save persists translations for both locales', function () {
+test('save persists the value for the active locale', function () {
     Livewire::test(HomeHeroSettings::class)
-        ->set('titleLv', 'Jauns LV virsraksts')
-        ->set('titleEn', 'New EN title')
+        ->set('title', 'Jauns LV virsraksts')
         ->call('save')
         ->assertHasNoErrors();
 
-    $setting = SiteSetting::where('key', SiteSetting::KEY_HOME_HERO_TITLE)->firstOrFail();
+    expect(app(SiteSettingService::class)->getTranslations(SiteSetting::KEY_HOME_HERO_TITLE))
+        ->toBe(['lv' => 'Jauns LV virsraksts']);
+});
 
-    expect($setting->getTranslations('value'))->toBe([
-        'lv' => 'Jauns LV virsraksts',
-        'en' => 'New EN title',
-    ]);
+test('saving in one locale preserves the value already stored for another locale', function () {
+    app(SiteSettingService::class)->set(SiteSetting::KEY_HOME_HERO_TITLE, ['en' => 'Existing EN']);
+
+    Livewire::test(HomeHeroSettings::class)
+        ->set('title', 'LV vērtība')
+        ->call('save');
+
+    expect(app(SiteSettingService::class)->getTranslations(SiteSetting::KEY_HOME_HERO_TITLE))
+        ->toBe(['en' => 'Existing EN', 'lv' => 'LV vērtība']);
 });
 
 test('save updates existing setting instead of creating a duplicate', function () {
-    Livewire::test(HomeHeroSettings::class)
-        ->set('titleLv', 'A')
-        ->set('titleEn', 'B')
-        ->call('save');
-
-    Livewire::test(HomeHeroSettings::class)
-        ->set('titleLv', 'C')
-        ->set('titleEn', 'D')
-        ->call('save');
+    Livewire::test(HomeHeroSettings::class)->set('title', 'A')->call('save');
+    Livewire::test(HomeHeroSettings::class)->set('title', 'C')->call('save');
 
     expect(SiteSetting::where('key', SiteSetting::KEY_HOME_HERO_TITLE)->count())->toBe(1);
 });
 
-test('save requires both locale values', function () {
+test('save requires a value', function () {
     Livewire::test(HomeHeroSettings::class)
-        ->set('titleLv', '')
-        ->set('titleEn', '')
+        ->set('title', '')
         ->call('save')
-        ->assertHasErrors(['titleLv' => 'required', 'titleEn' => 'required']);
+        ->assertHasErrors(['title' => 'required']);
 });
 
 test('home page renders the saved hero title for the current locale', function () {
-    $setting = new SiteSetting(['key' => SiteSetting::KEY_HOME_HERO_TITLE]);
-    $setting->setTranslations('value', ['lv' => 'LV Heading', 'en' => 'EN Heading']);
-    $setting->save();
+    app(SiteSettingService::class)->set(SiteSetting::KEY_HOME_HERO_TITLE, ['lv' => 'LV Heading', 'en' => 'EN Heading']);
 
     $response = $this->get('/lv');
 
