@@ -50,6 +50,11 @@ class HomeController extends Controller
         $aboutDescription = $this->siteSettingService->get(SiteSetting::KEY_ABOUT_DESCRIPTION);
         $aboutImage = $this->siteSettingService->get(SiteSetting::KEY_ABOUT_IMAGE);
 
+        $productsTitle = $this->siteSettingService->get(SiteSetting::KEY_PRODUCTS_TITLE, __('Dizaina mājas, sauna un džakuzi'));
+        $productsSubtitle = $this->siteSettingService->get(SiteSetting::KEY_PRODUCTS_SUBTITLE, __('Izsmalcināta atpūta starp pilsētu un dabu!'));
+        $galleryTitle = $this->siteSettingService->get(SiteSetting::KEY_GALLERY_TITLE, __('Galerija'));
+        $gallerySubtitle = $this->siteSettingService->get(SiteSetting::KEY_GALLERY_SUBTITLE, __('Siguldas skatu galerija.'));
+
         return view('home', compact(
             'products',
             'galleries',
@@ -60,6 +65,10 @@ class HomeController extends Controller
             'aboutHeading',
             'aboutDescription',
             'aboutImage',
+            'productsTitle',
+            'productsSubtitle',
+            'galleryTitle',
+            'gallerySubtitle',
         ));
     }
 }

@@ -73,12 +73,12 @@
         <div class="container mx-auto px-4">
             <div class="relative mb-3 inline-block">
                 <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
-                    @lang('Dizaina mājas, sauna un džakuzi')
+                    {{ $productsTitle }}
                 </h2>
 
             </div>
             <p class="text-ss-gray pb-6 text-sm leading-none">
-                @lang('Izsmalcināta atpūta starp pilsētu un dabu!')
+                {{ $productsSubtitle }}
             </p>
             <x-carousels.products.wrapper :products="$products"></x-carousels.products.wrapper>
         </div>
@@ -90,12 +90,12 @@
             <div class="container mx-auto px-4 pt-12 md:pt-18 lg:pt-24 xl:pt-30">
                 <div class="relative mb-3 inline-block">
                     <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
-                        @lang('Galerija')
+                        {{ $galleryTitle }}
                     </h2>
 
                 </div>
                 <p class="text-ss-gray pb-6 text-sm leading-none xl:pb-12">
-                    @lang('Siguldas skatu galerija.')
+                    {{ $gallerySubtitle }}
                 </p>
                 <x-carousels.gallery.wrapper :galleries="$galleries"></x-carousels.gallery.wrapper>
             </div>

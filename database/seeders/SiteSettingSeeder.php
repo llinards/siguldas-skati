@@ -37,6 +37,22 @@ class SiteSettingSeeder extends Seeder
                     .'<p>Located right next to the Ferris Wheel and Celebration Square, we have created modern holiday design houses that offer not only accommodation but also an experience of feeling. Here, the landscape becomes part of the interior, and each season brings a new perspective – from misty autumn mornings to snowy peaks or sunny summer days.</p>'
                     .'<p>We offer a place where simplicity means quality, minimalism reflects mindful comfort, and every detail carries a love for the place we call home. This project is our invitation to return to what truly matters – peace, presence, and beauty.</p>',
             ],
+            SiteSetting::KEY_PRODUCTS_TITLE => [
+                'lv' => 'Dizaina mājas, sauna un džakuzi',
+                'en' => 'Design houses, sauna and jacuzzi',
+            ],
+            SiteSetting::KEY_PRODUCTS_SUBTITLE => [
+                'lv' => 'Izsmalcināta atpūta starp pilsētu un dabu!',
+                'en' => 'Sophisticated relaxation between city and nature!',
+            ],
+            SiteSetting::KEY_GALLERY_TITLE => [
+                'lv' => 'Galerija',
+                'en' => 'Gallery',
+            ],
+            SiteSetting::KEY_GALLERY_SUBTITLE => [
+                'lv' => 'Siguldas skatu galerija.',
+                'en' => 'Siguldas Skati gallery.',
+            ],
         ];
 
         foreach ($defaults as $key => $translations) {

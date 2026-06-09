@@ -23,6 +23,14 @@ class SiteSetting extends Model
 
     public const KEY_ABOUT_IMAGE = 'about_image';
 
+    public const KEY_PRODUCTS_TITLE = 'products_title';
+
+    public const KEY_PRODUCTS_SUBTITLE = 'products_subtitle';
+
+    public const KEY_GALLERY_TITLE = 'gallery_title';
+
+    public const KEY_GALLERY_SUBTITLE = 'gallery_subtitle';
+
     public array $translatable = ['value'];
 
     protected $fillable = [
