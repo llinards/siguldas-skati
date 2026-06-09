@@ -53,7 +53,7 @@ class HomeController extends Controller
         $productsTitle = $this->siteSettingService->get(SiteSetting::KEY_PRODUCTS_TITLE, __('Dizaina mājas, sauna un džakuzi'));
         $productsSubtitle = $this->siteSettingService->get(SiteSetting::KEY_PRODUCTS_SUBTITLE, __('Izsmalcināta atpūta starp pilsētu un dabu!'));
         $galleryTitle = $this->siteSettingService->get(SiteSetting::KEY_GALLERY_TITLE, __('Galerija'));
-        $gallerySubtitle = $this->siteSettingService->get(SiteSetting::KEY_GALLERY_SUBTITLE, __('Siguldas skatu galerija.'));
+        $gallerySubtitle = $this->siteSettingService->get(SiteSetting::KEY_GALLERY_SUBTITLE, 'Siguldas skatu galerija.');
 
         return view('home', compact(
             'products',
