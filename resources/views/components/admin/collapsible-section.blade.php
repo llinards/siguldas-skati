@@ -11,7 +11,7 @@
         aria-expanded="false"
         aria-controls="{{ $sectionId }}-collapse"
     >
-        <span class="text-h-sm-mob lg:text-h-mob leading-none">{{ $title }}</span>
+        <span class="text-btn-md leading-none">{{ $title }}</span>
         <x-accordion-arrows />
     </button>
     <div
