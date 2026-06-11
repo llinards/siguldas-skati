@@ -61,6 +61,14 @@ class SiteSettingSeeder extends Seeder
                 'lv' => 'Dizaina brīvdienu mājas ar skatu uz Siguldu!',
                 'en' => 'Design holiday houses with a view of Sigulda!',
             ],
+            SiteSetting::KEY_ACTIVITIES_TITLE => [
+                'lv' => 'Ko vēl darīt Siguldā?',
+                'en' => 'What else to do in Sigulda?',
+            ],
+            SiteSetting::KEY_ACTIVITIES_SUBTITLE => [
+                'lv' => 'Sigulda ir vieta, kur daba, kultūra un piedzīvojumi saplūst vienā ainavā. Neatkarīgi no gadalaika, šeit katrs var atrast sev piemērotu ritmu – vai tā būtu nesteidzīga pastaiga dabas takās, kultūras baudījums vai mazs piedzīvojums virs koku galotnēm.',
+                'en' => 'Sigulda is a place where nature, culture, and adventures blend into one landscape. No matter the season, everyone can find their own rhythm here – whether it’s a leisurely walk along nature trails, enjoying cultural events, or a small adventure above the treetops.',
+            ],
         ];
 
         foreach ($defaults as $key => $translations) {

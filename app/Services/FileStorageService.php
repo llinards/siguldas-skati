@@ -25,6 +25,8 @@ class FileStorageService
 
     public const EXPERIENCE_ICON_PATH = 'experience-icons';
 
+    public const ACTIVITY_IMAGE_PATH = 'activity-images';
+
     public const MAX_FILE_SIZE_KB = 512;
 
     public const MAX_VIDEO_FILE_SIZE_KB = 15360;

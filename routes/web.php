@@ -3,6 +3,9 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Admin\Activity\ActivityList;
+use App\Livewire\Admin\Activity\AddActivity;
+use App\Livewire\Admin\Activity\EditActivity;
 use App\Livewire\Admin\Experience\AddExperience;
 use App\Livewire\Admin\Experience\EditExperience;
 use App\Livewire\Admin\Experience\ExperienceList;
@@ -93,6 +96,10 @@ Route::group(
                 Route::livewire('/experiences', ExperienceList::class)->name('dashboard.experiences');
                 Route::livewire('/experience/add', AddExperience::class)->name('dashboard.experience.add');
                 Route::livewire('/experience/{experience}/edit', EditExperience::class)->name('dashboard.experience.edit');
+
+                Route::livewire('/activities', ActivityList::class)->name('dashboard.activities');
+                Route::livewire('/activity/add', AddActivity::class)->name('dashboard.activity.add');
+                Route::livewire('/activity/{activity}/edit', EditActivity::class)->name('dashboard.activity.edit');
 
                 Route::livewire('/rules', RuleList::class)->name('dashboard.rules');
                 Route::livewire('/rule/add', AddRule::class)->name('dashboard.rule.add');

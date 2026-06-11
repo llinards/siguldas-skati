@@ -15,5 +15,8 @@
         <x-admin.collapsible-section :title="__('Pieredze')">
             <livewire:admin.experience-section-settings />
         </x-admin.collapsible-section>
+        <x-admin.collapsible-section :title="__('Ko darīt Siguldā')">
+            <livewire:admin.activity-section-settings />
+        </x-admin.collapsible-section>
     </div>
 </x-admin.app-layout>

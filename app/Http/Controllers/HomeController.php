@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SiteSetting;
+use App\Services\ActivityService;
 use App\Services\ExperienceService;
 use App\Services\GalleryServices;
 use App\Services\HeaderMediaService;
@@ -22,18 +23,22 @@ class HomeController extends Controller
 
     protected ExperienceService $experienceService;
 
+    protected ActivityService $activityService;
+
     public function __construct(
         ProductServices $productServices,
         GalleryServices $galleryService,
         HeaderMediaService $headerMediaService,
         SiteSettingService $siteSettingService,
         ExperienceService $experienceService,
+        ActivityService $activityService,
     ) {
         $this->productServices = $productServices;
         $this->galleryService = $galleryService;
         $this->headerMediaService = $headerMediaService;
         $this->siteSettingService = $siteSettingService;
         $this->experienceService = $experienceService;
+        $this->activityService = $activityService;
     }
 
     /**
@@ -64,6 +69,10 @@ class HomeController extends Controller
         $experiencesTitle = $this->siteSettingService->get(SiteSetting::KEY_EXPERIENCES_TITLE, __('Ko sniedz pieredze Siguldas Skatos?'));
         $experiencesSubtitle = $this->siteSettingService->get(SiteSetting::KEY_EXPERIENCES_SUBTITLE, __('Dizaina brīvdienu mājas ar skatu uz Siguldu!'));
 
+        $activities = $this->activityService->getAllActiveActivities();
+        $activitiesTitle = $this->siteSettingService->get(SiteSetting::KEY_ACTIVITIES_TITLE, __('Ko vēl darīt Siguldā?'));
+        $activitiesSubtitle = $this->siteSettingService->get(SiteSetting::KEY_ACTIVITIES_SUBTITLE, __('Sigulda ir vieta, kur daba, kultūra un piedzīvojumi saplūst vienā ainavā. Neatkarīgi no gadalaika, šeit katrs var atrast sev piemērotu ritmu – vai tā būtu nesteidzīga pastaiga dabas takās, kultūras baudījums vai mazs piedzīvojums virs koku galotnēm.'));
+
         return view('home', compact(
             'products',
             'galleries',
@@ -81,6 +90,9 @@ class HomeController extends Controller
             'experiences',
             'experiencesTitle',
             'experiencesSubtitle',
+            'activities',
+            'activitiesTitle',
+            'activitiesSubtitle',
         ));
     }
 }

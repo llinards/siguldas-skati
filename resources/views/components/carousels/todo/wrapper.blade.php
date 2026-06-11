@@ -1,3 +1,5 @@
+@props(['activities'])
+
 <div class="bg-ss">
     <div class="carousel-section container mx-auto grid grid-cols-1">
         <x-carousels.nav class="xl:hidden">
@@ -6,40 +8,13 @@
         </x-carousels.nav>
         <div id="todoCarousel" class="f-carousel">
             <div class="f-carousel__viewport">
-                <x-carousels.todo.card>
-                    <x-slot name="todoTitle">@lang('Dabas takas')</x-slot>
-                    <x-slot name="todoImage">
-                        {{ asset('images/siguldas-skati-todo-1.jpg') }}
-                    </x-slot>
-                    <x-slot name="modalId">nature-trails</x-slot>
-                </x-carousels.todo.card>
-                <x-carousels.todo.card>
-                    <x-slot name="todoTitle">
-                        @lang('Aktīvā atpūta')
-                    </x-slot>
-                    <x-slot name="todoImage">
-                        {{ asset('images/siguldas-skati-todo-2.jpg') }}
-                    </x-slot>
-                    <x-slot name="modalId">active-recreation</x-slot>
-                </x-carousels.todo.card>
-                <x-carousels.todo.card>
-                    <x-slot name="todoTitle">
-                        @lang('Garšu pieredze')
-                    </x-slot>
-                    <x-slot name="todoImage">
-                        {{ asset('images/siguldas-skati-todo-3.jpg') }}
-                    </x-slot>
-                    <x-slot name="modalId">taste-experience</x-slot>
-                </x-carousels.todo.card>
-                <x-carousels.todo.card>
-                    <x-slot name="todoTitle">
-                        @lang('Kultūra un vēsture')
-                    </x-slot>
-                    <x-slot name="todoImage">
-                        {{ asset('images/siguldas-skati-todo-4.jpg') }}
-                    </x-slot>
-                    <x-slot name="modalId">culture-and-history</x-slot>
-                </x-carousels.todo.card>
+                @foreach ($activities as $activity)
+                    <x-carousels.todo.card>
+                        <x-slot name="todoTitle">{{ $activity->title }}</x-slot>
+                        <x-slot name="todoImage">{{ $activity->image ? Storage::url($activity->image) : '' }}</x-slot>
+                        <x-slot name="modalId">activity-{{ $activity->id }}</x-slot>
+                    </x-carousels.todo.card>
+                @endforeach
             </div>
         </div>
     </div>

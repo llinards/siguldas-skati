@@ -35,6 +35,10 @@ class SiteSetting extends Model
 
     public const KEY_EXPERIENCES_SUBTITLE = 'experiences_subtitle';
 
+    public const KEY_ACTIVITIES_TITLE = 'activities_title';
+
+    public const KEY_ACTIVITIES_SUBTITLE = 'activities_subtitle';
+
     public array $translatable = ['value'];
 
     protected $fillable = [
