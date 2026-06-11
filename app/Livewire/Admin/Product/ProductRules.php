@@ -41,7 +41,7 @@ class ProductRules extends Component
         $this->product = $this->productServices->getProductById($product);
         if (! $this->product) {
             $this->flashMessageService->error(__('Produkts nav atrasts.'));
-            $this->redirect(route('dashboard'));
+            $this->redirect(route('dashboard.products'));
 
             return;
         }
@@ -54,7 +54,7 @@ class ProductRules extends Component
         try {
             $this->productServices->syncProductRules($this->product, $this->selectedRules);
             $this->flashMessageService->success(__('Mājas noteikumi veiksmīgi atjaunināti.'));
-            $this->redirect(route('dashboard'));
+            $this->redirect(route('dashboard.products'));
         } catch (\Exception $e) {
             $this->errorLogService->logError('Failed to save product rules', $e, [
                 'product_id' => $this->product->id,

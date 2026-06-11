@@ -41,7 +41,7 @@ class AddProduct extends Component
 
     private ErrorLogService $errorLogService;
 
-    private const SUCCESS_ROUTE = 'dashboard';
+    private const SUCCESS_ROUTE = 'dashboard.products';
 
     public function boot(
         ProductServices $productServices,

@@ -78,14 +78,15 @@ class ProductList extends Component
         try {
             $products = $this->productServices->getAllProducts();
 
-            return view('livewire.admin.product.product-list', compact('products'));
+            return view('livewire.admin.product.product-list', compact('products'))
+                ->layout('layouts.admin.app');
         } catch (\Exception $e) {
             $this->errorLogService->logError('Failed to load products list', $e, []);
             $this->flashMessageService->error(__('Ielādējot produktus, radās kļūda. Lūdzu, atsvaidziniet lapu.'));
 
             return view('livewire.admin.product.product-list', [
                 'products' => collect([]),
-            ]);
+            ])->layout('layouts.admin.app');
         }
     }
 }

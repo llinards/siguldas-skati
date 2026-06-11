@@ -40,7 +40,7 @@ class ProductFeatures extends Component
         $this->product = $this->productServices->getProductById($product);
         if (! $this->product) {
             $this->flashMessageService->error(__('Produkts nav atrasts.'));
-            $this->redirect(route('dashboard'));
+            $this->redirect(route('dashboard.products'));
 
             return;
         }
@@ -53,7 +53,7 @@ class ProductFeatures extends Component
         try {
             $this->productServices->syncProductFeatures($this->product, $this->selectedFeatures);
             $this->flashMessageService->success(__('Mājas ērtības veiksmīgi atjauninātas.'));
-            $this->redirect(route('dashboard'));
+            $this->redirect(route('dashboard.products'));
         } catch (\Exception $e) {
             $this->errorLogService->logError('Failed to save product features', $e, [
                 'product_id' => $this->product->id,

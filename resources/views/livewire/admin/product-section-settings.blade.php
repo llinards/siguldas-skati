@@ -10,7 +10,7 @@
                     {{ __('Virsraksts un apakšvirsraksts māju karuseļa sadaļai sākumlapā.') }}
                 </p>
                 <a
-                    href="{{ route('dashboard') }}"
+                    href="{{ route('dashboard.products') }}"
                     class="mb-6 inline-flex items-center gap-x-1 text-sm font-medium text-indigo-600 transition-colors duration-200 hover:text-indigo-900"
                 >
                     {{ __('Pārvaldīt mājas') }}

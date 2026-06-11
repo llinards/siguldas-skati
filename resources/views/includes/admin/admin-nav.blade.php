@@ -34,6 +34,10 @@
                     href="{{ route('dashboard') }}">
                     Sākums
                 </a>
+                <a class="hover:border-b-menu-hover hover:text-menu-hover text-btn-md {{ Route::is('dashboard.products*') || Route::is('product.*') ? 'border-b-menu-hover text-menu-hover' : '' }} border-b-1 border-transparent text-center transition-all duration-200 ease-in-out"
+                    href="{{ route('dashboard.products') }}">
+                    {{ __('Mājas') }}
+                </a>
                 <a class="hover:border-b-menu-hover hover:text-menu-hover text-btn-md {{ Route::is('newsletter.list') ? 'border-b-menu-hover text-menu-hover' : '' }} border-b-1 border-transparent text-center transition-all duration-200 ease-in-out"
                     href="{{ route('newsletter.list') }}">
                     Pieteikumi jaunumiem

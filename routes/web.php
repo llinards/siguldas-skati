@@ -18,6 +18,7 @@ use App\Livewire\Admin\Product\AddProduct;
 use App\Livewire\Admin\Product\EditProduct;
 use App\Livewire\Admin\Product\ProductFeatures;
 use App\Livewire\Admin\Product\ProductImages;
+use App\Livewire\Admin\Product\ProductList;
 use App\Livewire\Admin\Product\ProductRules;
 use App\Livewire\Admin\Rule\AddRule;
 use App\Livewire\Admin\Rule\EditRule;
@@ -78,6 +79,7 @@ Route::group(
                     return view('admin.dashboard');
                 })->name('dashboard');
 
+                Route::livewire('/products', ProductList::class)->name('dashboard.products');
                 Route::livewire('/product/add', AddProduct::class)->name('product.add');
                 Route::livewire('/product/{product:id}/edit', EditProduct::class)->name('product.edit');
                 Route::livewire('/product/{product:id}/images', ProductImages::class)->name('product.images');
