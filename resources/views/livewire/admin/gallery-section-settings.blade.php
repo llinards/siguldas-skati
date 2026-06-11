@@ -3,9 +3,6 @@
     <form wire:submit="save">
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
-                <h2 class="text-h-sm-mob lg:text-h-mob mb-3 leading-none">
-                    {{ __('Sadaļa "Galerija"') }}
-                </h2>
                 <p class="mb-3 text-sm text-gray-500">
                     {{ __('Virsraksts un apakšvirsraksts galerijas sadaļai sākumlapā.') }}
                 </p>

@@ -3,9 +3,6 @@
     <form wire:submit="save">
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
-                <h2 class="text-h-sm-mob lg:text-h-mob mb-3 leading-none">
-                    {{ __('Galvenes virsraksts') }}
-                </h2>
                 <p class="mb-6 text-sm text-gray-500">
                     {{ __('Galvenais virsraksts virs galvenes karuseļa.') }}
                 </p>
