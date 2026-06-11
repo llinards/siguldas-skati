@@ -6,9 +6,18 @@
                 <h2 class="text-h-sm-mob lg:text-h-mob mb-3 leading-none">
                     {{ __('Sadaļa "Mājas"') }}
                 </h2>
-                <p class="mb-6 text-sm text-gray-500">
+                <p class="mb-3 text-sm text-gray-500">
                     {{ __('Virsraksts un apakšvirsraksts māju karuseļa sadaļai sākumlapā.') }}
                 </p>
+                <a
+                    href="{{ route('dashboard') }}"
+                    class="mb-6 inline-flex items-center gap-x-1 text-sm font-medium text-indigo-600 transition-colors duration-200 hover:text-indigo-900"
+                >
+                    {{ __('Pārvaldīt mājas') }}
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
 
                 <div class="grid gap-6 sm:grid-cols-2">
                     <div>
