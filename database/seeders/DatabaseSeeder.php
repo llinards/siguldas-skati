@@ -44,5 +44,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(HeaderMediaSeeder::class);
         $this->call(SiteSettingSeeder::class);
+        $this->call(ExperienceSeeder::class);
     }
 }

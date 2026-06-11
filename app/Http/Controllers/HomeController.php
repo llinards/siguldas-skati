@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SiteSetting;
+use App\Services\ExperienceService;
 use App\Services\GalleryServices;
 use App\Services\HeaderMediaService;
 use App\Services\ProductServices;
@@ -19,16 +20,20 @@ class HomeController extends Controller
 
     protected SiteSettingService $siteSettingService;
 
+    protected ExperienceService $experienceService;
+
     public function __construct(
         ProductServices $productServices,
         GalleryServices $galleryService,
         HeaderMediaService $headerMediaService,
         SiteSettingService $siteSettingService,
+        ExperienceService $experienceService,
     ) {
         $this->productServices = $productServices;
         $this->galleryService = $galleryService;
         $this->headerMediaService = $headerMediaService;
         $this->siteSettingService = $siteSettingService;
+        $this->experienceService = $experienceService;
     }
 
     /**
@@ -55,6 +60,10 @@ class HomeController extends Controller
         $galleryTitle = $this->siteSettingService->get(SiteSetting::KEY_GALLERY_TITLE, __('Galerija'));
         $gallerySubtitle = $this->siteSettingService->get(SiteSetting::KEY_GALLERY_SUBTITLE, 'Siguldas skatu galerija.');
 
+        $experiences = $this->experienceService->getAllActiveExperiences();
+        $experiencesTitle = $this->siteSettingService->get(SiteSetting::KEY_EXPERIENCES_TITLE, __('Ko sniedz pieredze Siguldas Skatos?'));
+        $experiencesSubtitle = $this->siteSettingService->get(SiteSetting::KEY_EXPERIENCES_SUBTITLE, __('Dizaina brīvdienu mājas ar skatu uz Siguldu!'));
+
         return view('home', compact(
             'products',
             'galleries',
@@ -69,6 +78,9 @@ class HomeController extends Controller
             'productsSubtitle',
             'galleryTitle',
             'gallerySubtitle',
+            'experiences',
+            'experiencesTitle',
+            'experiencesSubtitle',
         ));
     }
 }

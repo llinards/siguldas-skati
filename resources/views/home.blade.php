@@ -103,64 +103,30 @@
     @endif
 
     {{-- EXPERIENCES --}}
-    <div class="bg-ss">
-        <div class="container mx-auto px-4 py-12 md:py-18 lg:py-24 xl:py-30">
-            <div class="relative mb-3 inline-block">
-                <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
-                    @lang('Ko sniedz pieredze Siguldas Skatos?')
-                </h2>
-            </div>
-            <p class="text-ss-gray pb-6 text-sm leading-none sm:pb-12">
-                @lang('Dizaina brīvdienu mājas ar skatu uz Siguldu!')
-            </p>
-            <div class="mb-6 grid grid-cols-1 gap-6 text-white sm:grid-cols-2 xl:grid-cols-4">
-                <x-experience-card>
-                    <x-slot name="experienceSvg">wave</x-slot>
-                    <x-slot name="experienceTitle">
-                        {{-- prettier-ignore --}}
-                        @lang('Klusums un miers')
-                    </x-slot>
-                    <x-slot name="experienceText">
-                        {{-- prettier-ignore --}}
-                        @lang('Mūsu brīvdienu dizaina mājās nav steigas – šī ir vieta, kur Tu vari elpot dziļāk, dzirdēt sevi un atpūsties bez stresa.')
-                    </x-slot>
-                </x-experience-card>
-                <x-experience-card>
-                    <x-slot name="experienceSvg">check</x-slot>
-                    <x-slot name="experienceTitle">
-                        {{-- prettier-ignore --}}
-                        @lang('Estētika un komforts')
-                    </x-slot>
-                    <x-slot name="experienceText">
-                        {{-- prettier-ignore --}}
-                        @lang('Pārdomāts dizains, kvalitatīvas detaļas un mājīgums, kas ļauj justies kā mājās – tikai vēl labāk.')
-                    </x-slot>
-                </x-experience-card>
-                <x-experience-card>
-                    <x-slot name="experienceSvg">happy_face</x-slot>
-                    <x-slot name="experienceTitle">
-                        {{-- prettier-ignore --}}
-                        @lang('Atmiņas un sajūtas')
-                    </x-slot>
-                    <x-slot name="experienceText">
-                        {{-- prettier-ignore --}}
-                        @lang('Šī nav tikai naktsmītne – tā ir iespēja apstāties, sajust vidi un ieraudzīt Siguldu citām acīm.')
-                    </x-slot>
-                </x-experience-card>
-                <x-experience-card>
-                    <x-slot name="experienceSvg">location</x-slot>
-                    <x-slot name="experienceTitle">
-                        {{-- prettier-ignore --}}
-                        @lang('Izcila lokācija')
-                    </x-slot>
-                    <x-slot name="experienceText">
-                        {{-- prettier-ignore --}}
-                        @lang('Vietu pašā Siguldas sirdī, kur daba un pilsētas kultūras notikumi satiekas viena soļa attālumā.')
-                    </x-slot>
-                </x-experience-card>
+    @if ($experiences->isNotEmpty())
+        <div class="bg-ss">
+            <div class="container mx-auto px-4 py-12 md:py-18 lg:py-24 xl:py-30">
+                <div class="relative mb-3 inline-block">
+                    <h2 class="text-h-mob lg:text-h-md leading-none border-b-2">
+                        {{ $experiencesTitle }}
+                    </h2>
+                </div>
+                <p class="text-ss-gray pb-6 text-sm leading-none sm:pb-12">
+                    {{ $experiencesSubtitle }}
+                </p>
+                <div class="mb-6 grid grid-cols-1 gap-6 text-white sm:grid-cols-2 xl:grid-cols-4">
+                    @foreach ($experiences as $experience)
+                        <x-experience-card
+                            :iconUrl="$experience->icon_image ? Storage::url($experience->icon_image) : ''"
+                            :experienceTitle="$experience->title"
+                        >
+                            <x-slot name="experienceText">{!! $experience->description !!}</x-slot>
+                        </x-experience-card>
+                    @endforeach
+                </div>
             </div>
         </div>
-    </div>
+    @endif
 
     {{-- WHAT TO DO IN SIGULDA --}}
     <div class="bg-ss">

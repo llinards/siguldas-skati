@@ -53,6 +53,14 @@ class SiteSettingSeeder extends Seeder
                 'lv' => 'Siguldas skatu galerija.',
                 'en' => 'Siguldas Skati gallery.',
             ],
+            SiteSetting::KEY_EXPERIENCES_TITLE => [
+                'lv' => 'Ko sniedz pieredze Siguldas Skatos?',
+                'en' => 'What does the experience at Siguldas Skati offer?',
+            ],
+            SiteSetting::KEY_EXPERIENCES_SUBTITLE => [
+                'lv' => 'Dizaina brīvdienu mājas ar skatu uz Siguldu!',
+                'en' => 'Design holiday houses with a view of Sigulda!',
+            ],
         ];
 
         foreach ($defaults as $key => $translations) {

@@ -11,4 +11,7 @@
     <div class="mb-8">
         <livewire:admin.gallery-section-settings />
     </div>
+    <div class="mb-8">
+        <livewire:admin.experience-section-settings />
+    </div>
 </x-admin.app-layout>
