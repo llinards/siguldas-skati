@@ -3,15 +3,14 @@
         <div class="container mx-auto px-4">
             <div class="relative mt-26 lg:mt-30 xl:mt-36 mb-3 inline-block">
                 <div class="flex sm:inline-block justify-center items-start border-b-2">
-                    <x-btn-back class="pb-3 mr-5"/>
+                    <x-btn-back class="pb-3 mr-5" />
                     <h1 class="text-h-mob lg:text-h-md leading-none">
-                        {{-- prettier-ignore --}}
-                        @lang('Dizaina mājas, sauna un džakuzi')
+                        {{ $productsTitle }}
                     </h1>
                 </div>
             </div>
             <p class="text-ss-gray pb-6 text-sm leading-none">
-                @lang('Rezervē savu brīvdienu māju jau tagad!')
+                {{ $productsSubtitle }}
             </p>
 
             @if ($products->isEmpty())
@@ -33,11 +32,12 @@
                                 {{ Storage::url($product->cover) }}
                             </x-slot>
                             <x-slot name="productCapacity">
-                                {{ $product->person_count === 1 ? __('1 pieaugušais') : __(':count pieaugušie', ['count' =>
-                      $product->person_count]) }}
-                                @if($product->children_count > 0)
-                                    +  {{ $product->children_count === 1 ? __('1 bērns') : __(':count bērni', ['count' =>
-                                $product->children_count]) }}
+                                {{ $product->person_count === 1
+                                    ? __('1 pieaugušais')
+                                    : __(':count pieaugušie', ['count' => $product->person_count]) }}
+                                @if ($product->children_count > 0)
+                                    +
+                                    {{ $product->children_count === 1 ? __('1 bērns') : __(':count bērni', ['count' => $product->children_count]) }}
                                 @endif
                             </x-slot>
                             <x-slot name="productLink">
