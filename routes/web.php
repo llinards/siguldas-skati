@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -9,6 +10,9 @@ use App\Livewire\Admin\Activity\EditActivity;
 use App\Livewire\Admin\Experience\AddExperience;
 use App\Livewire\Admin\Experience\EditExperience;
 use App\Livewire\Admin\Experience\ExperienceList;
+use App\Livewire\Admin\Faq\AddFaq;
+use App\Livewire\Admin\Faq\EditFaq;
+use App\Livewire\Admin\Faq\FaqList;
 use App\Livewire\Admin\Feature\AddFeature;
 use App\Livewire\Admin\Feature\EditFeature;
 use App\Livewire\Admin\Feature\FeatureList;
@@ -60,9 +64,7 @@ Route::group(
             return view('terms');
         })->name('terms');
 
-        Route::get('/buj', function () {
-            return view('faq');
-        })->name('faq');
+        Route::get('/buj', FaqController::class)->name('faq');
 
         Route::get('/kontakti', function () {
             return view('contacts');
@@ -100,6 +102,10 @@ Route::group(
                 Route::livewire('/activities', ActivityList::class)->name('dashboard.activities');
                 Route::livewire('/activity/add', AddActivity::class)->name('dashboard.activity.add');
                 Route::livewire('/activity/{activity}/edit', EditActivity::class)->name('dashboard.activity.edit');
+
+                Route::livewire('/faqs', FaqList::class)->name('dashboard.faqs');
+                Route::livewire('/faq/add', AddFaq::class)->name('dashboard.faq.add');
+                Route::livewire('/faq/{faq}/edit', EditFaq::class)->name('dashboard.faq.edit');
 
                 Route::livewire('/rules', RuleList::class)->name('dashboard.rules');
                 Route::livewire('/rule/add', AddRule::class)->name('dashboard.rule.add');

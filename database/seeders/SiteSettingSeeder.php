@@ -69,6 +69,14 @@ class SiteSettingSeeder extends Seeder
                 'lv' => 'Sigulda ir vieta, kur daba, kultūra un piedzīvojumi saplūst vienā ainavā. Neatkarīgi no gadalaika, šeit katrs var atrast sev piemērotu ritmu – vai tā būtu nesteidzīga pastaiga dabas takās, kultūras baudījums vai mazs piedzīvojums virs koku galotnēm.',
                 'en' => 'Sigulda is a place where nature, culture, and adventures blend into one landscape. No matter the season, everyone can find their own rhythm here – whether it’s a leisurely walk along nature trails, enjoying cultural events, or a small adventure above the treetops.',
             ],
+            SiteSetting::KEY_FAQ_TITLE => [
+                'lv' => 'Biežāk uzdotie jautājumi',
+                'en' => 'Frequently asked questions',
+            ],
+            SiteSetting::KEY_FAQ_SUBTITLE => [
+                'lv' => 'Šeit ir atbildes uz biežāk uzdotajiem jautājumiem par mūsu brīvdienu dizaina mājām.',
+                'en' => 'Here are answers to frequently asked questions about our design houses and saunas.',
+            ],
         ];
 
         foreach ($defaults as $key => $translations) {

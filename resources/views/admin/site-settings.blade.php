@@ -18,5 +18,8 @@
         <x-admin.collapsible-section :title="__('Ko darīt Siguldā')">
             <livewire:admin.activity-section-settings />
         </x-admin.collapsible-section>
+        <x-admin.collapsible-section :title="__('Biežāk uzdotie jautājumi')">
+            <livewire:admin.faq-section-settings />
+        </x-admin.collapsible-section>
     </div>
 </x-admin.app-layout>
