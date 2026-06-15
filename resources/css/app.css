@@ -2,6 +2,7 @@
 
 @source "../../node_modules/preline/dist/*.js";
 @import '../../node_modules/preline/variants.css';
+@import '../../node_modules/vanilla-calendar-pro/styles/index.css';
 
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -161,4 +162,41 @@ button[disabled] {
     opacity: 0.5;
     pointer-events: none;
     cursor: not-allowed;
+}
+
+/* Booking date-range calendar — recolour vanilla-calendar-pro to the brand palette. */
+[data-vc='calendar'] {
+    font-family: 'Rubik', sans-serif;
+    border-color: var(--color-ss-gray);
+    box-shadow: 0 10px 30px rgba(24, 30, 5, 0.12);
+}
+
+[data-vc='calendar'] [data-vc-date-selected] .vc-date__btn {
+    background-color: var(--color-ss-dark) !important;
+    color: #fff !important;
+}
+
+[data-vc='calendar'] [data-vc-date-selected='middle'] .vc-date__btn {
+    background-color: #e3e6d8 !important;
+    color: var(--color-ss-dark) !important;
+}
+
+[data-vc='calendar'] [data-vc-date-today] .vc-date__btn {
+    background-color: var(--color-ss) !important;
+    color: var(--color-ss-dark) !important;
+}
+
+/* Neutralise the default rose weekend/holiday colour to fit the muted palette. */
+[data-vc='calendar'] [data-vc-date-weekend] .vc-date__btn,
+[data-vc='calendar'] [data-vc-date-holiday] .vc-date__btn {
+    color: inherit !important;
+}
+
+[data-vc='calendar'] [data-vc-date-hover] .vc-date__btn {
+    background-color: var(--color-ss) !important;
+}
+
+[data-vc='calendar'] [data-vc-date-disabled] .vc-date__btn {
+    text-decoration: line-through;
+    opacity: 0.45;
 }

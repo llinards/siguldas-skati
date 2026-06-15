@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Booking;
 
+use App\Enums\BookingStatus;
 use App\Exceptions\BookingException;
 use App\Models\Addon;
 use App\Models\Product;
@@ -10,6 +11,7 @@ use App\Services\PricingService;
 use App\Services\StripeService;
 use App\Support\BookingQuote;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\View\View;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -49,6 +51,16 @@ class BookingWidget extends Component
     public function mount(Product $product): void
     {
         $this->product = $product;
+    }
+
+    /**
+     * Sync the date range chosen in the JS calendar into Livewire state.
+     */
+    public function selectDates(?string $checkIn, ?string $checkOut): void
+    {
+        $this->checkIn = $checkIn ?? '';
+        $this->checkOut = $checkOut ?? '';
+        $this->recomputeQuoteTotal();
     }
 
     public function updatedCheckIn(): void
@@ -138,11 +150,57 @@ class BookingWidget extends Component
         return $this->redirect($session->url);
     }
 
+    /**
+     * Nights that cannot be booked (occupied by a confirmed/live-pending booking
+     * or an admin-blocked range), as 'Y-m-d' strings, bounded to an 18-month horizon.
+     *
+     * @return array<int, string>
+     */
+    private function unavailableDates(): array
+    {
+        $today = Carbon::today();
+        $horizon = $today->copy()->addMonths(18);
+        $dates = [];
+
+        $bookings = $this->product->bookings()
+            ->where(function ($query) {
+                $query->where('status', BookingStatus::Confirmed)
+                    ->orWhere(function ($pending) {
+                        $pending->where('status', BookingStatus::Pending)
+                            ->where('expires_at', '>', now());
+                    });
+            })
+            ->where('check_out', '>', $today->toDateString())
+            ->get(['check_in', 'check_out']);
+
+        foreach ($bookings as $booking) {
+            foreach (CarbonPeriod::create($booking->check_in, $booking->check_out->copy()->subDay()) as $night) {
+                $dates[$night->toDateString()] = true;
+            }
+        }
+
+        $blocked = $this->product->blockedDates()
+            ->where('end_date', '>=', $today->toDateString())
+            ->get(['start_date', 'end_date']);
+
+        foreach ($blocked as $range) {
+            foreach (CarbonPeriod::create($range->start_date, $range->end_date) as $day) {
+                $dates[$day->toDateString()] = true;
+            }
+        }
+
+        return array_values(array_filter(
+            array_keys($dates),
+            fn (string $date) => $date <= $horizon->toDateString(),
+        ));
+    }
+
     public function render(): View
     {
         return view('livewire.booking.booking-widget', [
             'quote' => $this->quote(),
             'addons' => $this->product->addons()->where('is_active', true)->get(),
+            'unavailableDates' => $this->unavailableDates(),
         ]);
     }
 }

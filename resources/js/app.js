@@ -1,5 +1,6 @@
 import './bootstrap';
 import 'preline';
+import {Calendar} from 'vanilla-calendar-pro';
 import {Fancybox} from '@fancyapps/ui';
 import '@fancyapps/ui/dist/fancybox/fancybox.css';
 import '@fancyapps/ui/dist/carousel/carousel.css';
@@ -108,4 +109,39 @@ window.addEventListener('hashchange', handleHashNavigation);
 
 window.addEventListener('load', () => {
     setTimeout(handleHashNavigation, 200);
+});
+
+// Booking date-range picker (vanilla-calendar-pro, the engine behind Preline's datepicker).
+// Lives inside a wire:ignore container; selected dates are pushed into Livewire via $wire.
+document.addEventListener('alpine:init', () => {
+    window.Alpine.data('bookingCalendar', (config = {}) => ({
+        calendar: null,
+        init() {
+            this.calendar = new Calendar(this.$refs.input, {
+                inputMode: true,
+                type: 'multiple',
+                selectedTheme: 'light',
+                displayMonthsCount: window.matchMedia('(min-width: 1024px)').matches ? 2 : 1,
+                monthsToSwitch: 1,
+                selectionDatesMode: 'multiple-ranged',
+                firstWeekday: 1,
+                positionToInput: 'center',
+                displayDateMin: config.minDate,
+                disableDatesPast: true,
+                disableDatesGaps: true,
+                disableDates: config.disabled ?? [],
+                selectedDates: config.selected ?? [],
+                onClickDate: (self) => {
+                    const dates = [...(self.context.selectedDates ?? [])].sort();
+                    const checkIn = dates[0] ?? null;
+                    const checkOut = dates.length > 1 ? dates[dates.length - 1] : null;
+                    this.$wire.selectDates(checkIn, checkOut);
+                },
+            });
+            this.calendar.init();
+        },
+        destroy() {
+            this.calendar?.destroy?.();
+        },
+    }));
 });

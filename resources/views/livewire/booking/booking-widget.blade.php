@@ -3,17 +3,20 @@
         <div class="mb-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">{{ $bookingError }}</div>
     @endif
 
-    <div class="grid grid-cols-2 gap-3">
-        <label class="text-sm font-medium text-neutral-700">
-            {{ __('Reģistrēšanās') }}
-            <input type="date" wire:model.live="checkIn" class="mt-1 w-full rounded-lg border-neutral-300" />
-            @error('checkIn') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
-        </label>
-        <label class="text-sm font-medium text-neutral-700">
-            {{ __('Izrakstīšanās') }}
-            <input type="date" wire:model.live="checkOut" class="mt-1 w-full rounded-lg border-neutral-300" />
-            @error('checkOut') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
-        </label>
+    <div>
+        <span class="text-sm font-medium text-neutral-700">{{ __('Reģistrēšanās') }} – {{ __('Izrakstīšanās') }}</span>
+        <div wire:ignore
+            x-data="bookingCalendar({
+                minDate: @js(now()->toDateString()),
+                disabled: @js($unavailableDates),
+                selected: @js(array_values(array_filter([$checkIn, $checkOut]))),
+            })">
+            <input x-ref="input" type="text" readonly
+                placeholder="{{ __('Izvēlies datumus') }}"
+                class="mt-1 w-full cursor-pointer rounded-lg border-neutral-300 focus:border-ss-dark focus:ring-ss-dark" />
+        </div>
+        @error('checkIn') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
+        @error('checkOut') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
     </div>
 
     <div class="mt-3 grid grid-cols-2 gap-3">

@@ -1,10 +1,12 @@
 <?php
 
-use App\Models\Addon;
+use App\Enums\BookingStatus;
+use App\Livewire\Booking\BookingWidget;
 use App\Models\Booking;
 use App\Models\Product;
 use App\Services\StripeService;
 use Livewire\Livewire;
+use Stripe\Checkout\Session;
 
 beforeEach(function () {
     $this->product = Product::factory()->create([
@@ -13,7 +15,7 @@ beforeEach(function () {
 });
 
 it('renders and computes a live quote for chosen dates', function () {
-    Livewire::test(\App\Livewire\Booking\BookingWidget::class, ['product' => $this->product])
+    Livewire::test(BookingWidget::class, ['product' => $this->product])
         ->set('checkIn', '2026-09-01')
         ->set('checkOut', '2026-09-04')
         ->set('adults', 2)
@@ -21,14 +23,41 @@ it('renders and computes a live quote for chosen dates', function () {
         ->assertSee('330'); // formatted euros somewhere in the summary
 });
 
+it('syncs the calendar date range via selectDates', function () {
+    Livewire::test(BookingWidget::class, ['product' => $this->product])
+        ->call('selectDates', '2026-09-01', '2026-09-04')
+        ->assertSet('checkIn', '2026-09-01')
+        ->assertSet('checkOut', '2026-09-04')
+        ->assertSet('quoteTotal', 33000);
+});
+
+it('exposes occupied nights as unavailable dates for the calendar', function () {
+    $checkIn = now()->addMonth()->startOfMonth();          // within the 18-month horizon
+    $checkOut = $checkIn->copy()->addDays(3);
+
+    Booking::factory()->for($this->product)->create([
+        'status' => BookingStatus::Confirmed,
+        'check_in' => $checkIn->toDateString(),
+        'check_out' => $checkOut->toDateString(),
+    ]);
+
+    Livewire::test(BookingWidget::class, ['product' => $this->product])
+        ->assertViewHas('unavailableDates', function (array $dates) use ($checkIn, $checkOut) {
+            // Occupied nights are check_in..check_out-1; the checkout day stays bookable (back-to-back).
+            return in_array($checkIn->toDateString(), $dates, true)
+                && in_array($checkIn->copy()->addDays(2)->toDateString(), $dates, true)
+                && ! in_array($checkOut->toDateString(), $dates, true);
+        });
+});
+
 it('creates a pending booking and redirects to Stripe on reserve', function () {
-    $fakeSession = \Stripe\Checkout\Session::constructFrom(['id' => 'cs_test_123', 'url' => 'https://checkout.stripe.test/cs_test_123']);
+    $fakeSession = Session::constructFrom(['id' => 'cs_test_123', 'url' => 'https://checkout.stripe.test/cs_test_123']);
 
     $this->mock(StripeService::class, function ($mock) use ($fakeSession) {
         $mock->shouldReceive('createCheckoutSession')->once()->andReturn($fakeSession);
     });
 
-    Livewire::test(\App\Livewire\Booking\BookingWidget::class, ['product' => $this->product])
+    Livewire::test(BookingWidget::class, ['product' => $this->product])
         ->set('checkIn', '2026-09-01')
         ->set('checkOut', '2026-09-04')
         ->set('adults', 2)
@@ -39,15 +68,15 @@ it('creates a pending booking and redirects to Stripe on reserve', function () {
         ->call('reserve')
         ->assertRedirect('https://checkout.stripe.test/cs_test_123');
 
-    expect(Booking::where('product_id', $this->product->id)->where('status', \App\Enums\BookingStatus::Pending)->count())->toBe(1);
+    expect(Booking::where('product_id', $this->product->id)->where('status', BookingStatus::Pending)->count())->toBe(1);
 });
 
 it('shows an error and does not redirect when dates are unavailable', function () {
     Booking::factory()->for($this->product)->create([
-        'status' => \App\Enums\BookingStatus::Confirmed, 'check_in' => '2026-09-01', 'check_out' => '2026-09-10',
+        'status' => BookingStatus::Confirmed, 'check_in' => '2026-09-01', 'check_out' => '2026-09-10',
     ]);
 
-    Livewire::test(\App\Livewire\Booking\BookingWidget::class, ['product' => $this->product])
+    Livewire::test(BookingWidget::class, ['product' => $this->product])
         ->set('checkIn', '2026-09-02')
         ->set('checkOut', '2026-09-04')
         ->set('adults', 2)
@@ -57,5 +86,5 @@ it('shows an error and does not redirect when dates are unavailable', function (
         ->call('reserve')
         ->assertNoRedirect();
 
-    expect(Booking::where('status', \App\Enums\BookingStatus::Pending)->count())->toBe(0);
+    expect(Booking::where('status', BookingStatus::Pending)->count())->toBe(0);
 });
