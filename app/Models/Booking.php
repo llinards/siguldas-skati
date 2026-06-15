@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
 
 class Booking extends Model
 {
@@ -40,5 +41,14 @@ class Booking extends Model
         return $this->belongsToMany(Addon::class, 'booking_addon')
             ->withPivot(['name', 'price', 'pricing_type', 'quantity'])
             ->withTimestamps();
+    }
+
+    public static function generateReference(): string
+    {
+        do {
+            $reference = 'SS-'.Str::upper(Str::random(5));
+        } while (static::where('reference', $reference)->exists());
+
+        return $reference;
     }
 }
