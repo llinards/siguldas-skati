@@ -22,9 +22,8 @@
         <div class="product-pricelist">
             {!! $product->pricelist !!}
         </div>
-        <div class="flex xl:justify-end">
-            <x-btn-primary target="_blank"
-                           href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html">@lang('Rezervēt')</x-btn-primary>
+        <div class="mt-4">
+            @livewire('booking.booking-widget', ['product' => $product])
         </div>
     </div>
 

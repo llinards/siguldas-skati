@@ -16,8 +16,7 @@
 
             <x-product.gallery.mobile :product="$product"/>
             <div class="mt-6 mb-6 sm:hidden">
-                <x-btn-primary target="_blank"
-                               href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html">@lang('Rezervēt')</x-btn-primary>
+                @livewire('booking.booking-widget', ['product' => $product])
             </div>
 
             <x-product.gallery.desktop :product="$product"/>
