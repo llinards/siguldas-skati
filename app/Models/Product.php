@@ -27,6 +27,11 @@ class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
 
+    public function prices(): HasMany
+    {
+        return $this->hasMany(ProductPrice::class);
+    }
+
     public function features(): BelongsToMany
     {
         return $this->belongsToMany(Feature::class);
