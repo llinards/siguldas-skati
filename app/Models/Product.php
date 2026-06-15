@@ -37,6 +37,12 @@ class Product extends Model
         return $this->belongsToMany(Rule::class);
     }
 
+    protected $attributes = [
+        'base_price' => 0,
+        'cleaning_fee' => 0,
+        'min_nights' => 1,
+    ];
+
     protected $casts = [
         'title' => 'array',
         'slug' => 'array',
@@ -47,6 +53,9 @@ class Product extends Model
         'order' => 'integer',
         'is_active' => 'boolean',
         'show_all_features' => 'boolean',
+        'base_price' => 'integer',
+        'cleaning_fee' => 'integer',
+        'min_nights' => 'integer',
     ];
 
     public function resolveRouteBinding($value, $field = null)
