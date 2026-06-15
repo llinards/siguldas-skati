@@ -42,6 +42,11 @@ class Product extends Model
         return $this->hasMany(BlockedDate::class);
     }
 
+    public function bookings(): HasMany
+    {
+        return $this->hasMany(Booking::class);
+    }
+
     public function features(): BelongsToMany
     {
         return $this->belongsToMany(Feature::class);
