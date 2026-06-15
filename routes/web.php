@@ -128,6 +128,9 @@ Route::group(
 
         require __DIR__.'/auth.php';
 
+        Route::get('/booking/{booking:reference}/success', [\App\Http\Controllers\BookingController::class, 'success'])->name('booking.success');
+        Route::get('/booking/{booking:reference}/cancel', [\App\Http\Controllers\BookingController::class, 'cancel'])->name('booking.cancel');
+
         Route::get('/{product}', [ProductController::class, 'show'])->name('product');
     }
 );
