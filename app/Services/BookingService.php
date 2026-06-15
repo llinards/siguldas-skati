@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\BookingStatus;
 use App\Events\BookingConfirmed;
 use App\Exceptions\BookingException;
+use App\Models\Addon;
 use App\Models\Booking;
 use App\Models\Product;
 use Carbon\CarbonInterface;
@@ -16,7 +17,7 @@ class BookingService
     /**
      * Minutes a pending hold is kept before it is released.
      */
-    public const HOLD_MINUTES = 20;
+    public const HOLD_MINUTES = 30;
 
     public function __construct(
         private readonly AvailabilityService $availability,
@@ -26,7 +27,7 @@ class BookingService
     /**
      * Create a pending booking that holds the dates while the guest pays.
      *
-     * @param  array<int, array{addon: \App\Models\Addon, quantity: int}>  $addonSelections
+     * @param  array<int, array{addon: Addon, quantity: int}>  $addonSelections
      * @param  array{name: string, email: string, phone: string}  $guest
      */
     public function createPendingBooking(

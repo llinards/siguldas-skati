@@ -20,9 +20,23 @@ class StripeWebhookController extends Controller
 
         if ($event->type === 'checkout.session.completed') {
             $session = $event->data->object;
+
+            $bookingId = $session->metadata->booking_id ?? null;
+            $sessionId = $session->id ?? null;
+
+            if ($bookingId === null && $sessionId === null) {
+                return response('OK', 200);
+            }
+
             $booking = Booking::query()
-                ->when($session->id ?? null, fn ($q) => $q->orWhere('stripe_session_id', $session->id))
-                ->orWhere('id', $session->metadata->booking_id ?? null)
+                ->where(function ($query) use ($bookingId, $sessionId) {
+                    if ($bookingId !== null) {
+                        $query->where('id', $bookingId);
+                    }
+                    if ($sessionId !== null) {
+                        $query->orWhere('stripe_session_id', $sessionId);
+                    }
+                })
                 ->first();
 
             if ($booking) {

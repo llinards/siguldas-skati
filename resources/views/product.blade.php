@@ -16,7 +16,7 @@
 
             <x-product.gallery.mobile :product="$product"/>
             <div class="mt-6 mb-6 sm:hidden">
-                @livewire('booking.booking-widget', ['product' => $product])
+                @livewire('booking.booking-widget', ['product' => $product], key('booking-mobile'))
             </div>
 
             <x-product.gallery.desktop :product="$product"/>

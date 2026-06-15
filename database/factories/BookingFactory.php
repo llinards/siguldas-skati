@@ -3,12 +3,13 @@
 namespace Database\Factories;
 
 use App\Enums\BookingStatus;
+use App\Models\Booking;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Booking>
+ * @extends Factory<Booking>
  */
 class BookingFactory extends Factory
 {
@@ -41,7 +42,7 @@ class BookingFactory extends Factory
     {
         return $this->state(fn () => [
             'status' => BookingStatus::Pending,
-            'expires_at' => now()->addMinutes(20),
+            'expires_at' => now()->addMinutes(30),
         ]);
     }
 

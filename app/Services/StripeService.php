@@ -51,6 +51,10 @@ class StripeService
 
     public function createCheckoutSession(Booking $booking, string $successUrl, string $cancelUrl): Session
     {
+        if ($this->client === null) {
+            throw new \RuntimeException('Stripe is not configured (missing STRIPE_SECRET).');
+        }
+
         return $this->client->checkout->sessions->create([
             'mode' => 'payment',
             'line_items' => $this->buildLineItems($booking),
@@ -59,7 +63,7 @@ class StripeService
             'metadata' => ['booking_id' => (string) $booking->id],
             'success_url' => $successUrl,
             'cancel_url' => $cancelUrl,
-            'expires_at' => now()->addMinutes(30)->getTimestamp(),
+            'expires_at' => $booking->expires_at->copy()->addMinute()->getTimestamp(),
         ], [
             'idempotency_key' => 'checkout_'.$booking->reference,
         ]);

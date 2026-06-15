@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Booking;
+use Illuminate\Support\Str;
 
 it('generates a unique SS-prefixed reference', function () {
     $ref = Booking::generateReference();
@@ -10,11 +11,17 @@ it('generates a unique SS-prefixed reference', function () {
 });
 
 it('does not collide with an existing reference', function () {
-    $existing = Booking::factory()->create(['reference' => 'SS-AAAAA']);
+    Booking::factory()->create(['reference' => 'SS-AAAAA']);
 
-    // Force the first random draw to equal the existing one, then succeed on retry.
-    $ref = Booking::generateReference();
+    $sequence = ['AAAAA', 'BBBBB'];
+    Str::createRandomStringsUsing(function () use (&$sequence) {
+        return array_shift($sequence);
+    });
 
-    expect($ref)->not->toBe($existing->reference)
-        ->and(Booking::where('reference', $ref)->exists())->toBeFalse();
+    try {
+        $ref = Booking::generateReference();
+        expect($ref)->toBe('SS-BBBBB');
+    } finally {
+        Str::createRandomStringsNormally();
+    }
 });

@@ -23,7 +23,7 @@
             {!! $product->pricelist !!}
         </div>
         <div class="mt-4">
-            @livewire('booking.booking-widget', ['product' => $product])
+            @livewire('booking.booking-widget', ['product' => $product], key('booking-desktop'))
         </div>
     </div>
 
