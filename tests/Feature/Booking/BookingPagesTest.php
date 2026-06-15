@@ -18,7 +18,7 @@ it('shows a processing state when the booking is still pending', function () {
 
     $this->get('/lv/booking/'.$booking->reference.'/success')
         ->assertOk()
-        ->assertSee(__('We are confirming your payment'));
+        ->assertSee('Apstiprinām jūsu maksājumu');
 });
 
 it('renders the cancel page', function () {

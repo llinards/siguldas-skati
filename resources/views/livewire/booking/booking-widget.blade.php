@@ -5,12 +5,12 @@
 
     <div class="grid grid-cols-2 gap-3">
         <label class="text-sm font-medium text-neutral-700">
-            {{ __('Check-in') }}
+            {{ __('Reģistrēšanās') }}
             <input type="date" wire:model.live="checkIn" class="mt-1 w-full rounded-lg border-neutral-300" />
             @error('checkIn') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
         </label>
         <label class="text-sm font-medium text-neutral-700">
-            {{ __('Check-out') }}
+            {{ __('Izrakstīšanās') }}
             <input type="date" wire:model.live="checkOut" class="mt-1 w-full rounded-lg border-neutral-300" />
             @error('checkOut') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
         </label>
@@ -18,11 +18,11 @@
 
     <div class="mt-3 grid grid-cols-2 gap-3">
         <label class="text-sm font-medium text-neutral-700">
-            {{ __('Adults') }}
+            {{ __('Pieaugušie') }}
             <input type="number" min="1" wire:model.live="adults" class="mt-1 w-full rounded-lg border-neutral-300" />
         </label>
         <label class="text-sm font-medium text-neutral-700">
-            {{ __('Children') }}
+            {{ __('Bērni') }}
             <input type="number" min="0" wire:model.live="children" class="mt-1 w-full rounded-lg border-neutral-300" />
         </label>
     </div>
@@ -49,10 +49,10 @@
                 <div class="flex justify-between"><span>{{ __('Uzkopšana') }}</span><span>€{{ number_format($quote->cleaningFee / 100, 2) }}</span></div>
             @endif
             @if ($quote->addonsTotal > 0)
-                <div class="flex justify-between"><span>{{ __('Papildservisi') }}</span><span>€{{ number_format($quote->addonsTotal / 100, 2) }}</span></div>
+                <div class="flex justify-between"><span>{{ __('Papildpakalpojumi') }}</span><span>€{{ number_format($quote->addonsTotal / 100, 2) }}</span></div>
             @endif
             <div class="flex justify-between border-t border-neutral-200 pt-2 font-semibold">
-                <span>{{ __('Total') }}</span><span>€{{ number_format($quote->grandTotal / 100, 2) }}</span>
+                <span>{{ __('Kopā') }}</span><span>€{{ number_format($quote->grandTotal / 100, 2) }}</span>
             </div>
         </div>
     @endif

@@ -5,7 +5,7 @@
             <p class="mt-4 text-neutral-600">{{ __('Rezervācijas numurs') }}: <strong>{{ $booking->reference }}</strong></p>
             <p class="mt-2 text-neutral-600">{{ $booking->check_in->toDateString() }} – {{ $booking->check_out->toDateString() }}</p>
         @else
-            <h1 class="text-2xl font-semibold text-[#2f3a1f]">{{ __('We are confirming your payment') }}</h1>
+            <h1 class="text-2xl font-semibold text-[#2f3a1f]">{{ __('Apstiprinām jūsu maksājumu') }}</h1>
             <p class="mt-4 text-neutral-600">{{ __('Rezervācijas numurs') }}: <strong>{{ $booking->reference }}</strong></p>
         @endif
     </div>
