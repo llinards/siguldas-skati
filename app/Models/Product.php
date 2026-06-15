@@ -32,6 +32,11 @@ class Product extends Model
         return $this->hasMany(ProductPrice::class);
     }
 
+    public function addons(): HasMany
+    {
+        return $this->hasMany(Addon::class);
+    }
+
     public function features(): BelongsToMany
     {
         return $this->belongsToMany(Feature::class);
