@@ -104,6 +104,14 @@
                                 </svg>
                             </a>
 
+                            <a href="{{ route('product.addons', $product) }}"
+                                class="text-bg-ss-600 inline-flex items-center rounded-md p-2 transition-colors duration-200 hover:bg-gray-50 hover:text-gray-900">
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 7h.01M7 3h5a2 2 0 0 1 1.41.59l7 7a2 2 0 0 1 0 2.82l-5.18 5.18a2 2 0 0 1-2.82 0l-7-7A2 2 0 0 1 3 9V4a1 1 0 0 1 1-1z" />
+                                </svg>
+                            </a>
+
                             <!-- Delete Button -->
                             <button wire:click="deleteProduct({{ $product->id }})"
                                 wire:confirm="{{ __('Vai esat pārliecināts, ka vēlaties dzēst šo produktu?') }}"

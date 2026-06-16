@@ -292,5 +292,20 @@
     "Datums": "Date",
     "Cena": "Price",
     "Nav cenu korekciju.": "No price overrides.",
-    "Dzēst": "Delete"
+    "Dzēst": "Delete",
+    "Papildinājumi": "Add-ons",
+    "Pievienot papildinājumu": "Add an add-on",
+    "Rediģēt papildinājumu": "Edit add-on",
+    "Nosaukums (LV)": "Name (LV)",
+    "Nosaukums (EN)": "Name (EN)",
+    "Apraksts (LV)": "Description (LV)",
+    "Apraksts (EN)": "Description (EN)",
+    "Aktīvs": "Active",
+    "Neaktīvs": "Inactive",
+    "Rediģēt": "Edit",
+    "Papildinājums saglabāts.": "Add-on saved.",
+    "Papildinājums dzēsts.": "Add-on deleted.",
+    "Dzēst šo papildinājumu?": "Delete this add-on?",
+    "Nav papildinājumu.": "No add-ons.",
+    "Atcelt": "Cancel"
 }
