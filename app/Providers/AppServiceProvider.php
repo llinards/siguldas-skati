@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\BookingCancelled;
 use App\Events\BookingConfirmed;
+use App\Listeners\SendBookingCancellationNotifications;
 use App\Listeners\SendBookingConfirmationNotifications;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
@@ -35,5 +37,6 @@ class AppServiceProvider extends ServiceProvider
         RouteServiceProvider::loadCachedRoutesUsing(fn () => $this->loadCachedRoutes());
         Translatable::fallback(config('app.fallback_locale'));
         Event::listen(BookingConfirmed::class, SendBookingConfirmationNotifications::class);
+        Event::listen(BookingCancelled::class, SendBookingCancellationNotifications::class);
     }
 }
