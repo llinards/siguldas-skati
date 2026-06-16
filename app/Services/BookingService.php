@@ -131,6 +131,27 @@ class BookingService
         BookingCancelled::dispatch($booking->fresh(), true);
     }
 
+    /**
+     * Record a refund that already happened on Stripe's side (e.g. a dashboard
+     * refund surfaced via the charge.refunded webhook). Idempotent.
+     */
+    public function reconcileRefund(Booking $booking, int $amountRefunded, ?string $refundId = null): void
+    {
+        if ($booking->status === BookingStatus::Cancelled) {
+            return;
+        }
+
+        $booking->update([
+            'status' => BookingStatus::Cancelled,
+            'cancelled_at' => now(),
+            'refunded_at' => now(),
+            'refund_amount' => $amountRefunded,
+            'stripe_refund_id' => $refundId,
+        ]);
+
+        BookingCancelled::dispatch($booking->fresh(), true);
+    }
+
     private function assertGuestCount(Product $product, int $adults, int $children): void
     {
         // person_count = max adults, children_count = max children (independent caps).
