@@ -10,7 +10,7 @@
         <p class="mb-6 text-justify lg:max-w-11/12">
             {{ $product->description }}
         </p>
-        <x-product.description.facilities :product="$product"/>
+        <x-product.description.facilities :product="$product" />
     </div>
     <div class="2xl:col-span-2">
         <div class="relative mb-3 inline-block">
@@ -24,14 +24,16 @@
         </div>
     </div>
 
-    <div class="col-span-5 mb-6">
-        <div class="relative mb-3 inline-block">
-            <h2 class="text-h-sm-mob lg:text-h-mob mt-6 mb-3 leading-none xl:mt-0 border-b-2">
-                @lang('Rezervācija')
-            </h2>
+    @if ($product->base_price > 0)
+        <div class="col-span-5 my-6">
+            <div class="relative mb-3 inline-block">
+                <h2 class="text-h-sm-mob lg:text-h-mob mt-6 mb-3 leading-none xl:mt-0 border-b-2">
+                    @lang('Rezervācija')
+                </h2>
+            </div>
+            @livewire('booking.booking-widget', ['product' => $product], key('booking-desktop'))
         </div>
-        @livewire('booking.booking-widget', ['product' => $product], key('booking-desktop'))
-    </div>
+    @endif
 
     <div class="col-span-5 hidden sm:block xl:border-b-2">
         <div class="relative mb-3 inline-block">
@@ -39,7 +41,7 @@
                 @lang('Lietas, ko ņemt vērā')
             </h2>
         </div>
-        <x-product.description.good-to-know :product="$product"/>
+        <x-product.description.good-to-know :product="$product" />
     </div>
 </div>
 
@@ -47,60 +49,62 @@
 <div class="hs-accordion-group space-y-6 pb-6 sm:hidden" data-hs-accordion-always-open="">
     <div class="hs-accordion active" id="hs-basic-with-arrow-heading-one">
         <button class="hs-accordion-toggle relative mb-3 flex w-full items-center justify-between border-b-2 pt-3"
-                aria-expanded="true" aria-controls="hs-basic-with-arrow-collapse-one">
+            aria-expanded="true" aria-controls="hs-basic-with-arrow-collapse-one">
             <h2 class="text-h-sm-mob lg:text-h-mob text-left leading-none">
                 {{-- prettier-ignore --}}
                 @lang('Ērtības un aprīkojums')
             </h2>
-            <x-accordion-arrows/>
+            <x-accordion-arrows />
         </button>
         <div id="hs-basic-with-arrow-collapse-one"
-             class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300" role="region"
-             aria-labelledby="hs-basic-with-arrow-heading-one">
+            class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300" role="region"
+            aria-labelledby="hs-basic-with-arrow-heading-one">
             <p class="mb-6 text-justify lg:max-w-11/12">
                 {{ $product->description }}
             </p>
-            <x-product.description.facilities :product="$product"/>
+            <x-product.description.facilities :product="$product" />
         </div>
     </div>
 
     <div class="hs-accordion" id="hs-basic-with-arrow-heading-two">
         <button class="hs-accordion-toggle relative mb-3 flex w-full items-center justify-between border-b-2 pt-3"
-                aria-expanded="false" aria-controls="hs-basic-with-arrow-collapse-two">
+            aria-expanded="false" aria-controls="hs-basic-with-arrow-collapse-two">
             <h2 class="text-h-sm-mob lg:text-h-mob text-left leading-none">
                 {{-- prettier-ignore --}}
                 @lang('Cenas un papildu informācija')
             </h2>
-            <x-accordion-arrows/>
+            <x-accordion-arrows />
         </button>
         <div id="hs-basic-with-arrow-collapse-two"
-             class="hs-accordion-content product-pricelist hidden w-full overflow-hidden transition-[height] duration-300"
-             role="region" aria-labelledby="hs-basic-with-arrow-heading-two">
+            class="hs-accordion-content product-pricelist hidden w-full overflow-hidden transition-[height] duration-300"
+            role="region" aria-labelledby="hs-basic-with-arrow-heading-two">
             {!! $product->pricelist !!}
         </div>
     </div>
 
-    <div>
-        <div class="relative mb-3 border-b-2 pt-3">
-            <h2 class="text-h-sm-mob lg:text-h-mob text-left leading-none">
-                @lang('Rezervācija')
-            </h2>
+    @if ($product->base_price > 0)
+        <div>
+            <div class="relative mb-3 border-b-2 pt-3">
+                <h2 class="text-h-sm-mob lg:text-h-mob text-left leading-none">
+                    @lang('Rezervācija')
+                </h2>
+            </div>
+            @livewire('booking.booking-widget', ['product' => $product], key('booking-mobile'))
         </div>
-        @livewire('booking.booking-widget', ['product' => $product], key('booking-mobile'))
-    </div>
+    @endif
 
     <div class="hs-accordion" id="hs-basic-with-arrow-heading-three">
         <button class="hs-accordion-toggle relative mb-3 flex w-full items-center justify-between border-b-2 pt-3"
-                aria-expanded="false" aria-controls="hs-basic-with-arrow-collapse-three">
+            aria-expanded="false" aria-controls="hs-basic-with-arrow-collapse-three">
             <h2 class="text-h-sm-mob lg:text-h-mob text-left leading-none">
                 @lang('Lietas, ko ņemt vērā')
             </h2>
-            <x-accordion-arrows/>
+            <x-accordion-arrows />
         </button>
         <div id="hs-basic-with-arrow-collapse-three"
-             class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region"
-             aria-labelledby="hs-basic-with-arrow-heading-three">
-            <x-product.description.good-to-know :product="$product"/>
+            class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" role="region"
+            aria-labelledby="hs-basic-with-arrow-heading-three">
+            <x-product.description.good-to-know :product="$product" />
         </div>
     </div>
 </div>
