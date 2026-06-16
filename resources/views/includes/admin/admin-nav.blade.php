@@ -34,6 +34,10 @@
                     href="{{ route('dashboard') }}">
                     Sākums
                 </a>
+                <a class="hover:border-b-menu-hover hover:text-menu-hover text-btn-md {{ Route::is('dashboard.bookings*') || Route::is('dashboard.booking.*') ? 'border-b-menu-hover text-menu-hover' : '' }} border-b-1 border-transparent text-center transition-all duration-200 ease-in-out"
+                    href="{{ route('dashboard.bookings') }}">
+                    {{ __('Rezervācijas') }}
+                </a>
                 <a class="hover:border-b-menu-hover hover:text-menu-hover text-btn-md {{ Route::is('dashboard.site-settings*') ? 'border-b-menu-hover text-menu-hover' : '' }} border-b-1 border-transparent text-center transition-all duration-200 ease-in-out"
                     href="{{ route('dashboard.site-settings') }}">
                     {{ __('Lapas iestatījumi') }}

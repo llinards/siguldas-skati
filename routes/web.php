@@ -9,6 +9,8 @@ use App\Http\Controllers\StripeWebhookController;
 use App\Livewire\Admin\Activity\ActivityList;
 use App\Livewire\Admin\Activity\AddActivity;
 use App\Livewire\Admin\Activity\EditActivity;
+use App\Livewire\Admin\Booking\BookingDetail;
+use App\Livewire\Admin\Booking\BookingList;
 use App\Livewire\Admin\Experience\AddExperience;
 use App\Livewire\Admin\Experience\EditExperience;
 use App\Livewire\Admin\Experience\ExperienceList;
@@ -87,6 +89,9 @@ Route::group(
                 Route::get('/', function () {
                     return view('admin.dashboard');
                 })->name('dashboard');
+
+                Route::livewire('/bookings', BookingList::class)->name('dashboard.bookings');
+                Route::livewire('/booking/{booking:id}', BookingDetail::class)->name('dashboard.booking.detail');
 
                 Route::livewire('/products', ProductList::class)->name('dashboard.products');
                 Route::livewire('/product/add', AddProduct::class)->name('product.add');
