@@ -51,14 +51,20 @@ class BookingWidget extends Component
     public function mount(Product $product): void
     {
         $this->product = $product;
-        $this->adults = max(1, min($this->adults, $product->person_count));
-        $this->children = max(0, min($this->children, $product->children_count));
+        $this->adults = max(1, min($this->adults, $product->person_count, $product->max_guests));
+        $this->children = max(0, min($this->children, $product->children_count, $product->max_guests - $this->adults));
     }
 
     public function incrementAdults(): void
     {
         if ($this->adults >= $this->product->person_count) {
             $this->guestError = __('Šī māja paredzēta līdz :count pieaugušajiem.', ['count' => $this->product->person_count]);
+
+            return;
+        }
+
+        if ($this->adults + $this->children >= $this->product->max_guests) {
+            $this->guestError = __('Šī māja paredzēta līdz :count viesiem kopā.', ['count' => $this->product->max_guests]);
 
             return;
         }
@@ -77,6 +83,12 @@ class BookingWidget extends Component
     {
         if ($this->children >= $this->product->children_count) {
             $this->guestError = __('Šī māja paredzēta līdz :count bērniem.', ['count' => $this->product->children_count]);
+
+            return;
+        }
+
+        if ($this->adults + $this->children >= $this->product->max_guests) {
+            $this->guestError = __('Šī māja paredzēta līdz :count viesiem kopā.', ['count' => $this->product->max_guests]);
 
             return;
         }

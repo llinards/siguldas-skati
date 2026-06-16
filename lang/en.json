@@ -241,5 +241,6 @@
     "Maks.": "Max.",
     "Šī māja paredzēta līdz :count pieaugušajiem.": "This house accommodates up to :count adults.",
     "Šī māja paredzēta līdz :count bērniem.": "This house accommodates up to :count children.",
-    "Šī māja paredzēta līdz :adults pieaugušajiem un :children bērniem.": "This house accommodates up to :adults adults and :children children."
+    "Šī māja paredzēta līdz :count viesiem kopā.": "This house accommodates up to :count guests in total.",
+    "Kopā līdz :count viesiem.": "Up to :count guests in total."
 }

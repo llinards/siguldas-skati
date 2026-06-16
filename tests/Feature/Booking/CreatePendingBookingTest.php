@@ -88,14 +88,30 @@ it('rejects more children than the house allows', function () {
     );
 })->throws(BookingException::class);
 
-it('allows guests within both the adult and child caps', function () {
+it('rejects when the combined total exceeds max_guests', function () {
+    // total 4, but 4 adults + 1 child = 5
     $product = Product::factory()->create([
-        'base_price' => 10000, 'min_nights' => 1, 'person_count' => 4, 'children_count' => 2,
+        'base_price' => 10000, 'min_nights' => 1, 'person_count' => 4, 'children_count' => 2, 'max_guests' => 4,
     ]);
 
-    $booking = $this->service->createPendingBooking(
-        $product, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 4, 2, [], $this->guest,
+    $this->service->createPendingBooking(
+        $product, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 4, 1, [], $this->guest,
+    );
+})->throws(BookingException::class);
+
+it('allows any adult/child mix within the shared total budget', function () {
+    // total 4: 4 adults + 0, or 2 adults + 2 children both fit
+    $product = Product::factory()->create([
+        'base_price' => 10000, 'min_nights' => 1, 'person_count' => 4, 'children_count' => 2, 'max_guests' => 4,
+    ]);
+
+    $allAdults = $this->service->createPendingBooking(
+        $product, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 4, 0, [], $this->guest,
+    );
+    $mixed = $this->service->createPendingBooking(
+        $product, Carbon::parse('2026-09-01'), Carbon::parse('2026-09-04'), 2, 2, [], $this->guest,
     );
 
-    expect($booking->adults)->toBe(4)->and($booking->children)->toBe(2);
+    expect($allAdults->adults)->toBe(4)
+        ->and($mixed->adults)->toBe(2)->and($mixed->children)->toBe(2);
 });

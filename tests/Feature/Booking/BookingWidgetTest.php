@@ -76,6 +76,21 @@ it('caps children at the house limit', function () {
         ->assertNotSet('guestError', null);
 });
 
+it('caps the combined guests at the house total', function () {
+    // total 3, generous individual caps
+    $product = Product::factory()->create(['base_price' => 10000, 'person_count' => 4, 'children_count' => 4, 'max_guests' => 3]);
+
+    Livewire::test(BookingWidget::class, ['product' => $product])
+        ->assertSet('adults', 2) // clamped to total/cap
+        ->call('incrementChildren')
+        ->assertSet('children', 1) // total now 3 = max
+        ->call('incrementChildren')
+        ->assertSet('children', 1) // blocked by total
+        ->assertNotSet('guestError', null)
+        ->call('incrementAdults')
+        ->assertSet('adults', 2); // also blocked by total
+});
+
 it('creates a pending booking and redirects to Stripe on reserve', function () {
     $fakeSession = Session::constructFrom(['id' => 'cs_test_123', 'url' => 'https://checkout.stripe.test/cs_test_123']);
 

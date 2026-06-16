@@ -52,6 +52,7 @@
                 </div>
             @endif
         </div>
+        <p class="mt-1 text-xs text-neutral-500">{{ __('Kopā līdz :count viesiem.', ['count' => $product->max_guests]) }}</p>
         @if ($guestError)
             <p class="mt-1 text-xs text-red-600">{{ $guestError }}</p>
         @endif

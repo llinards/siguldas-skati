@@ -2,13 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
+ * @extends Factory<Product>
  */
 class ProductFactory extends Factory
 {
@@ -72,6 +73,7 @@ class ProductFactory extends Factory
             'is_active' => true,
             'cover' => $copiedImagePath,
             'person_count' => $this->faker->numberBetween(1, 4),
+            'max_guests' => 6,
         ];
     }
 
