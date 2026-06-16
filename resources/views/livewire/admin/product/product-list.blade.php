@@ -112,6 +112,15 @@
                                 </svg>
                             </a>
 
+                            <a href="{{ route('product.blocked-dates', $product) }}"
+                                class="text-bg-ss-600 inline-flex items-center rounded-md p-2 transition-colors duration-200 hover:bg-gray-50 hover:text-gray-900">
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <rect x="3" y="5" width="18" height="16" rx="2" stroke-width="2" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 9h18M8 3v4M16 3v4M9 15l6-4M9 11l6 4" />
+                                </svg>
+                            </a>
+
                             <!-- Delete Button -->
                             <button wire:click="deleteProduct({{ $product->id }})"
                                 wire:confirm="{{ __('Vai esat pārliecināts, ka vēlaties dzēst šo produktu?') }}"

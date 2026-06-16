@@ -307,5 +307,13 @@
     "Papildinājums dzēsts.": "Add-on deleted.",
     "Dzēst šo papildinājumu?": "Delete this add-on?",
     "Nav papildinājumu.": "No add-ons.",
-    "Atcelt": "Cancel"
+    "Atcelt": "Cancel",
+    "Bloķētie datumi": "Blocked dates",
+    "No": "From",
+    "Līdz": "To",
+    "Bloķēt datumus": "Block dates",
+    "Datumi bloķēti.": "Dates blocked.",
+    "Bloķējums noņemts.": "Block removed.",
+    "Noņemt šo bloķējumu?": "Remove this block?",
+    "Nav bloķētu datumu.": "No blocked dates."
 }
