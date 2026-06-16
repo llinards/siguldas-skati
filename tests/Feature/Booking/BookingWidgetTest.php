@@ -50,21 +50,27 @@ it('exposes occupied nights as unavailable dates for the calendar', function () 
         });
 });
 
-it('caps adults at the house limit and reports an error when exceeded', function () {
+it('caps the combined guests at the house total', function () {
+    // total (person_count) = 2, no children sub-limit
     $product = Product::factory()->create(['base_price' => 10000, 'person_count' => 2, 'children_count' => 0]);
 
     Livewire::test(BookingWidget::class, ['product' => $product])
-        ->assertSet('adults', 2) // default clamped to capacity
+        ->assertSet('adults', 2) // clamped to the total
         ->call('incrementAdults')
-        ->assertSet('adults', 2) // not incremented past the cap
+        ->assertSet('adults', 2) // total reached
         ->assertNotSet('guestError', null)
+        ->call('incrementChildren')
+        ->assertSet('children', 0) // total reached, no room for children
         ->call('decrementAdults')
         ->assertSet('adults', 1)
-        ->call('decrementAdults')
-        ->assertSet('adults', 1); // never below 1
+        ->call('incrementChildren')
+        ->assertSet('children', 1) // now there is room (1 adult + 1 child = 2)
+        ->call('decrementChildren')
+        ->assertSet('children', 0);
 });
 
-it('caps children at the house limit', function () {
+it('respects the children sub-limit within the total', function () {
+    // total 4, but at most 1 child
     $product = Product::factory()->create(['base_price' => 10000, 'person_count' => 4, 'children_count' => 1]);
 
     Livewire::test(BookingWidget::class, ['product' => $product])
@@ -72,23 +78,8 @@ it('caps children at the house limit', function () {
         ->call('incrementChildren')
         ->assertSet('children', 1)
         ->call('incrementChildren')
-        ->assertSet('children', 1) // capped
+        ->assertSet('children', 1) // capped by children sub-limit even though total has room
         ->assertNotSet('guestError', null);
-});
-
-it('caps the combined guests at the house total', function () {
-    // total 3, generous individual caps
-    $product = Product::factory()->create(['base_price' => 10000, 'person_count' => 4, 'children_count' => 4, 'max_guests' => 3]);
-
-    Livewire::test(BookingWidget::class, ['product' => $product])
-        ->assertSet('adults', 2) // clamped to total/cap
-        ->call('incrementChildren')
-        ->assertSet('children', 1) // total now 3 = max
-        ->call('incrementChildren')
-        ->assertSet('children', 1) // blocked by total
-        ->assertNotSet('guestError', null)
-        ->call('incrementAdults')
-        ->assertSet('adults', 2); // also blocked by total
 });
 
 it('creates a pending booking and redirects to Stripe on reserve', function () {

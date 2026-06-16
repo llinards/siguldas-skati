@@ -68,7 +68,6 @@ class Product extends Model
         'description' => 'array',
         'person_count' => 'integer',
         'children_count' => 'integer',
-        'max_guests' => 'integer',
         'pricelist' => 'array',
         'order' => 'integer',
         'is_active' => 'boolean',

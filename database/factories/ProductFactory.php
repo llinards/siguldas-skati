@@ -72,8 +72,7 @@ class ProductFactory extends Factory
             'pricelist' => $this->productPricelist,
             'is_active' => true,
             'cover' => $copiedImagePath,
-            'person_count' => $this->faker->numberBetween(1, 4),
-            'max_guests' => 6,
+            'person_count' => $this->faker->numberBetween(2, 4),
         ];
     }
 

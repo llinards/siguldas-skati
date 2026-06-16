@@ -25,7 +25,6 @@
             <div class="flex items-center justify-between py-2">
                 <div>
                     <p class="font-medium text-neutral-800">{{ __('Pieaugušie') }}</p>
-                    <p class="text-xs text-neutral-500">{{ __('Maks.') }} {{ $product->person_count }}</p>
                 </div>
                 <div class="flex items-center gap-3">
                     <button type="button" wire:click="decrementAdults" @disabled($adults <= 1)
@@ -36,23 +35,23 @@
                 </div>
             </div>
 
-            @if ($product->children_count > 0)
-                <div class="flex items-center justify-between border-t border-neutral-100 py-2">
-                    <div>
-                        <p class="font-medium text-neutral-800">{{ __('Bērni') }}</p>
+            <div class="flex items-center justify-between border-t border-neutral-100 py-2">
+                <div>
+                    <p class="font-medium text-neutral-800">{{ __('Bērni') }}</p>
+                    @if ($product->children_count > 0)
                         <p class="text-xs text-neutral-500">{{ __('Maks.') }} {{ $product->children_count }}</p>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <button type="button" wire:click="decrementChildren" @disabled($children <= 0)
-                            class="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-300 text-lg leading-none disabled:opacity-40">−</button>
-                        <span class="w-5 text-center tabular-nums">{{ $children }}</span>
-                        <button type="button" wire:click="incrementChildren"
-                            class="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-300 text-lg leading-none">+</button>
-                    </div>
+                    @endif
                 </div>
-            @endif
+                <div class="flex items-center gap-3">
+                    <button type="button" wire:click="decrementChildren" @disabled($children <= 0)
+                        class="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-300 text-lg leading-none disabled:opacity-40">−</button>
+                    <span class="w-5 text-center tabular-nums">{{ $children }}</span>
+                    <button type="button" wire:click="incrementChildren"
+                        class="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-300 text-lg leading-none">+</button>
+                </div>
+            </div>
         </div>
-        <p class="mt-1 text-xs text-neutral-500">{{ __('Kopā līdz :count viesiem.', ['count' => $product->max_guests]) }}</p>
+        <p class="mt-1 text-xs text-neutral-500">{{ __('Kopā līdz :count viesiem.', ['count' => $product->person_count]) }}</p>
         @if ($guestError)
             <p class="mt-1 text-xs text-red-600">{{ $guestError }}</p>
         @endif

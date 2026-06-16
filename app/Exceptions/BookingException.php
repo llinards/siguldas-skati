@@ -11,11 +11,6 @@ class BookingException extends RuntimeException
         return new self(__('Izvēlētie datumi vairs nav pieejami.'));
     }
 
-    public static function tooManyAdults(int $max): self
-    {
-        return new self(__('Šī māja paredzēta līdz :count pieaugušajiem.', ['count' => $max]));
-    }
-
     public static function tooManyChildren(int $max): self
     {
         return new self(__('Šī māja paredzēta līdz :count bērniem.', ['count' => $max]));
