@@ -13,7 +13,7 @@ class ProductPrice extends Model
     protected $fillable = ['product_id', 'date', 'price'];
 
     protected $casts = [
-        'date' => 'date',
+        'date' => 'date:Y-m-d',
         'price' => 'integer',
     ];
 

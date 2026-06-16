@@ -159,4 +159,29 @@ document.addEventListener('alpine:init', () => {
             this.calendar?.destroy?.();
         },
     }));
+
+    window.Alpine.data('pricingCalendar', (config = {}) => ({
+        calendar: null,
+        init() {
+            this.calendar = new Calendar(this.$refs.calendar, {
+                type: 'multiple',
+                selectedTheme: 'light',
+                displayMonthsCount: window.matchMedia('(min-width: 1024px)').matches ? 2 : 1,
+                monthsToSwitch: 1,
+                selectionDatesMode: 'multiple', // toggle individual dates
+                firstWeekday: 1,
+                displayDateMin: config.minDate,
+                disableDatesPast: true,
+                onClickDate: (self) => {
+                    const dates = [...(self.context.selectedDates ?? [])].sort();
+                    // Defer-sync to Livewire; the value is sent with the next request (the Apply click).
+                    this.$wire.set('selectedDates', dates, false);
+                },
+            });
+            this.calendar.init();
+        },
+        destroy() {
+            this.calendar?.destroy?.();
+        },
+    }));
 });

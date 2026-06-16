@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Product;
 
+use App\Models\ProductPrice;
 use App\Services\FlashMessageService;
 use App\Services\ProductServices;
 use Illuminate\View\View;
@@ -14,6 +15,11 @@ class ProductPricing extends Component
     public ?float $basePrice = null;
 
     public int $minNights = 1;
+
+    /** @var array<int, string> 'Y-m-d' dates selected in the calendar */
+    public array $selectedDates = [];
+
+    public ?float $overridePrice = null;
 
     private ProductServices $productServices;
 
@@ -55,9 +61,40 @@ class ProductPricing extends Component
         $this->flashMessageService->success(__('Cenas iestatījumi saglabāti.'));
     }
 
+    public function applyPriceToSelected(): void
+    {
+        $this->validate([
+            'selectedDates' => 'required|array|min:1',
+            'selectedDates.*' => 'date',
+            'overridePrice' => 'required|numeric|min:0.01',
+        ]);
+
+        $cents = (int) round($this->overridePrice * 100);
+
+        foreach ($this->selectedDates as $date) {
+            ProductPrice::updateOrCreate(
+                ['product_id' => $this->product->id, 'date' => $date],
+                ['price' => $cents],
+            );
+        }
+
+        $this->selectedDates = [];
+        $this->overridePrice = null;
+
+        $this->flashMessageService->success(__('Cenas atjauninātas izvēlētajiem datumiem.'));
+    }
+
+    public function removeOverride(int $priceId): void
+    {
+        ProductPrice::where('product_id', $this->product->id)->whereKey($priceId)->delete();
+
+        $this->flashMessageService->success(__('Cenas korekcija dzēsta.'));
+    }
+
     public function render(): View
     {
-        return view('livewire.admin.product.product-pricing')
-            ->layout('layouts.admin.app');
+        return view('livewire.admin.product.product-pricing', [
+            'overrides' => $this->product->prices()->orderBy('date')->get(),
+        ])->layout('layouts.admin.app');
     }
 }
