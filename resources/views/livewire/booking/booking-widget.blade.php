@@ -1,10 +1,12 @@
-<div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
+<div class="border-ss-gray text-ss-gray flex flex-col space-y-6 rounded-3xl border-1 p-6 shadow-md">
     @if ($bookingError)
-        <div class="mb-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">{{ $bookingError }}</div>
+        <div class="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{{ $bookingError }}</div>
     @endif
 
-    <div>
-        <span class="text-sm font-medium text-neutral-700">{{ __('Reģistrēšanās') }} – {{ __('Izrakstīšanās') }}</span>
+    <div class="flex flex-col">
+        <label class="mb-2">{{ __('Reģistrēšanās') }} – {{ __('Izrakstīšanās') }}</label>
+        <x-input-error :messages="$errors->get('checkIn')" />
+        <x-input-error :messages="$errors->get('checkOut')" />
         <div wire:ignore
             x-data="bookingCalendar({
                 minDate: @js(now()->toDateString()),
@@ -13,88 +15,118 @@
             })">
             <input x-ref="input" type="text" readonly
                 placeholder="{{ __('Izvēlies datumus') }}"
-                class="mt-1 w-full cursor-pointer rounded-lg border-neutral-300 focus:border-ss-dark focus:ring-ss-dark" />
+                class="border-b w-full cursor-pointer bg-transparent" />
         </div>
-        @error('checkIn') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
-        @error('checkOut') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
     </div>
 
-    <div class="mt-3">
-        <span class="text-sm font-medium text-neutral-700">{{ __('Viesi') }}</span>
-        <div class="mt-1 rounded-lg border border-neutral-300 px-4 py-1">
-            <div class="flex items-center justify-between py-2">
+    <div class="flex flex-col">
+        <label class="mb-2">{{ __('Viesi') }}</label>
+        <div class="border-ss-gray rounded-2xl border-1 px-4 py-1">
+            <div class="flex items-center justify-between py-3">
                 <div>
-                    <p class="font-medium text-neutral-800">{{ __('Pieaugušie') }}</p>
-                    <p class="text-xs text-neutral-500">{{ __('Maks.') }} {{ $product->person_count }}</p>
+                    <p class="text-ss-dark font-medium">{{ __('Pieaugušie') }}</p>
+                    <p class="text-xs">{{ __('Maks.') }} {{ $product->person_count }}</p>
                 </div>
                 <div class="flex items-center gap-3">
                     <button type="button" wire:click="decrementAdults" @disabled($adults <= 1)
-                        class="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-300 text-lg leading-none disabled:opacity-40">−</button>
-                    <span class="w-5 text-center tabular-nums">{{ $adults }}</span>
+                        class="border-ss-gray text-ss-dark flex h-8 w-8 items-center justify-center rounded-full border-1 text-lg leading-none transition hover:border-ss-dark disabled:opacity-40">−</button>
+                    <span class="text-ss-dark w-5 text-center tabular-nums">{{ $adults }}</span>
                     <button type="button" wire:click="incrementAdults"
-                        class="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-300 text-lg leading-none">+</button>
+                        class="border-ss-gray text-ss-dark flex h-8 w-8 items-center justify-center rounded-full border-1 text-lg leading-none transition hover:border-ss-dark">+</button>
                 </div>
             </div>
 
             @if ($product->children_count > 0)
-                <div class="flex items-center justify-between border-t border-neutral-100 py-2">
+                <div class="border-ss-gray/30 flex items-center justify-between border-t py-3">
                     <div>
-                        <p class="font-medium text-neutral-800">{{ __('Bērni') }}</p>
-                        <p class="text-xs text-neutral-500">{{ __('Maks.') }} {{ $product->children_count }}</p>
+                        <p class="text-ss-dark font-medium">{{ __('Bērni') }}</p>
+                        <p class="text-xs">{{ __('Maks.') }} {{ $product->children_count }}</p>
                     </div>
                     <div class="flex items-center gap-3">
                         <button type="button" wire:click="decrementChildren" @disabled($children <= 0)
-                            class="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-300 text-lg leading-none disabled:opacity-40">−</button>
-                        <span class="w-5 text-center tabular-nums">{{ $children }}</span>
+                            class="border-ss-gray text-ss-dark flex h-8 w-8 items-center justify-center rounded-full border-1 text-lg leading-none transition hover:border-ss-dark disabled:opacity-40">−</button>
+                        <span class="text-ss-dark w-5 text-center tabular-nums">{{ $children }}</span>
                         <button type="button" wire:click="incrementChildren"
-                            class="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-300 text-lg leading-none">+</button>
+                            class="border-ss-gray text-ss-dark flex h-8 w-8 items-center justify-center rounded-full border-1 text-lg leading-none transition hover:border-ss-dark">+</button>
                     </div>
                 </div>
             @endif
         </div>
-        <p class="mt-1 text-xs text-neutral-500">{{ __('Kopā līdz :count viesiem.', ['count' => $product->person_count + $product->children_count]) }}</p>
+        <p class="mt-2 text-xs">{{ __('Kopā līdz :count viesiem.', ['count' => $product->person_count + $product->children_count]) }}</p>
         @if ($guestError)
             <p class="mt-1 text-xs text-red-600">{{ $guestError }}</p>
         @endif
     </div>
 
     @if ($quote)
-        <div class="mt-4 space-y-1 border-t border-neutral-200 pt-4 text-sm">
+        <div class="border-ss-gray/30 space-y-2 border-t pt-4 text-sm">
             <div class="flex justify-between">
                 <span>€{{ number_format(($quote->nightsTotal / max($quote->nights, 1)) / 100, 0) }} × {{ $quote->nights }} {{ __('naktis') }}</span>
                 <span>€{{ number_format($quote->nightsTotal / 100, 2) }}</span>
             </div>
-            <div class="flex justify-between border-t border-neutral-200 pt-2 font-semibold">
+            <div class="border-ss-gray/30 text-ss-dark flex justify-between border-t pt-2 font-medium">
                 <span>{{ __('Kopā') }}</span><span>€{{ number_format($quote->grandTotal / 100, 2) }}</span>
             </div>
         </div>
     @endif
 
     @if ($addons->isNotEmpty())
-        <div class="mt-4 space-y-3 border-t border-neutral-200 pt-4">
+        <div class="border-ss-gray/30 space-y-4 border-t pt-4">
             @foreach ($addons as $addon)
-                <label class="flex items-start gap-3 text-sm text-neutral-600">
-                    <input type="checkbox" wire:model="selectedAddons.{{ $addon->id }}"
-                        class="mt-0.5 h-5 w-5 shrink-0 rounded border-neutral-300 text-ss-dark focus:ring-ss-dark" />
+                <label class="flex cursor-pointer items-start gap-3 text-sm">
+                    <span class="relative shrink-0">
+                        <input
+                            type="checkbox"
+                            wire:model="selectedAddons.{{ $addon->id }}"
+                            class="peer border-ss-dark bg-ss checked:bg-ss-dark checked:border-ss-dark h-5 w-5 appearance-none rounded border-1 transition duration-200"
+                        />
+                        <svg
+                            class="pointer-events-none absolute top-0 left-0 h-5 w-5 text-white opacity-0 transition-opacity duration-150 peer-checked:opacity-100"
+                            fill="none"
+                            viewBox="0 0 20 20"
+                            stroke="currentColor"
+                            stroke-width="3"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6" />
+                        </svg>
+                    </span>
                     <span>{{ $addon->getTranslation('description', app()->getLocale()) ?: $addon->getTranslation('name', app()->getLocale()) }}</span>
                 </label>
             @endforeach
         </div>
     @endif
 
-    <hr class="mt-4 border-neutral-200" />
-
-    <div class="mt-4 space-y-2">
-        <input type="text" wire:model="guestName" placeholder="{{ __('Vārds, uzvārds') }}" class="w-full rounded-lg border-neutral-300" />
-        @error('guestName') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
-        <input type="email" wire:model="guestEmail" placeholder="{{ __('E-pasts') }}" class="w-full rounded-lg border-neutral-300" />
-        @error('guestEmail') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
-        <input type="text" wire:model="guestPhone" placeholder="{{ __('Tālrunis') }}" class="w-full rounded-lg border-neutral-300" />
-        @error('guestPhone') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
+    <div class="border-ss-gray/30 flex flex-col space-y-6 border-t pt-6">
+        <div class="flex flex-col">
+            <label class="mb-2" for="guestName">@lang('Vārds, uzvārds') *</label>
+            <x-input-error :messages="$errors->get('guestName')" />
+            <input class="border-b bg-transparent" id="guestName" wire:model="guestName" type="text" />
+        </div>
+        <div class="flex flex-col">
+            <label class="mb-2" for="guestEmail">@lang('E-pasts') *</label>
+            <x-input-error :messages="$errors->get('guestEmail')" />
+            <input class="border-b bg-transparent" id="guestEmail" wire:model="guestEmail" type="email" />
+        </div>
+        <div class="flex flex-col">
+            <label class="mb-2" for="guestPhone">@lang('Tālrunis') *</label>
+            <x-input-error :messages="$errors->get('guestPhone')" />
+            <input class="border-b bg-transparent" id="guestPhone" wire:model="guestPhone" type="text" />
+        </div>
     </div>
 
-    <button type="button" wire:click="reserve" wire:loading.attr="disabled"
-        class="mt-4 w-full rounded-xl bg-[#2f3a1f] px-4 py-3 font-semibold text-white hover:opacity-90">
-        {{ __('Rezervēt brīvdienu māju') }}
-    </button>
+    <x-btn-primary
+        type="button"
+        class="w-full"
+        wire:click="reserve"
+        wire:loading.attr="disabled"
+        wire:target="reserve"
+    >
+        <span wire:loading.remove wire:target="reserve">@lang('Rezervēt brīvdienu māju')</span>
+        <span wire:loading wire:target="reserve" class="flex items-center justify-center">
+            <svg class="mr-3 -ml-1 h-4 w-4 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+        </span>
+    </x-btn-primary>
 </div>
