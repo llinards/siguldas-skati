@@ -16,6 +16,7 @@ beforeEach(function () {
         'cleaning_fee' => 3000,
         'min_nights' => 2,
         'person_count' => 4,
+        'children_count' => 2,
     ]);
     $this->guest = ['name' => 'Jane Guest', 'email' => 'jane@example.com', 'phone' => '+37120000000'];
 });
@@ -75,8 +76,28 @@ it('rejects stays below the minimum nights', function () {
     );
 })->throws(BookingException::class);
 
-it('rejects guest counts above capacity', function () {
+it('rejects more adults than the house allows', function () {
+    // product person_count = 4
     $this->service->createPendingBooking(
-        $this->product, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 4, 2, [], $this->guest,
+        $this->product, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 5, 0, [], $this->guest,
     );
 })->throws(BookingException::class);
+
+it('rejects more children than the house allows', function () {
+    // product children_count = 2
+    $this->service->createPendingBooking(
+        $this->product, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 2, 3, [], $this->guest,
+    );
+})->throws(BookingException::class);
+
+it('allows guests within both the adult and child caps', function () {
+    $product = Product::factory()->create([
+        'base_price' => 10000, 'min_nights' => 1, 'person_count' => 4, 'children_count' => 2,
+    ]);
+
+    $booking = $this->service->createPendingBooking(
+        $product, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 4, 2, [], $this->guest,
+    );
+
+    expect($booking->adults)->toBe(4)->and($booking->children)->toBe(2);
+});

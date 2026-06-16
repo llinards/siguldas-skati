@@ -11,9 +11,12 @@ class BookingException extends RuntimeException
         return new self(__('Izvēlētie datumi vairs nav pieejami.'));
     }
 
-    public static function exceedsCapacity(int $max): self
+    public static function exceedsCapacity(int $maxAdults, int $maxChildren): self
     {
-        return new self(__('Šī māja paredzēta līdz :max viesiem.', ['max' => $max]));
+        return new self(__('Šī māja paredzēta līdz :adults pieaugušajiem un :children bērniem.', [
+            'adults' => $maxAdults,
+            'children' => $maxChildren,
+        ]));
     }
 
     public static function belowMinimumNights(int $min): self

@@ -26,11 +26,11 @@ class BookingWidget extends Component
     #[Validate('required|date|after:checkIn')]
     public string $checkOut = '';
 
-    #[Validate('required|integer|min:1')]
     public int $adults = 2;
 
-    #[Validate('integer|min:0')]
     public int $children = 0;
+
+    public ?string $guestError = null;
 
     /** @var array<int, bool> addon_id => selected */
     public array $selectedAddons = [];
@@ -51,6 +51,55 @@ class BookingWidget extends Component
     public function mount(Product $product): void
     {
         $this->product = $product;
+        $this->adults = max(1, min($this->adults, $product->person_count));
+        $this->children = max(0, min($this->children, $product->children_count));
+    }
+
+    public function incrementAdults(): void
+    {
+        if ($this->adults >= $this->product->person_count) {
+            $this->guestError = __('Šī māja paredzēta līdz :count pieaugušajiem.', ['count' => $this->product->person_count]);
+
+            return;
+        }
+
+        $this->adults++;
+        $this->guestError = null;
+    }
+
+    public function decrementAdults(): void
+    {
+        $this->adults = max(1, $this->adults - 1);
+        $this->guestError = null;
+    }
+
+    public function incrementChildren(): void
+    {
+        if ($this->children >= $this->product->children_count) {
+            $this->guestError = __('Šī māja paredzēta līdz :count bērniem.', ['count' => $this->product->children_count]);
+
+            return;
+        }
+
+        $this->children++;
+        $this->guestError = null;
+    }
+
+    public function decrementChildren(): void
+    {
+        $this->children = max(0, $this->children - 1);
+        $this->guestError = null;
+    }
+
+    public function getGuestsLabelProperty(): string
+    {
+        $label = $this->adults.' '.__('pieaugušie');
+
+        if ($this->children > 0) {
+            $label .= ', '.$this->children.' '.__('bērni');
+        }
+
+        return $label;
     }
 
     /**

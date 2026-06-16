@@ -164,6 +164,10 @@ button[disabled] {
     cursor: not-allowed;
 }
 
+[x-cloak] {
+    display: none !important;
+}
+
 /* Booking date-range calendar — recolour vanilla-calendar-pro to the brand palette. */
 [data-vc='calendar'] {
     font-family: 'Rubik', sans-serif;

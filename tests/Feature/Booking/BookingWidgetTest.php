@@ -50,6 +50,32 @@ it('exposes occupied nights as unavailable dates for the calendar', function () 
         });
 });
 
+it('caps adults at the house limit and reports an error when exceeded', function () {
+    $product = Product::factory()->create(['base_price' => 10000, 'person_count' => 2, 'children_count' => 0]);
+
+    Livewire::test(BookingWidget::class, ['product' => $product])
+        ->assertSet('adults', 2) // default clamped to capacity
+        ->call('incrementAdults')
+        ->assertSet('adults', 2) // not incremented past the cap
+        ->assertNotSet('guestError', null)
+        ->call('decrementAdults')
+        ->assertSet('adults', 1)
+        ->call('decrementAdults')
+        ->assertSet('adults', 1); // never below 1
+});
+
+it('caps children at the house limit', function () {
+    $product = Product::factory()->create(['base_price' => 10000, 'person_count' => 4, 'children_count' => 1]);
+
+    Livewire::test(BookingWidget::class, ['product' => $product])
+        ->assertSet('children', 0)
+        ->call('incrementChildren')
+        ->assertSet('children', 1)
+        ->call('incrementChildren')
+        ->assertSet('children', 1) // capped
+        ->assertNotSet('guestError', null);
+});
+
 it('creates a pending booking and redirects to Stripe on reserve', function () {
     $fakeSession = Session::constructFrom(['id' => 'cs_test_123', 'url' => 'https://checkout.stripe.test/cs_test_123']);
 
