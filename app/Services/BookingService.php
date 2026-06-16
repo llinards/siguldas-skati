@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\BookingStatus;
+use App\Events\BookingCancelled;
 use App\Events\BookingConfirmed;
 use App\Exceptions\BookingException;
 use App\Models\Addon;
@@ -22,6 +23,7 @@ class BookingService
     public function __construct(
         private readonly AvailabilityService $availability,
         private readonly PricingService $pricing,
+        private readonly StripeService $stripe,
     ) {}
 
     /**
@@ -103,6 +105,30 @@ class BookingService
         ]);
 
         BookingConfirmed::dispatch($booking->fresh());
+    }
+
+    /**
+     * Refund and cancel a booking. Passing a null amount issues a full refund.
+     * Idempotent: a booking already cancelled is left untouched.
+     */
+    public function cancelAndRefund(Booking $booking, ?int $amount = null, ?string $reason = null): void
+    {
+        if ($booking->status === BookingStatus::Cancelled) {
+            return;
+        }
+
+        $refund = $this->stripe->createRefund($booking, $amount);
+
+        $booking->update([
+            'status' => BookingStatus::Cancelled,
+            'cancelled_at' => now(),
+            'cancellation_reason' => $reason,
+            'refunded_at' => now(),
+            'refund_amount' => $refund->amount ?? ($amount ?? $booking->grand_total),
+            'stripe_refund_id' => $refund->id,
+        ]);
+
+        BookingCancelled::dispatch($booking->fresh(), true);
     }
 
     private function assertGuestCount(Product $product, int $adults, int $children): void
