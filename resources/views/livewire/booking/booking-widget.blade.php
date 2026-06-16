@@ -81,6 +81,8 @@
         </div>
     @endif
 
+    <hr class="mt-4 border-neutral-200" />
+
     <div class="mt-4 space-y-2">
         <input type="text" wire:model="guestName" placeholder="{{ __('Vārds, uzvārds') }}" class="w-full rounded-lg border-neutral-300" />
         @error('guestName') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
