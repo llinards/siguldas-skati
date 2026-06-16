@@ -47,6 +47,25 @@ class StripeWebhookController extends Controller
             }
         }
 
+        if ($event->type === 'charge.refunded') {
+            $charge = $event->data->object;
+
+            $paymentIntentId = is_string($charge->payment_intent ?? null)
+                ? $charge->payment_intent
+                : ($charge->payment_intent->id ?? null);
+
+            if ($paymentIntentId === null) {
+                return response('OK', 200);
+            }
+
+            $booking = Booking::where('stripe_payment_intent_id', $paymentIntentId)->first();
+
+            if ($booking) {
+                $refundId = $charge->refunds->data[0]->id ?? null;
+                $bookings->reconcileRefund($booking, (int) $charge->amount_refunded, $refundId);
+            }
+        }
+
         return response('OK', 200);
     }
 }
