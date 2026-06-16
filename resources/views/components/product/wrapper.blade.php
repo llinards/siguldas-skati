@@ -22,9 +22,15 @@
         <div class="product-pricelist">
             {!! $product->pricelist !!}
         </div>
-        <div class="mt-4">
-            @livewire('booking.booking-widget', ['product' => $product], key('booking-desktop'))
+    </div>
+
+    <div class="col-span-5 mb-6">
+        <div class="relative mb-3 inline-block">
+            <h2 class="text-h-sm-mob lg:text-h-mob mt-6 mb-3 leading-none xl:mt-0 border-b-2">
+                @lang('Rezervācija')
+            </h2>
         </div>
+        @livewire('booking.booking-widget', ['product' => $product], key('booking-desktop'))
     </div>
 
     <div class="col-span-5 hidden sm:block xl:border-b-2">
@@ -72,6 +78,15 @@
              role="region" aria-labelledby="hs-basic-with-arrow-heading-two">
             {!! $product->pricelist !!}
         </div>
+    </div>
+
+    <div>
+        <div class="relative mb-3 border-b-2 pt-3">
+            <h2 class="text-h-sm-mob lg:text-h-mob text-left leading-none">
+                @lang('Rezervācija')
+            </h2>
+        </div>
+        @livewire('booking.booking-widget', ['product' => $product], key('booking-mobile'))
     </div>
 
     <div class="hs-accordion" id="hs-basic-with-arrow-heading-three">
