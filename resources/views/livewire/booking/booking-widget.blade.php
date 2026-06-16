@@ -59,7 +59,7 @@
     </div>
 
     @if ($quote)
-        <div class="border-ss-gray/30 space-y-2 border-t pt-4 text-sm">
+        <div class="space-y-2 text-sm">
             <div class="flex justify-between">
                 <span>€{{ number_format(($quote->nightsTotal / max($quote->nights, 1)) / 100, 0) }} × {{ $quote->nights }} {{ __('naktis') }}</span>
                 <span>€{{ number_format($quote->nightsTotal / 100, 2) }}</span>
@@ -71,7 +71,7 @@
     @endif
 
     @if ($addons->isNotEmpty())
-        <div class="border-ss-gray/30 space-y-4 border-t pt-4">
+        <div class="space-y-4">
             @foreach ($addons as $addon)
                 <label class="flex cursor-pointer items-start gap-3 text-sm">
                     <span class="relative shrink-0">
@@ -96,7 +96,7 @@
         </div>
     @endif
 
-    <div class="border-ss-gray/30 flex flex-col space-y-6 border-t pt-6">
+    <div class="flex flex-col space-y-6">
         <div class="flex flex-col">
             <label class="mb-2" for="guestName">@lang('Vārds, uzvārds') *</label>
             <x-input-error :messages="$errors->get('guestName')" />
