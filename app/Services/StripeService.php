@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Booking;
 use Stripe\Checkout\Session;
 use Stripe\Event;
+use Stripe\Refund;
 use Stripe\StripeClient;
 use Stripe\Webhook;
 
@@ -55,6 +56,26 @@ class StripeService
             'expires_at' => $booking->expires_at->copy()->addMinute()->getTimestamp(),
         ], [
             'idempotency_key' => 'checkout_'.$booking->reference,
+        ]);
+    }
+
+    /**
+     * Refund a booking's payment. Passing null refunds the full charge.
+     */
+    public function createRefund(Booking $booking, ?int $amount = null): Refund
+    {
+        if ($this->client === null) {
+            throw new \RuntimeException('Stripe is not configured (missing STRIPE_SECRET).');
+        }
+
+        $params = ['payment_intent' => (string) $booking->stripe_payment_intent_id];
+
+        if ($amount !== null) {
+            $params['amount'] = $amount;
+        }
+
+        return $this->client->refunds->create($params, [
+            'idempotency_key' => 'refund_'.$booking->reference,
         ]);
     }
 
