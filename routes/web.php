@@ -30,6 +30,7 @@ use App\Livewire\Admin\Product\EditProduct;
 use App\Livewire\Admin\Product\ProductFeatures;
 use App\Livewire\Admin\Product\ProductImages;
 use App\Livewire\Admin\Product\ProductList;
+use App\Livewire\Admin\Product\ProductPricing;
 use App\Livewire\Admin\Product\ProductRules;
 use App\Livewire\Admin\Rule\AddRule;
 use App\Livewire\Admin\Rule\EditRule;
@@ -99,6 +100,7 @@ Route::group(
                 Route::livewire('/product/{product:id}/images', ProductImages::class)->name('product.images');
                 Route::livewire('/product/{product:id}/features', ProductFeatures::class)->name('product.features');
                 Route::livewire('/product/{product:id}/rules', ProductRules::class)->name('product.rules');
+                Route::livewire('/product/{product:id}/pricing', ProductPricing::class)->name('product.pricing');
 
                 Route::livewire('/features', FeatureList::class)->name('dashboard.features');
                 Route::livewire('/feature/add', AddFeature::class)->name('dashboard.feature.add');

@@ -279,5 +279,9 @@
     "Numurs": "Number",
     "Datumi": "Dates",
     "Apskatīt": "View",
-    "Nav rezervāciju.": "No bookings."
+    "Nav rezervāciju.": "No bookings.",
+    "Cenas": "Pricing",
+    "Cenas iestatījumi saglabāti.": "Pricing settings saved.",
+    "Pamatcena (EUR/nakts)": "Base price (EUR/night)",
+    "Minimālais nakšu skaits": "Minimum nights"
 }

@@ -95,6 +95,15 @@
 
                             </a>
 
+                            <a href="{{ route('product.pricing', $product) }}"
+                                class="text-bg-ss-600 inline-flex items-center rounded-md p-2 transition-colors duration-200 hover:bg-gray-50 hover:text-gray-900">
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="9" stroke-width="2" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14.5 9.5a2.5 2.5 0 0 0-2.5-1.5c-1.5 0-2.5 1-2.5 2s1 1.8 2.5 2 2.5.9 2.5 2-1 2-2.5 2a2.5 2.5 0 0 1-2.5-1.5M12 6.5v11" />
+                                </svg>
+                            </a>
+
                             <!-- Delete Button -->
                             <button wire:click="deleteProduct({{ $product->id }})"
                                 wire:confirm="{{ __('Vai esat pārliecināts, ka vēlaties dzēst šo produktu?') }}"
