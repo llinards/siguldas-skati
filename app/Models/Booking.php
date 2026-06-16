@@ -49,4 +49,25 @@ class Booking extends Model
 
         return $reference;
     }
+
+    public function formattedTotal(): string
+    {
+        return $this->formatCents($this->grand_total);
+    }
+
+    public function formattedRefund(): string
+    {
+        return $this->refund_amount === null ? '—' : $this->formatCents($this->refund_amount);
+    }
+
+    public function isRefundableByGuest(): bool
+    {
+        return $this->status === BookingStatus::Confirmed
+            && now()->startOfDay()->lte($this->check_in->copy()->subDays(7)->startOfDay());
+    }
+
+    private function formatCents(int $cents): string
+    {
+        return number_format($cents / 100, 2, ',', ' ').' €';
+    }
 }
