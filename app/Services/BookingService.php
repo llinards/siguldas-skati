@@ -65,8 +65,6 @@ class BookingService
                 'guest_email' => $guest['email'],
                 'guest_phone' => $guest['phone'],
                 'nights_total' => $quote->nightsTotal,
-                'cleaning_fee' => $quote->cleaningFee,
-                'addons_total' => $quote->addonsTotal,
                 'grand_total' => $quote->grandTotal,
                 'currency' => 'eur',
                 'status' => BookingStatus::Pending,
@@ -74,12 +72,14 @@ class BookingService
                 'management_token' => (string) Str::uuid(),
             ]);
 
-            foreach ($quote->addonLines as $line) {
-                $booking->addons()->attach($line['addon_id'], [
-                    'name' => $line['name'],
-                    'price' => $line['price'],
-                    'pricing_type' => $line['pricing_type'],
-                    'quantity' => $line['quantity'],
+            // Add-ons are recorded as requests (not charged) so the admin can follow up.
+            foreach ($addonSelections as $selection) {
+                $addon = $selection['addon'];
+                $booking->addons()->attach($addon->id, [
+                    'name' => $addon->getTranslation('name', app()->getLocale()),
+                    'price' => $addon->price,
+                    'pricing_type' => $addon->pricing_type->value,
+                    'quantity' => max(1, (int) ($selection['quantity'] ?? 1)),
                 ]);
             }
 

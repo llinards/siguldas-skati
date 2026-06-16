@@ -10,7 +10,7 @@ use Stripe\Checkout\Session;
 
 beforeEach(function () {
     $this->product = Product::factory()->create([
-        'base_price' => 10000, 'cleaning_fee' => 3000, 'min_nights' => 1, 'person_count' => 4,
+        'base_price' => 10000, 'min_nights' => 1, 'person_count' => 4,
     ]);
 });
 
@@ -19,8 +19,8 @@ it('renders and computes a live quote for chosen dates', function () {
         ->set('checkIn', '2026-09-01')
         ->set('checkOut', '2026-09-04')
         ->set('adults', 2)
-        ->assertSet('quoteTotal', 33000) // 3x10000 + 3000
-        ->assertSee('330'); // formatted euros somewhere in the summary
+        ->assertSet('quoteTotal', 30000) // 3 nights x 10000, nights only
+        ->assertSee('300'); // formatted euros somewhere in the summary
 });
 
 it('syncs the calendar date range via selectDates', function () {
@@ -28,7 +28,7 @@ it('syncs the calendar date range via selectDates', function () {
         ->call('selectDates', '2026-09-01', '2026-09-04')
         ->assertSet('checkIn', '2026-09-01')
         ->assertSet('checkOut', '2026-09-04')
-        ->assertSet('quoteTotal', 33000);
+        ->assertSet('quoteTotal', 30000);
 });
 
 it('exposes occupied nights as unavailable dates for the calendar', function () {

@@ -57,33 +57,27 @@
         @endif
     </div>
 
-    @if ($addons->isNotEmpty())
-        <div class="mt-4 space-y-2">
-            @foreach ($addons as $addon)
-                <label class="flex items-center gap-2 text-sm text-neutral-700">
-                    <input type="checkbox" wire:model.live="selectedAddons.{{ $addon->id }}" />
-                    {{ $addon->getTranslation('name', app()->getLocale()) }}
-                    <span class="ml-auto">€{{ number_format($addon->price / 100, 2) }}</span>
-                </label>
-            @endforeach
-        </div>
-    @endif
-
     @if ($quote)
         <div class="mt-4 space-y-1 border-t border-neutral-200 pt-4 text-sm">
             <div class="flex justify-between">
                 <span>€{{ number_format(($quote->nightsTotal / max($quote->nights, 1)) / 100, 0) }} × {{ $quote->nights }} {{ __('naktis') }}</span>
                 <span>€{{ number_format($quote->nightsTotal / 100, 2) }}</span>
             </div>
-            @if ($quote->cleaningFee > 0)
-                <div class="flex justify-between"><span>{{ __('Uzkopšana') }}</span><span>€{{ number_format($quote->cleaningFee / 100, 2) }}</span></div>
-            @endif
-            @if ($quote->addonsTotal > 0)
-                <div class="flex justify-between"><span>{{ __('Papildpakalpojumi') }}</span><span>€{{ number_format($quote->addonsTotal / 100, 2) }}</span></div>
-            @endif
             <div class="flex justify-between border-t border-neutral-200 pt-2 font-semibold">
                 <span>{{ __('Kopā') }}</span><span>€{{ number_format($quote->grandTotal / 100, 2) }}</span>
             </div>
+        </div>
+    @endif
+
+    @if ($addons->isNotEmpty())
+        <div class="mt-4 space-y-3 border-t border-neutral-200 pt-4">
+            @foreach ($addons as $addon)
+                <label class="flex items-start gap-3 text-sm text-neutral-600">
+                    <input type="checkbox" wire:model="selectedAddons.{{ $addon->id }}"
+                        class="mt-0.5 h-5 w-5 shrink-0 rounded border-neutral-300 text-ss-dark focus:ring-ss-dark" />
+                    <span>{{ $addon->getTranslation('description', app()->getLocale()) ?: $addon->getTranslation('name', app()->getLocale()) }}</span>
+                </label>
+            @endforeach
         </div>
     @endif
 

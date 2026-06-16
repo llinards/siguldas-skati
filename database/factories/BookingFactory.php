@@ -29,8 +29,6 @@ class BookingFactory extends Factory
             'guest_email' => $this->faker->safeEmail(),
             'guest_phone' => $this->faker->phoneNumber(),
             'nights_total' => 54000,
-            'cleaning_fee' => 0,
-            'addons_total' => 0,
             'grand_total' => 54000,
             'currency' => 'eur',
             'status' => BookingStatus::Confirmed,

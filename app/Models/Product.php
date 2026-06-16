@@ -59,7 +59,6 @@ class Product extends Model
 
     protected $attributes = [
         'base_price' => 0,
-        'cleaning_fee' => 0,
         'min_nights' => 1,
     ];
 
@@ -74,7 +73,6 @@ class Product extends Model
         'is_active' => 'boolean',
         'show_all_features' => 'boolean',
         'base_price' => 'integer',
-        'cleaning_fee' => 'integer',
         'min_nights' => 'integer',
     ];
 

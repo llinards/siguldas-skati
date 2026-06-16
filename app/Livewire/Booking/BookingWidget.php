@@ -111,11 +111,6 @@ class BookingWidget extends Component
         $this->recomputeQuoteTotal();
     }
 
-    public function updatedSelectedAddons(): void
-    {
-        $this->recomputeQuoteTotal();
-    }
-
     private function recomputeQuoteTotal(): void
     {
         $this->quoteTotal = $this->quote()?->grandTotal ?? 0;
@@ -149,7 +144,6 @@ class BookingWidget extends Component
                 $this->product,
                 Carbon::parse($this->checkIn),
                 Carbon::parse($this->checkOut),
-                $this->addonSelections(),
             );
         } catch (\InvalidArgumentException) {
             return null;

@@ -23,30 +23,19 @@ class StripeService
 
     /**
      * Build Stripe line items from a booking's stored cost components.
-     * One item per component (quantity 1) so the Stripe total equals grand_total.
+     * The only charged component is the nights total (add-ons are request-only).
      *
      * @return array<int, array{price_data: array{currency: string, unit_amount: int, product_data: array{name: string}}, quantity: int}>
      */
     public function buildLineItems(Booking $booking): array
     {
-        $currency = $booking->currency;
-        $items = [];
-
-        $items[] = $this->lineItem($currency, __('Naktis').' ('.$booking->check_in->toDateString().' – '.$booking->check_out->toDateString().')', $booking->nights_total);
-
-        if ($booking->cleaning_fee > 0) {
-            $items[] = $this->lineItem($currency, __('Uzkopšana'), $booking->cleaning_fee);
-        }
-
-        foreach ($booking->addons as $addon) {
-            $items[] = $this->lineItem(
-                $currency,
-                $addon->pivot->name,
-                $addon->pivot->price * $addon->pivot->quantity,
-            );
-        }
-
-        return $items;
+        return [
+            $this->lineItem(
+                $booking->currency,
+                __('Naktis').' ('.$booking->check_in->toDateString().' – '.$booking->check_out->toDateString().')',
+                $booking->nights_total,
+            ),
+        ];
     }
 
     public function createCheckoutSession(Booking $booking, string $successUrl, string $cancelUrl): Session

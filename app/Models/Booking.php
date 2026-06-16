@@ -21,8 +21,6 @@ class Booking extends Model
         'adults' => 'integer',
         'children' => 'integer',
         'nights_total' => 'integer',
-        'cleaning_fee' => 'integer',
-        'addons_total' => 'integer',
         'grand_total' => 'integer',
         'status' => BookingStatus::class,
         'expires_at' => 'datetime',

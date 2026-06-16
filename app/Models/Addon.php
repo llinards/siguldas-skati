@@ -14,12 +14,13 @@ class Addon extends Model
     use HasFactory;
     use HasTranslations;
 
-    public array $translatable = ['name'];
+    public array $translatable = ['name', 'description'];
 
-    protected $fillable = ['product_id', 'name', 'price', 'pricing_type', 'is_active', 'order'];
+    protected $fillable = ['product_id', 'name', 'description', 'price', 'pricing_type', 'is_active', 'order'];
 
     protected $casts = [
         'name' => 'array',
+        'description' => 'array',
         'price' => 'integer',
         'pricing_type' => AddonPricingType::class,
         'is_active' => 'boolean',
