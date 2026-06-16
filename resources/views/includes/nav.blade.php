@@ -7,8 +7,7 @@
                  :class="open ? 'invert' : ''" alt="Siguldas Skati Logo"/>
         </a>
         <ul class="{{ Route::is('home') ? 'text-white' : 'text-black' }} hidden uppercase xl:flex">
-            <x-nav.nav-link href="{{ route('products') }}"
-                            class="{{ Route::is('products') ? 'border-b-ss-gray text-ss-gray' : '' }}">
+            <x-nav.nav-link href="{{ route('products') }}">
                 @lang('Rezervēt')
             </x-nav.nav-link>
             <x-nav.nav-link href="{{ route('products') }}"
@@ -61,8 +60,7 @@
          x-transition:leave="transition duration-300 ease-in" x-transition:leave-start="translate-x-0 opacity-100"
          x-transition:leave-end="translate-x-full opacity-0" class="bg-ss bg-opacity-90 fixed inset-0 z-40 xl:hidden">
         <ul class="flex h-full flex-col items-center justify-center space-y-2 text-black uppercase xl:text-white">
-            <x-nav.nav-link href="{{ route('products') }}"
-                            class="{{ Route::is('products') ? 'border-b-ss-gray text-ss-gray' : '' }}">
+            <x-nav.nav-link href="{{ route('products') }}">
                 @lang('Rezervēt')
             </x-nav.nav-link>
             <x-nav.nav-link href="{{ route('products') }}"
