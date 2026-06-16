@@ -35,6 +35,8 @@ class BlockedDates extends Component
         if (! $this->product) {
             $this->flashMessageService->error(__('Produkts nav atrasts.'));
             $this->redirect(route('dashboard.products'));
+
+            return;
         }
     }
 

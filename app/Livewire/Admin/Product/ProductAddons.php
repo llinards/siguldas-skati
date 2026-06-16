@@ -42,6 +42,8 @@ class ProductAddons extends Component
         if (! $this->product) {
             $this->flashMessageService->error(__('Produkts nav atrasts.'));
             $this->redirect(route('dashboard.products'));
+
+            return;
         }
     }
 
@@ -61,7 +63,7 @@ class ProductAddons extends Component
         ];
 
         if ($this->editingId !== null) {
-            Addon::where('product_id', $this->product->id)->whereKey($this->editingId)->update($attributes);
+            $this->product->addons()->whereKey($this->editingId)->firstOrFail()->update($attributes);
         } else {
             $this->product->addons()->create([
                 ...$attributes,

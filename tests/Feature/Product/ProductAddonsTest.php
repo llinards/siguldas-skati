@@ -64,6 +64,7 @@ it('edits an existing addon', function () {
         ->assertHasNoErrors();
 
     expect($addon->fresh()->getTranslation('name', 'lv'))->toBe('Jauns')
+        ->and($addon->fresh()->getTranslation('name', 'en'))->toBe('Old')
         ->and(Addon::where('product_id', $product->id)->count())->toBe(1);
 });
 
