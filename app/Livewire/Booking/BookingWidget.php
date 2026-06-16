@@ -91,17 +91,6 @@ class BookingWidget extends Component
         $this->guestError = null;
     }
 
-    public function getGuestsLabelProperty(): string
-    {
-        $label = $this->adults.' '.__('pieaugušie');
-
-        if ($this->children > 0) {
-            $label .= ', '.$this->children.' '.__('bērni');
-        }
-
-        return $label;
-    }
-
     /**
      * Sync the date range chosen in the JS calendar into Livewire state.
      */
