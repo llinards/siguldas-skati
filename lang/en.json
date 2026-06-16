@@ -255,5 +255,16 @@
     "Pieprasītie papildinājumi": "Requested add-ons",
     "Apskatīt rezervāciju": "View booking",
     "Ar cieņu": "Kind regards",
-    "Viesis": "Guest"
+    "Viesis": "Guest",
+    "Jūsu rezervācija": "Your booking",
+    "Statuss": "Status",
+    "Confirmed": "Confirmed",
+    "Pending": "Pending",
+    "Cancelled": "Cancelled",
+    "Expired": "Expired",
+    "Atcelt rezervāciju un saņemt atmaksu": "Cancel booking and get a refund",
+    "Bezmaksas atcelšana iespējama līdz 7 dienām pirms ierašanās. Lūdzu, sazinieties ar mums.": "Free cancellation is available up to 7 days before arrival. Please contact us.",
+    "Atmaksu vairs nevar veikt tiešsaistē. Lūdzu, sazinieties ar mums.": "Online refunds are no longer available. Please contact us.",
+    "Rezervācija atcelta un atmaksa veikta.": "Booking cancelled and refunded.",
+    "Viesa pieprasījums": "Guest request"
 }
