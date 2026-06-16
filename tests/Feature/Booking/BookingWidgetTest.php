@@ -50,27 +50,21 @@ it('exposes occupied nights as unavailable dates for the calendar', function () 
         });
 });
 
-it('caps the combined guests at the house total', function () {
-    // total (person_count) = 2, no children sub-limit
+it('caps adults at the house maximum', function () {
     $product = Product::factory()->create(['base_price' => 10000, 'person_count' => 2, 'children_count' => 0]);
 
     Livewire::test(BookingWidget::class, ['product' => $product])
-        ->assertSet('adults', 2) // clamped to the total
+        ->assertSet('adults', 2) // clamped to max adults
         ->call('incrementAdults')
-        ->assertSet('adults', 2) // total reached
+        ->assertSet('adults', 2) // not past the cap
         ->assertNotSet('guestError', null)
-        ->call('incrementChildren')
-        ->assertSet('children', 0) // total reached, no room for children
         ->call('decrementAdults')
         ->assertSet('adults', 1)
-        ->call('incrementChildren')
-        ->assertSet('children', 1) // now there is room (1 adult + 1 child = 2)
-        ->call('decrementChildren')
-        ->assertSet('children', 0);
+        ->call('decrementAdults')
+        ->assertSet('adults', 1); // never below 1
 });
 
-it('respects the children sub-limit within the total', function () {
-    // total 4, but at most 1 child
+it('caps children at the house maximum, independent of adults', function () {
     $product = Product::factory()->create(['base_price' => 10000, 'person_count' => 4, 'children_count' => 1]);
 
     Livewire::test(BookingWidget::class, ['product' => $product])
@@ -78,7 +72,7 @@ it('respects the children sub-limit within the total', function () {
         ->call('incrementChildren')
         ->assertSet('children', 1)
         ->call('incrementChildren')
-        ->assertSet('children', 1) // capped by children sub-limit even though total has room
+        ->assertSet('children', 1) // capped at children_count
         ->assertNotSet('guestError', null);
 });
 
