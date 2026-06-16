@@ -136,6 +136,21 @@ document.addEventListener('alpine:init', () => {
                     const checkIn = dates[0] ?? null;
                     const checkOut = dates.length > 1 ? dates[dates.length - 1] : null;
                     this.$wire.selectDates(checkIn, checkOut);
+                    // Close the popover once a full range (both ends) is chosen.
+                    if (checkOut) {
+                        self.hide();
+                    }
+                },
+                // VCP does not fill the input automatically in inputMode — we format it here.
+                onChangeToInput: (self) => {
+                    if (!self.context.inputElement) {
+                        return;
+                    }
+                    const dates = [...(self.context.selectedDates ?? [])].sort();
+                    const fmt = (d) => d.split('-').reverse().join('.');
+                    self.context.inputElement.value = dates.length
+                        ? (dates.length > 1 ? `${fmt(dates[0])} – ${fmt(dates[dates.length - 1])}` : fmt(dates[0]))
+                        : '';
                 },
             });
             this.calendar.init();
