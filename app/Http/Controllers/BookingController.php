@@ -16,4 +16,11 @@ class BookingController extends Controller
     {
         return view('booking.cancel', compact('booking'));
     }
+
+    public function manage(Booking $booking, string $token): View
+    {
+        abort_unless(hash_equals($booking->management_token, $token), 403);
+
+        return view('booking.manage', compact('booking', 'token'));
+    }
 }

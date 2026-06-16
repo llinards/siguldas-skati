@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StripeWebhookController;
 use App\Livewire\Admin\Activity\ActivityList;
 use App\Livewire\Admin\Activity\AddActivity;
 use App\Livewire\Admin\Activity\EditActivity;
@@ -34,7 +36,7 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-Route::post('/stripe/webhook', \App\Http\Controllers\StripeWebhookController::class)->name('stripe.webhook');
+Route::post('/stripe/webhook', StripeWebhookController::class)->name('stripe.webhook');
 
 Route::group(
     [
@@ -128,8 +130,10 @@ Route::group(
 
         require __DIR__.'/auth.php';
 
-        Route::get('/booking/{booking:reference}/success', [\App\Http\Controllers\BookingController::class, 'success'])->name('booking.success');
-        Route::get('/booking/{booking:reference}/cancel', [\App\Http\Controllers\BookingController::class, 'cancel'])->name('booking.cancel');
+        Route::get('/booking/{booking:reference}/success', [BookingController::class, 'success'])->name('booking.success');
+        Route::get('/booking/{booking:reference}/cancel', [BookingController::class, 'cancel'])->name('booking.cancel');
+
+        Route::get('/booking/{booking:reference}/manage/{token}', [BookingController::class, 'manage'])->name('booking.manage');
 
         Route::get('/{product}', [ProductController::class, 'show'])->name('product');
     }
