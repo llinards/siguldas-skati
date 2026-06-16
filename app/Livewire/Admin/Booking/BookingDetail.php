@@ -14,8 +14,6 @@ class BookingDetail extends Component
 
     public ?string $refundReason = null;
 
-    public ?int $refundAmount = null;
-
     public ?string $notes = null;
 
     public function mount(Booking $booking): void
@@ -26,10 +24,8 @@ class BookingDetail extends Component
 
     public function refund(BookingService $bookings, FlashMessageService $flash): void
     {
-        // Admins may refund at any time. A null amount refunds in full.
-        $amount = $this->refundAmount !== null ? (int) $this->refundAmount : null;
-
-        $bookings->cancelAndRefund($this->booking, $amount, $this->refundReason);
+        // Admins may refund at any time; the UI issues a full refund.
+        $bookings->cancelAndRefund($this->booking, null, $this->refundReason);
         $this->booking->refresh();
 
         $flash->success(__('Atmaksa veikta.'));

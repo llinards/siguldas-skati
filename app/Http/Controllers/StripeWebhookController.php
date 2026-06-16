@@ -58,6 +58,12 @@ class StripeWebhookController extends Controller
                 return response('OK', 200);
             }
 
+            // Stripe also fires charge.refunded for partial refunds; only a full
+            // refund cancels the booking and frees the dates.
+            if ((int) ($charge->amount_refunded ?? 0) < (int) ($charge->amount ?? 0)) {
+                return response('OK', 200);
+            }
+
             $booking = Booking::where('stripe_payment_intent_id', $paymentIntentId)->first();
 
             if ($booking) {

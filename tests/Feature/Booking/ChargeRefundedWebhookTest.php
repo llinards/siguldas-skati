@@ -19,6 +19,7 @@ it('reconciles a dashboard refund on charge.refunded', function () {
             'id' => 'ch_1',
             'object' => 'charge',
             'payment_intent' => 'pi_ref_1',
+            'amount' => 54000,
             'amount_refunded' => 54000,
             'refunds' => ['data' => [['id' => 're_hook_1']]],
         ]],
@@ -34,6 +35,34 @@ it('reconciles a dashboard refund on charge.refunded', function () {
     expect($booking->status)->toBe(BookingStatus::Cancelled)
         ->and($booking->refund_amount)->toBe(54000)
         ->and($booking->stripe_refund_id)->toBe('re_hook_1');
+});
+
+it('does not cancel the booking on a partial charge.refunded', function () {
+    $booking = Booking::factory()->create([
+        'status' => BookingStatus::Confirmed,
+        'grand_total' => 54000,
+        'stripe_payment_intent_id' => 'pi_partial_1',
+    ]);
+
+    $event = Event::constructFrom([
+        'id' => 'evt_partial',
+        'type' => 'charge.refunded',
+        'data' => ['object' => [
+            'id' => 'ch_partial', 'object' => 'charge',
+            'payment_intent' => 'pi_partial_1',
+            'amount' => 54000,
+            'amount_refunded' => 20000, // partial
+            'refunds' => ['data' => [['id' => 're_partial_1']]],
+        ]],
+    ]);
+
+    $this->mock(StripeService::class, function ($mock) use ($event) {
+        $mock->shouldReceive('constructWebhookEvent')->once()->andReturn($event);
+    });
+
+    $this->postJson('/stripe/webhook', [], ['Stripe-Signature' => 't=1,v1=fake'])->assertOk();
+
+    expect($booking->fresh()->status)->toBe(BookingStatus::Confirmed);
 });
 
 it('ignores charge.refunded with no matching payment intent', function () {
