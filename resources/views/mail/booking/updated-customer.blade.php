@@ -1,17 +1,34 @@
-<x-mail::message>
-# {{ __('Jūsu rezervācija ir mainīta') }}
+<x-mail.layout :title="__('Rezervācija ir mainīta')" :subtitle="$booking->reference">
+    <div class="greeting">{{ __('Jūsu rezervācija ir atjaunināta.') }}</div>
 
-{{ __('Rezervācijas numurs') }}: **{{ $booking->reference }}**
+    <div class="form-section">
+        <h3>{{ __('Rezervācijas informācija') }}</h3>
 
-- {{ __('Māja') }}: {{ $booking->product?->getTranslation('title', app()->getLocale()) }}
-- {{ __('Reģistrēšanās') }}: {{ $booking->check_in->format('d.m.Y') }}
-- {{ __('Izrakstīšanās') }}: {{ $booking->check_out->format('d.m.Y') }}
-- {{ __('Kopā') }}: {{ $booking->formattedTotal() }}
+        <div class="field">
+            <div class="field-label">{{ __('Māja') }}</div>
+            <div class="field-value">{{ $booking->product?->getTranslation('title', app()->getLocale()) }}</div>
+        </div>
+        <div class="field">
+            <div class="field-label">{{ __('Reģistrēšanās') }}</div>
+            <div class="field-value">{{ $booking->check_in->format('d.m.Y') }}</div>
+        </div>
+        <div class="field">
+            <div class="field-label">{{ __('Izrakstīšanās') }}</div>
+            <div class="field-value">{{ $booking->check_out->format('d.m.Y') }}</div>
+        </div>
+        <div class="field">
+            <div class="field-label">{{ __('Kopā') }}</div>
+            <div class="field-value">{{ $booking->formattedTotal() }}</div>
+        </div>
+    </div>
 
-<x-mail::button :url="route('booking.manage', ['booking' => $booking->reference, 'token' => $booking->management_token])">
-{{ __('Apskatīt rezervāciju') }}
-</x-mail::button>
+    <div class="action-buttons">
+        <x-mail.button :url="route('booking.manage', ['booking' => $booking->reference, 'token' => $booking->management_token])">
+            {{ __('Apskatīt rezervāciju') }}
+        </x-mail.button>
+    </div>
 
-{{ __('Ar cieņu') }},<br>
-{{ config('app.name') }}
-</x-mail::message>
+    <x-slot:footer>
+        <p>{{ __('Ar cieņu') }},<br />{{ config('app.name') }}</p>
+    </x-slot:footer>
+</x-mail.layout>

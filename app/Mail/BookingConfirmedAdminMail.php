@@ -28,7 +28,7 @@ class BookingConfirmedAdminMail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.booking.confirmed-admin',
+            view: 'mail.booking.confirmed-admin',
             with: ['booking' => $this->booking->loadMissing('product')],
         );
     }

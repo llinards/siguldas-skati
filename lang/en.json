@@ -287,6 +287,8 @@
     "Datumi mainīti. Cena nemainās.": "Dates changed. Price unchanged.",
     "Jūsu rezervācija ir mainīta": "Your booking has been changed",
     "Rezervācija ir mainīta": "Booking changed",
+    "Rezervācijas informācija": "Booking details",
+    "Jūsu rezervācija ir atjaunināta.": "Your booking has been updated.",
     "Rezervācija apstiprināta.": "Booking confirmed.",
     "Vai tiešām apstiprināt šo rezervāciju?": "Are you sure you want to confirm this booking?",
     "Ja maksājums ir saņemts, bet rezervācija palikusi gaidīšanas statusā, apstiprini to manuāli. Klients saņems apstiprinājuma e-pastu.": "If payment was received but the booking is stuck in pending, confirm it manually. The customer will receive a confirmation email.",

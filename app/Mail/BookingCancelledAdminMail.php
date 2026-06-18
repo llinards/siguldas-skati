@@ -27,7 +27,7 @@ class BookingCancelledAdminMail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.booking.cancelled-admin',
+            view: 'mail.booking.cancelled-admin',
             with: ['booking' => $this->booking, 'refunded' => $this->refunded],
         );
     }
