@@ -30,16 +30,19 @@ class PricingService
             ->get()
             ->keyBy(fn ($price) => $price->date->toDateString());
 
-        $nightsTotal = 0;
+        $nightlyRates = [];
         foreach (CarbonPeriod::create($checkIn, $checkOut->copy()->subDay()) as $night) {
             $key = $night->toDateString();
-            $nightsTotal += $overrides->has($key) ? $overrides[$key]->price : $product->base_price;
+            $nightlyRates[] = $overrides->has($key) ? (int) $overrides[$key]->price : (int) $product->base_price;
         }
+
+        $nightsTotal = array_sum($nightlyRates);
 
         return new BookingQuote(
             nights: $nights,
             nightsTotal: $nightsTotal,
             grandTotal: $nightsTotal,
+            nightlyRates: $nightlyRates,
         );
     }
 }

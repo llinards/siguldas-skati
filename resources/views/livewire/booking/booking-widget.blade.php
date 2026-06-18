@@ -129,7 +129,13 @@
             @if ($quote)
                 <div class="mt-auto space-y-2 text-sm">
                     <div class="flex justify-between">
-                        <span>€{{ number_format(($quote->nightsTotal / max($quote->nights, 1)) / 100, 0) }} × {{ $quote->nights }} {{ __('naktis') }}</span>
+                        <span>
+                            @if ($quote->hasUniformRate())
+                                €{{ number_format($quote->uniformRate() / 100, $quote->uniformRate() % 100 === 0 ? 0 : 2) }} × {{ $quote->nights }} {{ __('naktis') }}
+                            @else
+                                {{ $quote->nights }} {{ __('naktis') }}
+                            @endif
+                        </span>
                         <span>€{{ number_format($quote->nightsTotal / 100, 2) }}</span>
                     </div>
                     <div class="border-ss-gray/30 text-ss-dark flex justify-between border-t pt-2 font-medium">

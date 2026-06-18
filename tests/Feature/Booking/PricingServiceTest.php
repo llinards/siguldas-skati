@@ -17,7 +17,10 @@ it('uses base_price for nights without an override', function () {
     // 3 nights x 15000
     expect($quote->nights)->toBe(3)
         ->and($quote->nightsTotal)->toBe(45000)
-        ->and($quote->grandTotal)->toBe(45000);
+        ->and($quote->grandTotal)->toBe(45000)
+        ->and($quote->nightlyRates)->toBe([15000, 15000, 15000])
+        ->and($quote->hasUniformRate())->toBeTrue()
+        ->and($quote->uniformRate())->toBe(15000);
 });
 
 it('uses per-date overrides where present and base_price elsewhere', function () {
@@ -28,7 +31,10 @@ it('uses per-date overrides where present and base_price elsewhere', function ()
     $quote = $this->service->quote($product, Carbon::parse('2026-07-01'), Carbon::parse('2026-07-04'));
 
     expect($quote->nightsTotal)->toBe(50000)
-        ->and($quote->grandTotal)->toBe(50000);
+        ->and($quote->grandTotal)->toBe(50000)
+        ->and($quote->nightlyRates)->toBe([15000, 20000, 15000])
+        ->and($quote->hasUniformRate())->toBeFalse()  // mixed nights → no single "€X × N" rate
+        ->and($quote->uniformRate())->toBeNull();
 });
 
 it('charges only the nights total (no cleaning fee or add-ons)', function () {
