@@ -139,42 +139,22 @@
                 {{ __('Bloķētajos datumos māju nevar rezervēt (piem., apkope vai privāta lietošana).') }}
             </p>
 
-            <div class="flex flex-col gap-4 sm:flex-row sm:space-x-6">
-                <div>
-                    <label for="startDate" class="block text-sm/6 font-medium text-gray-900">{{ __('No') }}</label>
-                    <div class="mt-2">
-                        <input
-                            id="startDate"
-                            type="date"
-                            wire:model="startDate"
-                            class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                        />
-                        <x-input-error :messages="$errors->get('startDate')" class="mt-2" />
-                    </div>
-                </div>
-                <div class="mt-5 sm:mt-0">
-                    <label for="endDate" class="block text-sm/6 font-medium text-gray-900">{{ __('Līdz') }}</label>
-                    <div class="mt-2">
-                        <input
-                            id="endDate"
-                            type="date"
-                            wire:model="endDate"
-                            class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                        />
-                        <x-input-error :messages="$errors->get('endDate')" class="mt-2" />
-                    </div>
-                </div>
-                <div class="mt-5 sm:mt-0 sm:flex-1">
-                    <label for="reason" class="block text-sm/6 font-medium text-gray-900">{{ __('Iemesls') }}</label>
-                    <div class="mt-2">
-                        <input
-                            id="reason"
-                            type="text"
-                            wire:model="reason"
-                            class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                        />
-                        <x-input-error :messages="$errors->get('reason')" class="mt-2" />
-                    </div>
+            <div wire:ignore x-data="blockCalendar({ minDate: '{{ now()->toDateString() }}' })">
+                <div x-ref="calendar"></div>
+            </div>
+            <x-input-error :messages="$errors->get('startDate')" class="mt-2" />
+            <x-input-error :messages="$errors->get('endDate')" class="mt-2" />
+
+            <div class="mt-5 sm:w-1/2">
+                <label for="reason" class="block text-sm/6 font-medium text-gray-900">{{ __('Iemesls') }}</label>
+                <div class="mt-2">
+                    <input
+                        id="reason"
+                        type="text"
+                        wire:model="reason"
+                        class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                    />
+                    <x-input-error :messages="$errors->get('reason')" class="mt-2" />
                 </div>
             </div>
 
@@ -233,5 +213,11 @@
                 </table>
             </div>
         </div>
+    </div>
+
+    <div class="mt-6 flex items-center gap-x-6">
+        <a href="{{ route('dashboard.products') }}" wire:navigate class="text-sm/6 font-semibold text-gray-900">
+            @lang('Atpakaļ')
+        </a>
     </div>
 </div>

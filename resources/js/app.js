@@ -218,4 +218,35 @@ document.addEventListener('alpine:init', () => {
             this.calendar?.destroy?.();
         },
     }));
+
+    // Range picker for blocking date ranges (start + end), synced to Livewire.
+    window.Alpine.data('blockCalendar', (config = {}) => ({
+        calendar: null,
+        init() {
+            const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+            this.calendar = new Calendar(this.$refs.calendar, {
+                type: isDesktop ? 'multiple' : 'default',
+                selectedTheme: 'light',
+                displayMonthsCount: isDesktop ? 2 : 1,
+                monthsToSwitch: 1,
+                selectionDatesMode: 'multiple-ranged',
+                firstWeekday: 1,
+                displayDateMin: config.minDate,
+                disableDatesPast: true,
+                onClickDate: (self) => {
+                    const dates = [...(self.context.selectedDates ?? [])].sort();
+                    const start = dates[0] ?? '';
+                    // A single click blocks one day; a second click extends to a range.
+                    const end = dates.length > 1 ? dates[dates.length - 1] : start;
+                    // Defer-sync to Livewire; the values are sent with the next request (the Block click).
+                    this.$wire.set('startDate', start, false);
+                    this.$wire.set('endDate', end, false);
+                },
+            });
+            this.calendar.init();
+        },
+        destroy() {
+            this.calendar?.destroy?.();
+        },
+    }));
 });
