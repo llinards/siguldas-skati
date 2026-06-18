@@ -5,10 +5,13 @@ namespace App\Livewire\Admin\Booking;
 use App\Enums\BookingStatus;
 use App\Exceptions\BookingException;
 use App\Models\Booking;
+use App\Services\AvailabilityService;
 use App\Services\BookingService;
 use App\Services\FlashMessageService;
+use App\Services\PricingService;
 use Illuminate\Support\Carbon;
 use Illuminate\View\View;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class BookingDetail extends Component
@@ -62,6 +65,39 @@ class BookingDetail extends Component
         $this->newCheckOut = $this->booking->check_out->toDateString();
 
         $flash->success($this->dateChangeMessage($this->booking->grand_total - $previousTotal));
+    }
+
+    /**
+     * Live preview of the chosen new dates: price, the difference versus the
+     * current total, availability, and whether the minimum-nights rule holds.
+     *
+     * @return array{nights: int, total: int, difference: int, available: bool, belowMin: bool, minNights: int}|null
+     */
+    #[Computed]
+    public function datePreview(): ?array
+    {
+        try {
+            $checkIn = Carbon::parse($this->newCheckIn)->startOfDay();
+            $checkOut = Carbon::parse($this->newCheckOut)->startOfDay();
+        } catch (\Throwable) {
+            return null;
+        }
+
+        if ($checkOut->lessThanOrEqualTo($checkIn)) {
+            return null;
+        }
+
+        $product = $this->booking->product;
+        $quote = app(PricingService::class)->quote($product, $checkIn, $checkOut);
+
+        return [
+            'nights' => $quote->nights,
+            'total' => $quote->grandTotal,
+            'difference' => $quote->grandTotal - $this->booking->grand_total,
+            'available' => app(AvailabilityService::class)->isAvailable($product, $checkIn, $checkOut, ignoreBookingId: $this->booking->getKey()),
+            'belowMin' => $quote->nights < $product->min_nights,
+            'minNights' => $product->min_nights,
+        ];
     }
 
     /**

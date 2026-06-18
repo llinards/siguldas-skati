@@ -76,7 +76,7 @@
                             <input
                                 id="newCheckIn"
                                 type="date"
-                                wire:model="newCheckIn"
+                                wire:model.live="newCheckIn"
                                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                             />
                             <x-input-error :messages="$errors->get('newCheckIn')" class="mt-2" />
@@ -88,15 +88,48 @@
                             <input
                                 id="newCheckOut"
                                 type="date"
-                                wire:model="newCheckOut"
+                                wire:model.live="newCheckOut"
                                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                             />
                             <x-input-error :messages="$errors->get('newCheckOut')" class="mt-2" />
                         </div>
                     </div>
                 </div>
+
+                @php($preview = $this->datePreview)
+                @if ($preview)
+                    <div class="mt-4 rounded-lg bg-gray-50 p-4 text-sm">
+                        <div class="flex items-center justify-between text-gray-900">
+                            <span>{{ __('Naktis') }}: {{ $preview['nights'] }}</span>
+                            <span class="font-medium">{{ __('Jaunā cena') }}: {{ number_format($preview['total'] / 100, 2, ',', ' ') }} €</span>
+                        </div>
+                        <p class="mt-1
+                            @if ($preview['difference'] > 0) text-amber-700
+                            @elseif ($preview['difference'] < 0) text-green-700
+                            @else text-gray-500 @endif">
+                            @if ($preview['difference'] > 0)
+                                {{ __('Jāiekasē papildus') }}: {{ number_format($preview['difference'] / 100, 2, ',', ' ') }} €
+                            @elseif ($preview['difference'] < 0)
+                                {{ __('Jāatmaksā') }}: {{ number_format(-$preview['difference'] / 100, 2, ',', ' ') }} €
+                            @else
+                                {{ __('Cena nemainās.') }}
+                            @endif
+                        </p>
+                        @if (! $preview['available'])
+                            <p class="mt-2 font-medium text-red-700">{{ __('Šie datumi nav pieejami.') }}</p>
+                        @elseif ($preview['belowMin'])
+                            <p class="mt-2 font-medium text-red-700">{{ __('Minimālais nakšu skaits') }}: {{ $preview['minNights'] }}</p>
+                        @endif
+                    </div>
+                @endif
+
                 <div class="mt-4 flex items-center justify-end">
-                    <x-btn-primary type="button" wire:click="changeDates" wire:confirm="{{ __('Vai tiešām mainīt rezervācijas datumus?') }}">
+                    <x-btn-primary
+                        type="button"
+                        :disabled="$preview && (! $preview['available'] || $preview['belowMin'])"
+                        wire:click="changeDates"
+                        wire:confirm="{{ __('Vai tiešām mainīt rezervācijas datumus?') }}"
+                    >
                         @lang('Saglabāt datumus')
                     </x-btn-primary>
                 </div>

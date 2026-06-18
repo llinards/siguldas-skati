@@ -112,6 +112,24 @@ it('lets an admin change the dates of a confirmed booking', function () {
         ->and($booking->fresh()->grand_total)->toBe(30000);
 });
 
+it('previews the new price and difference as the dates change', function () {
+    $product = Product::factory()->create(['base_price' => 10000, 'min_nights' => 1]);
+    $user = User::factory()->create();
+    $booking = Booking::factory()->for($product)->create([
+        'status' => BookingStatus::Confirmed,
+        'check_in' => '2026-08-01',
+        'check_out' => '2026-08-03', // 2 nights = 20000
+        'grand_total' => 20000,
+    ]);
+
+    Livewire::actingAs($user)
+        ->test(BookingDetail::class, ['booking' => $booking])
+        ->set('newCheckIn', '2026-09-10')
+        ->set('newCheckOut', '2026-09-13') // 3 nights = 30000 cents
+        ->assertSee('300,00') // new price
+        ->assertSee('100,00'); // +100,00 € difference to collect
+});
+
 it('rejects a check-out that is not after check-in', function () {
     $user = User::factory()->create();
     $booking = Booking::factory()->create([
