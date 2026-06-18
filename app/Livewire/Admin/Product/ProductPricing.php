@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Product;
 
+use App\Models\BlockedDate;
 use App\Models\ProductPrice;
 use App\Services\FlashMessageService;
 use App\Services\ProductServices;
@@ -20,6 +21,12 @@ class ProductPricing extends Component
     public array $selectedDates = [];
 
     public ?float $overridePrice = null;
+
+    public string $startDate = '';
+
+    public string $endDate = '';
+
+    public ?string $reason = null;
 
     private ProductServices $productServices;
 
@@ -91,10 +98,36 @@ class ProductPricing extends Component
         $this->flashMessageService->success(__('Cenas korekcija dzēsta.'));
     }
 
+    public function addBlock(): void
+    {
+        $this->validate([
+            'startDate' => 'required|date',
+            'endDate' => 'required|date|after_or_equal:startDate',
+            'reason' => 'nullable|string|max:255',
+        ]);
+
+        $this->product->blockedDates()->create([
+            'start_date' => $this->startDate,
+            'end_date' => $this->endDate,
+            'reason' => $this->reason,
+        ]);
+
+        $this->reset(['startDate', 'endDate', 'reason']);
+        $this->flashMessageService->success(__('Datumi bloķēti.'));
+    }
+
+    public function removeBlock(int $blockId): void
+    {
+        BlockedDate::where('product_id', $this->product->id)->whereKey($blockId)->delete();
+
+        $this->flashMessageService->success(__('Bloķējums noņemts.'));
+    }
+
     public function render(): View
     {
         return view('livewire.admin.product.product-pricing', [
             'overrides' => $this->product->prices()->orderBy('date')->get(),
+            'blocks' => $this->product->blockedDates()->orderBy('start_date')->get(),
         ])->layout('layouts.admin.app');
     }
 }

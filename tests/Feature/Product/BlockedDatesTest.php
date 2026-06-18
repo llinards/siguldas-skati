@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\Admin\Product\BlockedDates;
+use App\Livewire\Admin\Product\ProductPricing;
 use App\Models\BlockedDate;
 use App\Models\Product;
 use App\Models\User;
@@ -14,7 +14,7 @@ beforeEach(fn () => $this->actingAs(User::factory()->create()));
 it('renders with the product', function () {
     $product = Product::factory()->create();
 
-    Livewire::test(BlockedDates::class, ['product' => $product->id])
+    Livewire::test(ProductPricing::class, ['product' => $product->id])
         ->assertStatus(200)
         ->assertSet('product.id', $product->id);
 });
@@ -22,7 +22,7 @@ it('renders with the product', function () {
 it('adds a blocked date range', function () {
     $product = Product::factory()->create();
 
-    Livewire::test(BlockedDates::class, ['product' => $product->id])
+    Livewire::test(ProductPricing::class, ['product' => $product->id])
         ->set('startDate', '2026-08-01')
         ->set('endDate', '2026-08-05')
         ->set('reason', 'Apkope')
@@ -40,7 +40,7 @@ it('adds a blocked date range', function () {
 it('rejects an end date before the start date', function () {
     $product = Product::factory()->create();
 
-    Livewire::test(BlockedDates::class, ['product' => $product->id])
+    Livewire::test(ProductPricing::class, ['product' => $product->id])
         ->set('startDate', '2026-08-05')
         ->set('endDate', '2026-08-01')
         ->call('addBlock')
@@ -53,7 +53,7 @@ it('removes a blocked range', function () {
         'product_id' => $product->id, 'start_date' => '2026-08-01', 'end_date' => '2026-08-05',
     ]);
 
-    Livewire::test(BlockedDates::class, ['product' => $product->id])
+    Livewire::test(ProductPricing::class, ['product' => $product->id])
         ->call('removeBlock', $block->id)
         ->assertHasNoErrors();
 
