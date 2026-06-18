@@ -45,8 +45,9 @@
                     <div class="border-ss-gray/30 flex items-center justify-between border-t py-3">
                         <div>
                             <p class="text-ss-dark font-medium">{{ __('Bērni') }}</p>
-                            @if ($product->children_count > 0)
-                                <p class="text-xs">{{ __('Maks.') }} {{ $product->children_count }}</p>
+                            @php($childCap = min($product->children_count, max(0, $product->person_count - 1)))
+                            @if ($product->children_count > 0 && $childCap > 0)
+                                <p class="text-xs">{{ __('Maks.') }} {{ $childCap }}</p>
                             @endif
                         </div>
                         <div class="flex items-center gap-3">

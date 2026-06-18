@@ -44,7 +44,7 @@
                     </div>
                     <div class="mt-5 sm:mt-0">
                         <label for="personCount" class="block text-sm/6 font-medium text-gray-900">
-                            Cilvēku skaits
+                            Kopējais viesu skaits
                         </label>
                         <div class="mt-2">
                             <input
@@ -52,12 +52,13 @@
                                 wire:model="personCount"
                                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                             />
+                            <p class="mt-1 text-xs text-gray-500">Maksimālais viesu skaits kopā (pieaugušie + bērni).</p>
                             <x-input-error :messages="$errors->get('personCount')" class="mt-2"/>
                         </div>
                     </div>
                     <div class="mt-5 sm:mt-0">
                         <label for="childrenCount" class="block text-sm/6 font-medium text-gray-900">
-                            Bērnu skaits
+                            Maks. bērnu skaits
                         </label>
                         <div class="mt-2">
                             <input
@@ -65,6 +66,7 @@
                                 wire:model="childrenCount"
                                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                             />
+                            <p class="mt-1 text-xs text-gray-500">Cik no kopējā skaita drīkst būt bērni. 0 = nav atsevišķa ierobežojuma.</p>
                             <x-input-error :messages="$errors->get('childrenCount')" class="mt-2"/>
                         </div>
                     </div>
