@@ -227,12 +227,31 @@ class BookingWidget extends Component
         ));
     }
 
+    /**
+     * Per-date price overrides (in cents) within the booking horizon, keyed by
+     * date. Dates without an override fall back to the product's base price.
+     *
+     * @return array<string, int>
+     */
+    private function priceOverrides(): array
+    {
+        $today = Carbon::today();
+        $horizon = $today->copy()->addMonths(18);
+
+        return $this->product->prices()
+            ->whereBetween('date', [$today->toDateString(), $horizon->toDateString()])
+            ->get(['date', 'price'])
+            ->mapWithKeys(fn ($price) => [$price->date->toDateString() => (int) $price->price])
+            ->all();
+    }
+
     public function render(): View
     {
         return view('livewire.booking.booking-widget', [
             'quote' => $this->quote(),
             'addons' => $this->product->addons()->where('is_active', true)->get(),
             'unavailableDates' => $this->unavailableDates(),
+            'priceOverrides' => $this->priceOverrides(),
         ]);
     }
 }

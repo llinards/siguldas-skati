@@ -120,3 +120,14 @@ it('shows an error and does not redirect when dates are unavailable', function (
 
     expect(Booking::where('status', BookingStatus::Pending)->count())->toBe(0);
 });
+
+it('passes the base price and per-date overrides to the calendar', function () {
+    $product = Product::factory()->create(['base_price' => 12000, 'is_active' => true]);
+    $overrideDate = now()->addDays(10)->toDateString();
+    $product->prices()->create(['date' => $overrideDate, 'price' => 18000]);
+
+    Livewire::test(BookingWidget::class, ['product' => $product])
+        ->assertSee('12000')        // base price (cents) in the calendar config
+        ->assertSee($overrideDate)  // override keyed by date
+        ->assertSee('18000');       // override price (cents)
+});

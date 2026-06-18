@@ -15,6 +15,8 @@
                         minDate: @js(now()->toDateString()),
                         disabled: @js($unavailableDates),
                         selected: @js(array_values(array_filter([$checkIn, $checkOut]))),
+                        basePrice: @js((int) $product->base_price),
+                        priceOverrides: @js($priceOverrides),
                     })">
                     <input x-ref="input" type="text" readonly
                         placeholder="{{ __('Izvēlies datumus') }}"

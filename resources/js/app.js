@@ -141,6 +141,36 @@ document.addEventListener('alpine:init', () => {
                         self.hide();
                     }
                 },
+                // Render the nightly price under each available date.
+                onCreateDateEls: (self, dateEl) => {
+                    const date = dateEl.dataset.vcDate;
+                    if (!date) {
+                        return;
+                    }
+                    // Skip past dates and unavailable (booked/blocked) dates.
+                    if ((config.minDate && date < config.minDate) || (config.disabled ?? []).includes(date)) {
+                        return;
+                    }
+                    const overrides = config.priceOverrides ?? {};
+                    const cents = overrides[date] != null ? overrides[date] : config.basePrice;
+                    if (!cents || cents <= 0) {
+                        return;
+                    }
+                    const euros = cents % 100 === 0 ? String(cents / 100) : (cents / 100).toFixed(2).replace('.', ',');
+                    const btn = dateEl.querySelector('[data-vc-date-btn]');
+                    if (!btn) {
+                        return;
+                    }
+                    btn.style.display = 'flex';
+                    btn.style.flexDirection = 'column';
+                    btn.style.alignItems = 'center';
+                    btn.style.justifyContent = 'center';
+                    btn.style.lineHeight = '1.1';
+                    const label = document.createElement('span');
+                    label.textContent = `${euros} €`;
+                    label.style.cssText = 'font-size:10px;margin-top:2px;opacity:0.55;font-weight:400;';
+                    btn.appendChild(label);
+                },
                 // VCP does not fill the input automatically in inputMode — we format it here.
                 onChangeToInput: (self) => {
                     if (!self.context.inputElement) {
