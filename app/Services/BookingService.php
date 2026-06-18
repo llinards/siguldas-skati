@@ -81,18 +81,25 @@ class BookingService
 
     /**
      * Confirm a booking once payment has succeeded. Idempotent.
+     *
+     * Uses an atomic compare-and-set so only the caller that actually flips the
+     * booking to Confirmed dispatches the notifications. Stripe delivers
+     * webhooks at-least-once, so without this a redelivered
+     * checkout.session.completed would queue the confirmation emails twice.
      */
     public function confirm(Booking $booking, ?string $paymentIntentId = null): void
     {
-        if ($booking->status === BookingStatus::Confirmed) {
+        $claimed = Booking::whereKey($booking->getKey())
+            ->where('status', '!=', BookingStatus::Confirmed->value)
+            ->update([
+                'status' => BookingStatus::Confirmed->value,
+                'stripe_payment_intent_id' => $paymentIntentId,
+                'expires_at' => null,
+            ]);
+
+        if ($claimed === 0) {
             return;
         }
-
-        $booking->update([
-            'status' => BookingStatus::Confirmed,
-            'stripe_payment_intent_id' => $paymentIntentId,
-            'expires_at' => null,
-        ]);
 
         BookingConfirmed::dispatch($booking->fresh());
     }
