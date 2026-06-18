@@ -35,6 +35,30 @@ it('refunds, cancels, records refund fields, and fires BookingCancelled', functi
     Event::assertDispatched(BookingCancelled::class, fn ($e) => $e->refunded === true);
 });
 
+it('does not re-dispatch when a racing webhook already cancelled the booking', function () {
+    Event::fake([BookingCancelled::class]);
+
+    $booking = Booking::factory()->create([
+        'status' => BookingStatus::Confirmed,
+        'grand_total' => 54000,
+        'stripe_payment_intent_id' => 'pi_race',
+    ]);
+
+    // Stripe still returns the refund (idempotency key dedupes the actual charge).
+    $this->mock(StripeService::class, function ($mock) {
+        $mock->shouldReceive('createRefund')->once()
+            ->andReturn(Refund::constructFrom(['id' => 're_race', 'amount' => 54000]));
+    });
+
+    // Simulate the charge.refunded webhook landing mid-flight: the row is
+    // already Cancelled in the DB while $booking is still a stale Confirmed model.
+    Booking::whereKey($booking->getKey())->update(['status' => BookingStatus::Cancelled->value]);
+
+    app(BookingService::class)->cancelAndRefund($booking, amount: null, reason: 'Guest request');
+
+    Event::assertNotDispatched(BookingCancelled::class);
+});
+
 it('is idempotent — a second call does not refund again', function () {
     $booking = Booking::factory()->create([
         'status' => BookingStatus::Cancelled,

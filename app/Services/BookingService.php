@@ -117,16 +117,17 @@ class BookingService
             return;
         }
 
+        // Stripe dedupes the actual refund via the idempotency key, so this is
+        // safe even if a charge.refunded webhook is racing this same request.
         $refund = $this->stripe->createRefund($booking, $amount);
 
-        $booking->update([
-            'status' => BookingStatus::Cancelled,
-            'cancelled_at' => now(),
+        if (! $this->claimCancellation($booking, [
             'cancellation_reason' => $reason,
-            'refunded_at' => now(),
             'refund_amount' => $refund->amount ?? ($amount ?? $booking->grand_total),
             'stripe_refund_id' => $refund->id,
-        ]);
+        ])) {
+            return;
+        }
 
         BookingCancelled::dispatch($booking->fresh(), true);
     }
@@ -137,19 +138,35 @@ class BookingService
      */
     public function reconcileRefund(Booking $booking, int $amountRefunded, ?string $refundId = null): void
     {
-        if ($booking->status === BookingStatus::Cancelled) {
+        if (! $this->claimCancellation($booking, [
+            'refund_amount' => $amountRefunded,
+            'stripe_refund_id' => $refundId,
+        ])) {
             return;
         }
 
-        $booking->update([
-            'status' => BookingStatus::Cancelled,
-            'cancelled_at' => now(),
-            'refunded_at' => now(),
-            'refund_amount' => $amountRefunded,
-            'stripe_refund_id' => $refundId,
-        ]);
-
         BookingCancelled::dispatch($booking->fresh(), true);
+    }
+
+    /**
+     * Atomically transition a booking to Cancelled exactly once. Returns true
+     * only for the caller that actually performed the transition, so racing
+     * cancellation paths (guest action + charge.refunded webhook) can't each
+     * dispatch the cancellation notifications.
+     *
+     * @param  array<string, mixed>  $attributes
+     */
+    private function claimCancellation(Booking $booking, array $attributes): bool
+    {
+        $claimed = Booking::whereKey($booking->getKey())
+            ->where('status', '!=', BookingStatus::Cancelled->value)
+            ->update(array_merge($attributes, [
+                'status' => BookingStatus::Cancelled->value,
+                'cancelled_at' => now(),
+                'refunded_at' => now(),
+            ]));
+
+        return $claimed > 0;
     }
 
     private function assertGuestCount(Product $product, int $adults, int $children): void
