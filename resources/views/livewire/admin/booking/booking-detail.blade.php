@@ -46,29 +46,6 @@
         </div>
 
         <div class="border-b border-gray-900/10 pb-12">
-            <h2 class="text-h-sm-mob lg:text-h-mob mb-3 leading-none">{{ __('Maksājuma statuss') }}</h2>
-            <label for="paymentStatus" class="block text-sm/6 font-medium text-gray-900">{{ __('Statuss') }}</label>
-            <div class="mt-2 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <select
-                    id="paymentStatus"
-                    wire:model="paymentStatus"
-                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:w-64 sm:text-sm/6"
-                >
-                    @foreach ([\App\Enums\BookingStatus::Confirmed, \App\Enums\BookingStatus::Cancelled] as $status)
-                        <option value="{{ $status->value }}" @selected($paymentStatus === $status->value)>
-                            {{ __($status->label()) }}
-                        </option>
-                    @endforeach
-                </select>
-                <x-btn-primary type="button" wire:click="changeStatus" wire:confirm="{{ __('Vai tiešām mainīt maksājuma statusu?') }}">
-                    @lang('Saglabāt statusu')
-                </x-btn-primary>
-            </div>
-            <p class="mt-2 text-sm text-gray-500">{{ __('Statusa maiņa neveic atmaksu un nesūta e-pastus.') }}</p>
-            <x-input-error :messages="$errors->get('paymentStatus')" class="mt-2" />
-        </div>
-
-        <div class="border-b border-gray-900/10 pb-12">
             <h2 class="text-h-sm-mob lg:text-h-mob mb-3 leading-none">{{ __('Piezīmes') }}</h2>
             <div class="mt-2">
                 <textarea

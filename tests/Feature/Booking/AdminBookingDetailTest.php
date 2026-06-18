@@ -6,7 +6,6 @@ use App\Models\Addon;
 use App\Models\Booking;
 use App\Models\User;
 use App\Services\StripeService;
-use Illuminate\Support\Facades\Mail;
 use Livewire\Livewire;
 use Stripe\Refund;
 
@@ -47,58 +46,6 @@ it('lets an admin refund a confirmed booking any time', function () {
 
     expect($booking->fresh()->status)->toBe(BookingStatus::Cancelled)
         ->and($booking->fresh()->cancellation_reason)->toBe('Owner cancelled');
-});
-
-it('manually confirms a pending booking without Stripe or emails', function () {
-    Mail::fake();
-
-    $user = User::factory()->create();
-    $booking = Booking::factory()->pending()->create();
-
-    $this->mock(StripeService::class, function ($mock) {
-        $mock->shouldReceive('createRefund')->never();
-    });
-
-    Livewire::actingAs($user)
-        ->test(BookingDetail::class, ['booking' => $booking])
-        ->set('paymentStatus', BookingStatus::Confirmed->value)
-        ->call('changeStatus');
-
-    expect($booking->fresh()->status)->toBe(BookingStatus::Confirmed)
-        ->and($booking->fresh()->expires_at)->toBeNull();
-
-    Mail::assertNothingQueued();
-});
-
-it('manually cancels a booking without issuing a refund', function () {
-    $user = User::factory()->create();
-    $booking = Booking::factory()->create(['status' => BookingStatus::Confirmed]);
-
-    $this->mock(StripeService::class, function ($mock) {
-        $mock->shouldReceive('createRefund')->never();
-    });
-
-    Livewire::actingAs($user)
-        ->test(BookingDetail::class, ['booking' => $booking])
-        ->set('paymentStatus', BookingStatus::Cancelled->value)
-        ->call('changeStatus');
-
-    expect($booking->fresh()->status)->toBe(BookingStatus::Cancelled)
-        ->and($booking->fresh()->cancelled_at)->not->toBeNull()
-        ->and($booking->fresh()->refund_amount)->toBeNull();
-});
-
-it('rejects a status that is not manually settable', function () {
-    $user = User::factory()->create();
-    $booking = Booking::factory()->create(['status' => BookingStatus::Confirmed]);
-
-    Livewire::actingAs($user)
-        ->test(BookingDetail::class, ['booking' => $booking])
-        ->set('paymentStatus', BookingStatus::Expired->value)
-        ->call('changeStatus')
-        ->assertHasErrors('paymentStatus');
-
-    expect($booking->fresh()->status)->toBe(BookingStatus::Confirmed);
 });
 
 it('saves admin notes', function () {
