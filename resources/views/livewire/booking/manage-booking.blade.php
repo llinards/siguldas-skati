@@ -17,11 +17,16 @@
             @if ($booking->refund_amount) {{ __('Atmaksātā summa') }}: {{ $booking->formattedRefund() }}@endif
         </p>
     @elseif ($booking->isRefundableByGuest())
+        <p class="text-ss-gray mt-8 max-w-md text-sm">
+            {{ __('Bezmaksas atcelšana ar pilnu atmaksu iespējama līdz') }}
+            <strong>{{ $booking->freeCancellationUntil()->format('d.m.Y') }}</strong>.
+        </p>
+
         <x-btn-danger type="button"
             wire:click="requestRefund"
             wire:confirm="{{ __('Vai tiešām vēlaties atcelt šo rezervāciju? Atcelšana ir neatgriezeniska.') }}"
             wire:loading.attr="disabled"
-            class="mt-8">
+            class="mt-4">
             {{ __('Atcelt rezervāciju un saņemt atmaksu') }}
         </x-btn-danger>
     @elseif ($booking->status === \App\Enums\BookingStatus::Confirmed)

@@ -16,6 +16,10 @@
 @endforeach
 @endif
 
+@if ($booking->isRefundableByGuest())
+{{ __('Bezmaksas atcelšana ar pilnu atmaksu iespējama līdz') }} **{{ $booking->freeCancellationUntil()->format('d.m.Y') }}**. {{ __('Atcelt vari, atverot rezervāciju zemāk.') }}
+@endif
+
 <x-mail::button :url="route('booking.manage', ['booking' => $booking->reference, 'token' => $booking->management_token])">
 {{ __('Apskatīt rezervāciju') }}
 </x-mail::button>

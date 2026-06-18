@@ -100,7 +100,8 @@ it('shows a confirmation-gated cancel button when the booking is refundable', fu
 
     Livewire::test(ManageBooking::class, ['booking' => $booking, 'token' => $booking->management_token])
         ->assertSeeHtml('wire:confirm')
-        ->assertSee(__('Atcelt rezervāciju un saņemt atmaksu'));
+        ->assertSee(__('Atcelt rezervāciju un saņemt atmaksu'))
+        ->assertSee('13.07.2026'); // 7 days before check-in
 
     Carbon::setTestNow();
 });

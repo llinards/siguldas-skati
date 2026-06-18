@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\BookingStatus;
 use App\Events\BookingConfirmed;
 use App\Mail\BookingConfirmedAdminMail;
 use App\Mail\BookingConfirmedCustomerMail;
@@ -26,4 +27,20 @@ it('renders the customer confirmation with reference and manage link', function 
 
     expect($rendered)->toContain('SS-CONF1')
         ->and($rendered)->toContain($booking->management_token);
+});
+
+it('includes the free-cancellation deadline while the booking is still cancellable', function () {
+    Carbon\Carbon::setTestNow('2026-07-01');
+
+    $booking = Booking::factory()->create([
+        'status' => BookingStatus::Confirmed,
+        'check_in' => '2026-07-20',
+        'check_out' => '2026-07-23',
+    ]);
+
+    $rendered = (new BookingConfirmedCustomerMail($booking))->render();
+
+    expect($rendered)->toContain('13.07.2026'); // 7 days before check-in
+
+    Carbon\Carbon::setTestNow();
 });

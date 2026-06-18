@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\BookingStatus;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,6 +13,11 @@ use Illuminate\Support\Str;
 class Booking extends Model
 {
     use HasFactory;
+
+    /**
+     * Days before check-in a guest may still self-cancel for a full refund.
+     */
+    public const SELF_REFUND_DAYS = 7;
 
     protected $guarded = ['id'];
 
@@ -63,7 +69,15 @@ class Booking extends Model
     public function isRefundableByGuest(): bool
     {
         return $this->status === BookingStatus::Confirmed
-            && now()->startOfDay()->lte($this->check_in->copy()->subDays(7)->startOfDay());
+            && now()->startOfDay()->lte($this->freeCancellationUntil());
+    }
+
+    /**
+     * The last day a guest may self-cancel for a full refund.
+     */
+    public function freeCancellationUntil(): CarbonInterface
+    {
+        return $this->check_in->copy()->subDays(self::SELF_REFUND_DAYS)->startOfDay();
     }
 
     private function formatCents(int $cents): string
