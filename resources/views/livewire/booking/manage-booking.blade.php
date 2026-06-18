@@ -5,7 +5,7 @@
         <p>{{ __('Rezervācijas numurs') }}: <strong class="text-[#2f3a1f]">{{ $booking->reference }}</strong></p>
         <p>{{ $booking->check_in->format('d.m.Y') }} – {{ $booking->check_out->format('d.m.Y') }}</p>
         <p>{{ __('Kopā') }}: {{ $booking->formattedTotal() }}</p>
-        <p>{{ __('Statuss') }}: {{ __($booking->status->label()) }}</p>
+        <p>{{ __('Statuss') }}: <strong class="text-[#2f3a1f]">{{ __($booking->status->label()) }}</strong></p>
     </div>
 
     @if ($message)
