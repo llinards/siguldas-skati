@@ -24,6 +24,29 @@ it('renders the manage page with a valid token', function () {
         ->assertSee('SS-MNG1');
 });
 
+it('shows the confirmation heading and details for a confirmed booking', function () {
+    $booking = Booking::factory()->create([
+        'status' => BookingStatus::Confirmed,
+        'check_in' => '2026-09-01',
+        'check_out' => '2026-09-04',
+        'grand_total' => 54000,
+    ]);
+
+    $this->get('/lv/booking/'.$booking->reference.'/manage/'.$booking->management_token)
+        ->assertOk()
+        ->assertSee('Paldies – Jūsu rezervācija ir apstiprināta!')
+        ->assertSee('01.09.2026 – 04.09.2026')
+        ->assertSee('540,00');
+});
+
+it('shows the processing heading for a pending booking', function () {
+    $booking = Booking::factory()->pending()->create();
+
+    $this->get('/lv/booking/'.$booking->reference.'/manage/'.$booking->management_token)
+        ->assertOk()
+        ->assertSee('Apstiprinām jūsu maksājumu');
+});
+
 it('shows the booking status translated to Latvian', function () {
     $booking = Booking::factory()->create([
         'status' => BookingStatus::Confirmed,

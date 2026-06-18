@@ -24,9 +24,11 @@
             class="mt-8">
             {{ __('Atcelt rezervāciju un saņemt atmaksu') }}
         </x-btn-danger>
-    @else
+    @elseif ($booking->status === \App\Enums\BookingStatus::Confirmed)
         <p class="text-ss-gray mt-8 max-w-md text-sm">
             {{ __('Bezmaksas atcelšana iespējama līdz 7 dienām pirms ierašanās. Lūdzu, sazinieties ar mums.') }}
         </p>
     @endif
+
+    <x-need-help class="mt-6 max-w-md" />
 </div>

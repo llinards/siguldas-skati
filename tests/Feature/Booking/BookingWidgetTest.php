@@ -80,7 +80,13 @@ it('creates a pending booking and redirects to Stripe on reserve', function () {
     $fakeSession = Session::constructFrom(['id' => 'cs_test_123', 'url' => 'https://checkout.stripe.test/cs_test_123']);
 
     $this->mock(StripeService::class, function ($mock) use ($fakeSession) {
-        $mock->shouldReceive('createCheckoutSession')->once()->andReturn($fakeSession);
+        $mock->shouldReceive('createCheckoutSession')->once()
+            ->withArgs(function ($booking, $successUrl, $cancelUrl) {
+                // Post-payment must land on the tokenized manage page, not a public URL.
+                return str_contains($successUrl, '/manage/')
+                    && str_contains($successUrl, $booking->management_token);
+            })
+            ->andReturn($fakeSession);
     });
 
     Livewire::test(BookingWidget::class, ['product' => $this->product])

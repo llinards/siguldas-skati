@@ -141,7 +141,6 @@ Route::group(
 
         require __DIR__.'/auth.php';
 
-        Route::get('/booking/{booking:reference}/success', [BookingController::class, 'success'])->name('booking.success');
         Route::get('/booking/{booking:reference}/cancel', [BookingController::class, 'cancel'])->name('booking.cancel');
 
         Route::get('/booking/{booking:reference}/manage/{token}', [BookingController::class, 'manage'])->name('booking.manage');

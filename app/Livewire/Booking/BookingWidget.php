@@ -173,7 +173,7 @@ class BookingWidget extends Component
 
         $session = $stripe->createCheckoutSession(
             $booking,
-            route('booking.success', $booking->reference).'?session_id={CHECKOUT_SESSION_ID}',
+            route('booking.manage', ['booking' => $booking->reference, 'token' => $booking->management_token]),
             route('booking.cancel', $booking->reference),
         );
 
