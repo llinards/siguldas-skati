@@ -36,6 +36,17 @@ it('shows the booking status translated to Latvian', function () {
         ->assertDontSee('Confirmed');
 });
 
+it('shows the X-mark icon for a cancelled booking', function () {
+    $booking = Booking::factory()->create([
+        'status' => BookingStatus::Cancelled,
+    ]);
+
+    $this->get('/lv/booking/'.$booking->reference.'/manage/'.$booking->management_token)
+        ->assertOk()
+        ->assertSee('M6 6l8 8M14 6l-8 8', false)
+        ->assertDontSee('M5 10l4 4 6-6', false);
+});
+
 it('shows a confirmation-gated cancel button when the booking is refundable', function () {
     Carbon::setTestNow('2026-07-01 10:00:00');
 
