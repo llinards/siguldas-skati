@@ -74,25 +74,37 @@ it('rejects stays below the minimum nights', function () {
     );
 })->throws(BookingException::class);
 
-it('rejects more adults than the house allows', function () {
-    // person_count (max adults) = 4
+it('rejects more total guests than the house capacity', function () {
+    // person_count (total capacity) = 4 → 3 adults + 2 children = 5 is too many.
     $this->service->createPendingBooking(
-        $this->product, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 5, 0, [], $this->guest,
+        $this->product, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 3, 2, [], $this->guest,
     );
 })->throws(BookingException::class);
 
-it('rejects more children than the house allows', function () {
-    // children_count (max children) = 2
+it('rejects more children than the house child limit', function () {
+    // children_count (max children) = 2 → 3 children is too many even within the total.
     $this->service->createPendingBooking(
         $this->product, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 1, 3, [], $this->guest,
     );
 })->throws(BookingException::class);
 
-it('allows adults and children up to their independent caps', function () {
-    // person_count = 4 adults, children_count = 2 children → 4 + 2 valid
+it('allows guests up to the total capacity', function () {
+    // person_count = 4 total, children_count = 2 → 2 adults + 2 children = 4 valid.
     $booking = $this->service->createPendingBooking(
-        $this->product, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 4, 2, [], $this->guest,
+        $this->product, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 2, 2, [], $this->guest,
     );
 
-    expect($booking->adults)->toBe(4)->and($booking->children)->toBe(2);
+    expect($booking->adults)->toBe(2)->and($booking->children)->toBe(2);
+});
+
+it('allows children to fill the total when the house sets no child limit', function () {
+    $house = Product::factory()->create([
+        'base_price' => 10000, 'min_nights' => 2, 'person_count' => 4, 'children_count' => 0,
+    ]);
+
+    $booking = $this->service->createPendingBooking(
+        $house, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 1, 3, [], $this->guest,
+    );
+
+    expect($booking->adults)->toBe(1)->and($booking->children)->toBe(3);
 });

@@ -21,6 +21,16 @@ class BookingException extends RuntimeException
         return new self(__('Šī māja paredzēta līdz :count bērniem.', ['count' => $max]));
     }
 
+    public static function exceedsCapacity(int $max): self
+    {
+        return new self(__('Šī māja paredzēta līdz :count viesiem.', ['count' => $max]));
+    }
+
+    public static function atLeastOneAdult(): self
+    {
+        return new self(__('Rezervācijai nepieciešams vismaz viens pieaugušais.'));
+    }
+
     public static function belowMinimumNights(int $min): self
     {
         return new self(__('Minimālais uzturēšanās ilgums ir :min nakts(-is).', ['min' => $min]));

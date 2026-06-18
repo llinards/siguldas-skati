@@ -52,13 +52,13 @@ class BookingWidget extends Component
     {
         $this->product = $product;
         $this->adults = max(1, min($this->adults, $product->person_count));
-        $this->children = max(0, min($this->children, $product->children_count));
+        $this->children = max(0, min($this->children, $this->maxChildren()));
     }
 
     public function incrementAdults(): void
     {
-        if ($this->adults >= $this->product->person_count) {
-            $this->guestError = __('Šī māja paredzēta līdz :count pieaugušajiem.', ['count' => $this->product->person_count]);
+        if ($this->adults + $this->children >= $this->product->person_count) {
+            $this->guestError = __('Šī māja paredzēta līdz :count viesiem.', ['count' => $this->product->person_count]);
 
             return;
         }
@@ -75,8 +75,10 @@ class BookingWidget extends Component
 
     public function incrementChildren(): void
     {
-        if ($this->children >= $this->product->children_count) {
-            $this->guestError = __('Šī māja paredzēta līdz :count bērniem.', ['count' => $this->product->children_count]);
+        if ($this->children >= $this->maxChildren()) {
+            $this->guestError = $this->product->children_count > 0 && $this->children >= $this->product->children_count
+                ? __('Šī māja paredzēta līdz :count bērniem.', ['count' => $this->product->children_count])
+                : __('Šī māja paredzēta līdz :count viesiem.', ['count' => $this->product->person_count]);
 
             return;
         }
@@ -89,6 +91,19 @@ class BookingWidget extends Component
     {
         $this->children = max(0, $this->children - 1);
         $this->guestError = null;
+    }
+
+    /**
+     * Largest number of children allowed right now: bounded by the remaining
+     * total capacity and, when the house sets one, the explicit child limit.
+     */
+    public function maxChildren(): int
+    {
+        $byTotalCapacity = max(0, $this->product->person_count - $this->adults);
+
+        return $this->product->children_count > 0
+            ? min($this->product->children_count, $byTotalCapacity)
+            : $byTotalCapacity;
     }
 
     /**

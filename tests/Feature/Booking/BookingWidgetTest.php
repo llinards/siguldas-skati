@@ -64,7 +64,7 @@ it('caps adults at the house maximum', function () {
         ->assertSet('adults', 1); // never below 1
 });
 
-it('caps children at the house maximum, independent of adults', function () {
+it('caps children at the house child limit', function () {
     $product = Product::factory()->create(['base_price' => 10000, 'person_count' => 4, 'children_count' => 1]);
 
     Livewire::test(BookingWidget::class, ['product' => $product])
@@ -73,6 +73,33 @@ it('caps children at the house maximum, independent of adults', function () {
         ->assertSet('children', 1)
         ->call('incrementChildren')
         ->assertSet('children', 1) // capped at children_count
+        ->assertNotSet('guestError', null);
+});
+
+it('allows children up to the total capacity when the house sets no child limit', function () {
+    $product = Product::factory()->create(['base_price' => 10000, 'person_count' => 4, 'children_count' => 0]);
+
+    Livewire::test(BookingWidget::class, ['product' => $product])
+        ->assertSet('adults', 2)
+        ->assertSet('children', 0)
+        ->call('incrementChildren')
+        ->assertSet('children', 1) // children addable despite children_count = 0
+        ->call('incrementChildren')
+        ->assertSet('children', 2) // 2 adults + 2 children = 4 (total cap)
+        ->call('incrementChildren')
+        ->assertSet('children', 2) // total cap reached
+        ->assertNotSet('guestError', null);
+});
+
+it('blocks adding an adult once the total capacity is reached', function () {
+    $product = Product::factory()->create(['base_price' => 10000, 'person_count' => 3, 'children_count' => 0]);
+
+    Livewire::test(BookingWidget::class, ['product' => $product])
+        ->assertSet('adults', 2)
+        ->call('incrementChildren')
+        ->assertSet('children', 1) // 2 + 1 = 3 = capacity
+        ->call('incrementAdults')
+        ->assertSet('adults', 2) // can't exceed the total
         ->assertNotSet('guestError', null);
 });
 

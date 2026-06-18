@@ -26,38 +26,39 @@
 
             <div class="flex flex-col">
                 <label class="mb-2">{{ __('Viesi') }}</label>
+                @php($maxChildren = $this->maxChildren())
                 <div class="border-ss-gray rounded-2xl border-1 px-4 py-1">
                     <div class="flex items-center justify-between py-3">
                         <div>
                             <p class="text-ss-dark font-medium">{{ __('Pieaugušie') }}</p>
-                            <p class="text-xs">{{ __('Maks.') }} {{ $product->person_count }}</p>
+                            <p class="text-xs">{{ __('Vismaz 1') }}</p>
                         </div>
                         <div class="flex items-center gap-3">
                             <button type="button" wire:click="decrementAdults" @disabled($adults <= 1)
                                 class="border-ss-gray text-ss-dark flex h-8 w-8 items-center justify-center rounded-full border-1 text-lg leading-none transition hover:border-ss-dark disabled:opacity-40">−</button>
                             <span class="text-ss-dark w-5 text-center tabular-nums">{{ $adults }}</span>
-                            <button type="button" wire:click="incrementAdults"
-                                class="border-ss-gray text-ss-dark flex h-8 w-8 items-center justify-center rounded-full border-1 text-lg leading-none transition hover:border-ss-dark">+</button>
+                            <button type="button" wire:click="incrementAdults" @disabled($adults + $children >= $product->person_count)
+                                class="border-ss-gray text-ss-dark flex h-8 w-8 items-center justify-center rounded-full border-1 text-lg leading-none transition hover:border-ss-dark disabled:opacity-40">+</button>
                         </div>
                     </div>
 
-                    @if ($product->children_count > 0)
-                        <div class="border-ss-gray/30 flex items-center justify-between border-t py-3">
-                            <div>
-                                <p class="text-ss-dark font-medium">{{ __('Bērni') }}</p>
+                    <div class="border-ss-gray/30 flex items-center justify-between border-t py-3">
+                        <div>
+                            <p class="text-ss-dark font-medium">{{ __('Bērni') }}</p>
+                            @if ($product->children_count > 0)
                                 <p class="text-xs">{{ __('Maks.') }} {{ $product->children_count }}</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <button type="button" wire:click="decrementChildren" @disabled($children <= 0)
-                                    class="border-ss-gray text-ss-dark flex h-8 w-8 items-center justify-center rounded-full border-1 text-lg leading-none transition hover:border-ss-dark disabled:opacity-40">−</button>
-                                <span class="text-ss-dark w-5 text-center tabular-nums">{{ $children }}</span>
-                                <button type="button" wire:click="incrementChildren"
-                                    class="border-ss-gray text-ss-dark flex h-8 w-8 items-center justify-center rounded-full border-1 text-lg leading-none transition hover:border-ss-dark">+</button>
-                            </div>
+                            @endif
                         </div>
-                    @endif
+                        <div class="flex items-center gap-3">
+                            <button type="button" wire:click="decrementChildren" @disabled($children <= 0)
+                                class="border-ss-gray text-ss-dark flex h-8 w-8 items-center justify-center rounded-full border-1 text-lg leading-none transition hover:border-ss-dark disabled:opacity-40">−</button>
+                            <span class="text-ss-dark w-5 text-center tabular-nums">{{ $children }}</span>
+                            <button type="button" wire:click="incrementChildren" @disabled($children >= $maxChildren)
+                                class="border-ss-gray text-ss-dark flex h-8 w-8 items-center justify-center rounded-full border-1 text-lg leading-none transition hover:border-ss-dark disabled:opacity-40">+</button>
+                        </div>
+                    </div>
                 </div>
-                <p class="mt-2 text-xs">{{ __('Kopā līdz :count viesiem.', ['count' => $product->person_count + $product->children_count]) }}</p>
+                <p class="mt-2 text-xs">{{ __('Kopā līdz :count viesiem.', ['count' => $product->person_count]) }}</p>
                 @if ($guestError)
                     <p class="mt-1 text-xs text-red-600">{{ $guestError }}</p>
                 @endif
