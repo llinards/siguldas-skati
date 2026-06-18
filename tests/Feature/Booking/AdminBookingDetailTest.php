@@ -21,7 +21,9 @@ it('shows booking details and requested add-ons to an admin', function () {
     $this->actingAs($user)->get('/lv/dashboard/booking/'.$booking->id)
         ->assertOk()
         ->assertSee('SS-DET1')
-        ->assertSee('Pirts');
+        ->assertSee('Pirts')
+        ->assertSee('Pieaugušie')
+        ->assertSee('Bērni');
 });
 
 it('lets an admin refund a confirmed booking any time', function () {

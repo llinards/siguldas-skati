@@ -19,7 +19,7 @@
                 </div>
                 <div>
                     <dt class="font-medium text-gray-900">{{ __('Viesi') }}</dt>
-                    <dd class="mt-1 text-gray-600">{{ $booking->adults }} + {{ $booking->children }}</dd>
+                    <dd class="mt-1 text-gray-600">{{ __('Pieaugušie') }}: {{ $booking->adults }} · {{ __('Bērni') }}: {{ $booking->children }}</dd>
                 </div>
                 <div>
                     <dt class="font-medium text-gray-900">{{ __('Kopā') }}</dt>
