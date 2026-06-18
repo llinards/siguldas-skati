@@ -117,11 +117,14 @@ document.addEventListener('alpine:init', () => {
     window.Alpine.data('bookingCalendar', (config = {}) => ({
         calendar: null,
         init() {
+            // VCP requires the 'multiple' type to show 2–12 months, so on a single-month
+            // (mobile) view we must fall back to the 'default' type.
+            const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
             this.calendar = new Calendar(this.$refs.input, {
                 inputMode: true,
-                type: 'multiple',
+                type: isDesktop ? 'multiple' : 'default',
                 selectedTheme: 'light',
-                displayMonthsCount: window.matchMedia('(min-width: 1024px)').matches ? 2 : 1,
+                displayMonthsCount: isDesktop ? 2 : 1,
                 monthsToSwitch: 1,
                 selectionDatesMode: 'multiple-ranged',
                 firstWeekday: 1,
@@ -193,10 +196,11 @@ document.addEventListener('alpine:init', () => {
     window.Alpine.data('pricingCalendar', (config = {}) => ({
         calendar: null,
         init() {
+            const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
             this.calendar = new Calendar(this.$refs.calendar, {
-                type: 'multiple',
+                type: isDesktop ? 'multiple' : 'default',
                 selectedTheme: 'light',
-                displayMonthsCount: window.matchMedia('(min-width: 1024px)').matches ? 2 : 1,
+                displayMonthsCount: isDesktop ? 2 : 1,
                 monthsToSwitch: 1,
                 selectionDatesMode: 'multiple', // toggle individual dates
                 firstWeekday: 1,

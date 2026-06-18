@@ -204,3 +204,26 @@ button[disabled] {
     text-decoration: line-through;
     opacity: 0.45;
 }
+
+/* Roomier cells so the per-night price label has space to breathe. */
+[data-vc='calendar'] [data-vc-date] {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+[data-vc='calendar'] .vc-date__btn {
+    min-height: 2.6rem;
+    font-size: 0.9rem;
+}
+
+@media (min-width: 1024px) {
+    [data-vc='calendar'] {
+        min-width: 340px;
+        padding: 1.25rem;
+    }
+
+    [data-vc='calendar'] .vc-date__btn {
+        min-height: 2.9rem;
+        font-size: 0.95rem;
+    }
+}
