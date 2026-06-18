@@ -94,3 +94,23 @@ it('removes a single date override', function () {
 
     expect(ProductPrice::find($override->id))->toBeNull();
 });
+
+it('lists only upcoming overrides and blocks, hiding past ones', function () {
+    Carbon\Carbon::setTestNow('2026-07-01');
+
+    $product = Product::factory()->create();
+
+    ProductPrice::create(['product_id' => $product->id, 'date' => '2026-06-20', 'price' => 18000]); // past
+    ProductPrice::create(['product_id' => $product->id, 'date' => '2026-07-10', 'price' => 18000]); // upcoming
+
+    $product->blockedDates()->create(['start_date' => '2026-06-10', 'end_date' => '2026-06-15']); // ended
+    $product->blockedDates()->create(['start_date' => '2026-06-28', 'end_date' => '2026-07-03']); // spans today
+    $product->blockedDates()->create(['start_date' => '2026-07-05', 'end_date' => '2026-07-08']); // upcoming
+
+    Livewire::test(ProductPricing::class, ['product' => $product->id])
+        ->assertViewHas('overrides', fn ($overrides) => $overrides->count() === 1
+            && $overrides->first()->date->toDateString() === '2026-07-10')
+        ->assertViewHas('blocks', fn ($blocks) => $blocks->count() === 2); // ended one hidden
+
+    Carbon\Carbon::setTestNow();
+});

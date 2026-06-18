@@ -125,9 +125,19 @@ class ProductPricing extends Component
 
     public function render(): View
     {
+        $today = now()->toDateString();
+
         return view('livewire.admin.product.product-pricing', [
-            'overrides' => $this->product->prices()->orderBy('date')->get(),
-            'blocks' => $this->product->blockedDates()->orderBy('start_date')->get(),
+            // Only show upcoming entries — past overrides and ended blocks are
+            // just clutter (and the public calendar already ignores them).
+            'overrides' => $this->product->prices()
+                ->whereDate('date', '>=', $today)
+                ->orderBy('date')
+                ->get(),
+            'blocks' => $this->product->blockedDates()
+                ->whereDate('end_date', '>=', $today)
+                ->orderBy('start_date')
+                ->get(),
         ])->layout('layouts.admin.app');
     }
 }
