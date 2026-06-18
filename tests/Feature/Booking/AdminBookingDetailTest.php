@@ -5,6 +5,7 @@ use App\Livewire\Admin\Booking\BookingDetail;
 use App\Mail\BookingConfirmedCustomerMail;
 use App\Models\Addon;
 use App\Models\Booking;
+use App\Models\Product;
 use App\Models\User;
 use App\Services\StripeService;
 use Illuminate\Support\Facades\Mail;
@@ -88,6 +89,45 @@ it('does not confirm a booking that is not pending', function () {
         ->call('confirmBooking');
 
     expect($booking->fresh()->status)->toBe(BookingStatus::Cancelled);
+});
+
+it('lets an admin change the dates of a confirmed booking', function () {
+    Mail::fake();
+
+    $product = Product::factory()->create(['base_price' => 10000, 'min_nights' => 1]);
+    $user = User::factory()->create();
+    $booking = Booking::factory()->for($product)->create([
+        'status' => BookingStatus::Confirmed,
+        'check_in' => '2026-08-01',
+        'check_out' => '2026-08-03',
+    ]);
+
+    Livewire::actingAs($user)
+        ->test(BookingDetail::class, ['booking' => $booking])
+        ->set('newCheckIn', '2026-09-10')
+        ->set('newCheckOut', '2026-09-13')
+        ->call('changeDates');
+
+    expect($booking->fresh()->check_in->toDateString())->toBe('2026-09-10')
+        ->and($booking->fresh()->grand_total)->toBe(30000);
+});
+
+it('rejects a check-out that is not after check-in', function () {
+    $user = User::factory()->create();
+    $booking = Booking::factory()->create([
+        'status' => BookingStatus::Confirmed,
+        'check_in' => '2026-08-01',
+        'check_out' => '2026-08-03',
+    ]);
+
+    Livewire::actingAs($user)
+        ->test(BookingDetail::class, ['booking' => $booking])
+        ->set('newCheckIn', '2026-09-13')
+        ->set('newCheckOut', '2026-09-10')
+        ->call('changeDates')
+        ->assertHasErrors('newCheckOut');
+
+    expect($booking->fresh()->check_in->toDateString())->toBe('2026-08-01');
 });
 
 it('saves admin notes', function () {

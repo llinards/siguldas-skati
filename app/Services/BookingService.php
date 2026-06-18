@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\BookingStatus;
 use App\Events\BookingCancelled;
 use App\Events\BookingConfirmed;
+use App\Events\BookingDatesChanged;
 use App\Exceptions\BookingException;
 use App\Models\Addon;
 use App\Models\Booking;
@@ -105,6 +106,38 @@ class BookingService
         ]);
 
         BookingConfirmed::dispatch($booking->fresh());
+    }
+
+    /**
+     * Move a confirmed booking to new dates. Re-checks availability (ignoring
+     * this booking's own dates) and minimum nights, then recomputes the stored
+     * totals. Money is settled manually — no Stripe charge or refund here.
+     */
+    public function changeDates(Booking $booking, CarbonInterface $checkIn, CarbonInterface $checkOut): void
+    {
+        DB::transaction(function () use ($booking, $checkIn, $checkOut) {
+            // Lock the product row to serialize concurrent booking attempts for this house.
+            $product = Product::whereKey($booking->product_id)->lockForUpdate()->firstOrFail();
+
+            if (! $this->availability->isAvailable($product, $checkIn, $checkOut, ignoreBookingId: $booking->getKey())) {
+                throw BookingException::datesUnavailable();
+            }
+
+            $quote = $this->pricing->quote($product, $checkIn, $checkOut);
+
+            if ($quote->nights < $product->min_nights) {
+                throw BookingException::belowMinimumNights($product->min_nights);
+            }
+
+            $booking->update([
+                'check_in' => $checkIn->toDateString(),
+                'check_out' => $checkOut->toDateString(),
+                'nights_total' => $quote->nightsTotal,
+                'grand_total' => $quote->grandTotal,
+            ]);
+        });
+
+        BookingDatesChanged::dispatch($booking->fresh());
     }
 
     /**

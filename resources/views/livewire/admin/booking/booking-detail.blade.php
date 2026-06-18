@@ -65,6 +65,44 @@
             </div>
         @endif
 
+        @if ($booking->status === \App\Enums\BookingStatus::Confirmed)
+            <div class="border-b border-gray-900/10 pb-12">
+                <h2 class="text-h-sm-mob lg:text-h-mob mb-3 leading-none">{{ __('Mainīt datumus') }}</h2>
+                <p class="mb-4 text-sm text-gray-600">{{ __('Cena tiks pārrēķināta. Maksājuma starpība jānokārto atsevišķi.') }}</p>
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div>
+                        <label for="newCheckIn" class="block text-sm/6 font-medium text-gray-900">{{ __('Reģistrēšanās') }}</label>
+                        <div class="mt-2">
+                            <input
+                                id="newCheckIn"
+                                type="date"
+                                wire:model="newCheckIn"
+                                class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                            />
+                            <x-input-error :messages="$errors->get('newCheckIn')" class="mt-2" />
+                        </div>
+                    </div>
+                    <div>
+                        <label for="newCheckOut" class="block text-sm/6 font-medium text-gray-900">{{ __('Izrakstīšanās') }}</label>
+                        <div class="mt-2">
+                            <input
+                                id="newCheckOut"
+                                type="date"
+                                wire:model="newCheckOut"
+                                class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                            />
+                            <x-input-error :messages="$errors->get('newCheckOut')" class="mt-2" />
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center justify-end">
+                    <x-btn-primary type="button" wire:click="changeDates" wire:confirm="{{ __('Vai tiešām mainīt rezervācijas datumus?') }}">
+                        @lang('Saglabāt datumus')
+                    </x-btn-primary>
+                </div>
+            </div>
+        @endif
+
         <div class="border-b border-gray-900/10 pb-12">
             <h2 class="text-h-sm-mob lg:text-h-mob mb-3 leading-none">{{ __('Piezīmes') }}</h2>
             <div class="mt-2">

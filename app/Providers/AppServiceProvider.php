@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Events\BookingCancelled;
 use App\Events\BookingConfirmed;
+use App\Events\BookingDatesChanged;
 use App\Listeners\SendBookingCancellationNotifications;
 use App\Listeners\SendBookingConfirmationNotifications;
+use App\Listeners\SendBookingUpdatedNotification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\DB;
@@ -38,5 +40,6 @@ class AppServiceProvider extends ServiceProvider
         Translatable::fallback(config('app.fallback_locale'));
         Event::listen(BookingConfirmed::class, SendBookingConfirmationNotifications::class);
         Event::listen(BookingCancelled::class, SendBookingCancellationNotifications::class);
+        Event::listen(BookingDatesChanged::class, SendBookingUpdatedNotification::class);
     }
 }
