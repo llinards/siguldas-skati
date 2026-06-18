@@ -12,6 +12,11 @@
             <hr class="my-8 w-40 border-t border-[#2f3a1f]/30" />
 
             <p class="text-ss-gray">{{ __('Jūsu rezervācijas numurs') }}: {{ $booking->reference }}</p>
+
+            <a href="{{ route('booking.manage', ['booking' => $booking->reference, 'token' => $booking->management_token]) }}"
+                class="bg-ss-dark mt-8 inline-block rounded-full px-6 py-3 text-white">
+                {{ __('Pārvaldīt rezervāciju') }}
+            </a>
         @else
             {{-- Payment not confirmed yet / error: the same icon family, an X mark. --}}
             <svg class="mb-8 h-14 w-14 text-[#2f3a1f]" fill="none" viewBox="0 0 20 20" stroke="currentColor" stroke-width="2">

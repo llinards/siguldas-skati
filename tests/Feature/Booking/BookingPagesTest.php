@@ -13,6 +13,30 @@ it('shows the confirmed reference on the success page', function () {
         ->assertSee('SS-ABCDE');
 });
 
+it('links to the manage page when the booking is confirmed', function () {
+    $booking = Booking::factory()->create([
+        'status' => BookingStatus::Confirmed,
+    ]);
+
+    $this->get('/lv/booking/'.$booking->reference.'/success')
+        ->assertOk()
+        ->assertSee(route('booking.manage', [
+            'booking' => $booking->reference,
+            'token' => $booking->management_token,
+        ]));
+});
+
+it('does not link to the manage page when the booking is still pending', function () {
+    $booking = Booking::factory()->pending()->create();
+
+    $this->get('/lv/booking/'.$booking->reference.'/success')
+        ->assertOk()
+        ->assertDontSee(route('booking.manage', [
+            'booking' => $booking->reference,
+            'token' => $booking->management_token,
+        ]));
+});
+
 it('shows a processing state when the booking is still pending', function () {
     $booking = Booking::factory()->pending()->create(['reference' => 'SS-PEND1']);
 
