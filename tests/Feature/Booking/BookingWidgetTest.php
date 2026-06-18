@@ -139,13 +139,18 @@ it('creates a pending booking and redirects to Stripe on reserve', function () {
         ->set('checkOut', '2026-09-04')
         ->set('adults', 2)
         ->set('children', 0)
+        ->set('wantsSaunaJacuzzi', true)
         ->set('guestName', 'Jane Guest')
         ->set('guestEmail', 'jane@example.com')
         ->set('guestPhone', '+37120000000')
         ->call('reserve')
         ->assertRedirect('https://checkout.stripe.test/cs_test_123');
 
-    expect(Booking::where('product_id', $this->product->id)->where('status', BookingStatus::Pending)->count())->toBe(1);
+    $booking = Booking::where('product_id', $this->product->id)->where('status', BookingStatus::Pending)->first();
+
+    expect($booking)->not->toBeNull()
+        ->and($booking->wants_sauna_jacuzzi)->toBeTrue()
+        ->and($booking->wants_baby_cot)->toBeFalse();
 });
 
 it('shows an error and does not redirect when dates are unavailable', function () {

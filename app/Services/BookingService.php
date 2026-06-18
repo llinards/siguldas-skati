@@ -7,7 +7,6 @@ use App\Events\BookingCancelled;
 use App\Events\BookingConfirmed;
 use App\Events\BookingDatesChanged;
 use App\Exceptions\BookingException;
-use App\Models\Addon;
 use App\Models\Booking;
 use App\Models\Product;
 use Carbon\CarbonInterface;
@@ -30,7 +29,8 @@ class BookingService
     /**
      * Create a pending booking that holds the dates while the guest pays.
      *
-     * @param  array<int, array{addon: Addon, quantity: int}>  $addonSelections
+     * @param  array{sauna_jacuzzi?: bool, baby_cot?: bool}  $requests  Optional
+     *                                                                  extras the guest asked for; recorded (not charged) for admin follow-up.
      * @param  array{name: string, email: string, phone: string}  $guest
      */
     public function createPendingBooking(
@@ -39,10 +39,10 @@ class BookingService
         CarbonInterface $checkOut,
         int $adults,
         int $children,
-        array $addonSelections,
+        array $requests,
         array $guest,
     ): Booking {
-        return DB::transaction(function () use ($product, $checkIn, $checkOut, $adults, $children, $addonSelections, $guest) {
+        return DB::transaction(function () use ($product, $checkIn, $checkOut, $adults, $children, $requests, $guest) {
             // Lock the product row to serialize concurrent booking attempts for this house.
             $product = Product::whereKey($product->getKey())->lockForUpdate()->firstOrFail();
 
@@ -52,18 +52,20 @@ class BookingService
                 throw BookingException::datesUnavailable();
             }
 
-            $quote = $this->pricing->quote($product, $checkIn, $checkOut, $addonSelections);
+            $quote = $this->pricing->quote($product, $checkIn, $checkOut);
 
             if ($quote->nights < $product->min_nights) {
                 throw BookingException::belowMinimumNights($product->min_nights);
             }
 
-            $booking = $product->bookings()->create([
+            return $product->bookings()->create([
                 'reference' => Booking::generateReference(),
                 'check_in' => $checkIn->toDateString(),
                 'check_out' => $checkOut->toDateString(),
                 'adults' => $adults,
                 'children' => $children,
+                'wants_sauna_jacuzzi' => (bool) ($requests['sauna_jacuzzi'] ?? false),
+                'wants_baby_cot' => (bool) ($requests['baby_cot'] ?? false),
                 'guest_name' => $guest['name'],
                 'guest_email' => $guest['email'],
                 'guest_phone' => $guest['phone'],
@@ -74,19 +76,6 @@ class BookingService
                 'expires_at' => now()->addMinutes(self::HOLD_MINUTES),
                 'management_token' => (string) Str::uuid(),
             ]);
-
-            // Add-ons are recorded as requests (not charged) so the admin can follow up.
-            foreach ($addonSelections as $selection) {
-                $addon = $selection['addon'];
-                $booking->addons()->attach($addon->id, [
-                    'name' => $addon->getTranslation('name', app()->getLocale()),
-                    'price' => $addon->price,
-                    'pricing_type' => $addon->pricing_type->value,
-                    'quantity' => max(1, (int) ($selection['quantity'] ?? 1)),
-                ]);
-            }
-
-            return $booking;
         });
     }
 

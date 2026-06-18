@@ -28,7 +28,7 @@ class BookingDetail extends Component
 
     public function mount(Booking $booking): void
     {
-        $this->booking = $booking->load(['product', 'addons']);
+        $this->booking = $booking->load('product');
         $this->notes = $booking->notes;
         $this->newCheckIn = $booking->check_in->toDateString();
         $this->newCheckOut = $booking->check_out->toDateString();

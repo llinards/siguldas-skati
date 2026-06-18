@@ -3,7 +3,6 @@
 use App\Enums\BookingStatus;
 use App\Livewire\Admin\Booking\BookingDetail;
 use App\Mail\BookingConfirmedCustomerMail;
-use App\Models\Addon;
 use App\Models\Booking;
 use App\Models\Product;
 use App\Models\User;
@@ -12,18 +11,19 @@ use Illuminate\Support\Facades\Mail;
 use Livewire\Livewire;
 use Stripe\Refund;
 
-it('shows booking details and requested add-ons to an admin', function () {
+it('shows booking details and requested extras to an admin', function () {
     $user = User::factory()->create();
-    $booking = Booking::factory()->create(['reference' => 'SS-DET1']);
-    $addon = Addon::factory()->create();
-    $booking->addons()->attach($addon->id, [
-        'name' => 'Pirts', 'price' => 0, 'pricing_type' => 'per_stay', 'quantity' => 1,
+    $booking = Booking::factory()->create([
+        'reference' => 'SS-DET1',
+        'wants_sauna_jacuzzi' => true,
+        'wants_baby_cot' => true,
     ]);
 
     $this->actingAs($user)->get('/lv/dashboard/booking/'.$booking->id)
         ->assertOk()
         ->assertSee('SS-DET1')
-        ->assertSee('Pirts')
+        ->assertSee('Sauna un džakuzi')
+        ->assertSee('Bērnu gultiņa')
         ->assertSee('Pieaugušie')
         ->assertSee('Bērni');
 });

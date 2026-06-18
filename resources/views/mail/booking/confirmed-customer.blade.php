@@ -9,11 +9,14 @@
 - {{ __('Viesi') }}: {{ $booking->adults }} + {{ $booking->children }}
 - {{ __('Kopā') }}: {{ $booking->formattedTotal() }}
 
-@if ($booking->addons->isNotEmpty())
+@if ($booking->wants_sauna_jacuzzi || $booking->wants_baby_cot)
 {{ __('Pieprasītie papildinājumi (sazināsimies par detaļām)') }}:
-@foreach ($booking->addons as $addon)
-- {{ $addon->pivot->name }}
-@endforeach
+@if ($booking->wants_sauna_jacuzzi)
+- {{ __('Sauna un džakuzi') }}
+@endif
+@if ($booking->wants_baby_cot)
+- {{ __('Bērnu gultiņa') }}
+@endif
 @endif
 
 @if ($booking->isRefundableByGuest())

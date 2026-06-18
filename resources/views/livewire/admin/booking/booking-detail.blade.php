@@ -39,13 +39,16 @@
                 @endif
             </dl>
 
-            @if ($booking->addons->isNotEmpty())
+            @if ($booking->wants_sauna_jacuzzi || $booking->wants_baby_cot)
                 <div class="mt-5">
                     <dt class="text-sm font-medium text-gray-900">{{ __('Pieprasītie papildinājumi') }}</dt>
                     <ul class="mt-1 list-disc pl-5 text-sm text-gray-600">
-                        @foreach ($booking->addons as $addon)
-                            <li>{{ $addon->pivot->name }}</li>
-                        @endforeach
+                        @if ($booking->wants_sauna_jacuzzi)
+                            <li>{{ __('Sauna un džakuzi') }}</li>
+                        @endif
+                        @if ($booking->wants_baby_cot)
+                            <li>{{ __('Bērnu gultiņa') }}</li>
+                        @endif
                     </ul>
                 </div>
             @endif

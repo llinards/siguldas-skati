@@ -28,7 +28,6 @@ use App\Livewire\Admin\NewsletterList;
 use App\Livewire\Admin\Product\AddProduct;
 use App\Livewire\Admin\Product\BlockedDates;
 use App\Livewire\Admin\Product\EditProduct;
-use App\Livewire\Admin\Product\ProductAddons;
 use App\Livewire\Admin\Product\ProductFeatures;
 use App\Livewire\Admin\Product\ProductImages;
 use App\Livewire\Admin\Product\ProductList;
@@ -103,7 +102,6 @@ Route::group(
                 Route::livewire('/product/{product:id}/features', ProductFeatures::class)->name('product.features');
                 Route::livewire('/product/{product:id}/rules', ProductRules::class)->name('product.rules');
                 Route::livewire('/product/{product:id}/pricing', ProductPricing::class)->name('product.pricing');
-                Route::livewire('/product/{product:id}/addons', ProductAddons::class)->name('product.addons');
                 Route::livewire('/product/{product:id}/blocked-dates', BlockedDates::class)->name('product.blocked-dates');
 
                 Route::livewire('/features', FeatureList::class)->name('dashboard.features');

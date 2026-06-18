@@ -9,10 +9,13 @@
 
 {{ __('Viesis') }}: {{ $booking->guest_name }} · {{ $booking->guest_email }} · {{ $booking->guest_phone }}
 
-@if ($booking->addons->isNotEmpty())
+@if ($booking->wants_sauna_jacuzzi || $booking->wants_baby_cot)
 {{ __('Pieprasītie papildinājumi') }}:
-@foreach ($booking->addons as $addon)
-- {{ $addon->pivot->name }}
-@endforeach
+@if ($booking->wants_sauna_jacuzzi)
+- {{ __('Sauna un džakuzi') }}
+@endif
+@if ($booking->wants_baby_cot)
+- {{ __('Bērnu gultiņa') }}
+@endif
 @endif
 </x-mail::message>

@@ -65,31 +65,47 @@
                 @endif
             </div>
 
-            @if ($addons->isNotEmpty())
-                <div class="space-y-4">
-                    @foreach ($addons as $addon)
-                        <label class="flex cursor-pointer items-start gap-3 text-sm">
-                            <span class="relative shrink-0">
-                                <input
-                                    type="checkbox"
-                                    wire:model="selectedAddons.{{ $addon->id }}"
-                                    class="peer border-ss-dark bg-ss checked:bg-ss-dark checked:border-ss-dark h-5 w-5 appearance-none rounded border-1 transition duration-200"
-                                />
-                                <svg
-                                    class="pointer-events-none absolute top-0 left-0 h-5 w-5 text-white opacity-0 transition-opacity duration-150 peer-checked:opacity-100"
-                                    fill="none"
-                                    viewBox="0 0 20 20"
-                                    stroke="currentColor"
-                                    stroke-width="3"
-                                >
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6" />
-                                </svg>
-                            </span>
-                            <span>{{ $addon->getTranslation('description', app()->getLocale()) ?: $addon->getTranslation('name', app()->getLocale()) }}</span>
-                        </label>
-                    @endforeach
-                </div>
-            @endif
+            <div class="space-y-4">
+                <label class="flex cursor-pointer items-start gap-3 text-sm">
+                    <span class="relative shrink-0">
+                        <input
+                            type="checkbox"
+                            wire:model="wantsSaunaJacuzzi"
+                            class="peer border-ss-dark bg-ss checked:bg-ss-dark checked:border-ss-dark h-5 w-5 appearance-none rounded border-1 transition duration-200"
+                        />
+                        <svg
+                            class="pointer-events-none absolute top-0 left-0 h-5 w-5 text-white opacity-0 transition-opacity duration-150 peer-checked:opacity-100"
+                            fill="none"
+                            viewBox="0 0 20 20"
+                            stroke="currentColor"
+                            stroke-width="3"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6" />
+                        </svg>
+                    </span>
+                    <span>{{ __('Ja vēlaties rezervācijai pievienot saunu un džakuzi par papildu samaksu, lūdzu, atzīmējiet šo opciju. Pēc rezervācijas ar jums privāti sazināsimies, lai precizētu detaļas.') }}</span>
+                </label>
+
+                <label class="flex cursor-pointer items-start gap-3 text-sm">
+                    <span class="relative shrink-0">
+                        <input
+                            type="checkbox"
+                            wire:model="wantsBabyCot"
+                            class="peer border-ss-dark bg-ss checked:bg-ss-dark checked:border-ss-dark h-5 w-5 appearance-none rounded border-1 transition duration-200"
+                        />
+                        <svg
+                            class="pointer-events-none absolute top-0 left-0 h-5 w-5 text-white opacity-0 transition-opacity duration-150 peer-checked:opacity-100"
+                            fill="none"
+                            viewBox="0 0 20 20"
+                            stroke="currentColor"
+                            stroke-width="3"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6" />
+                        </svg>
+                    </span>
+                    <span>{{ __('Ja vēlaties rezervācijai pievienot bērnu gultiņu, lūdzu, atzīmējiet šo opciju.') }}</span>
+                </label>
+            </div>
         </div>
 
         {{-- Guest details, price & reserve --}}

@@ -32,11 +32,6 @@ class Product extends Model
         return $this->hasMany(ProductPrice::class);
     }
 
-    public function addons(): HasMany
-    {
-        return $this->hasMany(Addon::class);
-    }
-
     public function blockedDates(): HasMany
     {
         return $this->hasMany(BlockedDate::class);

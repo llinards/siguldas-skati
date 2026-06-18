@@ -28,7 +28,7 @@ class BookingUpdatedCustomerMail extends Mailable implements ShouldQueue
     {
         return new Content(
             markdown: 'mail.booking.updated-customer',
-            with: ['booking' => $this->booking->loadMissing(['product', 'addons'])],
+            with: ['booking' => $this->booking->loadMissing('product')],
         );
     }
 }

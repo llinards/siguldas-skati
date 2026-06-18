@@ -13,8 +13,7 @@ class BookingList extends Component
     use WithPagination;
 
     /**
-     * Permanently delete a booking and its data. The booking_addon rows are
-     * removed by the database cascade.
+     * Permanently delete a booking and all of its data.
      */
     public function delete(int $bookingId, FlashMessageService $flash): void
     {

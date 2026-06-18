@@ -4,7 +4,6 @@ namespace App\Livewire\Booking;
 
 use App\Enums\BookingStatus;
 use App\Exceptions\BookingException;
-use App\Models\Addon;
 use App\Models\Product;
 use App\Services\BookingService;
 use App\Services\PricingService;
@@ -32,8 +31,9 @@ class BookingWidget extends Component
 
     public ?string $guestError = null;
 
-    /** @var array<int, bool> addon_id => selected */
-    public array $selectedAddons = [];
+    public bool $wantsSaunaJacuzzi = false;
+
+    public bool $wantsBabyCot = false;
 
     #[Validate('required|string|min:2|max:120')]
     public string $guestName = '';
@@ -152,23 +152,6 @@ class BookingWidget extends Component
         $this->quoteTotal = $this->quote()?->grandTotal ?? 0;
     }
 
-    /**
-     * @return array<int, array{addon: Addon, quantity: int}>
-     */
-    private function addonSelections(): array
-    {
-        if (empty(array_filter($this->selectedAddons))) {
-            return [];
-        }
-
-        return $this->product->addons()
-            ->where('is_active', true)
-            ->whereIn('id', array_keys(array_filter($this->selectedAddons)))
-            ->get()
-            ->map(fn (Addon $addon) => ['addon' => $addon, 'quantity' => 1])
-            ->all();
-    }
-
     private function quote(): ?BookingQuote
     {
         if ($this->checkIn === '' || $this->checkOut === '') {
@@ -198,7 +181,7 @@ class BookingWidget extends Component
                 Carbon::parse($this->checkOut),
                 $this->adults,
                 $this->children,
-                $this->addonSelections(),
+                ['sauna_jacuzzi' => $this->wantsSaunaJacuzzi, 'baby_cot' => $this->wantsBabyCot],
                 ['name' => $this->guestName, 'email' => $this->guestEmail, 'phone' => $this->guestPhone],
             );
         } catch (BookingException $e) {
@@ -285,7 +268,6 @@ class BookingWidget extends Component
     {
         return view('livewire.booking.booking-widget', [
             'quote' => $this->quote(),
-            'addons' => $this->product->addons()->where('is_active', true)->get(),
             'unavailableDates' => $this->unavailableDates(),
             'priceOverrides' => $this->priceOverrides(),
         ]);
