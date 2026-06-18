@@ -21,7 +21,8 @@ it('renders the manage page with a valid token', function () {
 
     $this->get('/lv/booking/'.$booking->reference.'/manage/'.$booking->management_token)
         ->assertOk()
-        ->assertSee('SS-MNG1');
+        ->assertSee('SS-MNG1')
+        ->assertSee('Jūsu rezervācija | '.config('app.name'));
 });
 
 it('shows the confirmation heading and details for a confirmed booking', function () {

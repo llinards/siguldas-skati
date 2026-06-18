@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout :title="__('Maksājums atcelts')">
     <div class="bg-ss flex min-h-[70vh] flex-col items-center justify-center px-4 py-24 text-center">
         <div class="mx-auto flex max-w-2xl flex-col items-center">
             {{-- Payment not completed: the same X mark as the success/manage error state. --}}
