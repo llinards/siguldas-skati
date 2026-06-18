@@ -175,6 +175,14 @@ button[disabled] {
     box-shadow: 0 10px 30px rgba(24, 30, 5, 0.12);
 }
 
+/* Neutralise the default rose weekend/holiday colour to fit the muted palette.
+   Kept before the stateful rules below so selected/today/middle win for a
+   selected weekend date (equal specificity → later !important rule wins). */
+[data-vc='calendar'] [data-vc-date-weekend] .vc-date__btn,
+[data-vc='calendar'] [data-vc-date-holiday] .vc-date__btn {
+    color: inherit !important;
+}
+
 [data-vc='calendar'] [data-vc-date-selected] .vc-date__btn {
     background-color: var(--color-ss-dark) !important;
     color: #fff !important;
@@ -188,12 +196,6 @@ button[disabled] {
 [data-vc='calendar'] [data-vc-date-today] .vc-date__btn {
     background-color: var(--color-ss) !important;
     color: var(--color-ss-dark) !important;
-}
-
-/* Neutralise the default rose weekend/holiday colour to fit the muted palette. */
-[data-vc='calendar'] [data-vc-date-weekend] .vc-date__btn,
-[data-vc='calendar'] [data-vc-date-holiday] .vc-date__btn {
-    color: inherit !important;
 }
 
 [data-vc='calendar'] [data-vc-date-hover] .vc-date__btn {
