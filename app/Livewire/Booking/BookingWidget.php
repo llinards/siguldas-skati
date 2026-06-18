@@ -51,14 +51,16 @@ class BookingWidget extends Component
     public function mount(Product $product): void
     {
         $this->product = $product;
-        $this->adults = max(1, min($this->adults, $product->person_count));
+        $this->adults = max(1, min($this->adults, $this->maxAdults()));
         $this->children = max(0, min($this->children, $this->maxChildren()));
     }
 
     public function incrementAdults(): void
     {
-        if ($this->adults + $this->children >= $this->product->person_count) {
-            $this->guestError = __('Šī māja paredzēta līdz :count viesiem.', ['count' => $this->product->person_count]);
+        if ($this->adults >= $this->maxAdults()) {
+            $this->guestError = $this->product->children_count > 0
+                ? __('Šī māja paredzēta līdz :count pieaugušajiem.', ['count' => $this->product->person_count])
+                : __('Šī māja paredzēta līdz :count viesiem.', ['count' => $this->totalCapacity()]);
 
             return;
         }
@@ -76,9 +78,9 @@ class BookingWidget extends Component
     public function incrementChildren(): void
     {
         if ($this->children >= $this->maxChildren()) {
-            $this->guestError = $this->product->children_count > 0 && $this->children >= $this->product->children_count
+            $this->guestError = $this->product->children_count > 0
                 ? __('Šī māja paredzēta līdz :count bērniem.', ['count' => $this->product->children_count])
-                : __('Šī māja paredzēta līdz :count viesiem.', ['count' => $this->product->person_count]);
+                : __('Šī māja paredzēta līdz :count viesiem.', ['count' => $this->totalCapacity()]);
 
             return;
         }
@@ -94,16 +96,35 @@ class BookingWidget extends Component
     }
 
     /**
-     * Largest number of children allowed right now: bounded by the remaining
-     * total capacity and, when the house sets one, the explicit child limit.
+     * Max adults: the base spots. When children share those spots (no
+     * dedicated child spots), adults yield room to the children already added.
+     */
+    public function maxAdults(): int
+    {
+        return $this->product->children_count > 0
+            ? $this->product->person_count
+            : max(1, $this->product->person_count - $this->children);
+    }
+
+    /**
+     * Max children: the dedicated child spots when the house sets them,
+     * otherwise the base spots left over after the adults.
      */
     public function maxChildren(): int
     {
-        $byTotalCapacity = max(0, $this->product->person_count - $this->adults);
-
         return $this->product->children_count > 0
-            ? min($this->product->children_count, $byTotalCapacity)
-            : $byTotalCapacity;
+            ? $this->product->children_count
+            : max(0, $this->product->person_count - $this->adults);
+    }
+
+    /**
+     * Total guests the house can hold (base spots plus any dedicated child spots).
+     */
+    public function totalCapacity(): int
+    {
+        return $this->product->children_count > 0
+            ? $this->product->person_count + $this->product->children_count
+            : $this->product->person_count;
     }
 
     /**

@@ -204,17 +204,21 @@ class BookingService
 
     private function assertGuestCount(Product $product, int $adults, int $children): void
     {
-        // person_count is the total capacity (adults + children). children_count,
-        // when set (> 0), additionally caps the number of children.
+        // person_count = base (adult) spots. children_count = dedicated child
+        // spots; when 0, children share the base spots with the adults.
         if ($adults < 1) {
             throw BookingException::atLeastOneAdult();
         }
 
-        if ($product->children_count > 0 && $children > $product->children_count) {
-            throw BookingException::tooManyChildren($product->children_count);
+        if ($adults > $product->person_count) {
+            throw BookingException::tooManyAdults($product->person_count);
         }
 
-        if ($adults + $children > $product->person_count) {
+        if ($product->children_count > 0) {
+            if ($children > $product->children_count) {
+                throw BookingException::tooManyChildren($product->children_count);
+            }
+        } elseif ($adults + $children > $product->person_count) {
             throw BookingException::exceedsCapacity($product->person_count);
         }
     }

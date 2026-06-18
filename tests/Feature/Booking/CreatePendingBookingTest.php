@@ -74,30 +74,30 @@ it('rejects stays below the minimum nights', function () {
     );
 })->throws(BookingException::class);
 
-it('rejects more total guests than the house capacity', function () {
-    // person_count (total capacity) = 4 → 3 adults + 2 children = 5 is too many.
+it('rejects more adults than the base spots', function () {
+    // person_count (base/adult spots) = 4 → 5 adults is too many.
     $this->service->createPendingBooking(
-        $this->product, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 3, 2, [], $this->guest,
+        $this->product, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 5, 0, [], $this->guest,
     );
 })->throws(BookingException::class);
 
-it('rejects more children than the house child limit', function () {
-    // children_count (max children) = 2 → 3 children is too many even within the total.
+it('rejects more children than the dedicated child spots', function () {
+    // children_count (dedicated child spots) = 2 → 3 children is too many.
     $this->service->createPendingBooking(
         $this->product, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 1, 3, [], $this->guest,
     );
 })->throws(BookingException::class);
 
-it('allows guests up to the total capacity', function () {
-    // person_count = 4 total, children_count = 2 → 2 adults + 2 children = 4 valid.
+it('allows adults plus dedicated child spots to add up', function () {
+    // person_count = 4 adults + children_count = 2 children → 6 total valid.
     $booking = $this->service->createPendingBooking(
-        $this->product, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 2, 2, [], $this->guest,
+        $this->product, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 4, 2, [], $this->guest,
     );
 
-    expect($booking->adults)->toBe(2)->and($booking->children)->toBe(2);
+    expect($booking->adults)->toBe(4)->and($booking->children)->toBe(2);
 });
 
-it('allows children to fill the total when the house sets no child limit', function () {
+it('lets children share the base spots when no child spots are set', function () {
     $house = Product::factory()->create([
         'base_price' => 10000, 'min_nights' => 2, 'person_count' => 4, 'children_count' => 0,
     ]);
@@ -108,3 +108,14 @@ it('allows children to fill the total when the house sets no child limit', funct
 
     expect($booking->adults)->toBe(1)->and($booking->children)->toBe(3);
 });
+
+it('rejects guests beyond the base spots when children share them', function () {
+    $house = Product::factory()->create([
+        'base_price' => 10000, 'min_nights' => 2, 'person_count' => 4, 'children_count' => 0,
+    ]);
+
+    // 2 adults + 3 children = 5 > 4 shared base spots.
+    $this->service->createPendingBooking(
+        $house, Carbon::parse('2026-08-01'), Carbon::parse('2026-08-04'), 2, 3, [], $this->guest,
+    );
+})->throws(BookingException::class);

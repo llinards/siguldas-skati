@@ -26,18 +26,19 @@
 
             <div class="flex flex-col">
                 <label class="mb-2">{{ __('Viesi') }}</label>
+                @php($maxAdults = $this->maxAdults())
                 @php($maxChildren = $this->maxChildren())
                 <div class="border-ss-gray rounded-2xl border-1 px-4 py-1">
                     <div class="flex items-center justify-between py-3">
                         <div>
                             <p class="text-ss-dark font-medium">{{ __('Pieaugušie') }}</p>
-                            <p class="text-xs">{{ __('Vismaz 1') }}</p>
+                            <p class="text-xs">{{ __('Maks.') }} {{ $product->person_count }}</p>
                         </div>
                         <div class="flex items-center gap-3">
                             <button type="button" wire:click="decrementAdults" @disabled($adults <= 1)
                                 class="border-ss-gray text-ss-dark flex h-8 w-8 items-center justify-center rounded-full border-1 text-lg leading-none transition hover:border-ss-dark disabled:opacity-40">−</button>
                             <span class="text-ss-dark w-5 text-center tabular-nums">{{ $adults }}</span>
-                            <button type="button" wire:click="incrementAdults" @disabled($adults + $children >= $product->person_count)
+                            <button type="button" wire:click="incrementAdults" @disabled($adults >= $maxAdults)
                                 class="border-ss-gray text-ss-dark flex h-8 w-8 items-center justify-center rounded-full border-1 text-lg leading-none transition hover:border-ss-dark disabled:opacity-40">+</button>
                         </div>
                     </div>
@@ -45,9 +46,8 @@
                     <div class="border-ss-gray/30 flex items-center justify-between border-t py-3">
                         <div>
                             <p class="text-ss-dark font-medium">{{ __('Bērni') }}</p>
-                            @php($childCap = min($product->children_count, max(0, $product->person_count - 1)))
-                            @if ($product->children_count > 0 && $childCap > 0)
-                                <p class="text-xs">{{ __('Maks.') }} {{ $childCap }}</p>
+                            @if ($product->children_count > 0)
+                                <p class="text-xs">{{ __('Maks.') }} {{ $product->children_count }}</p>
                             @endif
                         </div>
                         <div class="flex items-center gap-3">
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <p class="mt-2 text-xs">{{ __('Kopā līdz :count viesiem.', ['count' => $product->person_count]) }}</p>
+                <p class="mt-2 text-xs">{{ __('Kopā līdz :count viesiem.', ['count' => $this->totalCapacity()]) }}</p>
                 @if ($guestError)
                     <p class="mt-1 text-xs text-red-600">{{ $guestError }}</p>
                 @endif

@@ -76,6 +76,24 @@ it('caps children at the house child limit', function () {
         ->assertNotSet('guestError', null);
 });
 
+it('adds dedicated child spots on top of the adult spots', function () {
+    // person_count = 2 adults + children_count = 2 children → 4 total.
+    $product = Product::factory()->create(['base_price' => 10000, 'person_count' => 2, 'children_count' => 2]);
+
+    Livewire::test(BookingWidget::class, ['product' => $product])
+        ->assertSet('adults', 2)
+        ->assertSet('children', 0)
+        ->call('incrementAdults')
+        ->assertSet('adults', 2) // adults capped at person_count
+        ->call('incrementChildren')
+        ->assertSet('children', 1)
+        ->call('incrementChildren')
+        ->assertSet('children', 2) // 2 adults + 2 children = 4
+        ->call('incrementChildren')
+        ->assertSet('children', 2) // children capped at children_count
+        ->assertSee('4'); // "Kopā līdz 4 viesiem."
+});
+
 it('allows children up to the total capacity when the house sets no child limit', function () {
     $product = Product::factory()->create(['base_price' => 10000, 'person_count' => 4, 'children_count' => 0]);
 
