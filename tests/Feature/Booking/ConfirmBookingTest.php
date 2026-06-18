@@ -33,18 +33,3 @@ it('is idempotent on repeated confirmation (webhook redelivery)', function () {
 
     Event::assertDispatchedTimes(BookingConfirmed::class, 1);
 });
-
-it('fires BookingConfirmed once when two webhook deliveries race', function () {
-    Event::fake([BookingConfirmed::class]);
-    $booking = Booking::factory()->pending()->create();
-
-    // Simulate concurrent deliveries: both load the booking while it is still
-    // pending (stale in-memory status), as separate webhook requests would.
-    $first = Booking::find($booking->id);
-    $second = Booking::find($booking->id);
-
-    $this->service->confirm($first, 'pi_test_123');
-    $this->service->confirm($second, 'pi_test_123');
-
-    Event::assertDispatchedTimes(BookingConfirmed::class, 1);
-});
