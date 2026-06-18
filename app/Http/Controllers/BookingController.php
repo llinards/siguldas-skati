@@ -14,7 +14,8 @@ class BookingController extends Controller
 
     public function manage(Booking $booking, string $token): View
     {
-        abort_unless(hash_equals($booking->management_token, $token), 403);
+        // 404 (not 403) so a wrong token can't confirm the booking exists.
+        abort_unless(hash_equals($booking->management_token, $token), 404);
 
         return view('booking.manage', compact('booking', 'token'));
     }

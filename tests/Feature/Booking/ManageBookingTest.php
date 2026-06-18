@@ -9,11 +9,11 @@ use Illuminate\Support\Str;
 use Livewire\Livewire;
 use Stripe\Refund;
 
-it('aborts with 403 on a bad management token', function () {
+it('returns 404 on a bad management token so the booking is not revealed', function () {
     $booking = Booking::factory()->create();
 
     $this->get('/lv/booking/'.$booking->reference.'/manage/'.Str::uuid())
-        ->assertForbidden();
+        ->assertNotFound();
 });
 
 it('renders the manage page with a valid token', function () {

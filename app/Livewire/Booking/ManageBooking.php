@@ -17,7 +17,7 @@ class ManageBooking extends Component
 
     public function mount(Booking $booking, string $token): void
     {
-        abort_unless(hash_equals($booking->management_token, $token), 403);
+        abort_unless(hash_equals($booking->management_token, $token), 404);
 
         $this->booking = $booking;
         $this->token = $token;
@@ -25,7 +25,7 @@ class ManageBooking extends Component
 
     public function requestRefund(BookingService $bookings): void
     {
-        abort_unless(hash_equals($this->booking->management_token, $this->token), 403);
+        abort_unless(hash_equals($this->booking->management_token, $this->token), 404);
 
         if (! $this->booking->isRefundableByGuest()) {
             $this->message = __('Atmaksu vairs nevar veikt tiešsaistē. Lūdzu, sazinieties ar mums.');
