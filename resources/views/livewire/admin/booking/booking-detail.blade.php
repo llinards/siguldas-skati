@@ -31,6 +31,12 @@
                         <dd class="mt-1 text-gray-600">{{ $booking->formattedRefund() }}</dd>
                     </div>
                 @endif
+                @if ($booking->cancellation_reason)
+                    <div>
+                        <dt class="font-medium text-gray-900">{{ __('Atcelšanas iemesls') }}</dt>
+                        <dd class="mt-1 text-gray-600">{{ $booking->cancellation_reason }}</dd>
+                    </div>
+                @endif
             </dl>
 
             @if ($booking->addons->isNotEmpty())

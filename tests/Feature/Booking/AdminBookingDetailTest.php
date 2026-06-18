@@ -48,6 +48,19 @@ it('lets an admin refund a confirmed booking any time', function () {
         ->and($booking->fresh()->cancellation_reason)->toBe('Owner cancelled');
 });
 
+it('shows the cancellation reason for a cancelled booking', function () {
+    $user = User::factory()->create();
+    $booking = Booking::factory()->create([
+        'status' => BookingStatus::Cancelled,
+        'cancellation_reason' => 'Owner requested',
+    ]);
+
+    $this->actingAs($user)->get('/lv/dashboard/booking/'.$booking->id)
+        ->assertOk()
+        ->assertSee('Atcelšanas iemesls')
+        ->assertSee('Owner requested');
+});
+
 it('saves admin notes', function () {
     $user = User::factory()->create();
     $booking = Booking::factory()->create();
