@@ -23,11 +23,11 @@
             }
 
             .header {
-                background: #000000;
+                background: #181e05;
                 color: white;
                 padding: 30px 40px;
                 text-align: center;
-                border-bottom: 2px solid #000000;
+                border-bottom: 2px solid #181e05;
             }
 
             .logo {
@@ -180,27 +180,27 @@
             .btn {
                 display: inline-block;
                 padding: 12px 24px;
-                background: #000000;
+                background: #181e05;
                 color: white;
                 text-decoration: none;
                 border-radius: 4px;
                 font-weight: 500;
                 margin: 0 10px;
-                border: 2px solid #000000;
+                border: 2px solid #181e05;
             }
 
             .btn:hover {
-                background: #333333;
+                background: #2c350a;
             }
 
             .btn-secondary {
                 background: white;
-                color: #000000;
-                border: 2px solid #000000;
+                color: #181e05;
+                border: 2px solid #181e05;
             }
 
             .btn-secondary:hover {
-                background: #f8f9fa;
+                background: #f2f3ed;
             }
 
             @media (max-width: 600px) {
