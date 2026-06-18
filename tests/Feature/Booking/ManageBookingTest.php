@@ -46,6 +46,15 @@ it('shows the X-mark icon for a cancelled booking', function () {
         ->assertSee('M6 6l8 8M14 6l-8 8', false);
 });
 
+it('shows the hourglass icon for a pending booking', function () {
+    $booking = Booking::factory()->pending()->create();
+
+    $this->get('/lv/booking/'.$booking->reference.'/manage/'.$booking->management_token)
+        ->assertOk()
+        ->assertSee('M5 3h14M5 21h14', false)
+        ->assertDontSee('M6 6l8 8M14 6l-8 8', false);
+});
+
 it('shows no X-mark icon for a confirmed booking', function () {
     $booking = Booking::factory()->create([
         'status' => BookingStatus::Confirmed,
