@@ -43,8 +43,17 @@ it('shows the X-mark icon for a cancelled booking', function () {
 
     $this->get('/lv/booking/'.$booking->reference.'/manage/'.$booking->management_token)
         ->assertOk()
-        ->assertSee('M6 6l8 8M14 6l-8 8', false)
-        ->assertDontSee('M5 10l4 4 6-6', false);
+        ->assertSee('M6 6l8 8M14 6l-8 8', false);
+});
+
+it('shows no X-mark icon for a confirmed booking', function () {
+    $booking = Booking::factory()->create([
+        'status' => BookingStatus::Confirmed,
+    ]);
+
+    $this->get('/lv/booking/'.$booking->reference.'/manage/'.$booking->management_token)
+        ->assertOk()
+        ->assertDontSee('M6 6l8 8M14 6l-8 8', false);
 });
 
 it('shows a confirmation-gated cancel button when the booking is refundable', function () {
