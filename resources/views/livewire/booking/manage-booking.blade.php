@@ -1,26 +1,31 @@
-<div class="space-y-6">
-    <div>
-        <p class="text-neutral-600">{{ __('Rezervācijas numurs') }}: <strong>{{ $booking->reference }}</strong></p>
-        <p class="text-neutral-600">{{ $booking->check_in->format('d.m.Y') }} – {{ $booking->check_out->format('d.m.Y') }}</p>
-        <p class="text-neutral-600">{{ __('Kopā') }}: {{ $booking->formattedTotal() }}</p>
-        <p class="text-neutral-600">{{ __('Statuss') }}: {{ __(ucfirst($booking->status->value)) }}</p>
+<div class="flex w-full flex-col items-center text-center">
+    <hr class="my-8 w-40 border-t border-[#2f3a1f]/30" />
+
+    <div class="text-ss-gray space-y-1">
+        <p>{{ __('Rezervācijas numurs') }}: <strong class="text-[#2f3a1f]">{{ $booking->reference }}</strong></p>
+        <p>{{ $booking->check_in->format('d.m.Y') }} – {{ $booking->check_out->format('d.m.Y') }}</p>
+        <p>{{ __('Kopā') }}: {{ $booking->formattedTotal() }}</p>
+        <p>{{ __('Statuss') }}: {{ __($booking->status->label()) }}</p>
     </div>
 
     @if ($message)
-        <p class="rounded-lg bg-neutral-100 p-4 text-sm text-neutral-700">{{ $message }}</p>
+        <p class="mt-6 rounded-lg bg-white/60 px-4 py-3 text-sm text-neutral-700">{{ $message }}</p>
     @endif
 
     @if ($booking->status === \App\Enums\BookingStatus::Cancelled)
-        <p class="text-neutral-600">{{ __('Rezervācija ir atcelta.') }}
-            @if ($booking->refund_amount){{ __('Atmaksātā summa') }}: {{ $booking->formattedRefund() }}@endif
+        <p class="text-ss-gray mt-6">{{ __('Rezervācija ir atcelta.') }}
+            @if ($booking->refund_amount) {{ __('Atmaksātā summa') }}: {{ $booking->formattedRefund() }}@endif
         </p>
     @elseif ($booking->isRefundableByGuest())
-        <button type="button" wire:click="requestRefund" wire:loading.attr="disabled"
-            class="rounded-full bg-ss-dark px-6 py-3 text-white">
+        <button type="button"
+            wire:click="requestRefund"
+            wire:confirm="{{ __('Vai tiešām vēlaties atcelt šo rezervāciju? Atcelšana ir neatgriezeniska.') }}"
+            wire:loading.attr="disabled"
+            class="bg-ss-dark mt-8 inline-block rounded-full px-6 py-3 text-white">
             {{ __('Atcelt rezervāciju un saņemt atmaksu') }}
         </button>
     @else
-        <p class="text-sm text-neutral-500">
+        <p class="text-ss-gray mt-8 max-w-md text-sm">
             {{ __('Bezmaksas atcelšana iespējama līdz 7 dienām pirms ierašanās. Lūdzu, sazinieties ar mums.') }}
         </p>
     @endif

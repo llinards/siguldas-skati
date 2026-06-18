@@ -65,6 +65,7 @@ php artisan storage:link
 
 ```bash
 composer run dev
+stripe listen --forward-to siguldas-skati.test/stripe/webhook
 ```
 
 This starts the Laravel server, queue worker, log watcher, and Vite dev server concurrently.
