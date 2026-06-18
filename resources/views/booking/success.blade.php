@@ -28,6 +28,8 @@
             <hr class="my-8 w-40 border-t border-[#2f3a1f]/30" />
 
             <p class="text-ss-gray">{{ __('Jūsu rezervācijas numurs') }}: {{ $booking->reference }}</p>
+
+            <x-need-help class="mt-4 max-w-md" />
         @endif
         </div>
     </div>

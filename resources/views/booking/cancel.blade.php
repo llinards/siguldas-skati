@@ -12,6 +12,8 @@
 
             <p class="text-ss-gray max-w-md">{{ __('Jūsu rezervācija netika pabeigta. Datumi atkal būs pieejami pēc neilga brīža.') }}</p>
 
+            <x-need-help class="mt-4 max-w-md" />
+
             <x-btn-primary href="{{ route('home') }}" class="mt-8">
                 {{ __('Atpakaļ uz sākumu') }}
             </x-btn-primary>

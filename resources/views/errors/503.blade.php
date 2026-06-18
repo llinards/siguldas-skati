@@ -6,6 +6,7 @@
     <h2 class="text-md mb-4 text-center">
         @lang('Šobrīd mājaslapa nav pieejama, taču drīz būsim atpakaļ!')
     </h2>
+    <x-need-help class="mb-4 text-center" />
     <div class="text-center">
         <x-btn-primary :type="'button'" onclick="location.reload()">
             @lang('Atjaunot')

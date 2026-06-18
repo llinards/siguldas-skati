@@ -3,6 +3,7 @@
     <h1 class="mb-2 text-center text-2xl">
         @lang('Hmm... lapa nav atrasta! :(')
     </h1>
+    <x-need-help class="mb-4 text-center" />
     <div class="text-center">
         <x-btn-primary :type="'button'" onclick="window.history.back()">
             @lang('Atpakaļ')
