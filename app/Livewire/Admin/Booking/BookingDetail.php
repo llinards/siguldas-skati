@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Booking;
 
+use App\Enums\BookingStatus;
 use App\Models\Booking;
 use App\Services\BookingService;
 use App\Services\FlashMessageService;
@@ -20,6 +21,23 @@ class BookingDetail extends Component
     {
         $this->booking = $booking->load(['product', 'addons']);
         $this->notes = $booking->notes;
+    }
+
+    /**
+     * Manually confirm a pending booking (e.g. payment succeeded but the
+     * Stripe webhook never arrived). Reuses the normal confirmation flow, so
+     * the customer receives their confirmation email and the hold is kept.
+     */
+    public function confirmBooking(BookingService $bookings, FlashMessageService $flash): void
+    {
+        if ($this->booking->status !== BookingStatus::Pending) {
+            return;
+        }
+
+        $bookings->confirm($this->booking);
+        $this->booking->refresh();
+
+        $flash->success(__('Rezervācija apstiprināta.'));
     }
 
     public function refund(BookingService $bookings, FlashMessageService $flash): void

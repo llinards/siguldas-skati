@@ -2,10 +2,12 @@
 
 use App\Enums\BookingStatus;
 use App\Livewire\Admin\Booking\BookingDetail;
+use App\Mail\BookingConfirmedCustomerMail;
 use App\Models\Addon;
 use App\Models\Booking;
 use App\Models\User;
 use App\Services\StripeService;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Livewire;
 use Stripe\Refund;
 
@@ -59,6 +61,33 @@ it('shows the cancellation reason for a cancelled booking', function () {
         ->assertOk()
         ->assertSee('Atcelšanas iemesls')
         ->assertSee('Owner requested');
+});
+
+it('lets an admin confirm a stuck pending booking and emails the customer', function () {
+    Mail::fake();
+
+    $user = User::factory()->create();
+    $booking = Booking::factory()->pending()->create();
+
+    Livewire::actingAs($user)
+        ->test(BookingDetail::class, ['booking' => $booking])
+        ->call('confirmBooking');
+
+    expect($booking->fresh()->status)->toBe(BookingStatus::Confirmed)
+        ->and($booking->fresh()->expires_at)->toBeNull();
+
+    Mail::assertQueued(BookingConfirmedCustomerMail::class);
+});
+
+it('does not confirm a booking that is not pending', function () {
+    $user = User::factory()->create();
+    $booking = Booking::factory()->create(['status' => BookingStatus::Cancelled]);
+
+    Livewire::actingAs($user)
+        ->test(BookingDetail::class, ['booking' => $booking])
+        ->call('confirmBooking');
+
+    expect($booking->fresh()->status)->toBe(BookingStatus::Cancelled);
 });
 
 it('saves admin notes', function () {

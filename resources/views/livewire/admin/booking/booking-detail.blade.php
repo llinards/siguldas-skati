@@ -51,6 +51,20 @@
             @endif
         </div>
 
+        @if ($booking->status === \App\Enums\BookingStatus::Pending)
+            <div class="border-b border-gray-900/10 pb-12">
+                <h2 class="text-h-sm-mob lg:text-h-mob mb-3 leading-none">{{ __('Apstiprināt rezervāciju') }}</h2>
+                <p class="text-sm text-gray-600">
+                    {{ __('Ja maksājums ir saņemts, bet rezervācija palikusi gaidīšanas statusā, apstiprini to manuāli. Klients saņems apstiprinājuma e-pastu.') }}
+                </p>
+                <div class="mt-4 flex items-center justify-end">
+                    <x-btn-primary type="button" wire:click="confirmBooking" wire:confirm="{{ __('Vai tiešām apstiprināt šo rezervāciju?') }}">
+                        @lang('Apstiprināt rezervāciju')
+                    </x-btn-primary>
+                </div>
+            </div>
+        @endif
+
         <div class="border-b border-gray-900/10 pb-12">
             <h2 class="text-h-sm-mob lg:text-h-mob mb-3 leading-none">{{ __('Piezīmes') }}</h2>
             <div class="mt-2">
