@@ -18,6 +18,11 @@ it('queues a customer and an admin email when a booking is confirmed', function 
 
     Mail::assertQueued(BookingConfirmedCustomerMail::class, fn ($mail) => $mail->hasTo('guest@example.com'));
     Mail::assertQueued(BookingConfirmedAdminMail::class, fn ($mail) => $mail->hasTo('ops@example.com'));
+
+    // Exactly one of each — guards against the listener being registered twice
+    // (auto-discovery + an explicit Event::listen), which doubled the emails.
+    expect(Mail::queued(BookingConfirmedCustomerMail::class))->toHaveCount(1)
+        ->and(Mail::queued(BookingConfirmedAdminMail::class))->toHaveCount(1);
 });
 
 it('renders the customer confirmation with reference and manage link', function () {
