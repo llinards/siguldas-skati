@@ -36,7 +36,7 @@ it('can submit form successfully with all fields', function () {
         ->set('consent', true)
         ->call('save');
 
-    Mail::assertSent(ContactUsMail::class, function ($mail) {
+    Mail::assertQueued(ContactUsMail::class, function ($mail) {
         return $mail->firstName === 'Jānis' &&
                $mail->lastName === 'Bērziņš' &&
                $mail->phoneNumber === '+371 28123456' &&
@@ -55,7 +55,7 @@ it('can submit form without optional question field', function () {
         ->set('consent', true)
         ->call('save');
 
-    Mail::assertSent(ContactUsMail::class, function ($mail) {
+    Mail::assertQueued(ContactUsMail::class, function ($mail) {
         return $mail->firstName === 'Anna' &&
                $mail->lastName === 'Kļava' &&
                $mail->question === '';
@@ -88,7 +88,7 @@ it('accepts valid Latvian characters in names', function () {
         ->call('save')
         ->assertHasNoErrors();
 
-    Mail::assertSent(ContactUsMail::class);
+    Mail::assertQueued(ContactUsMail::class);
 });
 
 it('accepts various valid phone number formats', function ($phoneNumber) {
@@ -101,7 +101,7 @@ it('accepts various valid phone number formats', function ($phoneNumber) {
         ->call('save')
         ->assertHasNoErrors();
 
-    Mail::assertSent(ContactUsMail::class);
+    Mail::assertQueued(ContactUsMail::class);
 })->with([
     '+371 28123456',
     '371 28123456',
@@ -128,7 +128,7 @@ it('preserves form data during validation errors', function () {
         ->assertSet('consent', true)
         ->assertHasErrors(['email']);
 
-    Mail::assertNotSent(ContactUsMail::class);
+    Mail::assertNotQueued(ContactUsMail::class);
 });
 
 it('handles mail sending failure gracefully', function () {
@@ -184,7 +184,7 @@ it('validates required fields', function ($field, $value) {
         ->call('save')
         ->assertHasErrors([$field => 'required']);
 
-    Mail::assertNotSent(ContactUsMail::class);
+    Mail::assertNotQueued(ContactUsMail::class);
 })->with([
     ['firstName', ''],
     ['lastName', ''],
@@ -214,7 +214,7 @@ it('validates field minimum lengths', function ($field, $value) {
         ->call('save')
         ->assertHasErrors([$field => 'min']);
 
-    Mail::assertNotSent(ContactUsMail::class);
+    Mail::assertNotQueued(ContactUsMail::class);
 })->with([
     ['firstName', 'A'],
     ['lastName', 'B'],
@@ -243,7 +243,7 @@ it('validates field maximum lengths', function ($field, $value) {
         ->call('save')
         ->assertHasErrors([$field => 'max']);
 
-    Mail::assertNotSent(ContactUsMail::class);
+    Mail::assertNotQueued(ContactUsMail::class);
 })->with([
     ['firstName', str_repeat('A', 51)],
     ['lastName', str_repeat('B', 51)],
@@ -274,7 +274,7 @@ it('validates field regex patterns', function ($field, $value) {
         ->call('save')
         ->assertHasErrors([$field => 'regex']);
 
-    Mail::assertNotSent(ContactUsMail::class);
+    Mail::assertNotQueued(ContactUsMail::class);
 })->with([
     ['firstName', 'John123'],
     ['firstName', 'Jānis@'],
@@ -294,7 +294,7 @@ it('validates email format', function () {
         ->call('save')
         ->assertHasErrors(['email' => 'email']);
 
-    Mail::assertNotSent(ContactUsMail::class);
+    Mail::assertNotQueued(ContactUsMail::class);
 });
 
 it('validates consent acceptance', function () {
@@ -307,7 +307,7 @@ it('validates consent acceptance', function () {
         ->call('save')
         ->assertHasErrors(['consent' => 'accepted']);
 
-    Mail::assertNotSent(ContactUsMail::class);
+    Mail::assertNotQueued(ContactUsMail::class);
 });
 
 it('validates all fields at once when all are invalid', function () {
@@ -326,5 +326,5 @@ it('validates all fields at once when all are invalid', function () {
             'consent',
         ]);
 
-    Mail::assertNotSent(ContactUsMail::class);
+    Mail::assertNotQueued(ContactUsMail::class);
 });
