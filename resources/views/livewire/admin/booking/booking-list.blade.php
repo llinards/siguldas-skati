@@ -13,6 +13,9 @@
                         {{ __('Viesis') }}
                     </th>
                     <th class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+                        {{ __('Māja') }}
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
                         {{ __('Datumi') }}
                     </th>
                     <th class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
@@ -34,6 +37,9 @@
                         </td>
                         <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
                             {{ $booking->guest_name }}
+                        </td>
+                        <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
+                            {{ $booking->product->title }}
                         </td>
                         <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
                             {{ $booking->check_in->format('d.m.Y') }} – {{ $booking->check_out->format('d.m.Y') }}
@@ -71,7 +77,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="px-6 py-12 text-center">
+                        <td colspan="7" class="px-6 py-12 text-center">
                             <p class="text-base leading-7.5 md:text-xl xl:text-2xl">
                                 @lang('Nav rezervāciju.')
                             </p>

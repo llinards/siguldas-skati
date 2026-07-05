@@ -13,7 +13,8 @@ use Stripe\Refund;
 
 it('shows booking details and requested extras to an admin', function () {
     $user = User::factory()->create();
-    $booking = Booking::factory()->create([
+    $product = Product::factory()->create(['title' => ['lv' => 'Skatu māja']]);
+    $booking = Booking::factory()->for($product)->create([
         'reference' => 'SS-DET1',
         'wants_sauna_jacuzzi' => true,
         'wants_baby_cot' => true,
@@ -22,6 +23,7 @@ it('shows booking details and requested extras to an admin', function () {
     $this->actingAs($user)->get('/lv/dashboard/booking/'.$booking->id)
         ->assertOk()
         ->assertSee('SS-DET1')
+        ->assertSee('Skatu māja')
         ->assertSee('Sauna un džakuzi')
         ->assertSee('Bērnu gultiņa')
         ->assertSee('Pieaugušie')

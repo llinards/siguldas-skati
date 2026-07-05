@@ -2,6 +2,7 @@
 
 use App\Livewire\Admin\Booking\BookingList;
 use App\Models\Booking;
+use App\Models\Product;
 use App\Models\User;
 use Livewire\Livewire;
 
@@ -38,10 +39,12 @@ it('permanently deletes a booking', function () {
 
 it('lists bookings for an authenticated admin', function () {
     $user = User::factory()->create();
-    $booking = Booking::factory()->create(['reference' => 'SS-ADM1', 'guest_name' => 'Anna Guest']);
+    $product = Product::factory()->create(['title' => ['lv' => 'Skatu māja']]);
+    $booking = Booking::factory()->for($product)->create(['reference' => 'SS-ADM1', 'guest_name' => 'Anna Guest']);
 
     $this->actingAs($user)->get('/lv/dashboard/bookings')
         ->assertOk()
         ->assertSee('SS-ADM1')
-        ->assertSee('Anna Guest');
+        ->assertSee('Anna Guest')
+        ->assertSee('Skatu māja');
 });

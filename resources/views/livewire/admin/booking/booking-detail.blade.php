@@ -10,6 +10,10 @@
 
             <dl class="mt-5 grid grid-cols-1 gap-5 text-sm sm:grid-cols-2">
                 <div>
+                    <dt class="font-medium text-gray-900">{{ __('Māja') }}</dt>
+                    <dd class="mt-1 text-gray-600">{{ $booking->product->title }}</dd>
+                </div>
+                <div>
                     <dt class="font-medium text-gray-900">{{ __('Viesis') }}</dt>
                     <dd class="mt-1 text-gray-600">{{ $booking->guest_name }} · {{ $booking->guest_email }} · {{ $booking->guest_phone }}</dd>
                 </div>
