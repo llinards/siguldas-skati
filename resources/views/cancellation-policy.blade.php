@@ -3,7 +3,7 @@
         <div class="container mx-auto px-4">
             <div class="relative mt-26 lg:mt-30 xl:mt-36 mb-3 inline-block">
                 <div class="flex sm:inline-block justify-center items-start border-b-2">
-                    <x-btn-back class="pb-3 mr-5"/>
+                    <x-btn-back class="pb-3 mr-5" />
                     <h1 class="text-h-mob lg:text-h-md leading-none">
                         {{-- prettier-ignore --}}
                         @lang('Atcelšanas politika')
@@ -28,7 +28,7 @@
                 </div>
 
                 <h2 class="text-h-sm-mob lg:text-h-sm mt-8 mb-4 leading-none">
-                    @lang('2. Vēlīna atcelšana un neierašanās')
+                    @lang('2. Citi atcelšanas un neierašanās gadījumi')
                 </h2>
                 <div class="mb-6 text-justify">
                     <p class="mb-2">@lang('2.1. Ja līdz ierašanās dienai ir atlikušas mazāk nekā 7 dienas, atcelšana tiešsaistē vairs nav pieejama un samaksātā summa netiek atmaksāta.')</p>
@@ -69,12 +69,12 @@
                 <h2 class="text-h-sm-mob lg:text-h-sm mt-8 mb-4 leading-none">
                     @lang('7. Saziņa ar mums')
                 </h2>
-                <div class="mb-6 text-justify">
+                <div class="text-justify">
                     <p class="mb-2">@lang('Ja radušies jautājumi par rezervācijas atcelšanu vai atmaksu, lūdzam sazināties ar mums:')</p>
                     <p class="mb-2">
                         <x-link href="tel:+37125666622">+371 25666622</x-link>
                     </p>
-                    <p class="mb-2">
+                    <p>
                         <x-link href="mailto:siguldasskati@gmail.com">siguldasskati@gmail.com</x-link>
                     </p>
                 </div>
