@@ -144,9 +144,33 @@
                 </div>
             @endif
 
+            <div>
+                <x-input-error :messages="$errors->get('consent')" class="mb-2" />
+                <label class="flex cursor-pointer items-start gap-3 text-sm">
+                    <span class="relative shrink-0">
+                        <input
+                            type="checkbox"
+                            wire:model.live="consent"
+                            class="peer border-ss-dark bg-ss checked:bg-ss-dark checked:border-ss-dark h-5 w-5 appearance-none rounded border-1 transition duration-200"
+                        />
+                        <svg
+                            class="pointer-events-none absolute top-0 left-0 h-5 w-5 text-white opacity-0 transition-opacity duration-150 peer-checked:opacity-100"
+                            fill="none"
+                            viewBox="0 0 20 20"
+                            stroke="currentColor"
+                            stroke-width="3"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l4 4 6-6" />
+                        </svg>
+                    </span>
+                    <span>@lang('Es piekrītu <a href=":terms" target="_blank" class="underline">iekšējās kārtības noteikumiem</a> un <a href=":policy" target="_blank" class="underline">atcelšanas politikai</a>.', ['terms' => route('terms'), 'policy' => route('cancellation-policy')])</span>
+                </label>
+            </div>
+
             <x-btn-primary
                 type="button"
                 class="w-full"
+                :disabled="!$consent"
                 wire:click="reserve"
                 wire:loading.attr="disabled"
                 wire:target="reserve"

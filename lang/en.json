@@ -381,5 +381,6 @@
     "6. Booking.com rezervācijas": "6. Booking.com reservations",
     "6.1. Rezervācijām, kas veiktas Booking.com platformā, ir spēkā rezervācijas brīdī izvēlētie Booking.com atcelšanas noteikumi. Šīs rezervācijas var pārvaldīt un atcelt Booking.com sistēmā.": "6.1. Bookings made on the Booking.com platform are subject to the Booking.com cancellation terms selected at the time of booking. These reservations can be managed and cancelled in the Booking.com system.",
     "7. Saziņa ar mums": "7. Contact us",
-    "Ja radušies jautājumi par rezervācijas atcelšanu vai atmaksu, lūdzam sazināties ar mums:": "If you have any questions about cancelling your booking or refunds, please contact us:"
+    "Ja radušies jautājumi par rezervācijas atcelšanu vai atmaksu, lūdzam sazināties ar mums:": "If you have any questions about cancelling your booking or refunds, please contact us:",
+    "Es piekrītu <a href=\":terms\" target=\"_blank\" class=\"underline\">iekšējās kārtības noteikumiem</a> un <a href=\":policy\" target=\"_blank\" class=\"underline\">atcelšanas politikai</a>.": "I agree to the <a href=\":terms\" target=\"_blank\" class=\"underline\">house rules</a> and the <a href=\":policy\" target=\"_blank\" class=\"underline\">cancellation policy</a>."
 }

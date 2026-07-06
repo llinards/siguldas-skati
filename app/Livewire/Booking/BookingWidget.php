@@ -44,9 +44,19 @@ class BookingWidget extends Component
     #[Validate('required|string|min:6|max:40')]
     public string $guestPhone = '';
 
+    #[Validate('accepted')]
+    public bool $consent = false;
+
     public ?string $bookingError = null;
 
     public int $quoteTotal = 0;
+
+    protected function messages(): array
+    {
+        return [
+            'consent.accepted' => __('validation.consent.accepted'),
+        ];
+    }
 
     public function mount(Product $product): void
     {

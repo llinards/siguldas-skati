@@ -143,6 +143,7 @@ it('creates a pending booking and redirects to Stripe on reserve', function () {
         ->set('guestName', 'Jane Guest')
         ->set('guestEmail', 'jane@example.com')
         ->set('guestPhone', '+37120000000')
+        ->set('consent', true)
         ->call('reserve')
         ->assertRedirect('https://checkout.stripe.test/cs_test_123');
 
@@ -165,10 +166,26 @@ it('shows an error and does not redirect when dates are unavailable', function (
         ->set('guestName', 'Jane Guest')
         ->set('guestEmail', 'jane@example.com')
         ->set('guestPhone', '+37120000000')
+        ->set('consent', true)
         ->call('reserve')
         ->assertNoRedirect();
 
     expect(Booking::where('status', BookingStatus::Pending)->count())->toBe(0);
+});
+
+it('requires agreeing to the terms and cancellation policy before reserving', function () {
+    Livewire::test(BookingWidget::class, ['product' => $this->product])
+        ->set('checkIn', '2026-09-01')
+        ->set('checkOut', '2026-09-04')
+        ->set('adults', 2)
+        ->set('guestName', 'Jane Guest')
+        ->set('guestEmail', 'jane@example.com')
+        ->set('guestPhone', '+37120000000')
+        ->call('reserve')
+        ->assertHasErrors(['consent' => 'accepted'])
+        ->assertNoRedirect();
+
+    expect(Booking::count())->toBe(0);
 });
 
 it('passes the base price and per-date overrides to the calendar', function () {
