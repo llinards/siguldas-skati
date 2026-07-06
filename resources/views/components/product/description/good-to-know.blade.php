@@ -71,7 +71,7 @@
                 <h3>@lang('Atcelšanas politika')</h3>
             </li>
             <li class="text-ss-gray">
-                @lang('Atcelšanas politika pieejama Booking platformā <a href="https://www.booking.com/hotel/lv/siguldas-skati-sigulda.lv.html#availability" target="blank" class="underline">šeit</a>.')
+                @lang('Bezmaksas atcelšana līdz 7 dienām pirms ierašanās. Atcelšanas politika pieejama <a href=":url" class="underline">šeit</a>.', ['url' => route('cancellation-policy')])
             </li>
         </ul>
     </div>

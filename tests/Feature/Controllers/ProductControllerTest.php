@@ -123,6 +123,15 @@ test('product page displays description correctly', function () {
         ->assertSee('Šis ir testa apraksts latviešu valodā');
 });
 
+test('product page links to the cancellation policy', function () {
+    $product = Product::factory()->create(['is_active' => true]);
+
+    $this->get(route('product', $product))
+        ->assertOk()
+        ->assertSee('Bezmaksas atcelšana līdz 7 dienām pirms ierašanās.')
+        ->assertSee(route('cancellation-policy'));
+});
+
 test('product page handles empty description', function () {
     $product = Product::factory()->create([
         'is_active' => true,
