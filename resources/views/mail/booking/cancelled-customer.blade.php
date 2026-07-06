@@ -8,6 +8,12 @@
             <div class="field-label">{{ __('Rezervācijas numurs') }}</div>
             <div class="field-value">{{ $booking->reference }}</div>
         </div>
+        @if ($booking->cancellation_reason)
+            <div class="field">
+                <div class="field-label">{{ __('Atcelšanas iemesls') }}</div>
+                <div class="field-value">{{ $booking->cancellation_reason }}</div>
+            </div>
+        @endif
         @if ($refunded)
             <div class="field">
                 <div class="field-label">{{ __('Atmaksātā summa') }}</div>

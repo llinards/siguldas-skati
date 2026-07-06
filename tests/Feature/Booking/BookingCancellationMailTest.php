@@ -29,3 +29,22 @@ it('shows the refunded amount in the customer cancellation email', function () {
 
     expect($rendered)->toContain('SS-CXL1')->and($rendered)->toContain('540,00 €');
 });
+
+it('shows the cancellation reason in the customer cancellation email', function () {
+    $booking = Booking::factory()->create([
+        'cancellation_reason' => 'Plūdi mājā, diemžēl nevaram uzņemt viesus',
+    ]);
+
+    $rendered = (new BookingCancelledCustomerMail($booking, refunded: true))->render();
+
+    expect($rendered)->toContain('Atcelšanas iemesls')
+        ->and($rendered)->toContain('Plūdi mājā, diemžēl nevaram uzņemt viesus');
+});
+
+it('omits the reason section when the booking has no cancellation reason', function () {
+    $booking = Booking::factory()->create(['cancellation_reason' => null]);
+
+    $rendered = (new BookingCancelledCustomerMail($booking, refunded: false))->render();
+
+    expect($rendered)->not->toContain('Atcelšanas iemesls');
+});
