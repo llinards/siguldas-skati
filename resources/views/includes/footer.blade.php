@@ -56,6 +56,9 @@
                     <x-nav.footer-link href="{{route('privacy-policy')}}">
                         @lang('Privātuma politika')
                     </x-nav.footer-link>
+                    <x-nav.footer-link href="{{ route('cancellation-policy') }}">
+                        @lang('Atcelšanas politika')
+                    </x-nav.footer-link>
                 </ul>
             </div>
             <div class="mb-6 lg:my-0">
