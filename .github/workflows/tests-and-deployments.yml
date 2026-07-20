@@ -47,32 +47,13 @@ jobs:
       - name: Run Tests
         run: ./vendor/bin/pest
 
-  deploy-staging:
-    needs: tests
+  deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/staging'
-    environment: staging
-
-    steps:
-      - name: Deploy to Staging
-        run: |
-          curl -s -f -X POST \
-            -H "Authorization: Bearer ${{ secrets.FORGE_API_TOKEN }}" \
-            -H "Accept: application/json" \
-            -H "Content-Type: application/json" \
-            "https://forge.laravel.com/api/v1/servers/${{ secrets.FORGE_STAGING_SERVER_ID }}/sites/${{ secrets.FORGE_STAGING_SITE_ID }}/deployment/deploy"
-
-  deploy-production:
     needs: tests
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
-    environment: production
-
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/staging')
+    environment: ${{ github.ref_name == 'master' && 'production' || 'staging' }}
     steps:
-      - name: Deploy to Production
-        run: |
-          curl -s -f -X POST \
-            -H "Authorization: Bearer ${{ secrets.FORGE_API_TOKEN }}" \
-            -H "Accept: application/json" \
-            -H "Content-Type: application/json" \
-            "https://forge.laravel.com/api/v1/servers/${{ secrets.FORGE_PRODUCTION_SERVER_ID }}/sites/${{ secrets.FORGE_PRODUCTION_SITE_ID }}/deployment/deploy"
+      - name: Trigger Forge deployment
+        env:
+          FORGE_TRIGGER_URL: ${{ github.ref_name == 'master' && secrets.FORGE_TRIGGER_URL_PRODUCTION || secrets.FORGE_TRIGGER_URL_STAGING }}
+        run: curl --fail --silent --show-error --request POST "$FORGE_TRIGGER_URL"
