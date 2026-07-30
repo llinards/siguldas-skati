@@ -2,11 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\BlockedDate;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\BlockedDate>
+ * @extends Factory<BlockedDate>
  */
 class BlockedDateFactory extends Factory
 {

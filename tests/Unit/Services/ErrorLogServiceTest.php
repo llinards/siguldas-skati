@@ -2,8 +2,9 @@
 
 use App\Services\ErrorLogService;
 use Illuminate\Support\Facades\Log;
+use Tests\TestCase;
 
-uses(Tests\TestCase::class);
+uses(TestCase::class);
 
 beforeEach(function () {
     $this->errorLogService = new ErrorLogService;

@@ -1,8 +1,9 @@
 <?php
 
 use App\Services\FlashMessageService;
+use Tests\TestCase;
 
-uses(Tests\TestCase::class);
+uses(TestCase::class);
 
 beforeEach(function () {
     $this->flashMessageService = new FlashMessageService;

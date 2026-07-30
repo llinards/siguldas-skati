@@ -102,7 +102,7 @@ test('handles subscriber not found during deletion with error message', function
 
 test('handles error during subscriber deletion', function () {
     $subscriber = Newsletter::factory()->create();
-    $exception = new \Exception('Deletion failed');
+    $exception = new Exception('Deletion failed');
 
     $this->newsletterService->shouldReceive('getAllSubscribers')
         ->atLeast()->once()
@@ -158,7 +158,7 @@ test('deletes all subscribers and shows success message', function () {
 });
 
 test('handles error during deleting all subscribers', function () {
-    $exception = new \Exception('Delete all failed');
+    $exception = new Exception('Delete all failed');
 
     $this->newsletterService->shouldReceive('getAllSubscribers')
         ->atLeast()->once()
