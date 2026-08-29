@@ -11,9 +11,9 @@
     "skills": [
         "infer-conventions",
         "laravel-best-practices",
+        "testing-best-practices",
         "configure-nightwatch",
         "livewire-development",
-        "pest-testing",
         "tailwindcss-development"
     ]
 }
