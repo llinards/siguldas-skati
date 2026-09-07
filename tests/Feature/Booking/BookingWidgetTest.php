@@ -12,12 +12,14 @@ beforeEach(function () {
     $this->product = Product::factory()->create([
         'base_price' => 10000, 'min_nights' => 1, 'person_count' => 4,
     ]);
+    $this->checkIn = now()->addMonth()->startOfMonth();
+    $this->checkOut = $this->checkIn->copy()->addDays(3);
 });
 
 it('renders and computes a live quote for chosen dates', function () {
     Livewire::test(BookingWidget::class, ['product' => $this->product])
-        ->set('checkIn', '2026-09-01')
-        ->set('checkOut', '2026-09-04')
+        ->set('checkIn', $this->checkIn->toDateString())
+        ->set('checkOut', $this->checkOut->toDateString())
         ->set('adults', 2)
         ->assertSet('quoteTotal', 30000) // 3 nights x 10000, nights only
         ->assertSee('300'); // formatted euros somewhere in the summary
@@ -25,15 +27,15 @@ it('renders and computes a live quote for chosen dates', function () {
 
 it('syncs the calendar date range via selectDates', function () {
     Livewire::test(BookingWidget::class, ['product' => $this->product])
-        ->call('selectDates', '2026-09-01', '2026-09-04')
-        ->assertSet('checkIn', '2026-09-01')
-        ->assertSet('checkOut', '2026-09-04')
+        ->call('selectDates', $this->checkIn->toDateString(), $this->checkOut->toDateString())
+        ->assertSet('checkIn', $this->checkIn->toDateString())
+        ->assertSet('checkOut', $this->checkOut->toDateString())
         ->assertSet('quoteTotal', 30000);
 });
 
 it('exposes occupied nights as unavailable dates for the calendar', function () {
-    $checkIn = now()->addMonth()->startOfMonth();          // within the 18-month horizon
-    $checkOut = $checkIn->copy()->addDays(3);
+    $checkIn = $this->checkIn;   // within the 18-month horizon
+    $checkOut = $this->checkOut;
 
     Booking::factory()->for($this->product)->create([
         'status' => BookingStatus::Confirmed,
@@ -135,8 +137,8 @@ it('creates a pending booking and redirects to Stripe on reserve', function () {
     });
 
     Livewire::test(BookingWidget::class, ['product' => $this->product])
-        ->set('checkIn', '2026-09-01')
-        ->set('checkOut', '2026-09-04')
+        ->set('checkIn', $this->checkIn->toDateString())
+        ->set('checkOut', $this->checkOut->toDateString())
         ->set('adults', 2)
         ->set('children', 0)
         ->set('wantsSaunaJacuzzi', true)
@@ -156,12 +158,14 @@ it('creates a pending booking and redirects to Stripe on reserve', function () {
 
 it('shows an error and does not redirect when dates are unavailable', function () {
     Booking::factory()->for($this->product)->create([
-        'status' => BookingStatus::Confirmed, 'check_in' => '2026-09-01', 'check_out' => '2026-09-10',
+        'status' => BookingStatus::Confirmed,
+        'check_in' => $this->checkIn->toDateString(),
+        'check_out' => $this->checkIn->copy()->addDays(9)->toDateString(),
     ]);
 
     Livewire::test(BookingWidget::class, ['product' => $this->product])
-        ->set('checkIn', '2026-09-02')
-        ->set('checkOut', '2026-09-04')
+        ->set('checkIn', $this->checkIn->copy()->addDay()->toDateString())
+        ->set('checkOut', $this->checkOut->toDateString())
         ->set('adults', 2)
         ->set('guestName', 'Jane Guest')
         ->set('guestEmail', 'jane@example.com')
@@ -175,8 +179,8 @@ it('shows an error and does not redirect when dates are unavailable', function (
 
 it('requires agreeing to the terms and cancellation policy before reserving', function () {
     Livewire::test(BookingWidget::class, ['product' => $this->product])
-        ->set('checkIn', '2026-09-01')
-        ->set('checkOut', '2026-09-04')
+        ->set('checkIn', $this->checkIn->toDateString())
+        ->set('checkOut', $this->checkOut->toDateString())
         ->set('adults', 2)
         ->set('guestName', 'Jane Guest')
         ->set('guestEmail', 'jane@example.com')
